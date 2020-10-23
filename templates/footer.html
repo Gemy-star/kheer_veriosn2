@@ -1,0 +1,41 @@
+{% load static %}
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <h2 class="footer-heading mb-3 text-black body-font">خير السعوديه</h2>
+                <p class="mb-5 text-black body-font"> حركتنا قصة .. اجتمعنا لمبدأ .. ونفذنا اهدافنا … الخير من الناس الي الناس .. لنصنع وقف تفاعي مؤثر </p>
+               <img src="{% static 'images/logo.png' %}" alt="logo"/>
+
+          </div>
+          <div class="col-lg-8 ml-auto">
+            <div class="row">
+              <div class="col-lg-4 ml-auto">
+                <h2 class="footer-heading mb-4 text-black body-font" >تصفح الموقع</h2>
+                <ul class="list-unstyled text-black">
+                  <li><a class="text-black body-font" href="{% url 'about-page' %}">عن المؤسسه</a></li>
+                  <li><a class="text-black body-font" href="{% url 'home-page' %}">الرئيسيه</a></li>
+                  <li><a class="text-black body-font" href="{% url 'login' %}">شارك فى الخير</a></li>
+                  <li><a class="text-black body-font" href="{% url 'register' %}">إنشاء حساب</a></li>
+                </ul>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <div class="border-top pt-5">
+              <p class="body-font text-black">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                  خير السعوديه
+            </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+
