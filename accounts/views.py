@@ -1,11 +1,24 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import User
 
 
+def check_email(request):
+    if request.method == 'POST' and request.is_ajax:
+        email = request.POST.get('email')
+        user_obj = User.objects.get(email=email)
+        if user_obj.pk:
+            return JsonResponse(
+                {"status": 1, "user_name": user_obj.first_name, "user_type": user_obj.user_type,
+                 "email": user_obj.email})
+        else:
+            return JsonResponse({"status": 0})
+
+
 def loginPage(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.is_ajax:
         email = request.POST.get('email')
         password = request.POST.get('password')
 
@@ -14,14 +27,14 @@ def loginPage(request):
         if user is not None:
             if user.user_type == 2:
                 login(request, user)
-                return redirect('home-employee',user.pk)
+                return JsonResponse({"status": 'done', "user_pk": user.pk})
             else:
                 login(request, user)
-                return redirect('home-page')
+                return JsonResponse({"status": 'done', "user_pk": user.pk})
 
 
         else:
-            messages.info(request, 'Username OR password is incorrect')
+            return JsonResponse({"status": 'Username OR password is incorrect'})
 
     context = {}
     return render(request, 'accounts/login.html', context)

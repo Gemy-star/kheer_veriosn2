@@ -145,7 +145,7 @@
                     <div class="modal-body">
                         <div id="case_info">
 
-                                    </div>
+                        </div>
                     </div>
 
                     <!-- Modal footer -->
@@ -183,7 +183,7 @@
                                                            placeholder="الأسم">
                                                 </div>
                                                 <div class="col-md-6">
-                                                         <input type="number" name="phone" id="phone" class="form-control"
+                                                    <input type="number" name="phone" id="phone" class="form-control"
                                                            placeholder="الهاتف">
 
                                                 </div>
@@ -191,8 +191,9 @@
 
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <input type="text" name="national_id" id="national_id" class="form-control"
-                                                           placeholder="الرقم القومى">
+                                                    <input type="text" name="national_id" id="national_id"
+                                                           class="form-control"
+                                                           placeholder="الهويه">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -203,82 +204,104 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                   <input type="text" name="description" id="description" class="form-control"
+                                                    <input type="text" name="description" id="description"
+                                                           class="form-control"
                                                            placeholder="وصف الحاله">
+                                                </div>
+                                            </div>
+                                             <div class="form-group row">
+                                                <div class="col-md-12">
+                                                     <label for="case_type" class="text-cursive h5 text-red">نوع الحاله</label>
+                                                 <select class="form-control" id="case_type">
+                                                           <option value="1">عاجله</option>
+                                                           <option value="2">متوسطه</option>
+                                                          <option value="3">عاديه</option>
+                                                       </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-md-12">
+                                                    <label for="need_type" class="text-cursive h5 text-red">نوع المساعده</label>
+                                                 <select class="form-control" id="need_type">
+                                                           <option value="1">مال</option>
+                                                           <option value="2">ملبس</option>
+                                                          <option value="3">مواد غذائيه</option>
+                                                       </select>
                                                 </div>
                                             </div>
                                         </form>
 
+                                    </div>
                                 </div>
                             </div>
-                            </div>
                         </div>
                     </div>
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" id="create_needy"
-                                        class="btn btn-blue text-white py-4 btn-custom-1 small body-font">
-                                    إنشاء
-                                </button>
-                                <button type="button" class="btn btn-teal text-white py-4 btn-custom-1 small body-font"
-                                        data-dismiss="modal">إغلاق
-                                </button>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="site-section">
-                <div class="container">
-                    <div class="col-md-12 ">
-                        <button type="button" id="cases"
-                                class="btn btn-teal text-white py-4 btn-custom-1 body-font"
-                                data-toggle="modal" data-target="#myModal4">
-                            ضف حاله
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" id="create_needy"
+                                class="btn btn-blue text-white py-4 btn-custom-1 small body-font">
+                            إنشاء
                         </button>
+                        <button type="button" class="btn btn-teal text-white py-4 btn-custom-1 small body-font"
+                                data-dismiss="modal">إغلاق
+                        </button>
+
                     </div>
+
                 </div>
             </div>
-            {% block  javascript %}
-                <script>
-                    var id = {{ request.user.pk }};
-                    var empolyees;
-                    var fondations;
-                    var cases;
-                    $(() => {
-                        $.ajax({
-                            method: 'GET',
-                            url: '{% url 'get-found-emp-info' %}',
-                            data: {
-                                'user_id': id,
-                            },
-                            success: function (data) {
-                                console.log(data)
-                                empolyees = JSON.parse(data.employee);
-                                fondations = JSON.parse(data.foundation);
-                                cases = JSON.parse(data.cases);
-                                console.log(cases)
-                                $("#user_header").empty();
-                                $("#user_header").append(fondations[0].fields.name);
-                                $("#user_para").empty();
-                                $("#user_para").append(empolyees[0].fields.first_name);
-                                $("#cases-count").empty();
-                                $("#cases-count").append(data.cases_count);
-                                $("#emp_count").empty();
-                                $("#emp_count").append(data.emp_count);
+        </div>
+    </div>
+    <div class="site-section">
+        <div class="container">
+            <div class="col-md-12 ">
+                <button type="button" id="cases"
+                        class="btn btn-teal text-white py-4 btn-custom-1 body-font"
+                        data-toggle="modal" data-target="#myModal4">
+                    ضف حاله
+                </button>
+            </div>
+        </div>
+    </div>
+    {% block  javascript %}
+        <script>
+            var id = {{ request.user.pk }};
+            var empolyees;
+            var fondations;
+            var cases;
+            var needy_id;
+            $(() => {
+                $.ajax({
+                    method: 'GET',
+                    url: '{% url 'get-found-emp-info' %}',
+                    data: {
+                        'user_id': id,
+                    },
+                    success: function (data) {
+                        console.log(data)
+                        empolyees = JSON.parse(data.employee);
+                        fondations = JSON.parse(data.foundation);
+                        cases = JSON.parse(data.cases);
+                        console.log(cases)
+                        $("#user_header").empty();
+                        $("#user_header").append(fondations[0].fields.name);
+                        $("#user_para").empty();
+                        $("#user_para").append(empolyees[0].fields.first_name);
+                        $("#cases-count").empty();
+                        $("#cases-count").append(data.cases_count);
+                        $("#emp_count").empty();
+                        $("#emp_count").append(data.emp_count);
 
 
-                            },
-                            error: function (error) {
-                                alert(error.responseText)
-                            }
-                        });
-                        $("#found").on('click', (event) => {
-                            console.log(event);
-                            $("#found_info").empty();
-                            $("#found_info").append(`
+                    },
+                    error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+                $("#found").on('click', (event) => {
+                    console.log(event);
+                    $("#found_info").empty();
+                    $("#found_info").append(`
                 <h2 class="text-cursive h5 text-red  " >الأسم</h2>
                                        <p class="text-cursive h5 text-black " >${fondations[0].fields.name}</p>
                                        <hr/>
@@ -292,10 +315,10 @@
                                        <p class="text-cursive h5 text-black " >${fondations[0].fields.description}</p>
                                        <hr/>
                `)
-                        });
-                        $("#emp").on('click', event => {
-                            $("#emp_info").empty();
-                            $("#emp_info").append(`
+                });
+                $("#emp").on('click', event => {
+                    $("#emp_info").empty();
+                    $("#emp_info").append(`
                 <h2 class="text-cursive h5 text-red  " >الأسم</h2>
                                        <p class="text-cursive h5 text-black " >${empolyees[0].fields.first_name}</p>
                                        <hr/>
@@ -308,19 +331,19 @@
   <h2 class="text-cursive h5 text-red  " >البريد الألكترونى</h2>
                                        <p class="text-cursive h5 text-black " >${empolyees[0].fields.email}</p>
                                        <hr/>`
-                            );
-                        });
-                        $("#cases").on('click', event => {
-                            $("#case_info").empty();
-                            cases.map(c => {
-                                return (
-                                    $("#case_info").append(
-                                        `
+                    );
+                });
+                $("#cases").on('click', event => {
+                    $("#case_info").empty();
+                    cases.map(c => {
+                        return (
+                            $("#case_info").append(
+                                `
 <div class="card" style="width: 20rem;">
   <div class="card-body">
     <h5 class="text-cursive h5 text-red">رقم الحاله</h5>
     <h6 class="text-cursive h5 text-black">${c.pk}</h6>
- <h5 class="text-cursive h5 text-red">الرقم القومى</h5>
+ <h5 class="text-cursive h5 text-red">الهويه</h5>
     <h6 class="text-cursive h5 text-black">${c.fields.national_id}</h6>
     <h5 class="text-cursive h5 text-red">العنوان</h5>
 
@@ -330,34 +353,36 @@
 </div>
                                        <hr/>
                             `
-                                    )
-                                );
-                            })
+                            )
+                        );
+                    })
 
-                        });
-                        $("#create_needy").on('click', event => {
-                           event.preventDefault();
-                            $.ajax({
-	method:'POST',
-	url:'{% url 'create-needy' %}',
-	data:{
-	    'found_id':fondations[0].pk,
-	'name':$('#name').val(),
-	'national_id':$('#national_id').val(),
-    'address': $('#address').val(),
-         'phone': $('#phone').val(),
-         'description': $('#description').val(),
-	'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val()
-},
-success: function(data) {
-       if (data.data === 1) {
+                });
+                $("#create_needy").on('click', event => {
+                    event.preventDefault();
+                    $.ajax({
+                        method: 'POST',
+                        url: '{% url 'create-needy' %}',
+                        data: {
+                            'found_id': fondations[0].pk,
+                            'name': $('#name').val(),
+                            'national_id': $('#national_id').val(),
+                            'address': $('#address').val(),
+                            'phone': $('#phone').val(),
+                            'description': $('#description').val(),
+                            'case_type': $('#case_type').val(),
+                            'need_type': $('#need_type').val(),
+                            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                        },
+                        success: function (data) {
+                            if (data.data === 1) {
                                 swal({
                                     title: "تم",
                                     text: "تم  بنجاح",
                                     icon: "success",
                                     button: "إغلاق",
                                 });
-                                window.location.reload();
+
                             } else {
                                 swal({
                                     title: "خطا",
@@ -366,15 +391,15 @@ success: function(data) {
                                     button: "إغلاق",
                                 });
                             }
-},
-error : function (error) {
-  alert(error.responseText)
-}
-});
-                        });
-
+                        },
+                        error: function (error) {
+                            alert(error.responseText)
+                        }
                     });
-                </script>
+                });
 
-            {% endblock javascript %}
+            });
+        </script>
+
+    {% endblock javascript %}
 {% endblock content %}

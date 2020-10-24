@@ -19,7 +19,7 @@ def get_emp_found_info(request):
         cases_all = found_obj.cases.all()
         cases_json = serializers.serialize('json', cases_all)
         found_json = serializers.serialize('json', models.Foundation.objects.filter(employee=user_obj))
-        user_json = serializers.serialize('json',  User.objects.filter(pk=pk))
+        user_json = serializers.serialize('json', User.objects.filter(pk=pk))
         return JsonResponse(
             {"emp_count": emp_count, "cases_count": cases_count, "cases": cases_json, "foundation": found_json,
              "employee": user_json},
@@ -39,7 +39,11 @@ def create_needy(request):
         found_needy = models.Foundation.objects.get(pk=found_id)
         needy_obj.save()
         found_needy.cases.add(needy_obj)
+        case_type = request.POST.get('case_type')
+        need_type = request.POST.get('need_type')
+        status_obj = models.Status(needy_status=needy_obj, case_type=case_type, need_type=need_type)
+        status_obj.save()
         if needy_obj.pk:
-            return JsonResponse({"data": 1})
+            return JsonResponse({"data": 1, "needy_case": needy_obj.pk})
         else:
             return JsonResponse({"data": 1})
