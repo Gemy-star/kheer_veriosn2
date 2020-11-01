@@ -5,4 +5,4 @@ from . import models
 
 admin.site.register(models.Foundation)
 admin.site.register(models.Needy)
-admin.site.register(models.Status)
+admin.site.register(models.Dependency)

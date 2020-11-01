@@ -1,0 +1,256 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block  title %} إضافة محتاج || ير السعوديه {% endblock title %}
+
+
+{% block content %}
+    <div class="ftco-blocks-cover-1">
+        <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/h1_hero.png')">
+            <div class="container">
+                <div class="row align-items-center ">
+
+                    <div class="col-md-5 mt-5 pt-5">
+                        <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+                        <h1 class="mb-3 font-weight-bold body-font">إضافة || حاله</h1>
+                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
+                            <strong>إضافة حاله</strong></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="site-section py-12 bg-white">
+                    <div class="row ">
+                        <div class="col-md-12 d-flex">
+                            <div id="create_case">
+                                <form action="#" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group row">
+                                        <div class="col-md-6 mb-4 mb-lg-0">
+                                            <input type="text" name="name" id="name" class="form-control"
+                                                   placeholder="الأسم">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" name="phone" id="phone" class="form-control"
+                                                   placeholder="الهاتف">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <input type="text" name="national_id" id="national_id"
+                                                   class="form-control"
+                                                   placeholder="الهويه">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label for="case_type" class="text-cursive h5 text-red">حالة السكن</label>
+                                            <select class="form-control" id="address">
+                                                <option value="ملك">ملك</option>
+                                                <option value="إيجار">إيجار</option>
+                                                <option value="أخرى">أخرى</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-12" id="status_div">
+                                            <label for="status" class="text-cursive h5 text-red">الحاله
+                                                الأجتماعيه</label>
+                                            <select class="form-control" id="status">
+                                                <option value="مطلقة">مطلقة</option>
+                                                <option value="ارملة">ارملة</option>
+                                                <option value="مهجورة">مهجورة</option>
+                                                <option value="متزوجة">متزوجة</option>
+                                                <option value="زوجة سجين">زوجة سجين</option>
+
+                                            </select>
+                                            <button type="button" id="btn_other" class="btn btn-outline-success btn-sm">
+                                                أخرى
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <input type="number" name="case_age" id="case_age"
+                                                   class="form-control"
+                                                   placeholder="العمر">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" name="case_number" id="case_number"
+                                                   class="form-control"
+                                                   placeholder="رقم الحاله">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label for="case_type" class="text-cursive h5 text-red">مصدر الدخل</label>
+                                            <select class="form-control" id="source_type">
+                                                <option value="راتب شهري">راتب شهري</option>
+                                                <option value="ضمان اجتماعي">ضمان اجتماعي</option>
+                                                <option value="حساب مواطن">حساب مواطن</option>
+                                                <option value="أخرى"> أخرى</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label for="health_status" class="text-cursive h5 text-red">الحاله
+                                                الصحيه</label>
+                                            <select class="form-control" id="health_status">
+                                                <option value="مريض">مريض</option>
+                                                <option value="حاله حرجه">حاله حرجه</option>
+                                                <option value="صحه جيده">صحه جيده</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12" id="depend_div">
+                                            <button type="button" id="btn_depend" class="btn btn-outline-success"> إضافة
+                                                عائل
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12" id="depend_div">
+                                            <button type="submit" id="btn_submit"
+                                                    class="btn btn-teal text-white py-4 btn-custom-1 body-font"> إضافة
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    {% block javascript %}
+        <script>
+            var ages = [];
+            var genders = [];
+            var case_types = [];
+            $(() => {
+                $("#btn_other").on('click', event => {
+                    event.preventDefault;
+                    $("#status_div").empty();
+                    $("#status_div").append(`
+                                              <label for="status" class="text-cursive h5 text-red">الحاله الأجتماعيه</label>
+              <input type="text" name="status" id="status"
+                                                   class="form-control"
+                                                   placeholder="الحاله الأجتماعيه">
+`)
+                });
+                $("#btn_depend").on('click', event => {
+                    event.preventDefault();
+                    add_dependency();
+
+                });
+                $("#btn_submit").on('click', event => {
+                    event.preventDefault();
+                    $(".age").each(function (i, obj) {
+                        console.log(obj)
+                        ages.push($(this).val())
+                        console.log(ages);
+                    });
+                    $(".gender").each(function (i, obj) {
+                        genders.push($(this).val())
+                        console.log(genders);
+
+                    });
+                    $(".case_type").each(function (i, obj) {
+                        case_types.push($(this).val())
+                        console.log(case_types);
+
+                    });
+                    $.ajax({
+                        method: 'POST',
+                        url: '{% url 'create-needy-ajax' %}',
+                        data: {
+                            'name': $('#name').val(),
+                            'national_id': $('#national_id').val(),
+                            'address': $('#address').val(),
+                            'phone': $('#phone').val(),
+                            'status': $('#status').val(),
+                            'case_age': $('#case_age').val(),
+                            'case_number': $('#case_number').val(),
+                            'health_status': $('#health_status').val(),
+                            'source_type': $('#source_type').val(),
+                            'depend_ages': ages,
+                            'depend_genders': genders,
+                            'depend_cases_type': case_types,
+
+                            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                        },
+                        success: function (data) {
+                            if (data.data === 1) {
+                                swal({
+                                    title: "تم",
+                                    text: "تم  بنجاح",
+                                    icon: "success",
+                                    button: "إغلاق",
+                                });
+
+                            } else {
+                                swal({
+                                    title: "خطا",
+                                    text: "من فضلك راجع البيانات",
+                                    icon: "error",
+                                    button: "إغلاق",
+                                });
+                            }
+                        },
+                        error: function (error) {
+                            alert(error.responseText)
+                        }
+                    });
+                })
+
+            });
+
+            function add_dependency() {
+                //   $("#depend_div").empty();
+                $('#depend_div').append(`
+                                            <h5 class="text-cursive h5 text-red">إضافة عائل </h5>
+
+<hr/>
+                                            <label for="case_type" class="text-cursive h5 text-red">النوع </label>
+                                            <select class="form-control gender" id="gender">
+                                                <option value="M">ذكر</option>
+                                                <option value="F">أنثى</option>
+                                            </select>
+                    <label for="case_type" class="text-cursive h5 text-red">المرحله الدراسيه </label>
+                                            <select class="form-control case_type" id="case_type">
+                                                <option value="التمهيدى">التمهيدى</option>
+                                                <option value="الأبتدائى">الأبتدائى</option>
+                                                 <option value="الأعدادى">الأعدادى</option>
+                                                <option value="الثانوى">الثانوى</option>
+                                                <option value="الجامعه">الجامعه</option>
+                                            </select>
+ <input type="number" name="age" id="age"
+                                                   class="form-control age"
+                                                   placeholder="العمر">
+
+               `);
+            }
+        </script>
+    {% endblock javascript %}
+{% endblock content %}
+

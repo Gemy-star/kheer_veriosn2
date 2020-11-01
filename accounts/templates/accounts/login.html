@@ -94,9 +94,9 @@
                             if (data.status) {
                                 email_address = data.email;
                                 if (data.user_type === 2) {
-                                    user_type = 'مشرف جمعيه'
+                                    user_type = ' مشرف جمعيه رئيسيه'
                                 }else if (data.user_type === 3) {
-                                    user_type = 'متبرع'
+                                    user_type = 'مشرف جمعيه تنمويه'
                                 }else {
                                     user_type = 'مشرف عام'
                                 }
@@ -146,7 +146,7 @@
                                     icon: "success",
                                     button: "إغلاق",
                                 });
-                               window.location.href = '{% url 'home-employee' request.user.pk %}'
+                               window.location.href = '{% url 'home-employee' %}'
                            }else {
                                swal({
                                     title: "خطا",

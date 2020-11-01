@@ -30,12 +30,12 @@ class UserManager(BaseUserManager):
         )
 
         user.set_password(password)
-        user.is_volunteer = False
+        user.is_secondary_emp = False
         user.is_active = True
         user.is_admin = False
         user.is_staff = False
         user.is_needy = False
-        user.is_employee = False
+        user.is_premier_emp = False
         if commit:
             user.save(using=self._db)
         return user
@@ -61,7 +61,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_volunteeruser(self, email, first_name, last_name, phone, address, password):
+    def create_secondary_empuser(self, email, first_name, last_name, phone, address, password):
         """
         Creates and saves a superuser with the given email, first name,
         last name and password.
@@ -75,16 +75,16 @@ class UserManager(BaseUserManager):
             address=address,
             commit=False,
         )
-        user.is_volunteer = True
+        user.is_secondary_emp = True
         user.is_admin = False
         user.is_needy = False
-        user.is_employee = False
+        user.is_premier_emp = False
         user.is_active = True
         user.user_type = 3
         user.save(using=self._db)
         return user
 
-    def create_employeeuser(self, email, first_name, last_name, phone, address, password):
+    def create_permier_employeeuser(self, email, first_name, last_name, phone, address, password):
         """
         Creates and saves a superuser with the given email, first name,
         last name and password.
@@ -98,16 +98,15 @@ class UserManager(BaseUserManager):
             address=address,
             commit=False,
         )
-        user.is_volunteer = False
+        user.is_premier_emp = True
         user.is_admin = False
         user.is_needy = False
-        user.is_employee = True
+        user.is_secondary_emp = False
         user.is_active = True
         user.user_type = 3
         user.is_superuser = False
         user.save(using=self._db)
         return user
-
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -121,20 +120,20 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone = models.CharField(max_length=255, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     address = models.CharField(_('Address'), max_length=255, null=True, blank=True)
-    is_volunteer = models.BooleanField(_('Volunteer'), default=False, help_text=_(
-        'Designates whether this user should be treated as a Volunteer. '
+    is_premier_emp = models.BooleanField(_('Premier Employee '), default=False, help_text=_(
+        'Designates whether this user should be treated as a Premier Employee. '
     ), )
     is_admin = models.BooleanField(_('Admin'), default=False, help_text=_(
         'Designates whether this user should be treated as an Admin. '
     ))
-    is_employee = models.BooleanField(_('Employee'), default=False, help_text=_(
-        'Designates whether this user should be treated as an Employee. '
+    is_secondary_emp = models.BooleanField(_('Secondary Employee'), default=False, help_text=_(
+        'Designates whether this user should be treated as an Secondary Employee. '
     ))
 
     USER_TYPE_CHOICES = (
         (1, 'مدير المؤسسه'),
-        (2, 'مشرف الجمعيه'),
-        (3, 'متبرع'),
+        (2, 'مشرف جمعيه رئيسيه'),
+        (3, 'مشرف جمعيه تنمويه'),
     )
 
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, null=True, verbose_name=_('User Type'),

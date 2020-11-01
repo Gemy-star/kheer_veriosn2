@@ -45,7 +45,7 @@ def logoutUser(request):
     return redirect('login')
 
 
-def register(request):
+def register_permier_emp(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -53,8 +53,8 @@ def register(request):
         address = request.POST.get('address')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
-        user = User.objects.create_volunteeruser(email=email, first_name=first_name, last_name=last_name,
-                                                 address=address, password=password, phone=phone)
+        user = User.objects.create_permier_employeeuser(email=email, first_name=first_name, last_name=last_name,
+                                                        address=address, password=password, phone=phone)
         if user is not None:
             if user.user_type == 2:
                 login(request, user)
@@ -70,7 +70,7 @@ def register(request):
     return render(request, 'accounts/register.html', context)
 
 
-def register_empolyee(request):
+def register_secondary_empolyee(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -78,7 +78,7 @@ def register_empolyee(request):
         address = request.POST.get('address')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
-        user = User.objects.create_employeeuser(email=email, first_name=first_name, last_name=last_name,
+        user = User.objects.create_secondary_empuser(email=email, first_name=first_name, last_name=last_name,
                                                 address=address, password=password, phone=phone)
         if user is not None:
             login(request, user)
