@@ -9,5 +9,7 @@ urlpatterns = [
     path('needy/list', views.needy_list, name='needy-list'),
     path('needy/detail/<int:pk>', views.needy_detial, name='needy-detail'),
     path('needy/delete', views.delete_needy, name='needy-delete'),
-
+    path('found/delete', views.delete_found, name='found-delete'),
+    path('found/detail/<int:pk>', views.found_detial, name='found-detail'),
+    path('found/list', views.found_list, name='found-list'),
 ]

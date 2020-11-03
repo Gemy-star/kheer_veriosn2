@@ -91,6 +91,7 @@
                             'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
                         },
                         success: function (data) {
+                            sessionStorage.setItem('user_id' , data.user_id);
                             if (data.status) {
                                 email_address = data.email;
                                 if (data.user_type === 2) {

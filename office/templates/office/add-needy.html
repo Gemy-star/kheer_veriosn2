@@ -93,6 +93,17 @@
                                                    placeholder="رقم الحاله">
                                         </div>
                                     </div>
+                                        <div class="form-group row">
+                                        <div class="col-md-6 mb-4 mb-lg-0">
+                                            <input type="text" name="emp_name" id="emp_name" class="form-control"
+                                                   placeholder="إسم الموظف">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" name="amount" id="amount" class="form-control"
+                                                   placeholder="المبلغ">
+
+                                        </div>
+                                    </div>
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                             <label for="case_type" class="text-cursive h5 text-red">مصدر الدخل</label>
@@ -105,6 +116,23 @@
                                             </select>
                                         </div>
                                     </div>
+                                                                        <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label for="health_status" class="text-cursive h5 text-red">الدعم المقدم
+<hr/>
+                                                <br>
+                                                </label>
+                                           <input type="radio" id="first_opt" name="first_opt" value="تفريج كربه"/>
+                                              <label for="first_opt">تفريج كربه</label><br>
+                                            <input type="radio" id="second_opt" name="second_opt" value="الضائقة المالي "/>
+
+                                              <label for="second_opt">الضائقة المالية</label><br>
+                                            <div id="options">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                             <label for="health_status" class="text-cursive h5 text-red">الحاله
@@ -116,6 +144,8 @@
                                             </select>
                                         </div>
                                     </div>
+
+
                                     <div class="form-group row">
                                         <div class="col-md-12" id="depend_div">
                                             <button type="button" id="btn_depend" class="btn btn-outline-success"> إضافة
@@ -147,6 +177,7 @@
             var ages = [];
             var genders = [];
             var case_types = [];
+            var user_id = sessionStorage.getItem('user_id');
             $(() => {
                 $("#btn_other").on('click', event => {
                     event.preventDefault;
@@ -164,6 +195,7 @@
 
                 });
                 $("#btn_submit").on('click', event => {
+                    let amount =  $("#amount").val()
                     event.preventDefault();
                     $(".age").each(function (i, obj) {
                         console.log(obj)
@@ -222,13 +254,43 @@
                         }
                     });
                 })
+           $("#first_opt").on('click' , event => {
+              event.preventDefault();
+              $("#options").empty();
+              $("#options").append(`    <select class="form-control" id="korba">
+                                                <option value="ايجار سكني">ايجار سكني</option>
+                                                <option value="فاتورة كهرباء">فاتورة كهرباء</option>
+                                                <option value="فاتورة مياة">فاتورة مياة</option>
+                                                <option value="موؤنة غذائية"> موؤنة غذائية</option>
+                                                <option value="دعم علاج"> دعم علاج</option>
+                                                <option value="دعم التعليم"> دعم التعليم</option>
 
+                                            </select>`);
+
+           });
+           $("#second_opt").on('click' , event => {
+              event.preventDefault();
+              $("#options").empty();
+              $("#options").append(`    <select class="form-control" id="korba">
+                                                <option value="تطوع ">تطوع </option>
+                                                <option value="تدريب اون لاين">تدريب اون لاين</option>
+                                                <option value="تدريب حضور
+توظيف
+"> تدريب حضور
+توظيف
+</option>
+                                                <option value="دعم مشروع"> دعم مشروع</option>
+                                                <option value="اخرى">اخرى </option>
+
+                                            </select>`);
+
+           });
             });
 
             function add_dependency() {
                 //   $("#depend_div").empty();
                 $('#depend_div').append(`
-                                            <h5 class="text-cursive h5 text-red">إضافة عائل </h5>
+                                            <h5 class="text-cursive h5 text-red">إضافة الأبناء </h5>
 
 <hr/>
                                             <label for="case_type" class="text-cursive h5 text-red">النوع </label>

@@ -58,6 +58,16 @@
                                              >
                                         إظهار
                                     </a>
+                                    <hr/>
+                                    {% if request.user.user_type == 1 or request.user.user_type == 2  %}
+                                      <h2 class="text-cursive h5 text-red">عدد الجمعيات </h2>
+                                    <p class="text-cursive h5 text-white" id="found-count"></p>
+                                    <a  href="{% url 'found-list' %}"
+                                            class="btn btn-teal text-white py-4 btn-custom-1 body-font"
+                                             >
+                                        إظهار
+                                    </a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -146,7 +156,7 @@
     </div>
     {% block  javascript %}
         <script>
-            var id = {{ request.user.pk }};
+            var id =sessionStorage.getItem('user_id');
             var empolyees;
             var fondations;
             var cases;
@@ -172,6 +182,8 @@
                         $("#cases-count").append(data.cases_count);
                         $("#emp_count").empty();
                         $("#emp_count").append(data.emp_count);
+                        $("#found-count").empty()
+                        $("#found-count").append(data.found_count)
 
 
                     },

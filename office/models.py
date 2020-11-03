@@ -30,9 +30,11 @@ class Needy(models.Model):
         ('أخرى', 'أخرى'),
 
     )
-    home = models.CharField(null=True,max_length=255, choices=HOME_CHOICES, verbose_name='السكن')
+    home = models.CharField(null=True, max_length=255, choices=HOME_CHOICES, verbose_name='السكن')
     national_id = models.CharField(max_length=255, null=True, verbose_name='رقم الهويه')
     phone = models.CharField(max_length=255, null=True, verbose_name='الجوال')
+    parent = models.CharField(max_length=255, null=True, verbose_name='العائل')
+
     SOURCE_CHOICES = (
         ('راتب شهري', 'راتب شهري'),
         ('ضمان اجتماعي', 'ضمان اجتماعي'),
@@ -41,7 +43,7 @@ class Needy(models.Model):
 
     )
     source_income = models.CharField(null=True, max_length=255, choices=SOURCE_CHOICES, verbose_name='مصدر الدخل')
-    dependencies = models.ManyToManyField(Dependency, verbose_name='العائلين')
+    dependencies = models.ManyToManyField(Dependency, verbose_name='الاطفال')
     HEALTH_STATUS = (
         ('مريض', 'مريض'), ('حالة حرجة', 'حالة حرجة'), ('صحة جيدة', 'صحة جيدة'),
     )
@@ -50,6 +52,11 @@ class Needy(models.Model):
     age = models.SmallIntegerField(null=True, verbose_name='العمر')
     data_added = models.DateField(auto_now_add=True, null=True)
     case_number = models.SmallIntegerField(null=True, blank=True)
+    pay_paper = models.FileField(verbose_name='سند الصرف')
+    emp_name = models.CharField(null=True, max_length=255, verbose_name='اسم المشرف')
+    support = models.CharField(null=True, max_length=255, verbose_name='الدعم المقدم')
+    department = models.CharField(null=True, max_length=255, verbose_name='المنطقة')
+    amount = models.CharField(null=True, max_length=255, verbose_name='قيمة الدعم')
 
     def __str__(self):
         return self.name

@@ -11,7 +11,7 @@ def check_email(request):
         user_obj = User.objects.get(email=email)
         if user_obj.pk:
             return JsonResponse(
-                {"status": 1, "user_name": user_obj.first_name, "user_type": user_obj.user_type,
+                {"status": 1, "user_name": user_obj.first_name, "user_id": user_obj.pk, "user_type": user_obj.user_type,
                  "email": user_obj.email})
         else:
             return JsonResponse({"status": 0})
@@ -79,7 +79,7 @@ def register_secondary_empolyee(request):
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         user = User.objects.create_secondary_empuser(email=email, first_name=first_name, last_name=last_name,
-                                                address=address, password=password, phone=phone)
+                                                     address=address, password=password, phone=phone)
         if user is not None:
             login(request, user)
             return redirect('home-page')
