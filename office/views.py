@@ -120,3 +120,5 @@ def found_detial(request, pk):
     cases = found.cases.all()
     context = {"found": found, "emps": emps, "cases": cases}
     return render(request, 'office/found_detail.html', context)
+
+

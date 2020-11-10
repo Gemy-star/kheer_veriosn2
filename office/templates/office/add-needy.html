@@ -2,7 +2,7 @@
 {% load static %}
 
 
-{% block  title %} إضافة محتاج || ير السعوديه {% endblock title %}
+{% block  title %} إضافة محتاج || خير السعوديه {% endblock title %}
 
 
 {% block content %}
@@ -93,7 +93,7 @@
                                                    placeholder="رقم الحاله">
                                         </div>
                                     </div>
-                                        <div class="form-group row">
+                                    <div class="form-group row">
                                         <div class="col-md-6 mb-4 mb-lg-0">
                                             <input type="text" name="emp_name" id="emp_name" class="form-control"
                                                    placeholder="إسم الموظف">
@@ -116,17 +116,18 @@
                                             </select>
                                         </div>
                                     </div>
-                                                                        <div class="form-group row">
+                                    <div class="form-group row">
                                         <div class="col-md-12">
                                             <label for="health_status" class="text-cursive h5 text-red">الدعم المقدم
-<hr/>
+                                                <hr/>
                                                 <br>
-                                                </label>
-                                           <input type="radio" id="first_opt" name="first_opt" value="تفريج كربه"/>
-                                              <label for="first_opt">تفريج كربه</label><br>
-                                            <input type="radio" id="second_opt" name="second_opt" value="الضائقة المالي "/>
+                                            </label>
+                                            <input type="radio" id="first_opt" name="first_opt" value="تفريج كربه"/>
+                                            <label for="first_opt">تفريج كربه</label><br>
+                                            <input type="radio" id="second_opt" name="second_opt"
+                                                   value="الضائقة المالي "/>
 
-                                              <label for="second_opt">الضائقة المالية</label><br>
+                                            <label for="second_opt">الضائقة المالية</label><br>
                                             <div id="options">
 
                                             </div>
@@ -149,7 +150,7 @@
                                     <div class="form-group row">
                                         <div class="col-md-12" id="depend_div">
                                             <button type="button" id="btn_depend" class="btn btn-outline-success"> إضافة
-                                                عائل
+                                                إبن
                                             </button>
                                         </div>
                                     </div>
@@ -195,7 +196,6 @@
 
                 });
                 $("#btn_submit").on('click', event => {
-                    let amount =  $("#amount").val()
                     event.preventDefault();
                     $(".age").each(function (i, obj) {
                         console.log(obj)
@@ -212,9 +212,15 @@
                         console.log(case_types);
 
                     });
-                    $.ajax({
-                        method: 'POST',
-                        url: '{% url 'create-needy-ajax' %}',
+                    var money = $("#amount").val()
+                    var korba_type = $("#korba").val()
+                    debugger;
+               let  result =   checkamount(korba_type , money , user_id);
+
+                    if (result === false) {
+                        $.ajax({
+                          method: 'POST',
+                          url: '{% url 'create-needy-ajax' %}',
                         data: {
                             'name': $('#name').val(),
                             'national_id': $('#national_id').val(),
@@ -228,7 +234,9 @@
                             'depend_ages': ages,
                             'depend_genders': genders,
                             'depend_cases_type': case_types,
-
+                            'korba_type':korba_type,
+                            'amount':money,
+                            'health_status':$("#health_status").val(),
                             'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
                         },
                         success: function (data) {
@@ -252,12 +260,20 @@
                         error: function (error) {
                             alert(error.responseText)
                         }
-                    });
+                    })
+                    }else {
+                         swal({
+                                    title: "خطا",
+                                    text: "من فضلك راجع البيانات",
+                                    icon: "error",
+                                    button: "إغلاق",
+                                });
+                    }
                 })
-           $("#first_opt").on('click' , event => {
-              event.preventDefault();
-              $("#options").empty();
-              $("#options").append(`    <select class="form-control" id="korba">
+                $("#first_opt").on('click', event => {
+                    event.preventDefault();
+                    $("#options").empty();
+                    $("#options").append(`    <select class="form-control" id="korba">
                                                 <option value="ايجار سكني">ايجار سكني</option>
                                                 <option value="فاتورة كهرباء">فاتورة كهرباء</option>
                                                 <option value="فاتورة مياة">فاتورة مياة</option>
@@ -267,11 +283,11 @@
 
                                             </select>`);
 
-           });
-           $("#second_opt").on('click' , event => {
-              event.preventDefault();
-              $("#options").empty();
-              $("#options").append(`    <select class="form-control" id="korba">
+                });
+                $("#second_opt").on('click', event => {
+                    event.preventDefault();
+                    $("#options").empty();
+                    $("#options").append(`    <select class="form-control" id="korba">
                                                 <option value="تطوع ">تطوع </option>
                                                 <option value="تدريب اون لاين">تدريب اون لاين</option>
                                                 <option value="تدريب حضور
@@ -284,7 +300,7 @@
 
                                             </select>`);
 
-           });
+                });
             });
 
             function add_dependency() {
@@ -311,6 +327,132 @@
                                                    placeholder="العمر">
 
                `);
+            }
+
+            function checkamount(korba, amount, user_id) {
+                debugger;
+                if (user_id === "2") {
+                    switch (korba) {
+                        case 'ايجار سكني':
+                            if (!(amount <= 11000)) {
+                                swal({
+                                    title: "خطا",
+                                    text: "من فضلك راجع قيمة المدخلات",
+                                    icon: "error",
+                                    button: "إغلاق",
+                                });
+                                return false;
+                            }
+                            break;
+                        case 'فاتورة كهرباء' :
+                            if (!(amount <= 800)) {
+                                swal({
+                                    title: "خطا",
+                                    text: "من فضلك راجع قيمة المدخلات",
+                                    icon: "error",
+                                    button: "إغلاق",
+                                });
+                                return false;
+                            }
+
+                            break;
+                        case 'موؤنة غذائية' :
+                            if (!(amount <= 6000)) {
+                                swal({
+                                    title: "خطا",
+                                    text: "من فضلك راجع قيمة المدخلات",
+                                    icon: "error",
+                                    button: "إغلاق",
+                                });
+                                return false;
+                            }
+
+                            break;
+                        case 'فاتورة مياة' :
+                            if (!(amount <= 600)) {
+                                swal({
+                                    title: "خطا",
+                                    text: "من فضلك راجع قيمة المدخلات",
+                                    icon: "error",
+                                    button: "إغلاق",
+                                });
+                                return false;
+                            }
+
+                            break;
+                        default:
+                            if (!(amount <= 11000)) {
+                                swal({
+                                    title: "خطا",
+                                    text: "من فضلك راجع قيمة المدخلات",
+                                    icon: "error",
+                                    button: "إغلاق",
+                                });
+                                return false;
+                            }
+                    }
+                } else if (user_id === "3") {
+                    switch (korba) {
+                        case 'ايجار سكني':
+                            if (!(amount <= 1500)) {
+                                swal({
+                                    title: "خطا",
+                                    text: "من فضلك راجع قيمة المدخلات",
+                                    icon: "error",
+                                    button: "إغلاق",
+                                });
+                                return false;
+                            }
+                            break;
+                        case 'فاتورة كهرباء' :
+                            if (!(amount <= 1200)) {
+                                swal({
+                                    title: "خطا",
+                                    text: "من فضلك راجع قيمة المدخلات",
+                                    icon: "error",
+                                    button: "إغلاق",
+                                });
+                                return false;
+                            }
+
+                            break;
+                        case 'موؤنة غذائية' :
+                            if (!(amount <= 6000)) {
+                                swal({
+                                    title: "خطا",
+                                    text: "من فضلك راجع قيمة المدخلات",
+                                    icon: "error",
+                                    button: "إغلاق",
+                                });
+                                return false;
+                            }
+
+                            break;
+                        case 'فاتورة مياة' :
+                            if (!(amount <= 600)) {
+                                swal({
+                                    title: "خطا",
+                                    text: "من فضلك راجع قيمة المدخلات",
+                                    icon: "error",
+                                    button: "إغلاق",
+                                });
+                                return false;
+                            }
+
+                            break;
+                        default:
+                            if (!(amount <= 11000)) {
+                                swal({
+                                    title: "خطا",
+                                    text: "من فضلك راجع قيمة المدخلات",
+                                    icon: "error",
+                                    button: "إغلاق",
+                                });
+                                return false;
+                            }
+                    }
+
+                }
             }
         </script>
     {% endblock javascript %}

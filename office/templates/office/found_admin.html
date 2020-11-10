@@ -1,0 +1,238 @@
+{% extends 'main.html' %}
+
+
+{% load static %}
+
+{% block title %} التحكم || المؤسسات   {% endblock title %}
+
+{% block style %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/gijgo.css' %}" rel="stylesheet" type="text/css"/>
+    <style>
+
+        .form-row {
+            display: flex;
+            margin-bottom: 29px;
+        }
+
+        .form-row:last-child {
+            margin-bottom: 0px;
+        }
+
+        .margin-top-10 {
+            margin-top: 10px;
+        }
+
+        .float-left {
+            float: left;
+        }
+
+        .float-right {
+            float: right;
+        }
+
+        .display-inline {
+            display: inline;
+        }
+
+        .display-inline-block {
+            display: inline-block;
+        }
+
+        .width-200 {
+            width: 200px;
+        }
+
+        .clear-both {
+            clear: both;
+        }
+
+        .gj-display-none {
+            display: none;
+        }
+    </style>
+{% endblock style %}
+{% block content %}
+    <div class="ftco-blocks-cover-1">
+        <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/h1_hero.png')">
+            <div class="container">
+                <div class="row align-items-center ">
+
+                    <div class="col-md-5 mt-5 pt-5">
+                        <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+                        <h1 class="mb-3 font-weight-bold body-font">مشرف || الرئيسيه</h1>
+                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
+                            <strong>عن المؤسسه</strong></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="site-section py-12 bg-white">
+                    <h1 style="direction: rtl;" class="text-cursive h5 text-red">أدوات التحكم || الجمعيه</h1>
+
+                    <div class="margin-top-10">
+                        <div class="float-left">
+                            <form class="display-inline">
+                                <input id="txtName" type="text" placeholder="الأسم..."
+                                       class="gj-textbox-md display-inline-block width-200"/>
+                                <input id="txtAddress" type="text" placeholder="العنوان..."
+                                       class="gj-textbox-md display-inline-block width-200"/>
+                                <button id="btnSearch" type="button" class="gj-button-md">بحث</button>
+                                <button id="btnClear" type="button" class="gj-button-md">إعاده</button>
+                            </form>
+                        </div>
+                        <div class="float-right">
+                            <button id="btnAdd" type="button" class="gj-button-md">إضف جمعيه جديده</button>
+                        </div>
+                    </div>
+                    <div class="clear-both"></div>
+                    <div class="margin-top-10">
+                        <table id="grid"></table>
+                    </div>
+
+                    <div id="dialog" class="gj-display-none">
+                        <div data-role="body">
+                            <input type="hidden" id="ID"/>
+                            <div class="form-row">
+                                <input type="text" class="gj-textbox-md" id="foundName" placeholder="إسم الجمعيه...">
+                            </div>
+                            <div class="form-row">
+                                <input type="text" class="gj-textbox-md" id="foundAddress"
+                                       placeholder="عنوان الجمعيه...">
+                            </div>
+                            <div class="form-row">
+                                <input type="text" class="gj-textbox-md" id="foundDesc" placeholder="وصف الجمعيه...">
+                            </div>
+
+                            <div class="form-row">
+                                <input type="number" class="gj-textbox-md" id="foundPhone"
+                                       placeholder="هاتف الجمعيه...">
+                            </div>
+                        </div>
+                        <div data-role="footer">
+                            <button type="button" id="btnSave" class="gj-button-md">حفظ</button>
+                            <button type="button" id="btnCancel" class="gj-button-md">إلغاء</button>
+                        </div>
+                    </div>
+                    <hr/>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block javascript %}
+    <script src="{% static 'js/gijgo.js' %}" type="text/javascript"></script>
+
+    <script>
+        var grid, dialog, nationalityDropdown, dateOfBirth, isActiveCheckbox;
+
+        function Edit(e) {
+            $('#ID').val(e.data.id);
+            $('#foundName').val(e.data.record.Name);
+            $('#foundAddress').val(e.data.record.Name);
+            $('#foundDesc').val(e.data.record.Name);
+            $('#foundPhone').val(e.data.record.Name);
+            dialog.open('Edit Player');
+        }
+
+        function Save() {
+            var record = {
+                ID: $('#ID').val(),
+                Name: $('#foundName').val(),
+                CountryID: nationalityDropdown.value(),
+                DateOfBirth: gj.core.parseDate(dateOfBirth.value(), 'mm/dd/yyyy').toISOString(),
+                IsActive: $('#IsActive').prop('checked')
+            };
+            $.ajax({url: '/Players/Save', data: {record: record}, method: 'POST'})
+                .done(function () {
+                    dialog.close();
+                    grid.reload();
+                })
+                .fail(function () {
+                    alert('Failed to save.');
+                    dialog.close();
+                });
+        }
+
+        function Delete(e) {
+            if (confirm('Are you sure?')) {
+                $.ajax({url: '/Players/Delete', data: {id: e.data.id}, method: 'POST'})
+                    .done(function () {
+                        grid.reload();
+                    })
+                    .fail(function () {
+                        alert('Failed to delete.');
+                    });
+            }
+        }
+
+        $(document).ready(function () {
+            grid = $('#grid').grid({
+                primaryKey: 'ID',
+                dataSource: '{% url 'found-all' %}',
+                columns: [
+                    {field: 'ID', width: 56},
+                    {field: 'Name', sortable: true},
+                    {field: 'CountryName', title: 'Nationality', sortable: true},
+                    {field: 'DateOfBirth', sortable: true, type: 'date'},
+                    {field: 'IsActive', title: 'Active?', type: 'checkbox', width: 90, align: 'center'},
+                    {
+                        width: 64,
+                        tmpl: '<span class="material-icons gj-cursor-pointer">edit</span>',
+                        align: 'center',
+                        events: {'click': Edit}
+                    },
+                    {
+                        width: 64,
+                        tmpl: '<span class="material-icons gj-cursor-pointer">delete</span>',
+                        align: 'center',
+                        events: {'click': Delete}
+                    }
+                ],
+                pager: {limit: 5}
+            });
+            dialog = $('#dialog').dialog({
+                autoOpen: false,
+                resizable: false,
+                modal: true,
+                width: 360
+            });
+            nationalityDropdown = $('#Nationality').dropdown({dataSource: '/Locations/GetCountries', valueField: 'id'});
+            dateOfBirth = $('#DateOfBirth').datepicker();
+            isActiveCheckbox = $('#IsActive').checkbox();
+            $('#btnAdd').on('click', function () {
+                $('#ID').val('');
+                $('#Name').val('');
+                nationalityDropdown.value('');
+                dateOfBirth.value('');
+                isActiveCheckbox.state('unchecked');
+                dialog.open('Add Player');
+            });
+            $('#btnSave').on('click', Save);
+            $('#btnCancel').on('click', function () {
+                dialog.close();
+            });
+            $('#btnSearch').on('click', function () {
+                grid.reload({page: 1, name: $('#txtName').val(), nationality: $('#txtNationality').val()});
+            });
+            $('#btnClear').on('click', function () {
+                $('#txtName').val('');
+                $('#txtNationality').val('');
+                grid.reload({name: '', nationality: ''});
+            });
+        });
+    </script>
+{% endblock javascript %}
