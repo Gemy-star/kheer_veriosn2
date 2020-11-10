@@ -52,7 +52,6 @@ class Needy(models.Model):
     age = models.SmallIntegerField(null=True, verbose_name='العمر')
     data_added = models.DateField(auto_now_add=True, null=True)
     case_number = models.SmallIntegerField(null=True, blank=True)
-    pay_paper = models.FileField(verbose_name='سند الصرف')
     emp_name = models.CharField(null=True, max_length=255, verbose_name='اسم المشرف')
     support = models.CharField(null=True, max_length=255, verbose_name='الدعم المقدم')
     department = models.CharField(null=True, max_length=255, verbose_name='المنطقة')

@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.core import serializers
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from office import models
 from accounts.models import User
+from django.core.files.storage import FileSystemStorage
+
 
 
 def home_employee(request):
@@ -49,14 +51,13 @@ def create_neeedy_ajax(request):
         health_status = request.POST.get('health_status')
         source_type = request.POST.get('source_type')
         department = request.POST.get('department')
-        support = request.POST.get('support')
+        support = request.POST.get('korba_type')
         emp_name = request.POST.get('emp_name')
-        pay_paper = request.POST.get('pay_paper')
 
         needy = models.Needy(name=name, national_id=national_id, phone=phone, home=address, health_status=health_status,
                              source_income=source_type, case_number=case_number, age=case_age, department=department,
                              support=support,
-                             emp_employee=emp_name, pay_paper=pay_paper)
+                             emp_name=emp_name)
         needy.save()
         found_obj.cases.add(needy)
         if len(depend_ages) == len(depend_genders) == len(depend_cases_type):

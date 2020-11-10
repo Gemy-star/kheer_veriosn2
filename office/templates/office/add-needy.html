@@ -32,7 +32,7 @@
                     <div class="row ">
                         <div class="col-md-12 d-flex">
                             <div id="create_case">
-                                <form action="#" method="post">
+                                <form action="#"  method="post">
                                     {% csrf_token %}
                                     <div class="form-group row">
                                         <div class="col-md-6 mb-4 mb-lg-0">
@@ -82,27 +82,33 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <input type="number" name="case_age" id="case_age"
                                                    class="form-control"
                                                    placeholder="العمر">
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <input type="number" name="case_number" id="case_number"
                                                    class="form-control"
                                                    placeholder="رقم الحاله">
                                         </div>
+                                        <div class="col-md-4">
+                                            <input type="text" name="department" id="department"
+                                                   class="form-control"
+                                                   placeholder="المنطقه">
+                                        </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-md-6 mb-4 mb-lg-0">
+                                        <div class="col-md-4 mb-4 mb-lg-0">
                                             <input type="text" name="emp_name" id="emp_name" class="form-control"
                                                    placeholder="إسم الموظف">
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <input type="number" name="amount" id="amount" class="form-control"
                                                    placeholder="المبلغ">
 
                                         </div>
+
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-12">
@@ -196,6 +202,7 @@
 
                 });
                 $("#btn_submit").on('click', event => {
+                    alert('hello')
                     event.preventDefault();
                     $(".age").each(function (i, obj) {
                         console.log(obj)
@@ -215,61 +222,56 @@
                     var money = $("#amount").val()
                     var korba_type = $("#korba").val()
                     debugger;
-               let  result =   checkamount(korba_type , money , user_id);
+                    // let  result =   checkamount(korba_type , money , user_id);
 
-                    if (result === false) {
+
+
                         $.ajax({
-                          method: 'POST',
-                          url: '{% url 'create-needy-ajax' %}',
-                        data: {
-                            'name': $('#name').val(),
-                            'national_id': $('#national_id').val(),
-                            'address': $('#address').val(),
-                            'phone': $('#phone').val(),
-                            'status': $('#status').val(),
-                            'case_age': $('#case_age').val(),
-                            'case_number': $('#case_number').val(),
-                            'health_status': $('#health_status').val(),
-                            'source_type': $('#source_type').val(),
-                            'depend_ages': ages,
-                            'depend_genders': genders,
-                            'depend_cases_type': case_types,
-                            'korba_type':korba_type,
-                            'amount':money,
-                            'health_status':$("#health_status").val(),
-                            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-                        },
-                        success: function (data) {
-                            if (data.data === 1) {
-                                swal({
-                                    title: "تم",
-                                    text: "تم  بنجاح",
-                                    icon: "success",
-                                    button: "إغلاق",
-                                });
-
-                            } else {
-                                swal({
-                                    title: "خطا",
-                                    text: "من فضلك راجع البيانات",
-                                    icon: "error",
-                                    button: "إغلاق",
-                                });
+                            method: 'POST',
+                            url: '{% url 'create-needy-ajax' %}',
+                               data: {
+                                'name': $('#name').val(),
+                                'national_id': $('#national_id').val(),
+                                'address': $('#address').val(),
+                                'phone': $('#phone').val(),
+                                'status': $('#status').val(),
+                                'case_age': $('#case_age').val(),
+                                'case_number': $('#case_number').val(),
+                                'health_status': $('#health_status').val(),
+                                'source_type': $('#source_type').val(),
+                                'depend_ages': ages,
+                                'depend_genders': genders,
+                                'depend_cases_type': case_types,
+                                'korba_type': korba_type,
+                                'amount': money,
+                                'emp_name': $("#emp_name").val(),
+                                'department': $("#department").val(),
+                                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                            },
+                            success: function (data) {
+                                if (data.data === 1) {
+                                    swal({
+                                        title: "تم",
+                                        text: "تم  بنجاح",
+                                        icon: "success",
+                                        button: "إغلاق",
+                                    });
+window.location.href = "{% url 'home-employee' %}"
+                                } else {
+                                    swal({
+                                        title: "خطا",
+                                        text: "من فضلك راجع البيانات",
+                                        icon: "error",
+                                        button: "إغلاق",
+                                    });
+                                }
+                            },
+                            error: function (error) {
+                                alert(error.responseText)
                             }
-                        },
-                        error: function (error) {
-                            alert(error.responseText)
-                        }
-                    })
-                    }else {
-                         swal({
-                                    title: "خطا",
-                                    text: "من فضلك راجع البيانات",
-                                    icon: "error",
-                                    button: "إغلاق",
-                                });
-                    }
-                })
+                        });
+
+                });
                 $("#first_opt").on('click', event => {
                     event.preventDefault();
                     $("#options").empty();
@@ -280,7 +282,6 @@
                                                 <option value="موؤنة غذائية"> موؤنة غذائية</option>
                                                 <option value="دعم علاج"> دعم علاج</option>
                                                 <option value="دعم التعليم"> دعم التعليم</option>
-
                                             </select>`);
 
                 });
@@ -297,7 +298,6 @@
 </option>
                                                 <option value="دعم مشروع"> دعم مشروع</option>
                                                 <option value="اخرى">اخرى </option>
-
                                             </select>`);
 
                 });
@@ -307,7 +307,6 @@
                 //   $("#depend_div").empty();
                 $('#depend_div').append(`
                                             <h5 class="text-cursive h5 text-red">إضافة الأبناء </h5>
-
 <hr/>
                                             <label for="case_type" class="text-cursive h5 text-red">النوع </label>
                                             <select class="form-control gender" id="gender">
@@ -325,7 +324,6 @@
  <input type="number" name="age" id="age"
                                                    class="form-control age"
                                                    placeholder="العمر">
-
                `);
             }
 
