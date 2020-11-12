@@ -29,18 +29,35 @@
                 <ul class="site-menu main-menu js-clone-nav mr-auto ">
                   <li><img src="{% static 'images/logo.png' %}" /></li>
                     <li class="active body-font"><a href="{% url 'home-page' %}" class="nav-link">الرئيسيه</a></li>
-                    <li><a href="{% url 'about-page' %}" class="nav-link body-font">عن المؤسسه</a></li>
-                  <li><a href="packages.html" class="nav-link body-font">شارك فى الخير</a></li>
-                  <li><a href="gallery.html" class="nav-link body-font">أنواع الخير</a></li>
+                      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle body-font" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          حول المؤسسه
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item body-font" href="{% url 'about-page' %}">عن المؤسسه</a>
+          <a class="dropdown-item body-font" href="#">مبادرتنا</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item body-font" href="#">شركاؤنا</a>
+        </div>
+      </li>
+                      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle body-font" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          أدوات التحكم
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item body-font" href="#">الحالات</a>
+          <a class="dropdown-item body-font" href="#">ادوات التحكم</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item body-font" href="#">إضافة جمعيه</a>
+        </div>
+      </li>
                   <li><a href="{% url 'login' %}" class="nav-link body-font">تسجيل الدخول</a></li>
                   <li><a href="{% url 'register' %}" class="nav-link body-font">إنشاء حساب</a></li>
                 </ul>
               </nav>
 
               <div class="top-social ml-auto">
-                <a href="#"><span class="icon-facebook text-teal"></span></a>
-                <a href="#"><span class="icon-twitter text-success"></span></a>
-                <a href="#"><span class="icon-linkedin text-yellow"></span></a>
+             <img src="{% static 'images/carts.png' %}"  width="50" height="50"/>
               </div>
           </div>
         </div>
