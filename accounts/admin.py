@@ -18,9 +18,11 @@ class AddUserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', 'phone', 'is_premier_emp', 'is_admin',  'is_superuser',
-                  'is_secondary_emp',
-                  'is_active', 'is_staff', 'user_type')
+        fields = (
+            'email', 'first_name', 'last_name', 'phone', 'is_premier_emp', 'is_admin', 'is_needy', 'is_helper_employee',
+            'is_superuser',
+            'is_secondary_emp',
+            'is_active', 'is_staff', 'user_type')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -48,7 +50,8 @@ class UpdateUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = (
-            'email', 'first_name', 'last_name', 'phone', 'is_secondary_emp', 'is_admin', 'is_premier_emp', 'is_superuser',
+            'email', 'first_name', 'last_name', 'phone', 'is_secondary_emp', 'is_admin', 'is_needy',
+            'is_helper_employee', 'is_premier_emp', 'is_superuser',
             'is_active', 'is_staff', 'user_type')
 
     def clean_password(self):
@@ -66,7 +69,9 @@ class UserAdmin(BaseUserAdmin):
         (None, {'fields': ('email', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name', 'phone', 'address')}),
         ('Permissions',
-         {'fields': ('is_active', 'is_secondary_emp', 'is_admin', 'user_type', 'is_staff', 'is_premier_emp')}),
+         {'fields': (
+             'is_active', 'is_secondary_emp', 'is_admin', 'is_needy', 'is_helper_employee', 'user_type', 'is_staff',
+             'is_premier_emp')}),
     )
     add_fieldsets = (
         (
@@ -76,7 +81,7 @@ class UserAdmin(BaseUserAdmin):
                 'fields': (
                     'email', 'first_name', 'last_name', 'password1', 'password2',
                     'user_type', 'phone', 'address',
-                    'is_active', 'is_admin', 'is_secondary_emp', 'is_premier_emp'
+                    'is_active', 'is_admin', 'is_secondary_emp', 'is_needy', 'is_helper_employee', 'is_premier_emp'
                 )
             }
         ),

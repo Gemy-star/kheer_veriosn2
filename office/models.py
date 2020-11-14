@@ -3,6 +3,11 @@ from accounts.models import User
 
 
 class Dependency(models.Model):
+    ENABILTY_CHOICES = (
+        (1, 'مرشح للتمكين'),
+        (2, 'غير مرشح للتمكين'),
+
+    )
     GENDER_CHOICES = (
         ('M', 'ذكر'),
         ('F', 'أنثى'),
@@ -17,6 +22,7 @@ class Dependency(models.Model):
     )
     stage = models.CharField(max_length=255, choices=STAGE_CHOICES, verbose_name='المرحله')
     age = models.SmallIntegerField(null=True, verbose_name='العمر')
+    enablity = models.SmallIntegerField(null=True, choices=ENABILTY_CHOICES)
 
     def __str__(self):
         return str(self.gender)
@@ -30,10 +36,17 @@ class Needy(models.Model):
         ('أخرى', 'أخرى'),
 
     )
+    ENABILTY_CHOICES = (
+        (1, 'مرشح للتمكين'),
+        (2, 'غير مرشح للتمكين'),
+
+    )
     home = models.CharField(null=True, max_length=255, choices=HOME_CHOICES, verbose_name='السكن')
     national_id = models.CharField(max_length=255, null=True, verbose_name='رقم الهويه')
     phone = models.CharField(max_length=255, null=True, verbose_name='الجوال')
     parent = models.CharField(max_length=255, null=True, verbose_name='العائل')
+    enablity = models.SmallIntegerField(null=True, choices=ENABILTY_CHOICES)
+    job = models.CharField(max_length=255, null=True, verbose_name='المهنه')
 
     SOURCE_CHOICES = (
         ('راتب شهري', 'راتب شهري'),
@@ -71,5 +84,3 @@ class Foundation(models.Model):
 
     def __str__(self):
         return self.name
-
-

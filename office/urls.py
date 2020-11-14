@@ -12,5 +12,6 @@ urlpatterns = [
     path('found/delete', views.delete_found, name='found-delete'),
     path('found/detail/<int:pk>', views.found_detial, name='found-detail'),
     path('found/list', views.found_list, name='found-list'),
+    path('enable/list', views.enable_list, name='enable-list'),
 
 ]

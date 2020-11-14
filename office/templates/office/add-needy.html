@@ -108,6 +108,11 @@
                                                    placeholder="المبلغ">
 
                                         </div>
+                                         <div class="col-md-4">
+                                            <input type="text" name="job" id="job" class="form-control"
+                                                   placeholder="الحرفه أو المهنه">
+
+                                        </div>
 
                                     </div>
                                     <div class="form-group row">
@@ -151,7 +156,15 @@
                                             </select>
                                         </div>
                                     </div>
-
+                      <div class="form-group row">
+                          <div class="col-md-12">
+                               <label for="enable_needy" class="text-cursive h5 text-red"> مرشح للتمكين </label>
+                                            <select class="form-control enable_needy" id="enable_needy">
+                                                <option value="1">مرشح</option>
+                                                <option value="2">غير مرشح</option>
+                                            </select>
+                          </div>
+                      </div>
 
                                     <div class="form-group row">
                                         <div class="col-md-12" id="depend_div">
@@ -185,6 +198,7 @@
             var genders = [];
             var case_types = [];
             var user_id = sessionStorage.getItem('user_id');
+            var enable_teen = [];
             $(() => {
                 $("#btn_other").on('click', event => {
                     event.preventDefault;
@@ -219,6 +233,11 @@
                         console.log(case_types);
 
                     });
+                      $(".enable_teen").each(function (i, obj) {
+                        enable_teen.push($(this).val())
+                        console.log(enable_teen);
+
+                    });
                     var money = $("#amount").val()
                     var korba_type = $("#korba").val()
                     debugger;
@@ -236,6 +255,7 @@
                                 'phone': $('#phone').val(),
                                 'status': $('#status').val(),
                                 'case_age': $('#case_age').val(),
+                                'job': $('#job').val(),
                                 'case_number': $('#case_number').val(),
                                 'health_status': $('#health_status').val(),
                                 'source_type': $('#source_type').val(),
@@ -244,6 +264,8 @@
                                 'depend_cases_type': case_types,
                                 'korba_type': korba_type,
                                 'amount': money,
+                                   'enable_teen':enable_teen,
+                                   'enable_needy' : $("#enable_needy").val(),
                                 'emp_name': $("#emp_name").val(),
                                 'department': $("#department").val(),
                                 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
@@ -324,6 +346,11 @@ window.location.href = "{% url 'home-employee' %}"
  <input type="number" name="age" id="age"
                                                    class="form-control age"
                                                    placeholder="العمر">
+ <label for="enable_teen" class="text-cursive h5 text-red"> مرشح للتمكين </label>
+                                            <select class="form-control enable_teen" id="enable_teen">
+                                                <option value="1">مرشح</option>
+                                                <option value="2">غير مرشح</option>
+                                            </select>
                `);
             }
 

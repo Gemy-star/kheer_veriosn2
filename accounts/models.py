@@ -35,6 +35,8 @@ class UserManager(BaseUserManager):
         user.is_admin = False
         user.is_staff = False
         user.is_needy = False
+        user.is_needy = False
+        user.is_helper_employee = False
         user.is_premier_emp = False
         if commit:
             user.save(using=self._db)
@@ -57,13 +59,17 @@ class UserManager(BaseUserManager):
         user.is_staff = True
         user.is_superuser = True
         user.is_admin = True
+        user.is_needy = False
+        user.is_helper_employee = False
+        user.is_premier_emp = False
+        user.is_secondary_emp = False
         user.user_type = 1
         user.save(using=self._db)
         return user
 
     def create_secondary_empuser(self, email, first_name, last_name, phone, address, password):
         """
-        Creates and saves a superuser with the given email, first name,
+        Creates and saves a Secondary Employee USer with the given email, first name,
         last name and password.
         """
         user = self.create_user(
@@ -78,6 +84,8 @@ class UserManager(BaseUserManager):
         user.is_secondary_emp = True
         user.is_admin = False
         user.is_needy = False
+        user.is_needy = False
+        user.is_helper_employee = False
         user.is_premier_emp = False
         user.is_active = True
         user.user_type = 3
@@ -86,7 +94,7 @@ class UserManager(BaseUserManager):
 
     def create_permier_employeeuser(self, email, first_name, last_name, phone, address, password):
         """
-        Creates and saves a superuser with the given email, first name,
+        Creates and saves a premier Employee User with the given email, first name,
         last name and password.
         """
         user = self.create_user(
@@ -101,10 +109,60 @@ class UserManager(BaseUserManager):
         user.is_premier_emp = True
         user.is_admin = False
         user.is_needy = False
+        user.is_helper_employee = False
+        user.is_needy = False
         user.is_secondary_emp = False
         user.is_active = True
-        user.user_type = 3
+        user.user_type = 2
         user.is_superuser = False
+        user.save(using=self._db)
+        return user
+
+    def create_helper_empuser(self, email, first_name, last_name, phone, address, password):
+        """
+        Creates and saves a Helper Employee User with the given email, first name,
+        last name and password.
+        """
+        user = self.create_user(
+            email,
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+            phone=phone,
+            address=address,
+            commit=False,
+        )
+        user.is_secondary_emp = False
+        user.is_admin = False
+        user.is_needy = False
+        user.is_helper_employee = True
+        user.is_premier_emp = False
+        user.is_active = True
+        user.user_type = 4
+        user.save(using=self._db)
+        return user
+
+    def create_Needy_user(self, email, first_name, last_name, phone, address, password):
+        """
+        Creates and saves a Needy User with the given email, first name,
+        last name and password.
+        """
+        user = self.create_user(
+            email,
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+            phone=phone,
+            address=address,
+            commit=False,
+        )
+        user.is_secondary_emp = False
+        user.is_admin = False
+        user.is_needy = True
+        user.is_helper_employee = False
+        user.is_premier_emp = False
+        user.is_active = True
+        user.user_type = 5
         user.save(using=self._db)
         return user
 
@@ -129,11 +187,19 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_secondary_emp = models.BooleanField(_('Secondary Employee'), default=False, help_text=_(
         'Designates whether this user should be treated as an Secondary Employee. '
     ))
-
+    is_needy = models.BooleanField(_('Needy '), default=False, help_text=_(
+        'Designates whether this user should be treated as an Needy. '
+    ))
+    is_helper_employee = models.BooleanField(_('Helper Employee '), default=False, help_text=_(
+        'Designates whether this user should be treated as an Helper Employee. '
+    ))
     USER_TYPE_CHOICES = (
         (1, 'مدير المؤسسه'),
         (2, 'مشرف جمعيه رئيسيه'),
         (3, 'مشرف جمعيه تنمويه'),
+        (4, 'مشرف متعاون'),
+        (5, 'محتاج'),
+
     )
 
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, null=True, verbose_name=_('User Type'),

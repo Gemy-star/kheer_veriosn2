@@ -6,7 +6,6 @@ from accounts.models import User
 from django.core.files.storage import FileSystemStorage
 
 
-
 def home_employee(request):
     return render(request, 'office/home-employee.html')
 
@@ -53,20 +52,25 @@ def create_neeedy_ajax(request):
         department = request.POST.get('department')
         support = request.POST.get('korba_type')
         emp_name = request.POST.get('emp_name')
+        enable_teen = request.POST.getlist('enable_teen[]')
+        enable_needy = request.POST.get('enable_needy')
+        job = request.POST.get('job')
 
         needy = models.Needy(name=name, national_id=national_id, phone=phone, home=address, health_status=health_status,
                              source_income=source_type, case_number=case_number, age=case_age, department=department,
                              support=support,
-                             emp_name=emp_name)
+                             emp_name=emp_name, enablity=enable_needy, job=job)
         needy.save()
         found_obj.cases.add(needy)
-        if len(depend_ages) == len(depend_genders) == len(depend_cases_type):
+        if len(depend_ages) == len(depend_genders) == len(depend_cases_type) == len(enable_teen):
             for age in depend_ages:
                 for gender in depend_genders:
                     for case_type in depend_cases_type:
-                        depend = models.Dependency(age=age, gender=gender, stage=case_type)
-                        depend.save()
-                        needy.dependencies.add(depend)
+                        for enable in enable_teen:
+                            depend = models.Dependency(age=age, gender=gender, stage=case_type, enablity=enable)
+                            depend.save()
+                            needy.dependencies.add(depend)
+
         if needy.pk:
             return JsonResponse({"data": 1, "needy_Pk": needy.pk})
         else:
@@ -121,5 +125,12 @@ def found_detial(request, pk):
     cases = found.cases.all()
     context = {"found": found, "emps": emps, "cases": cases}
     return render(request, 'office/found_detail.html', context)
+
+
+def enable_list(request):
+    children = models.Dependency.objects.filter(enablity=1)
+    enable_needies = models.Needy.objects.filter(enablity=1)
+    context = {"children": children, "enable_needies": enable_needies}
+    return render(request, 'office/enable_list.html', context=context)
 
 
