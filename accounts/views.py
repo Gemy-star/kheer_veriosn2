@@ -87,3 +87,60 @@ def register_secondary_empolyee(request):
             messages.add_message(request, messages.error, 'Please Review Your Data Failed To Register')
     context = {}
     return render(request, 'accounts/register-employee.html', context)
+
+
+def register_helper_employee(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        user = User.objects.create_helper_empuser(email=email, first_name=first_name, last_name=last_name,
+                                                  address=address, password=password, phone=phone)
+        if user is not None:
+            login(request, user)
+            return redirect('home-page')
+        else:
+            messages.add_message(request, messages.error, 'Please Review Your Data Failed To Register')
+    context = {}
+    return render(request, 'accounts/register-helper-employee.html', context)
+
+
+def register_needy(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        user = User.objects.create_Needy_user(email=email, first_name=first_name, last_name=last_name,
+                                              address=address, password=password, phone=phone)
+        if user is not None:
+            login(request, user)
+            return redirect('home-page')
+        else:
+            messages.add_message(request, messages.error, 'Please Review Your Data Failed To Register')
+    context = {}
+    return render(request, 'accounts/register-needy.html', context)
+
+
+def register_donator(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        user = User.objects.create_Donator_user(email=email, first_name=first_name, last_name=last_name,
+                                                address=address, password=password, phone=phone)
+        if user is not None:
+            login(request, user)
+            return redirect('home-page')
+        else:
+            messages.add_message(request, messages.error, 'Please Review Your Data Failed To Register')
+    context = {}
+    return render(request, 'accounts/register-donator.html', context)

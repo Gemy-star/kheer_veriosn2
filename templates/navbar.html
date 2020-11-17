@@ -1,83 +1,98 @@
 {% load static %}
-  <header class="site-navbar site-navbar-target" role="banner">
+<header class="site-navbar site-navbar-target" role="banner">
 
-        <div class="container mb-3">
-          <div class="d-flex align-items-center">
+    <div class="container mb-3">
+        <div class="d-flex align-items-center">
             <div class="site-quick-contact d-none d-lg-flex ml-auto ">
-              <div class="d-flex site-info align-items-center mr-5 body-font">
-                <span class="block-icon mr-3"><span class="icon-map-marker text-yellow"></span></span>
-                <span>جده</span>
-              </div>
-              <div class="d-flex site-info align-items-center body-font">
-                <span class="block-icon mr-3"><span class="icon-clock-o"></span></span>
-                <span><br> طوال أيام الأسبوع</span>
-              </div>
+                <div class="d-flex site-info align-items-center mr-5 body-font">
+                    {#                <span class="block-icon mr-3"><span class="icon-map-marker text-yellow"></span></span>#}
+                    {#                <span>جده</span>#}
+                </div>
+                <div class="d-flex site-info align-items-center body-font">
+                    {#                <span class="block-icon mr-3"><span class="icon-clock-o"></span></span>#}
+                    {#                <span><br> طوال أيام الأسبوع</span>#}
+                </div>
 
             </div>
-          </div>
         </div>
+    </div>
 
 
-        <div class="container">
-          <div class="menu-wrap d-flex align-items-center">
-            <span class="d-inline-block d-lg-none"><a href="{% url 'home-page' %}" class="text-black site-menu-toggle js-menu-toggle py-5"><span class="icon-menu h3 text-black"></span></a></span>
+    <div class="container">
+        <div class="menu-wrap d-flex align-items-center">
+            <span class="d-inline-block d-lg-none"><a href="{% url 'home-page' %}"
+                                                      class="text-black site-menu-toggle js-menu-toggle py-5"><span
+                    class="icon-menu h3 text-black"></span></a></span>
 
 
-
-              <nav class="site-navigation text-left mr-auto d-none d-lg-block" role="navigation">
+            <nav class="site-navigation text-left mr-auto d-none d-lg-block" role="navigation">
 
                 <ul class="site-menu main-menu js-clone-nav mr-auto ">
-                  <li><img src="{% static 'images/logo.png' %}" /></li>
+                    <li><img src="{% static 'images/logo.png' %}"/></li>
                     <li class="active body-font"><a href="{% url 'home-page' %}" class="nav-link">الرئيسيه</a></li>
-                      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle body-font" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          حول المؤسسه
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item body-font" href="{% url 'about-page' %}">عن المؤسسه</a>
-          <a class="dropdown-item body-font" href="#">المركز الإعلامي</a>
-          <a class="dropdown-item body-font" href="#">الخدمات الالكترونية</a>
-
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item body-font" href="#">شركاؤنا</a>
-        </div>
-      </li>
-                      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle body-font" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          أدوات التحكم
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item body-font" href="#">الحالات</a>
-          <a class="dropdown-item body-font" href="#">ادوات التحكم</a>
-          <div class="dropdown-divider"></div>
-            <a class="dropdown-item body-font" href="{% url 'enable-list' %}">المرشحين للتمكين</a>
-          <a class="dropdown-item body-font" href="#">إضافة جمعيه</a>
-        </div>
-      </li>
-                  <li><a href="{% url 'login' %}" class="nav-link body-font">تسجيل الدخول</a></li>
-                  <li><a href="{% url 'register' %}" class="nav-link body-font">إنشاء حساب</a></li>
-
                     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle body-font" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         الخدمات الالكترونية
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item body-font" href="#">تقديم طلب مساعده</a>
-          <a class="dropdown-item body-font" href="#">الأستعلام عن طلب</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item body-font" href="#">إضافة جمعيه</a>
-        </div>
-      </li
+                        <a class="nav-link dropdown-toggle body-font" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            حول المؤسسه
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item body-font" href="{% url 'about-page' %}">عن المؤسسه</a>
+                            <a class="dropdown-item body-font" href="#">المركز الإعلامي</a>
+                            <a class="dropdown-item body-font" href="#">الخدمات الالكترونية</a>
+
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item body-font" href="#">شركاؤنا</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle body-font" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            أدوات التحكم
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item body-font" href="#">الحالات</a>
+                            <a class="dropdown-item body-font" href="#">ادوات التحكم</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item body-font" href="{% url 'enable-list' %}">المرشحين للتمكين</a>
+                            <a class="dropdown-item body-font" href="#">إضافة جمعيه</a>
+                        </div>
+                    </li>
+                    <li><a href="{% url 'login' %}" class="nav-link body-font">تسجيل الدخول</a></li>
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle body-font" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            إنشاء حساب </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item body-font" href="{% url 'register' %}"> مشرف رئيسيه</a>
+                            <a class="dropdown-item body-font" href="{% url 'register-employee' %}">مشرف تنمويه</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item body-font" href="{% url 'register-helper' %}">مشرف مساعد</a>
+                            <a class="dropdown-item body-font" href="{% url 'register-needy' %}">محتاج</a>
+                            <a class="dropdown-item body-font" href="#">متبرع</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle body-font" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            الخدمات الالكترونية
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item body-font" href="#">تقديم طلب مساعده</a>
+                            <a class="dropdown-item body-font" href="#">الأستعلام عن طلب</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item body-font" href="#">إضافة جمعيه</a>
+                        </div>
+                    </li
                 </ul>
-              </nav>
+            </nav>
 
-              <div class="top-social ml-auto">
-             <img src="{% static 'images/carts.png' %}"  width="50" height="50"/>
-              </div>
-          </div>
+            <div class="top-social ml-auto">
+                <img src="{% static 'images/carts.png' %}" width="50" height="50"/>
+            </div>
         </div>
+    </div>
 
 
-
-      </header>
+</header>
 

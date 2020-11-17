@@ -84,3 +84,22 @@ class Foundation(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Provider(models.Model):
+    name = models.CharField(max_length=255, null=True, verbose_name='اسم الراعى')
+    address = models.CharField(max_length=255, null=True, verbose_name='العنوان')
+    phone = models.CharField(max_length=255, null=True, verbose_name='الجوال')
+    description = models.CharField(max_length=255, null=True, verbose_name='عن المؤسسه')
+    employee = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
+class Courses(models.Model):
+    name = models.CharField(max_length=255, null=True, verbose_name='اسم الدوره')
+    description = models.CharField(max_length=255, null=True, verbose_name='عن الدوره')
+
+    def __str__(self):
+        return self.name
