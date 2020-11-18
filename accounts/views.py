@@ -144,3 +144,5 @@ def register_donator(request):
             messages.add_message(request, messages.error, 'Please Review Your Data Failed To Register')
     context = {}
     return render(request, 'accounts/register-donator.html', context)
+
+

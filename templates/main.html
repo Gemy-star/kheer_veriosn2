@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=DM+Sans:300,400,700|Indie+Flower" rel="stylesheet">
  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Almarai&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/fonts/icomoon/style.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
@@ -35,9 +36,10 @@
         <div class="site-mobile-menu-body"></div>
     </div>
     {% include 'navbar.html' %}
-    {% block content %}
+     {% block content %}
 
     {% endblock content %}
+
     {% include 'footer.html' %}
 
 
@@ -58,6 +60,27 @@
     <script src="{% static 'js/sweetalert.js' %}"></script>
 
     <script src="{% static 'js/main.js' %}"></script>
+<script>
+    var size = 20
+    $(() => {
+       $("#inc_size").on('click' , (event) => {
+           event.preventDefault();
+           size = size + 5
+           console.log(size.toString()+"px");
+          $("body").css("font-size", size.toString()+"px");
+
+       });
+        $("#dec_size").on('click' , (event) => {
+           event.preventDefault();
+           size = size - 5
+           console.log(size.toString()+"px");
+          $("body").css("font-size", size.toString()+"px");
+
+       });
+
+    });
+</script>
+
 {% block javascript %}
 
 {% endblock javascript %}
