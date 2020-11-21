@@ -134,3 +134,20 @@ def enable_list(request):
     return render(request, 'office/enable_list.html', context=context)
 
 
+def add_foundation(request):
+    if request.method == 'POST' and request.is_ajax:
+        name = request.POST.get('name')
+        address = request.POST.get('address')
+        phone = request.POST.get('phone')
+        description = request.POST.get('description')
+        found = models.Foundation(name=name, address=address, phone=phone, description=description)
+        found.save()
+        if found.pk:
+            return JsonResponse({"data": 1})
+        else:
+            return JsonResponse({"data": -1})
+    elif request.method == 'GET':
+        return render(request, 'office/add-found.html', context={})
+
+
+

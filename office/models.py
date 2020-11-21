@@ -79,8 +79,8 @@ class Foundation(models.Model):
     address = models.CharField(max_length=255, null=True, verbose_name='العنوان')
     phone = models.CharField(max_length=255, null=True, verbose_name='الجوال')
     description = models.CharField(max_length=255, null=True, verbose_name='عن المؤسسه')
-    cases = models.ManyToManyField(Needy, related_name='case', verbose_name='الحالات')
-    employee = models.ManyToManyField(User, related_name='employee', verbose_name='مشرفيين')
+    cases = models.ManyToManyField(Needy, related_name='case', verbose_name='الحالات', null=True)
+    employee = models.ManyToManyField(User, related_name='employee', null=True, verbose_name='مشرفيين')
 
     def __str__(self):
         return self.name

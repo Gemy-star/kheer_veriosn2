@@ -13,5 +13,6 @@ urlpatterns = [
     path('found/detail/<int:pk>', views.found_detial, name='found-detail'),
     path('found/list', views.found_list, name='found-list'),
     path('enable/list', views.enable_list, name='enable-list'),
+    path('found/add', views.add_foundation, name='add-found'),
 
 ]
