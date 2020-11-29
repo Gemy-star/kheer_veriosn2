@@ -1,0 +1,87 @@
+{% extends 'dashmain.html' %}
+
+{% block title %} مشرف متعاون || خير السعوديه {% endblock title %}
+
+
+{% block body %}
+    <div class="main-content-inner">
+<div class="row">
+<div class="col-md-6 ">
+    <div class="card">
+        <div class="card-title">
+       <center>   <p style="font-size: larger;" class="text-cursive text-green" id="provider_name">خير السعوديه</p> </center>
+        </div>
+        <div class="card-body" id="provider_body">
+
+        </div>
+    </div>
+</div>
+    <div class="col-md-6 ">
+    <div class="card">
+        <div class="card-title">
+       <center>   <p style="font-size: larger;" class="text-cursive text-green" id="employee_name">خير السعوديه</p> </center>
+        </div>
+        <div class="card-body" id="employee_body">
+
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+{% endblock body %}
+
+{% block javascript %}
+<script>
+            var empolyee;
+            var provider;
+            var id =sessionStorage.getItem('user_id');
+            $(() => {
+                    $.ajax({
+                    method: 'GET',
+                    url: '{% url 'get-found-emp-info' %}',
+                    data: {
+                        'user_id': id,
+                    },
+                    success: function (data) {
+                        empolyee = JSON.parse(data.employee);
+                        provider = JSON.parse(data.provider);
+                                                console.log(empolyee)
+                        $("#provider_name").empty();
+                        $("#provider_name").append(provider[0].fields.name);
+                        $("#provider_body").empty();
+                        $("#provider_body").append(`
+                           <p class="text-cursive text-red"> العنوان</p>
+                           <p class="text-cursive text-black"> ${provider[0].fields.address} </p>
+<hr/>
+<p class="text-cursive text-red"> الهاتف</p>
+                           <p class="text-cursive text-black"> ${provider[0].fields.phone} </p>
+<hr/>
+<p class="text-cursive text-red"> الوصف</p>
+                           <p class="text-cursive text-black"> ${provider[0].fields.description} </p>
+<hr/>
+
+                                    `);
+                        $("#employee_name").empty();
+                        $("#employee_name").append(empolyee[0].fields.first_name);
+                        $("#employee_body").empty();
+                        $("#employee_body").append(`                           <p class="text-cursive text-red"> البريد الألكترونى</p>
+                           <p class="text-cursive text-black"> ${empolyee[0].fields.email} </p>
+<hr/>
+<p class="text-cursive text-red"> الهاتف</p>
+                           <p class="text-cursive text-black"> ${empolyee[0].fields.phone} </p>
+<hr/>
+<p class="text-cursive text-red"> الأسم</p>
+                           <p class="text-cursive text-black"> ${empolyee[0].fields.first_name}   ${empolyee[0].fields.last_name}</p>
+<hr/>`);
+
+
+                    },
+                    error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+            })
+
+</script>
+{% endblock javascript %}

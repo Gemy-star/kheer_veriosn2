@@ -34,26 +34,26 @@
             <div class="row">
                 <div class="col-lg-8 mb-5">
                     <div class="card">
-                            <div class="card-body" id="form_login">
-                        <form action="#" method="post">
+                        <div class="card-body" id="form_login">
+                            <form action="#" method="post">
                                 {% csrf_token %}
                                 <div class="form-group row">
                                     <div class="col-md-12">
-                                        <label for="email"  class="text-cursive h5 text-black">البريد
+                                        <label for="email" class="text-cursive h5 text-black">البريد
                                             الألكترونى</label>
                                         <input type="email" id="email" name="email" class="form-control"
                                                placeholder="البريد الألكترونى">
                                     </div>
                                 </div>
-                                   <div class="form-group row">
+                                <div class="form-group row">
                                     <div class="col-md-6 mr-auto">
                                         <center><input type="submit" id="btn_login"
                                                        class="btn btn-block btn-login text-white py-3 px-5"
                                                        value="الدخول"></center>
                                     </div>
-                                   </div>
-                        </form>
-                            </div>
+                                </div>
+                            </form>
+                        </div>
 
                     </div>
                 </div>
@@ -79,7 +79,10 @@
     {% block javascript %}
         <script>
             var email_address;
-            var user_type;
+            var user = {
+                user_type: null,
+                user_type_id: 0
+            }
             $(() => {
                 $("#btn_login").on('click', event => {
                     event.preventDefault();
@@ -91,22 +94,38 @@
                             'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
                         },
                         success: function (data) {
-                            sessionStorage.setItem('user_id' , data.user_id);
+                            sessionStorage.setItem('user_id', data.user_id);
                             if (data.status) {
                                 email_address = data.email;
                                 if (data.user_type === 2) {
-                                    user_type = ' مشرف جمعيه رئيسيه'
-                                }else if (data.user_type === 3) {
-                                    user_type = 'مشرف جمعيه تنمويه'
-                                }else {
-                                    user_type = 'مشرف عام'
+                                    user.user_type = ' مشرف جمعيه رئيسيه'
+                                    user.user_type_id = 2
+                                } else if (data.user_type === 3) {
+                                    user.user_type = 'مشرف جمعيه تنمويه'
+                                    user.user_type_id = 3
+
+                                } else if (data.user_type === 4) {
+                                    user.user_type = 'مشرف متعاون'
+                                    user.user_type_id = 4
+                                } else if (data.user_type === 5) {
+                                    user.user_type = 'محتاج'
+                                    user.user_type_id = 5
+
+                                } else if (data.user_type === 6) {
+                                    user.user_type = 'متبرع'
+                                    user.user_type_id = 6
+
+                                } else {
+                                    user.user_type = 'مشرف عام'
+                                    user.user_type_id = 1
+
                                 }
                                 $("#form_login").empty();
                                 $("#form_login").append(
                                     `
                         <div class="justify-content-center">
                           <h3  class="text-cursive h5 text-red">${data.user_name}</h3>
-                          <p  class="text-cursive h5 text-red">${user_type}</p>
+                          <p  class="text-cursive h5 text-red">${user.user_type}</p>
                    </div>
                                <form action="#" method="post">
                                 {% csrf_token %}
@@ -129,40 +148,53 @@
 
                                   `
                                 );
-               $("#btn_login_password").on('click' , event => {
-                  event.preventDefault();
-                                     $.ajax({
-                        method: 'POST',
-                        url: '{% url 'login' %}',
-                        data: {
-                            'email': email_address,
-                            'password':$("#password").val(),
-                            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-                        },
-                        success: function (data) {
-                           if (data.status === 'done') {
-                                swal({
-                                    title: "تم",
-                                    text: "تم  بنجاح",
-                                    icon: "success",
-                                    button: "إغلاق",
-                                });
-                               window.location.href = '{% url 'home-employee' %}'
-                           }else {
-                               swal({
-                                    title: "خطا",
-                                    text: "من فضلك راجع البيانات",
-                                    icon: "error",
-                                    button: "إغلاق",
-                                });
-                           }
-                        },
-                        error: function (error) {
-                            alert(error.responseText)
-                        }
-                    });
+                                $("#btn_login_password").on('click', event => {
+                                    event.preventDefault();
+                                    $.ajax({
+                                        method: 'POST',
+                                        url: '{% url 'login' %}',
+                                        data: {
+                                            'email': email_address,
+                                            'password': $("#password").val(),
+                                            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                                        },
+                                        success: function (data) {
+                                            if (data.status === 'done') {
+                                                swal({
+                                                    title: "تم",
+                                                    text: "تم  بنجاح",
+                                                    icon: "success",
+                                                    button: "إغلاق",
+                                                });
 
-               });
+                                                if (user.user_type_id === 2) {
+                                                    window.location.href = '{% url 'home-employee' %}'
+                                                } else if (user.user_type_id === 3) {
+                                                    window.location.href = '{% url 'home-employee' %}'
+                                                } else if (user.user_type_id === 4) {
+                                                    window.location.href = '{% url 'home-emp' %}'
+                                                } else if (user.user_type_id === 5) {
+                                                    window.location.href = '{% url 'home-page' %}'
+                                                } else if (user.user_type_id === 6) {
+                                                    window.location.href = '{% url 'home-page' %}'
+                                                } else {
+                                                    window.location.href = '{% url 'home-page' %}'
+                                                }
+                                            } else {
+                                                swal({
+                                                    title: "خطا",
+                                                    text: "من فضلك راجع البيانات",
+                                                    icon: "error",
+                                                    button: "إغلاق",
+                                                });
+                                            }
+                                        },
+                                        error: function (error) {
+                                            alert(error.responseText)
+                                        }
+                                    });
+
+                                });
                             } else {
                                 swal({
                                     title: "خطا",

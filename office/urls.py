@@ -14,5 +14,9 @@ urlpatterns = [
     path('found/list', views.found_list, name='found-list'),
     path('enable/list', views.enable_list, name='enable-list'),
     path('found/add', views.add_foundation, name='add-found'),
+    path('provider/add', views.add_provider, name='add-provider'),
+    path('provider/list', views.provider_list, name='provider-list'),
+    path('provider/delete', views.provider_delete, name='provider-delete'),
+    path('employee/home', views.home_emp, name='home-emp'),
 
 ]

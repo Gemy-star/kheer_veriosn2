@@ -100,6 +100,8 @@ class Provider(models.Model):
 class Courses(models.Model):
     name = models.CharField(max_length=255, null=True, verbose_name='اسم الدوره')
     description = models.CharField(max_length=255, null=True, verbose_name='عن الدوره')
+    provider = models.ForeignKey(Provider,null=True, on_delete=models.CASCADE, verbose_name='الراعى')
+    cases = models.ManyToManyField(User, null=True, verbose_name='الحاله المستحقه')
 
     def __str__(self):
         return self.name

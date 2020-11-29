@@ -59,9 +59,15 @@ def register_permier_emp(request):
             if user.user_type == 2:
                 login(request, user)
                 return redirect('home-employee', user.pk)
-            else:
+            elif user.user_type == 3:
                 login(request, user)
                 return redirect('home-employee', user.pk)
+            elif user.user_type == 1:
+                login(request, user)
+                return redirect('home-employee', user.pk)
+            else:
+                login(request, user)
+                return redirect('home-page', user.pk)
 
 
         else:

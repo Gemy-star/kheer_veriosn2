@@ -12,20 +12,25 @@ def home_employee(request):
 
 def get_emp_found_info(request):
     if request.method == 'GET' and request.is_ajax:
-        pk = request.user.pk
+        pk = request.GET.get('user_id')
         user_obj = User.objects.get(pk=pk)
-        found_obj = models.Foundation.objects.get(employee=user_obj)
-        emp_count = found_obj.employee.count()
-        cases_count = found_obj.cases.count()
-        cases_all = found_obj.cases.all()
-        found_count = models.Foundation.objects.all().count()
-        cases_json = serializers.serialize('json', cases_all)
-        found_json = serializers.serialize('json', models.Foundation.objects.filter(employee=user_obj))
         user_json = serializers.serialize('json', User.objects.filter(pk=pk))
-        return JsonResponse(
-            {"emp_count": emp_count, "cases_count": cases_count, "cases": cases_json, "foundation": found_json,
-             "employee": user_json, "found_count": found_count},
-            content_type='application/json')
+        if user_obj.user_type == 4:
+            provider_obj = models.Provider.objects.filter(employee=user_obj)
+            provider_json = serializers.serialize('json', provider_obj)
+            return JsonResponse({"provider": provider_json, "employee": user_json}, content_type='application/json')
+        else:
+            found_obj = models.Foundation.objects.get(employee=user_obj)
+            emp_count = found_obj.employee.count()
+            cases_count = found_obj.cases.count()
+            cases_all = found_obj.cases.all()
+            found_count = models.Foundation.objects.all().count()
+            cases_json = serializers.serialize('json', cases_all)
+            found_json = serializers.serialize('json', models.Foundation.objects.filter(employee=user_obj))
+            return JsonResponse(
+                {"emp_count": emp_count, "cases_count": cases_count, "cases": cases_json, "foundation": found_json,
+                 "employee": user_json, "found_count": found_count},
+                content_type='application/json')
 
 
 def create_needy(request):
@@ -150,4 +155,37 @@ def add_foundation(request):
         return render(request, 'office/add-found.html', context={})
 
 
+def add_provider(request):
+    if request.method == 'GET':
+        return render(request, 'office/add-provider.html', context={"emps": User.objects.filter(user_type=4)})
+    elif request.method == 'POST' and request.is_ajax:
+        name = request.POST.get('name')
+        address = request.POST.get('address')
+        phone = request.POST.get('phone')
+        desc = request.POST.get('desc')
+        emp = request.POST.get('emps')
+        emp_obj = User.objects.get(pk=emp)
+        provider = models.Provider(name=name, address=address, phone=phone, description=desc, employee=emp_obj)
+        provider.save()
+        if provider.pk:
+            return JsonResponse({"data": 1})
+        else:
+            return JsonResponse({"data": -1})
 
+
+def provider_list(request):
+    return render(request, 'office/provider-list.html', context={'providers': models.Provider.objects.all()})
+
+
+def provider_delete(request):
+    if request.method == 'POST' and request.is_ajax:
+        provider_id = request.POST.get('provider_id')
+        provid = models.Provider.objects.get(pk=provider_id)
+        if provid.delete():
+            return JsonResponse({"data": 1})
+        else:
+            return JsonResponse({"data": -1})
+
+
+def home_emp(request):
+    return render(request, 'office/enable-emp.html')
