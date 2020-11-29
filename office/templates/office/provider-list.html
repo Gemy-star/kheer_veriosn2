@@ -1,36 +1,19 @@
-{% extends 'main.html' %}
+{% extends 'dashmain.html' %}
 
-{% block title %} قائمة الجمعيات {% endblock title %}
+{% block title %} قائمة الراعيين {% endblock title %}
 
 
-{% block content %}
-    <div class="ftco-blocks-cover-1">
-        <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
-        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
-             style="background-image: url('../../../static/images/h1_hero.png')">
-            <div class="container">
-                <div class="row align-items-center ">
+{% block body %}
 
-                    <div class="col-md-5 mt-5 pt-5">
-                        <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
-                        <h1 class="mb-3 font-weight-bold body-font">قائمة || الراعيين</h1>
-                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
-                            <strong>قائمة الراعيين</strong></p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
+    <div class="card center">
+    <div class="card-header">
+        <center><p class="body-font text-green">قائمة الراعيين</p></center>
     </div>
-
-    <div class="site-section">
         <div class="container">
             <div class="row">
                 <div class="site-section py-12 bg-white">
-                    <h1 style="direction: rtl;" class="text-cursive h5 text-red">قائمة الراعيين</h1>
-                    <hr/>
 
-                    <div class="row">
+                    <div class="card-body">
 
                         {% for provider in providers %}
                             <div class="col-md-4">
@@ -68,13 +51,16 @@
                         {% endfor %}
                     </div>
                     <hr/>
-                    <a class="btn btn-teal body-font" href="{% url 'home-page' %}"><span class="fa fa-backward "></span>الرجوع</a>
+                <div class="card-footer">
+                                        <a class="btn btn-success body-font" href="{% url 'home-page' %}"><span class="fa fa-backward "></span>الرجوع</a>
+
+                </div>
                 </div>
             </div>
         </div>
     </div>
 
-{% endblock content %}
+{% endblock body %}
 
 {% block javascript %}
     <script>
