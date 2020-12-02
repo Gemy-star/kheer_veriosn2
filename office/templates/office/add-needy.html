@@ -184,6 +184,7 @@
             var case_types = [];
             var user_id = sessionStorage.getItem('user_id');
             var enable_teen = [];
+            var child_names = [];
             $(() => {
                 $("#btn_other").on('click', event => {
                     event.preventDefault;
@@ -208,6 +209,7 @@
                         console.log(ages);
                     });
                     $(".gender").each(function (i, obj) {
+                        console.log(i , obj)
                         genders.push($(this).val())
                         console.log(genders);
 
@@ -221,6 +223,11 @@
                         enable_teen.push($(this).val())
                         console.log(enable_teen);
 
+                    });
+                       $(".child_name").each(function (i, obj) {
+                        console.log(obj)
+                        child_names.push($(this).val())
+                        console.log(child_names);
                     });
                     var money = $("#amount").val()
                     var korba_type = $("#korba").val()
@@ -249,6 +256,7 @@
                                 'korba_type': korba_type,
                                 'amount': money,
                                    'enable_teen':enable_teen,
+                                   'child_names':child_names,
                                    'enable_needy' : $("#enable_needy").val(),
                                 'emp_name': $("#emp_name").val(),
                                 'department': $("#department").val(),
@@ -327,11 +335,14 @@
                                                 <option value="الثانوى">الثانوى</option>
                                                 <option value="الجامعه">الجامعه</option>
                                             </select>
- <input type="number" name="age" id="age"
+                                            <input type="number" name="age" id="age"
                                                    class="form-control age"
                                                    placeholder="العمر">
+                                  <input type="text" name="child_name" id="child_name"
+                                                   class="form-control child_name"
+                                                   placeholder="الأسم">
  <label for="enable_teen" class="text-cursive h5 text-red"> مرشح للتمكين </label>
-                                            <select class="form-control enable_teen" id="enable_teen">
+                                            <select  class="form-control enable_teen" id="enable_teen">
                                                 <option value="1">مرشح</option>
                                                 <option value="2">غير مرشح</option>
                                             </select>

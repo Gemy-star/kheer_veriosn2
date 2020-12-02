@@ -1,0 +1,52 @@
+{% extends 'dashmain.html' %}
+
+{% block title %} إضافة منحه || خير السعوديه  {% endblock title %}
+
+{% block body %}
+    <div class="main-content-inner">
+        <div class="card center">
+            <div class="card-header">
+              <center>  <h5 class="body-font text-green"> إضافة منحه</h5></center>
+            </div>
+            <div class="card-body">
+                <form method="post" autocomplete="off">
+                    {% csrf_token %}
+                <div class="form-group row">
+                     <input class="form-control body-font" placeholder="اسم المنحه" name="course_name" id="course_name" type="text">
+                </div>
+                    <div class="form-group row">
+                    <label class="body-font text-green"> إختر الحالات</label>
+                        <select multiple="multiple" name="cases" id="cases" size="5">
+                            {% for case in cases %}
+                                <option class="form-control" value="{{ case.pk }}">{{ case.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                                    <div class="form-group row">
+                    <label class="body-font text-green"> إختر الحالات</label>
+                        <select multiple="multiple" name="children" id="children" size="5">
+                            {% for child in children %}
+                                <option class="form-control" value="{{ child.pk }}">{{ child.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+
+
+{% block javascript %}
+ <script>
+ $(() => {
+    $("#cases").on('click',(event) => {
+        event.preventDefault();
+       var x = $("#cases").val();
+       console.log(x);
+    });
+ });
+ </script>
+{% endblock javascript %}

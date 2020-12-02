@@ -1,31 +1,41 @@
 {% load static %}
 
- <div class="sidebar-menu">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <a href="{% url 'home-page' %}"><img src="{% static 'images/logo.png' %}" alt="logo"></a>
-                </div>
-            </div>
-            <div class="main-menu">
-                <div class="menu-inner">
-                    <nav>
-                        <ul class="metismenu" id="menu">
-                            <li class="active">
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span class="body-font">خير السعوديه</span></a>
-                                <ul class="collapse">
-                                    <li><a class="body-font" href="{% url 'home-page' %}">الرئيسيه</a></li>
-                                    <li><a href="{% url 'create-needy' %}" class="body-font">إضافة حالة</a></li>
-                                    <li class="body-font"><a class="body-font" href="{% url 'enable-list' %}">قائمة التمكين</a></li>
-                                    <li class="body-font"><a class="body-font" href="{% url 'needy-list' %}">قائمة المحتاجين</a></li>
-                                    <li class="body-font"><a class="body-font" href="{% url 'found-list' %}">قائمة الجمعيات</a></li>
-                                    <li class="body-font"><a class="body-font" href="{% url 'add-found' %}">إضافة جمعيه</a></li>
-                                    <li class="body-font"><a class="body-font" href="{% url 'add-provider' %}">إضافة راعى</a></li>
-
-                                </ul>
+<div class="sidebar-menu">
+    <div class="sidebar-header">
+        <div class="logo">
+            <a href="{% url 'home-page' %}"><img src="{% static 'images/logo.png' %}" alt="logo"></a>
+        </div>
+    </div>
+    <div class="main-menu">
+        <div class="menu-inner">
+            <nav>
+                <ul class="metismenu" id="menu">
+                    <li class="active">
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span
+                                class="body-font">خير السعوديه</span></a>
+                        <ul class="collapse">
+                            <li><a class="body-font" href="{% url 'home-page' %}">الرئيسيه</a></li>
+                            <li><a href="{% url 'create-needy' %}" class="body-font">إضافة حالة</a></li>
+                            <li class="body-font"><a class="body-font" href="{% url 'enable-list' %}">قائمة التمكين</a>
                             </li>
+                            <li class="body-font"><a class="body-font" href="{% url 'needy-list' %}">قائمة الحالات</a>
+                            </li>
+                            <li class="body-font"><a class="body-font" href="{% url 'found-list' %}">قائمة الجمعيات</a>
+                            </li>
+                            <li class="body-font"><a class="body-font" href="{% url 'add-found' %}">إضافة جمعيه</a></li>
+                            <li class="body-font"><a class="body-font" href="{% url 'add-provider' %}">إضافة راعى</a>
+                            </li>
+                            {% if request.user.user_type == 4 %}
+                                <li><a class="body-font" href="{% url 'add-course' %}">إضافة
+                                    منحه</a></li>
+
+                            {% endif %}
 
                         </ul>
-                    </nav>
-                </div>
-            </div>
+                    </li>
+
+                </ul>
+            </nav>
         </div>
+    </div>
+</div>

@@ -18,5 +18,6 @@ urlpatterns = [
     path('provider/list', views.provider_list, name='provider-list'),
     path('provider/delete', views.provider_delete, name='provider-delete'),
     path('employee/home', views.home_emp, name='home-emp'),
+    path('course/add', views.add_course, name='add-course'),
 
 ]

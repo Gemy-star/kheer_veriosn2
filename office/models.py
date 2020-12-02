@@ -23,6 +23,7 @@ class Dependency(models.Model):
     stage = models.CharField(max_length=255, choices=STAGE_CHOICES, verbose_name='المرحله')
     age = models.SmallIntegerField(null=True, verbose_name='العمر')
     enablity = models.SmallIntegerField(null=True, choices=ENABILTY_CHOICES)
+    name = models.CharField(null=True, max_length=255, verbose_name='الأسم')
 
     def __str__(self):
         return str(self.gender)
@@ -100,7 +101,7 @@ class Provider(models.Model):
 class Courses(models.Model):
     name = models.CharField(max_length=255, null=True, verbose_name='اسم الدوره')
     description = models.CharField(max_length=255, null=True, verbose_name='عن الدوره')
-    provider = models.ForeignKey(Provider,null=True, on_delete=models.CASCADE, verbose_name='الراعى')
+    provider = models.ForeignKey(Provider, null=True, on_delete=models.CASCADE, verbose_name='الراعى')
     cases = models.ManyToManyField(User, null=True, verbose_name='الحاله المستحقه')
 
     def __str__(self):

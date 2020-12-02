@@ -60,6 +60,7 @@ def create_neeedy_ajax(request):
         enable_teen = request.POST.getlist('enable_teen[]')
         enable_needy = request.POST.get('enable_needy')
         job = request.POST.get('job')
+        child_names = request.POST.getlist('child_names[]')
 
         needy = models.Needy(name=name, national_id=national_id, phone=phone, home=address, health_status=health_status,
                              source_income=source_type, case_number=case_number, age=case_age, department=department,
@@ -72,9 +73,11 @@ def create_neeedy_ajax(request):
                 for gender in depend_genders:
                     for case_type in depend_cases_type:
                         for enable in enable_teen:
-                            depend = models.Dependency(age=age, gender=gender, stage=case_type, enablity=enable)
-                            depend.save()
-                            needy.dependencies.add(depend)
+                            for child_name in child_names:
+                                depend = models.Dependency(age=age, gender=gender, stage=case_type, enablity=enable,
+                                                           name=child_name)
+                                depend.save()
+                                needy.dependencies.add(depend)
 
         if needy.pk:
             return JsonResponse({"data": 1, "needy_Pk": needy.pk})
@@ -189,3 +192,10 @@ def provider_delete(request):
 
 def home_emp(request):
     return render(request, 'office/enable-emp.html')
+
+
+def add_course(request):
+    if request.method == 'GET':
+        context = {"cases": models.Needy.objects.filter(enablity=1), "provider": models.Provider.objects.all(),
+                   "children": models.Dependency.objects.filter(enablity=1)}
+        return render(request, 'office/add-course.html', context=context)
