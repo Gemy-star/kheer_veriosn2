@@ -14,22 +14,47 @@
                 <div class="form-group row">
                      <input class="form-control body-font" placeholder="اسم المنحه" name="course_name" id="course_name" type="text">
                 </div>
+                 <div class="form-group row">
+                     <input class="form-control body-font" placeholder="وصف المنحه" name="course_desc" id="course_desc" type="text">
+                </div>
                     <div class="form-group row">
-                    <label class="body-font text-green"> إختر الحالات</label>
-                        <select multiple="multiple" name="cases" id="cases" size="5">
+                   <div class="col-12">
+                        <label class="body-font text-green"> إختر الحالات</label>
+                        <select class="form-control" multiple="multiple" name="cases" id="cases" size="5">
                             {% for case in cases %}
-                                <option class="form-control" value="{{ case.pk }}">{{ case.name }}</option>
+                                <option  value="{{ case.pk }}">{{ case.name }}</option>
                             {% endfor %}
                         </select>
+                   </div>
                     </div>
                                     <div class="form-group row">
-                    <label class="body-font text-green"> إختر الحالات</label>
-                        <select multiple="multiple" name="children" id="children" size="5">
+                   <div class="col-12">
+                        <label for="provider" class="body-font text-green"> إختر الراعى</label>
+                        <select class="form-control" name="provider" id="provider">
+                            {% for pro in provider %}
+                                <option class="form-control" value="{{ pro.pk }}">{{ pro.name }}</option>
+                            {% endfor %}
+                        </select>
+                   </div>
+                    </div>
+
+                                    <div class="form-group row">
+                   <div class="col-12">
+                        <label class="body-font text-green"> إختر الحالات</label>
+                        <select class="form-control" multiple="multiple" name="children" id="children" size="5">
                             {% for child in children %}
                                 <option class="form-control" value="{{ child.pk }}">{{ child.name }}</option>
                             {% endfor %}
                         </select>
+                   </div>
                     </div>
+                                    <div class="form-group row">
+                                    <div class="col-md-12" id="depend_div">
+                                        <button type="submit" id="btn_add"
+                                                class="btnn btn-teal btn-custom-1 body-font"> إضافة
+                                        </button>
+                                    </div>
+                                </div>
 
                 </form>
             </div>
@@ -42,10 +67,42 @@
 {% block javascript %}
  <script>
  $(() => {
-    $("#cases").on('click',(event) => {
+    $("#btn_add").on('click',(event) => {
         event.preventDefault();
-       var x = $("#cases").val();
-       console.log(x);
+                     $.ajax({
+                    method: 'POST',
+                    url: '{% url 'add-course' %}',
+                    data: {
+                        'course_name': $('#course_name').val(),
+                        'provider': $('#provider').val(),
+                        'course_desc': $('#course_desc').val(),
+                        'cases': $('#cases').val(),
+                        'children': $('#children').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function (data) {
+                        if (data.data === 1) {
+                            swal({
+                                title: "تم",
+                                text: "تم  بنجاح",
+                                icon: "success",
+                                button: "إغلاق",
+                            });
+                            window.location.href = "{% url 'found-list' %}"
+                        } else {
+                            swal({
+                                title: "خطا",
+                                text: "من فضلك راجع البيانات",
+                                icon: "error",
+                                button: "إغلاق",
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+
     });
  });
  </script>

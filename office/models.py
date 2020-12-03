@@ -103,6 +103,7 @@ class Courses(models.Model):
     description = models.CharField(max_length=255, null=True, verbose_name='عن الدوره')
     provider = models.ForeignKey(Provider, null=True, on_delete=models.CASCADE, verbose_name='الراعى')
     cases = models.ManyToManyField(User, null=True, verbose_name='الحاله المستحقه')
+    depend_child = models.ManyToManyField(Dependency, null=True, verbose_name='الأطفال')
 
     def __str__(self):
         return self.name

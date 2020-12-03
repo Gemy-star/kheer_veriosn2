@@ -199,3 +199,22 @@ def add_course(request):
         context = {"cases": models.Needy.objects.filter(enablity=1), "provider": models.Provider.objects.all(),
                    "children": models.Dependency.objects.filter(enablity=1)}
         return render(request, 'office/add-course.html', context=context)
+    elif request.method == 'POST' and request.is_ajax:
+        course_name = request.POST.get('course_name')
+        provider = request.POST.get('provider')
+        provider_obj = models.Provider.objects.get(pk=provider)
+        course_desc = request.POST.get('course_desc')
+        children = request.POST.getlist('children[]')
+        cases = request.POST.getlist('cases[]')
+        course = models.Courses(provider=provider_obj, description=course_desc, name=course_name)
+        course.save()
+        for child in children:
+            depend = models.Dependency.objects.get(pk=child)
+            course.depend_child.add(depend)
+        for case in cases:
+            case_obj = User.objects.get(pk=case)
+            course.cases.add(case_obj)
+        if course.pk:
+            return JsonResponse({"data": 1})
+        else:
+            return JsonResponse({"data": -1})
