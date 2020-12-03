@@ -77,6 +77,44 @@
           $("body").css("font-size", size.toString()+"px");
 
        });
+        $("#btn_add").on('click',event => {
+           event.preventDefault();
+                           $.ajax({
+                    method: 'POST',
+                    url: '{% url 'create-contact' %}',
+                    data: {
+                        'name': $('#name').val(),
+                        'message': $('#message').val(),
+                        'address': $('#address').val(),
+                        'phone': $('#phone').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function (data) {
+                        if (data.data === 1) {
+                            swal({
+                                title: "تم",
+                                text: "تم  بنجاح",
+                                icon: "success",
+                                button: "إغلاق",
+                            });
+                            window.location.href = "{% url 'home-page' %}"
+                        } else {
+                            swal({
+                                title: "خطا",
+                                text: "من فضلك راجع البيانات",
+                                icon: "error",
+                                button: "إغلاق",
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+
+
+        });
+
 
     });
 </script>

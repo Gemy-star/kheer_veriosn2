@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from cases.models import NeedyCase
 
 
 def home_page(request):
-    return render(request, 'main/home.html')
+    context = {"cases": NeedyCase.objects.all()}
+    return render(request, 'main/home.html', context=context)
 
 
 def about_page(request):

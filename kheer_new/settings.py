@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'office',
     'main',
     'accounts',
+    'cases'
 ]
 
 MIDDLEWARE = [

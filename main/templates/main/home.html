@@ -16,66 +16,106 @@
                     <div class="carousel-caption d-none d-md-block text-lay-image">
                         <h2 class="body-font text-green">منصة الخير </h2>
                         <h5 class="body-font text-black">صممت لتيسير الخير لفاعل الخير ليكون ضمن </h5>
-                        <p class="body-font text-black" style="font-weight: bold;"> دائره تكافليه موثوقه  <p class="body-font text-green" style="font-weight: bold;">,مستمره و ممتده</p>  </p>
+                        <p class="body-font text-black" style="font-weight: bold;"> دائره تكافليه موثوقه
+                        <p class="body-font text-green" style="font-weight: bold;">,مستمره و ممتده</p>  </p>
                     </div>
                 </div>
                 <div class="carousel-item " style="background-image: url('../../../static/images/login.png')">
                     <div class="carousel-caption d-none d-md-block  text-lay-image">
-                         <h2 class="body-font text-blue" style="font-weight: bold;">منصة الخير </h2>
-                        <h5 class="body-font text-black" style="font-weight: bold;">صممت لتيسير الخير لفاعل الخير ليكون ضمن </h5>
-                        <p class="body-font text-black" style="font-weight: bold;"> دائره تكافليه موثوقه  <p class="body-font text-green" style="font-weight: bold;">,مستمره و ممتده</p>  </p>
+                        <h2 class="body-font text-blue" style="font-weight: bold;">منصة الخير </h2>
+                        <h5 class="body-font text-black" style="font-weight: bold;">صممت لتيسير الخير لفاعل الخير ليكون
+                            ضمن </h5>
+                        <p class="body-font text-black" style="font-weight: bold;"> دائره تكافليه موثوقه
+                        <p class="body-font text-green" style="font-weight: bold;">,مستمره و ممتده</p>  </p>
                     </div>
                 </div>
                 <div class="carousel-item " style="background-image: url('../../../static/images/kid_transparent.png')">
                     <div class="carousel-caption d-none d-md-block text-lay-image">
-                         <h2 class="body-font text-blue" style="font-weight: bold;">منصة الخير </h2>
-                        <h5 class="body-font text-black" style="font-weight: bold;">صممت لتيسير الخير لفاعل الخير ليكون ضمن </h5>
-                        <p class="body-font text-black" style="font-weight: bold;"> دائره تكافليه موثوقه  <p class="body-font text-green" style="font-weight: bold;">,مستمره و ممتده</p>
+                        <h2 class="body-font text-blue" style="font-weight: bold;">منصة الخير </h2>
+                        <h5 class="body-font text-black" style="font-weight: bold;">صممت لتيسير الخير لفاعل الخير ليكون
+                            ضمن </h5>
+                        <p class="body-font text-black" style="font-weight: bold;"> دائره تكافليه موثوقه
+                        <p class="body-font text-green" style="font-weight: bold;">,مستمره و ممتده</p>
                     </div>
                 </div>
             </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="fa fa-chevron-left" style="color: black;" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="fa fa-chevron-right"  style="color: black;" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="fa fa-chevron-left" style="color: black;" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="fa fa-chevron-right" style="color: black;" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
 
     </div>
     <div class="site-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="block-2 red">
-              <span class="wrap-icon">
-                <span class="icon-home"></span>
-              </span>
-                        <h2 class="body-font"><a href="#" class="btn btn-green py-4 text-white btn-custom-1 body-font">
-                            طلب مساعده </a></h2>
-                        <p class="body-font">نسعى جاهدين لخدمة كل من يطلب مساعده</p>
+                <div class="col-12">
+                    <div class="justify-content-center">
+                        <center><a href="#" class="body-font text-black"> الحالات</a></center>
+                        <hr/>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="block-2 red">
-              <span class="wrap-icon">
-                <span class="icon-person"></span>
-              </span>
-                        <h2 class="body-font"><a href="#" class="btn btn-green py-4 btn-custom-1 body-font"> أنواع
-                            الخير </a></h2>
-                        <p class="body-font">للخير انواع شارك بمساهمه فوريه او شهريه او سنويه </p>
+            </div>
+            <div class="row">
+                {% for case in cases %}
+                    <div class="col-lg-4">
+                        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                            <div class="mainflip">
+                                <div class="frontside">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            {% if case.case_type == 1 %}
+                                                <p><img width="70" height="70"
+                                                        src="{% static 'images/electricty.png' %}" alt="card image"></p>
+                                                <h4 class="card-title body-font">دعم الكهرباء</h4>
+                                                <p class="card-text body-font">لتقديم الدعم للحالات التى تريد دعم فى
+                                                    الكهرباء</p>
+                                            {% endif %}
+                                            {% if case.case_type == 2 %}
+                                                <p><img src="{% static 'images/food.png' %}" alt="card image"></p>
+                                                <h4 class="card-title body-font">دعم الغذاء</h4>
+                                                <p class="card-text body-font">لتقديم الدعم للحالات التى تريد دعم فى
+                                                    الطعام</p>
+                                            {% endif %}
+                                            {% if case.case_type == 3 %}
+                                                <p><img src="{% static 'images/education.png' %}" alt="card image"></p>
+                                                <h4 class="card-title body-font">دعم التعليم</h4>
+                                                <p class="card-text">لتقديم الدعم للحالات التى تريد دعم فى التعليم</p>
+                                            {% endif %}
+                                            {% if case.case_type == 4 %}
+                                                <p><img src="{% static 'images/education.png' %}" alt="card image"></p>
+                                                <h4 class="card-title body-font">دعم الماء</h4>
+                                                <p class="card-text body-font">لتقديم الدعم للحالات التى تريد دعم فى
+                                                    الماء</p>
+                                            {% endif %}
+                                            {% if case.case_type == 5 %}
+                                                <p><img src="{% static 'images/money.png' %}" alt="card image"></p>
+                                                <h4 class="card-title body-font">دعم الملبس</h4>
+                                                <p class="card-text body-font">لتقديم الدعم للحالات التى تريد دعم فى
+                                                    الملبس</p>
+                                            {% endif %}
+                                            <a href="#" class="btn btn-teal btn-sm body-font"><i class="fa fa-plus"></i>
+                                                تقديم الدعم</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="backside">
+                                    <div class="card">
+                                        <div class="card-body text-center mt-4">
+                                            <h4 class="card-title body-font">{{ case.case.name }}</h4>
+                                            <h5 class="body-font text-black"> المبلغ : {{ case.case.amount }}</h5>
+                                            <p class="card-text body-font">{{ case.details }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="block-2 red">
-              <span class="wrap-icon">
-                <span class="icon-cog"></span>
-              </span>
-                        <p class="body-font">نستقبل أسئلتكم فى أى و قت على مدار اليوم طوال ايام الأسبوع</p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -156,45 +196,8 @@
     </div>
 
 
-    <div class="site-section bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 mb-5 mb-md-0">
-                    <img src="{% static 'images/family-in-home.png' %}" alt="Image" class="img-fluid">
-                </div>
-                <div class="col-md-5 ml-auto pl-md-5">
-                    <span class="text-cursive h5 text-red body-font">عن المؤسسه</span>
-                    <h3 class="text-black body-font">فريق العمل الإبداعي</h3>
-                    <p class="body-font"><span> تنوعوا بالادوات والمؤهلات واختلفوا في الاساليب والطرق ولكنهم اشتركوا بحب المضى على مبدأ التكاتف والتكافل الانساني</span><span>هم أرواح شبابية خلاقة من مبادرين بالفكرة , ملهمين للحلول , مؤمنين بالتكافل , شغوفين للانجاز </span>
-                    </p>
-
-                    <p class="mt-5"><a href="{% url 'about-page' %}" class="btn btn-green text-white py-4 btn-custom-1">أقرا
-                        المزيد</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
-
-    <div class="site-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="text-cursive h5 text-red d-block body-font">التمكين</span>
-                    <h2 class="text-black body-font">رؤيه جديده للمساعدة المحتاج</h2>
-                    <p class="body-font">مؤسسة خير السعودي توفر لك جميع السبل لتقديم أى مساعده ممكنه</p>
-                </div>
-            </div>
-            <div class="row">
-                <p><a href="{% url 'enable-list' %}" class="btn btn-teal btn-custom-1 mt-4 body-font">قائمة التمكين</a>
-                </p>
-            </div>
-        </div>
-
-    </div>
-    </div>
-    </div>
 
     <div class="site-section bg-home">
         <div class="container">
@@ -271,34 +274,67 @@
             </div>
         </div>
     </div>
-  <div class="row mt-5 justify-content-center">
+    <div class="row mt-5 justify-content-center">
 
-          <div class="col-md-8">
+        <div class="col-md-8">
 
 
             <div class="row">
-              <div class="col-lg-3 text-center">
-                <span class="text-teal h2 d-block">3423</span>
-                <span class="body-font">متبرع</span>
-              </div>
-              <div class="col-lg-3 text-center">
-                <span class="text-yellow h2 d-block">4398</span>
-                <span class="body-font"> حاله</span>
-              </div>
-              <div class="col-lg-3 text-center">
-                <span class="text-success h2 d-block">50+</span>
-                <span class="body-font">أعضاء</span>
-              </div>
-              <div class="col-lg-3 text-center">
-                <span class="text-danger h2 d-block">2000+</span>
-                <span class="body-font">متابعينا</span>
-              </div>
+                <div class="col-lg-3 text-center">
+                    <span class="text-teal h2 d-block">3423</span>
+                    <span class="body-font">متبرع</span>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <span class="text-yellow h2 d-block">4398</span>
+                    <span class="body-font"> حاله</span>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <span class="text-success h2 d-block">50+</span>
+                    <span class="body-font">أعضاء</span>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <span class="text-danger h2 d-block">2000+</span>
+                    <span class="body-font">متابعينا</span>
+                </div>
             </div>
 
-          </div>
         </div>
-      </div>
     </div>
+        <div class="site-section bg-home">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <center><h3 class="body-font text-green"> رسالة خير</h3></center>
+                    <p class="body-font text-black">السعى لتمكين و تفعيل التكافل الأجتماعى باستخدام التقنيات الحديثه
+                        للربط بين الكيانات المقتدره من المؤسسات و الأفراد و المستفيدات من الجمعيات الخيريه الرسميه فى
+                        المملكه العربيه السعوديه</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{% static 'images/Photos-16.png' %}" alt="Card image cap">
+                        <div class="card-body">
+                            <a class="btn btn-teal body-font" href="{% url 'enable-list' %}">عن تمكين الخير</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-6">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <a class="btn btn-teal body-font" href="{% url 'enable-list' %}">عن تكافل الخير</a>
+                        </div>
+                        <img class="card-img-top" src="{% static 'images/Photos-17.png' %}" alt="Card image cap">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 {% endblock content %}
 
 
@@ -306,7 +342,7 @@
     <script>
         $(document).ready(function () {
             $('.carousel').carousel({
-                interval: 7000
+                interval: 6000
             });
             var itemsMainDiv = ('.MultiCarousel');
             var itemsDiv = ('.MultiCarousel-inner');

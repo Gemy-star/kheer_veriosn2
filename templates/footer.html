@@ -1,21 +1,73 @@
 {% load static %}
-    <footer class="site-footer">
-      <div class="container">
+<footer class="site-footer">
+    <div class="container">
         <div class="row">
-          <div class="col-lg-6">
-            <h2 class="footer-heading mb-3 text-white body-font">خير السعوديه</h2>
-                <p class="mb-5 text-white body-font"> حركتنا قصة .. اجتمعنا لمبدأ .. ونفذنا اهدافنا … الخير من الناس الي الناس .. لنصنع وقف تفاعي مؤثر </p>
-               <img src="{% static 'images/logo.png' %}" alt="logo"/>
-                  <div class="top-social ml-auto">
-                <a href="#"><span class="icon-facebook text-teal"></span></a>
-                <a href="https://twitter.com/ksakhair?s=11"><span class="icon-twitter text-success"></span></a>
-                <a href="#"><span class="icon-linkedin text-yellow"></span></a>
-              </div>
+            <div class="col-lg-4">
+                <h2 class="footer-heading mb-3 text-white body-font">خير السعوديه</h2>
+                <p class="mb-5 text-white body-font"> حركتنا قصة .. اجتمعنا لمبدأ .. ونفذنا اهدافنا … الخير من الناس الي
+                    الناس .. لنصنع وقف تفاعي مؤثر </p>
+                <img src="{% static 'images/logo.png' %}" alt="logo"/>
+                <div class="top-social ml-auto">
+                    <a href="#"><span class="icon-facebook text-teal"></span></a>
+                    <a href="https://twitter.com/ksakhair?s=11"><span class="icon-twitter text-success"></span></a>
+                    <a href="#"><span class="icon-linkedin text-yellow"></span></a>
+                </div>
 
-          </div>
+            </div>
 
-            <div class="col-lg-6">
-<a class="twitter-timeline" data-width="350" data-height="350" data-dnt="true" href="https://twitter.com/KSAKhair?ref_src=twsrc%5Etfw">Tweets by KSAKhair</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>        </div>
-      </div>
-    </footer>
+            <div class="col-lg-4">
+                <div class="justify-content-center">
+                <center>  <h3 class="body-font"> تواصل معنا</h3> </center>
+                    <hr/>
+                </div>
+                <form action="#" method="post">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <div class="col-md-6 mb-4 mb-lg-0">
+                            <input type="text" name="name" id="name" class="form-control"
+                                   placeholder="الأسم">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" name="phone" id="phone" class="form-control"
+                                   placeholder="الهاتف">
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <input type="text" name="address" id="address"
+                                   class="form-control"
+                                   placeholder="العنوان">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <input type="text" name="message" id="message"
+                                   class="form-control"
+                                   placeholder="الرساله">
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="form-group row">
+                            <div class="col-md-12" id="btn add">
+                                <button type="submit" id="btn_add"
+                                        class="btn btn-teal btn-custom-1 body-font"> إضافة
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="col-lg-4">
+                <a class="twitter-timeline" data-width="350" data-height="350" data-dnt="true"
+                   href="https://twitter.com/KSAKhair?ref_src=twsrc%5Etfw">Tweets by KSAKhair</a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+        </div>
+    </div>
+</footer>
 
