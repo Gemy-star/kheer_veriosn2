@@ -34,8 +34,9 @@ class Payment(models.Model):
     address = models.CharField(max_length=255, null=True, blank=True, verbose_name='العنوان')
     phone = models.CharField(max_length=255, null=True, blank=True, verbose_name='الهاتف')
     national_id = models.CharField(max_length=255, null=True, blank=True, verbose_name='الهويه')
-    helper = models.ForeignKey(User, on_delete=models.CASCADE)
-    case = models.ForeignKey(NeedyCase, on_delete=models.CASCADE)
+    ammount = models.IntegerField(null=True, blank=True, verbose_name='المبلغ')
+    helper = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    case = models.ForeignKey(NeedyCase, on_delete=models.CASCADE,null=True)
     PAYMENT_CHOICES = (
         (1, 'نقدى'),
         (2, 'تحويل بنكى'),

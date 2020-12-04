@@ -47,8 +47,9 @@ def payment_page(request, pk):
         address = request.POST.get('address')
         national_id = request.POST.get('national_id')
         payment_method = request.POST.get('payment_method')
+        ammount = request.POST.get('ammount')
         payment_obj = models.Payment(name=name, phone=phone, address=address, national_id=national_id, helper=user_obj,
-                                     case=case_obj, payment_type=int(payment_method))
+                                     case=case_obj, payment_type=int(payment_method),ammount=ammount)
         payment_obj.save()
         if payment_obj.pk:
             return JsonResponse({"data": 1})
