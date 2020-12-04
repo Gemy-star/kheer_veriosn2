@@ -98,7 +98,7 @@
                                                 <p class="card-text body-font">لتقديم الدعم للحالات التى تريد دعم فى
                                                     الملبس</p>
                                             {% endif %}
-                                            <a href="#" class="btn btn-teal btn-sm body-font"><i class="fa fa-plus"></i>
+                                             <a href="{% url "payment" case.pk  %}" class="btn btn-teal btn-sm body-font"><i class="fa fa-plus"></i>
                                                 تقديم الدعم</a>
                                         </div>
                                     </div>
@@ -107,8 +107,12 @@
                                     <div class="card">
                                         <div class="card-body text-center mt-4">
                                             <h4 class="card-title body-font">{{ case.case.name }}</h4>
-                                            <h5 class="body-font text-black"> المبلغ : {{ case.case.amount }}</h5>
+                                            <h5 class="body-font text-black"><i class="fa fa-money fa-lg text-black"
+                                                                                aria-hidden="true"></i>
+                                                {{ case.case.amount }}</h5>
                                             <p class="card-text body-font">{{ case.details }}</p>
+                                             <a href="{% url "payment" case.pk  %}" class="btn btn-teal btn-sm body-font"><i class="fa fa-plus"></i>
+                                                تقديم الدعم</a>
                                         </div>
                                     </div>
                                 </div>
@@ -300,7 +304,7 @@
 
         </div>
     </div>
-        <div class="site-section bg-home">
+    <div class="site-section bg-home">
         <div class="container">
             <div class="row">
                 <div class="col-12">

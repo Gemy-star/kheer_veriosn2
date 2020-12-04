@@ -1,5 +1,6 @@
 from django.db import models
 from office.models import Needy
+from accounts.models import User
 
 
 class NeedyCase(models.Model):
@@ -28,3 +29,19 @@ class Contact(models.Model):
         return self.name
 
 
+class Payment(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True, verbose_name='الأسم')
+    address = models.CharField(max_length=255, null=True, blank=True, verbose_name='العنوان')
+    phone = models.CharField(max_length=255, null=True, blank=True, verbose_name='الهاتف')
+    national_id = models.CharField(max_length=255, null=True, blank=True, verbose_name='الهويه')
+    helper = models.ForeignKey(User, on_delete=models.CASCADE)
+    case = models.ForeignKey(NeedyCase, on_delete=models.CASCADE)
+    PAYMENT_CHOICES = (
+        (1, 'نقدى'),
+        (2, 'تحويل بنكى'),
+        (3, 'دفع اون لاين'),
+    )
+    payment_type = models.SmallIntegerField(blank=True, choices=PAYMENT_CHOICES, null=True, verbose_name='طريقة الدفع')
+
+    def __str__(self):
+        return self.name

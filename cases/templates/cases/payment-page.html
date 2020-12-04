@@ -1,0 +1,167 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}  صفحة التبرع || خير السعوديه  {% endblock title %}
+
+{% block content %}
+   <div class="ftco-blocks-cover-1">
+       <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+      <div class="site-section-cover overlay" data-stellar-background-ratio="0.5" style="background-image: url('../../../static/images/food.png')">
+        <div class="container">
+          <div class="row align-items-center ">
+
+            <div class="col-md-5 mt-5 pt-5">
+              <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+              <h1 class="mb-3 font-weight-bold body-font">سشاركه فى الخير</h1>
+              <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span> <strong>سشاركه فى الخير </strong></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="site-section">
+      <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                                  <div class="border-top pt-5">
+                <p class="body-font text-white"> طرق الدفع الألكترونى</p>
+                             <img width="50" height="50" src="{% static 'images/mada.svg' %}" alt="logo"/>
+                <i class="fa fa-paypal fa-lg text-black"  aria-hidden="true"></i>
+           <i class="fa fa-cc-mastercard fa-lg text-black" aria-hidden="true"></i>
+<i class="fa fa-cc-visa fa-lg text-black" aria-hidden="true"></i>
+
+
+            </div>
+
+            </div>
+        </div>
+          <div class="row">
+              <div class="col-lg-12 ml-auto">
+                    <div class="bg-white p-3 p-md-5">
+                        <h3 class="text-black mb-4 body-font">تفاصيل الحاله</h3>
+                        <ul class="list-unstyled footer-link">
+                            <li class="d-block mb-3">
+                                <span class="d-block text-black body-font">وصف الحاله:</span>
+                                <span class="body-font">{{ case.details }}   </span></li>
+                            <li class="d-block mb-3 body-font"><span class="d-block text-black">الهاتف:</span><span>{{ case.case.phone }}</span>
+                            </li>
+                            <li class="d-block mb-3 body-font"><span
+                                    class="d-block text-black"></span><span><a class="btn btn-teal btn-custom-1" href="{% url 'needy-detail' case.case.pk %}">معرفة المزيد</a></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+          </div>
+          <div class="row">
+              <div class="col-md-12">
+                                  <form action="#" method="post">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <div class="col-md-6 mb-4 mb-lg-0">
+                            <input type="text" name="name" id="name" class="form-control"
+                                   placeholder="الأسم">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" name="phone" id="phone" class="form-control"
+                                   placeholder="الهاتف">
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <input type="text" name="address" id="address"
+                                   class="form-control"
+                                   placeholder="العنوان">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <input type="number" name="national_id" id="national_id"
+                                   class="form-control"
+                                   placeholder="رقم الهويه">
+                        </div>
+                    </div>
+                                                          <div class="form-group row">
+                        <div class="col-md-12">
+                          <label class="body-font text-red" for="payment_method">طريقة التبرع</label>
+
+<select class="form-control" name="payment_method" id="payment_method">
+  <option value="1">نقدى</option>
+  <option value="2">تحويل بنكى</option>
+  <option value="3">دفع اون لاين</option>
+</select>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="form-group row">
+                            <div class="col-md-12" id="btn add">
+                          <center>      <button type="submit" id="btn_add"
+                                        class="btn btn-teal btn-custom-1 body-font"> إرسال
+                                </button></center>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+
+              </div>
+          </div>
+
+      </div>
+  </div>
+
+{% endblock content %}
+
+{% block javascript %}
+<script>
+var user_id = localStorage.getItem("user_id");
+$(() => {
+   $("#btn_add").on('click' , event => {
+          if(!user_id){
+              window.location.href = {% url 'login' %}
+          }
+       event.preventDefault();
+     $.ajax({
+                    method: 'POST',
+                    url: '{% url 'payment' case.pk %}',
+                    data: {
+                        'name': $('#name').val(),
+                        'national_id': $('#national_id').val(),
+                        'address': $('#address').val(),
+                        'phone': $('#phone').val(),
+                        'payment_method': $('#payment_method').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function (data) {
+                        if (data.data === 1) {
+                            swal({
+                                title: "تم",
+                                text: "تم  بنجاح",
+                                icon: "success",
+                                button: "إغلاق",
+                            });
+                            window.location.href = "{% url 'found-list' %}"
+                        } else {
+                            swal({
+                                title: "خطا",
+                                text: "من فضلك راجع البيانات",
+                                icon: "error",
+                                button: "إغلاق",
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+
+   });
+});
+</script>
+{% endblock javascript %}
+
