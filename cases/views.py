@@ -36,12 +36,12 @@ def add_needycase(request):
 
 
 def payment_page(request, pk):
-    user_id = request.user.pk
-    user_obj = User.objects.get(pk=user_id)
     case_obj = models.NeedyCase.objects.get(pk=pk)
     if request.method == 'GET':
-        return render(request, 'cases/payment-page.html', context={"user": user_obj, "case": case_obj})
+        return render(request, 'cases/payment-page.html', context={"case": case_obj})
     elif request.method == 'POST' and request.is_ajax:
+        user_id = request.user.pk
+        user_obj = User.objects.get(pk=user_id)
         name = request.POST.get('name')
         phone = request.POST.get('phone')
         address = request.POST.get('address')
