@@ -1687,8 +1687,8 @@ h1, h2, h3, h4, h5,
 
 .menu-wrap {
   padding: 10px 20px;
-  background: #5DBD7E;
-  border-radius: 100px; }
+  background: #5DBD7E;}
+  /*border-radius: 100px; }*/
 
 .subtitle {
   font-size: 13px;
@@ -1781,6 +1781,22 @@ h1, h2, h3, h4, h5,
     visibility: visible; }
 .bg-home {
   background-color: #f6f5f5 !important;
+}
+.bg-aida {
+  background-color: #383737  !important;
+}
+.center {
+
+
+    margin: auto;
+
+
+    width: 60%;
+
+
+    padding: 10px;
+
+
 }
 .white-dots {
   position: relative; }
