@@ -1780,7 +1780,16 @@ h1, h2, h3, h4, h5,
     opacity: 1;
     visibility: visible; }
 .bg-home {
-  background-color: #f6f5f5 !important;
+background-image: url("../images/bg_home.png");
+opacity: 0.75;
+  background-repeat: no-repeat;
+    background-size: 100%;
+
+}
+.bg-ebtsam {
+  background-repeat: no-repeat;
+    background-size: 100%;
+
 }
 .bg-aida {
   background-color: #383737  !important;
