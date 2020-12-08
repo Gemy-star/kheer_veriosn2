@@ -9,3 +9,10 @@ def home_page(request):
 
 def about_page(request):
     return render(request, 'main/about.html')
+
+
+def contact(request):
+    return render(request, 'main/contact.html')
+
+def faq_question(request):
+    return render(request, 'main/faq-questions.html')

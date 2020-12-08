@@ -34,6 +34,7 @@ class UserManager(BaseUserManager):
         user.is_active = True
         user.is_admin = False
         user.is_staff = False
+        user.is_volunteer = False
         user.is_needy = False
         user.is_donator = False
         user.is_helper_employee = False
@@ -61,6 +62,7 @@ class UserManager(BaseUserManager):
         user.is_superuser = True
         user.is_admin = True
         user.is_needy = False
+        user.is_volunteer = False
         user.is_helper_employee = False
         user.is_premier_emp = False
         user.is_secondary_emp = False
@@ -86,6 +88,33 @@ class UserManager(BaseUserManager):
         user.is_admin = False
         user.is_needy = False
         user.is_donator = False
+        user.is_volunteer = False
+        user.is_helper_employee = False
+        user.is_premier_emp = False
+        user.is_active = True
+        user.user_type = 3
+        user.save(using=self._db)
+        return user
+
+    def create_volunteer(self, email, first_name, last_name, phone, address, password):
+        """
+        Creates and saves a Secondary Employee USer with the given email, first name,
+        last name and password.
+        """
+        user = self.create_user(
+            email,
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+            phone=phone,
+            address=address,
+            commit=False,
+        )
+        user.is_secondary_emp = False
+        user.is_admin = False
+        user.is_needy = False
+        user.is_donator = False
+        user.is_volunteer = True
         user.is_helper_employee = False
         user.is_premier_emp = False
         user.is_active = True
@@ -112,6 +141,7 @@ class UserManager(BaseUserManager):
         user.is_needy = False
         user.is_helper_employee = False
         user.is_needy = False
+        user.is_volunteer = False
         user.is_secondary_emp = False
         user.is_active = True
         user.is_donator = False
@@ -141,6 +171,7 @@ class UserManager(BaseUserManager):
         user.is_premier_emp = False
         user.is_active = True
         user.is_donator = False
+        user.is_volunteer = False
         user.user_type = 4
         user.save(using=self._db)
         return user
@@ -163,12 +194,14 @@ class UserManager(BaseUserManager):
         user.is_admin = False
         user.is_donator = False
         user.is_needy = True
+        user.is_volunteer = False
         user.is_helper_employee = False
         user.is_premier_emp = False
         user.is_active = True
         user.user_type = 5
         user.save(using=self._db)
         return user
+
     def create_Donator_user(self, email, first_name, last_name, phone, address, password):
         """
         Creates and saves a Needy User with the given email, first name,
@@ -190,6 +223,7 @@ class UserManager(BaseUserManager):
         user.is_helper_employee = False
         user.is_premier_emp = False
         user.is_active = True
+        user.is_volunteer = False
         user.user_type = 6
         user.save(using=self._db)
         return user
@@ -221,6 +255,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_donator = models.BooleanField(_('Donator '), default=False, help_text=_(
         'Designates whether this user should be treated as an Donator. '
     ))
+    is_volunteer = models.BooleanField(_('volunteer '), default=False, help_text=_(
+        'Designates whether this user should be treated as an volunteer. '
+    ))
     is_helper_employee = models.BooleanField(_('Helper Employee '), default=False, help_text=_(
         'Designates whether this user should be treated as an Helper Employee. '
     ))
@@ -231,6 +268,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         (4, 'مشرف متعاون'),
         (5, 'محتاج'),
         (6, 'متبرع'),
+        (7, 'متطوع')
     )
 
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, null=True, verbose_name=_('User Type'),
