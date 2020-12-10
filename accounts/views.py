@@ -142,7 +142,7 @@ def register_volunteer(request):
         address = request.POST.get('address')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
-        user = User.objects.create_Needy_user(email=email, first_name=first_name, last_name=last_name,
+        user = User.objects.create_volunteer(email=email, first_name=first_name, last_name=last_name,
                                               address=address, password=password, phone=phone)
         if user is not None:
             login(request, user)

@@ -118,7 +118,7 @@ class UserManager(BaseUserManager):
         user.is_helper_employee = False
         user.is_premier_emp = False
         user.is_active = True
-        user.user_type = 3
+        user.user_type = 7
         user.save(using=self._db)
         return user
 

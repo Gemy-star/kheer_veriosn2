@@ -58,3 +58,6 @@ def payment_page(request, pk):
         else:
             return JsonResponse({"data": -1})
 
+
+def volunteer_page(request):
+    return render(request, 'cases/home-volunteer.html')

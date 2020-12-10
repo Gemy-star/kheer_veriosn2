@@ -1,5 +1,5 @@
 from django.db import models
-from office.models import Needy
+from office.models import Needy, Foundation
 from accounts.models import User
 
 
@@ -35,9 +35,18 @@ class Payment(models.Model):
     phone = models.CharField(max_length=255, null=True, blank=True, verbose_name='الهاتف')
     national_id = models.CharField(max_length=255, null=True, blank=True, verbose_name='الهويه')
     ammount = models.IntegerField(null=True, blank=True, verbose_name='المبلغ')
-    helper = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
-    case = models.ForeignKey(NeedyCase, on_delete=models.CASCADE,null=True)
+    helper = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    case = models.ForeignKey(NeedyCase, on_delete=models.CASCADE, null=True)
 
+    def __str__(self):
+        return self.name
+
+
+class Certificate(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True, verbose_name='اسم الشهاده')
+    description = models.TextField(null=True, blank=True, verbose_name='وصف')
+    found = models.ForeignKey(Foundation, on_delete=models.CASCADE)
+    volunteer = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

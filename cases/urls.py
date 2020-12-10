@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('create/contact', views.create_contact, name='create-contact'),
     path('add/needy-case', views.add_needycase, name='add-needycase'),
-    path('payment/<int:pk>', views.payment_page, name='payment')
+    path('payment/<int:pk>', views.payment_page, name='payment'),
+    path('volunteer', views.volunteer_page, name='volunteer-page'),
 
 ]

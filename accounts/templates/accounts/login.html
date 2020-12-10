@@ -114,7 +114,12 @@
                                     user.user_type = 'محتاج'
                                     user.user_type_id = 5
 
-                                } else if (data.user_type === 6) {
+                                } else if (data.user_type === 7) {
+                                    user.user_type = 'متطوع'
+                                    user.user_type_id = 7
+
+                                }
+                                else if (data.user_type === 6) {
                                     user.user_type = 'متبرع'
                                     user.user_type_id = 6
 
@@ -180,7 +185,10 @@
                                                     window.location.href = '{% url 'home-page' %}'
                                                 } else if (user.user_type_id === 6) {
                                                     window.location.href = '{% url 'home-page' %}'
-                                                } else {
+                                                } else if (user.user_type_id === 7) {
+                                                    window.location.href = '{% url 'volunteer-page' %}'
+                                                }
+                                                else {
                                                     window.location.href = '{% url 'home-employee' %}'
                                                 }
                                             } else {

@@ -3,6 +3,7 @@ from django.core import serializers
 from django.http import JsonResponse
 from office import models
 from accounts.models import User
+from cases.models import Certificate
 from django.core.files.storage import FileSystemStorage
 
 
@@ -19,6 +20,9 @@ def get_emp_found_info(request):
             provider_obj = models.Provider.objects.filter(employee=user_obj)
             provider_json = serializers.serialize('json', provider_obj)
             return JsonResponse({"provider": provider_json, "employee": user_json}, content_type='application/json')
+        elif user_obj.user_type == 7:
+            certificates = Certificate.objects.filter(volunteer=user_obj)
+            return JsonResponse({"certificates": certificates, "volunteer": user_json}, content_type='application/json')
         else:
             found_obj = models.Foundation.objects.get(employee=user_obj)
             emp_count = found_obj.employee.count()

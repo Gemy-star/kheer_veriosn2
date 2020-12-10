@@ -7,13 +7,13 @@
     <div class="ftco-blocks-cover-1">
         <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
         <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
-             style="background-image: url('../../../static/images/food.png')">
+             style="background-image: url('../../../static/images/two_hands.jpg')">
             <div class="container">
                 <div class="row align-items-center ">
 
                     <div class="col-md-5 mt-5 pt-5">
                         <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
-                        <h1 class="mb-3 font-weight-bold body-font">سشاركه فى الخير</h1>
+                        <h1 class="mb-3 font-weight-bold body-font">مشاركه فى الخير</h1>
                         <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
                             <strong>مشاركه فى الخير </strong></p>
                     </div>
@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="border-top pt-5 center">
-                        <p class="body-font text-white"> طرق الدفع الألكترونى</p>
+                      <center>  <p class="body-font text-green"> طرق الدفع الألكترونى</p></center>
                         <center>
                             <img width="50" height="50" src="{% static 'images/mada.svg' %}" alt="logo"/>
                             <i class="fa fa-paypal fa-lg text-black" aria-hidden="true"></i>
@@ -43,19 +43,17 @@
             <div class="row">
                 <div class="col-lg-12 ml-auto center">
                     <div class="bg-white p-3 p-md-5">
-                        <h3 class="text-black mb-4 body-font">تفاصيل الحاله</h3>
-                        <ul class="list-unstyled footer-link">
+                     <center>   <h3 class="text-black mb-4 body-font">تفاصيل الحاله</h3> </center>
+                      <center>  <ul class="list-unstyled footer-link" style="display: inline-block;">
                             <li class="d-block mb-3">
                                 <span class="d-block text-black body-font">وصف الحاله:</span>
                                 <span class="body-font">{{ case.details }}   </span></li>
                             <li class="d-block mb-3 body-font"><span
-                                    class="d-block text-black">الهاتف:</span><span>{{ case.case.phone }}</span>
+                                    class="d-block text-black">عدد الأبناء:</span><span>{{ case.case.dependencies.count }}</span>
                             </li>
-                            <li class="d-block mb-3 body-font"><span
-                                    class="d-block text-black"></span><span><a class="btn btn-teal btn-custom-1"
-                                                                               href="{% url 'needy-detail' case.case.pk %}">معرفة المزيد</a></span>
-                            </li>
+
                         </ul>
+                    </center>
                     </div>
                 </div>
 
@@ -95,17 +93,6 @@
                                        placeholder="قيمة التبرع">
                             </div>
 
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <label class="body-font text-red" for="payment_method">طريقة التبرع</label>
-
-                                <select class="form-control" name="payment_method" id="payment_method">
-                                    <option value="1">نقدى</option>
-                                    <option value="2">تحويل بنكى</option>
-                                    <option value="3">دفع اون لاين</option>
-                                </select>
-                            </div>
                         </div>
 
                         <div class="card-footer">
