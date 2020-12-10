@@ -37,12 +37,7 @@ class Payment(models.Model):
     ammount = models.IntegerField(null=True, blank=True, verbose_name='المبلغ')
     helper = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     case = models.ForeignKey(NeedyCase, on_delete=models.CASCADE,null=True)
-    PAYMENT_CHOICES = (
-        (1, 'نقدى'),
-        (2, 'تحويل بنكى'),
-        (3, 'دفع اون لاين'),
-    )
-    payment_type = models.SmallIntegerField(blank=True, choices=PAYMENT_CHOICES, null=True, verbose_name='طريقة الدفع')
+
 
     def __str__(self):
         return self.name

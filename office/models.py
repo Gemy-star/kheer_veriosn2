@@ -26,7 +26,7 @@ class Dependency(models.Model):
     name = models.CharField(null=True, max_length=255, verbose_name='الأسم')
 
     def __str__(self):
-        return str(self.gender)
+        return self.name
 
 
 class Needy(models.Model):
@@ -69,7 +69,8 @@ class Needy(models.Model):
     emp_name = models.CharField(null=True, max_length=255, verbose_name='اسم المشرف')
     support = models.CharField(null=True, max_length=255, verbose_name='الدعم المقدم')
     department = models.CharField(null=True, max_length=255, verbose_name='المنطقة')
-    amount = models.CharField(null=True, max_length=255, verbose_name='قيمة الدعم')
+    amount = models.IntegerField(null=True, max_length=255, verbose_name='قيمة الدعم')
+    total_donations = models.IntegerField(null=True, default=0, verbose_name='إجمالى التبرعات')
 
     def __str__(self):
         return self.name

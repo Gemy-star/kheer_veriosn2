@@ -36,13 +36,11 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item body-font" href="{% url 'about-page' %}">عن المؤسسه</a>
-                            <a class="dropdown-item body-font" href="#">من نحن  </a>
                             <a class="dropdown-item body-font" href="#"> رسالتنا</a>
 
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item body-font" href="#">أهدافنا</a>
                             <a class="dropdown-item body-font" href="#">رؤيتنا</a>
-                            <a class="dropdown-item body-font" href="#">حملاتنا</a>
                             <a class="dropdown-item body-font" href="{% url 'register-volunteer' %}">تطوع معنا</a>
 
                         </div>
@@ -50,14 +48,17 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle body-font" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            أدوات التحكم
+                            حملاتنا
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item body-font" href="#">الحالات</a>
-                            <a class="dropdown-item body-font" href="#">ادوات التحكم</a>
+                            <a class="dropdown-item body-font" href="#">لمنتجات التكافليه الداعمه</a>
+                            <a class="dropdown-item body-font" href="#"> الدائره الخضراء</a>
+                                                        <a class="dropdown-item body-font" href="#"> برنامج التغيير الثقافى و الأثر للجمعيات </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item body-font" href="{% url 'enable-list' %}">المرشحين للتمكين</a>
-                            <a class="dropdown-item body-font" href="#">إضافة جمعيه</a>
+                            <a class="dropdown-item body-font" href="{% url 'enable-list' %}">برامج التأثير </a>
+                            <a class="dropdown-item body-font" href="#"> التمكين و التدريب</a>
+                            <a class="dropdown-item body-font" href="#"> رمضان الخير   </a>
+
                         </div>
                     </li>
                     <li><a href="{% url 'login' %}" class="nav-link body-font">تسجيل الدخول</a></li>
@@ -90,7 +91,6 @@
                     </li>
                 </ul>
             </nav>
-
             <div class="top-social ml-auto">
                 <img src="{% static 'images/carts.png' %}" width="50" height="50"/>
             </div>

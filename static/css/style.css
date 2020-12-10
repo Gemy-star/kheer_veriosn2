@@ -1,6 +1,6 @@
 /* Base */
 .text-cursive {
-  font-family: "Indie Flower", cursive !important; }
+  font-family: 'Almarai', sans-serif, cursive !important; }
 
 html {
   overflow-x: hidden; }
@@ -517,7 +517,7 @@ h1, h2, h3, h4, h5,
     padding: 0;
     margin-bottom: 0; }
     .site-navbar .site-navigation .site-menu .active {
-      color: #fd4d40 !important; }
+      color: #5DBD7E !important; }
     .site-navbar .site-navigation .site-menu a {
       text-decoration: none !important;
       display: inline-block; }

@@ -57,6 +57,7 @@ def create_neeedy_ajax(request):
         department = request.POST.get('department')
         support = request.POST.get('korba_type')
         emp_name = request.POST.get('emp_name')
+        parent_name = request.POST.get('parent_name')
         enable_teen = request.POST.getlist('enable_teen[]')
         enable_needy = request.POST.get('enable_needy')
         job = request.POST.get('job')
@@ -65,7 +66,7 @@ def create_neeedy_ajax(request):
         needy = models.Needy(name=name, national_id=national_id, phone=phone, home=address, health_status=health_status,
                              source_income=source_type, case_number=case_number, age=case_age, department=department,
                              support=support,
-                             emp_name=emp_name, enablity=enable_needy, job=job)
+                             emp_name=emp_name, enablity=enable_needy, job=job, parent=parent_name)
         needy.save()
         found_obj.cases.add(needy)
         if len(depend_ages) == len(depend_genders) == len(depend_cases_type) == len(enable_teen):
