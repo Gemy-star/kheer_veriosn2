@@ -103,11 +103,11 @@
 /*-------------------- 2.1 Sidebar Menu -------------------*/
 
 .sidebar-menu {
+  height: 100vh;
     float: left;
     width: 208px;
     padding-top: 30px;
     z-index: 99;
-    height: 100vh;
     overflow: hidden;
     background: #FFFFFF;
     box-shadow: 2px 0 32px #5DBD7E;
@@ -115,7 +115,14 @@
     transition: all 0.3s ease 0s;
     position: fixed;
 }
-
+.sidebar-menu:before {
+     background: url("../../images/laptop.jpg") center / cover;
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  z-index: -1;
+  opacity: 0.5;
+}
 .sbar_collapsed .sidebar-menu {
     left: -280px;
 }
@@ -867,6 +874,25 @@ ul.breadcrumbs {
 
 }
 
+
+
+ body {
+  margin: 0;
+}
+.boximage {
+  position: relative;
+  height: 100vh;
+}
+.boximage:before {
+  background: url("../../images/laptop.jpg") center / cover;
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+
 /*-------------------- 2.4 Fact Area ------------------- */
 
 .single-report {
@@ -1317,9 +1343,9 @@ table.dbkit-table tr td {
 }
 
 .body-font {
-    font-family: 'Almarai', sans-serif;
+font-family: 'Cairo', sans-serif;
     font-size: medium;
-    font-weight: lighter;
+    font-weight: bold;
 }
 
 .team-search input::-webkit-input-placeholder {

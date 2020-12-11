@@ -84,7 +84,7 @@
             var email_address;
             var user = {
                 user_type: null,
-                user_type_id: 0
+                user_type_id:0
             }
             $(() => {
                 $("#btn_login").on('click', event => {
@@ -103,29 +103,39 @@
                                 if (data.user_type === 2) {
                                     user.user_type = ' مشرف جمعيه رئيسيه'
                                     user.user_type_id = 2
+                                sessionStorage.setItem('user' , user)
+
                                 } else if (data.user_type === 3) {
                                     user.user_type = 'مشرف جمعيه تنمويه'
                                     user.user_type_id = 3
+                                sessionStorage.setItem('user' , user)
 
                                 } else if (data.user_type === 4) {
                                     user.user_type = 'مشرف متعاون'
                                     user.user_type_id = 4
+                                sessionStorage.setItem('user' , user)
+
                                 } else if (data.user_type === 5) {
                                     user.user_type = 'محتاج'
                                     user.user_type_id = 5
+                                sessionStorage.setItem('user' , user)
 
                                 } else if (data.user_type === 7) {
                                     user.user_type = 'متطوع'
                                     user.user_type_id = 7
+                                sessionStorage.setItem('user' , user)
 
                                 }
                                 else if (data.user_type === 6) {
                                     user.user_type = 'متبرع'
                                     user.user_type_id = 6
+                                sessionStorage.setItem('user' , user)
 
                                 } else {
                                     user.user_type = 'مشرف عام'
                                     user.user_type_id = 1
+                                    sessionStorage.setItem('user' , user)
+
 
                                 }
                                 $("#form_login").empty();

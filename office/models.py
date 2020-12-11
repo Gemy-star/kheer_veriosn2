@@ -43,7 +43,7 @@ class Needy(models.Model):
 
     )
     home = models.CharField(null=True, max_length=255, choices=HOME_CHOICES, verbose_name='السكن')
-    national_id = models.CharField(max_length=255, null=True, verbose_name='رقم الهويه')
+    national_id = models.CharField(unique=True, max_length=255, null=True, verbose_name='رقم الهويه')
     phone = models.CharField(max_length=255, null=True, verbose_name='الجوال')
     parent = models.CharField(max_length=255, null=True, verbose_name='العائل')
     enablity = models.SmallIntegerField(null=True, choices=ENABILTY_CHOICES)
@@ -103,7 +103,7 @@ class Courses(models.Model):
     name = models.CharField(max_length=255, null=True, verbose_name='اسم الدوره')
     description = models.CharField(max_length=255, null=True, verbose_name='عن الدوره')
     provider = models.ForeignKey(Provider, null=True, on_delete=models.CASCADE, verbose_name='الراعى')
-    cases = models.ManyToManyField(User, null=True, verbose_name='الحاله المستحقه')
+    cases = models.ManyToManyField(Needy, null=True, verbose_name='الحاله المستحقه')
     depend_child = models.ManyToManyField(Dependency, null=True, verbose_name='الأطفال')
 
     def __str__(self):

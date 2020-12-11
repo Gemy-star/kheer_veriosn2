@@ -60,4 +60,6 @@ def payment_page(request, pk):
 
 
 def volunteer_page(request):
-    return render(request, 'cases/home-volunteer.html')
+    user_obj = User.objects.get(pk=request.user.pk)
+    context = {"certificates": models.Certificate.objects.filter(volunteer=user_obj)}
+    return render(request, 'cases/home-volunteer.html', context=context)

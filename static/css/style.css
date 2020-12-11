@@ -1,6 +1,8 @@
 /* Base */
 .text-cursive {
-  font-family: 'Almarai', sans-serif, cursive !important; }
+  font-family: 'Almarai', sans-serif, cursive !important;
+  font-size: small;!important;
+}
 
 html {
   overflow-x: hidden; }

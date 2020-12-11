@@ -47,6 +47,7 @@ class Certificate(models.Model):
     description = models.TextField(null=True, blank=True, verbose_name='وصف')
     found = models.ForeignKey(Foundation, on_delete=models.CASCADE)
     volunteer = models.ForeignKey(User, on_delete=models.CASCADE)
+    paper = models.FileField(upload_to='documents/', null=True)
 
     def __str__(self):
         return self.name

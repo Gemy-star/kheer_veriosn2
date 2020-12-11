@@ -7,6 +7,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>{% block title %} {% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=DM+Sans:300,400,700|Indie+Flower" rel="stylesheet">
  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Almarai&display=swap" rel="stylesheet">
@@ -28,12 +30,13 @@
     <script src="{% static 'assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
 </head>
 <body>
+
  <div id="preloader">
         <div class="loader"></div>
     </div>
-    <div class="page-container">
+    <div class="page-container boximage">
 {% include 'sidebar.html' %}
-            <div class="main-content">
+            <div class="main-content boximage">
    {% include 'banner.html' %}
 
         {% block body %}

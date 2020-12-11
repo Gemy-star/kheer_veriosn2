@@ -3,6 +3,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import User
+from office.models import Needy, Courses , Foundation
+from django.core import serializers
+from cases.models import Payment
 
 
 def check_email(request):
@@ -133,7 +136,6 @@ def register_needy(request):
     return render(request, 'accounts/register-needy.html', context)
 
 
-
 def register_volunteer(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -143,7 +145,7 @@ def register_volunteer(request):
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         user = User.objects.create_volunteer(email=email, first_name=first_name, last_name=last_name,
-                                              address=address, password=password, phone=phone)
+                                             address=address, password=password, phone=phone)
         if user is not None:
             login(request, user)
             return redirect('home-page')
@@ -171,4 +173,34 @@ def register_donator(request):
     context = {}
     return render(request, 'accounts/register-donator.html', context)
 
+
+def user_profile(request):
+    return render(request, 'accounts/user-profile.html')
+
+
+def user_profile_dash(request):
+    return render(request, 'accounts/profile-dash.html')
+
+
+def get_notification(request):
+    if request.method == 'POST' and request.is_ajax:
+        pk = request.POST.get('user_id')
+        user_obj = User.objects.get(pk=pk)
+        if user_obj.user_type == 5:
+            national_id = request.POST.get('national_id')
+            neddy_obj = Needy.objects.get(national_id=national_id)
+            course_json = None
+            needy_json = serializers.serialize('json', neddy_obj)
+            if neddy_obj.enablity == 1:
+                coorse_obi = Courses.objects.filter(cases=neddy_obj)
+                course_json = serializers.serialize('json', coorse_obi)
+            return JsonResponse({"needy": needy_json, "courses": course_json}, content_type='application/json')
+        elif user_obj.user_type == 6:
+            payment = Payment.objects.filter(helper=user_obj)
+            payment_json = serializers.serialize('json', payment)
+            return JsonResponse({"payment": payment_json}, content_type='application/json')
+        else:
+            found = Foundation.objects.filter(employee=user_obj)
+            found_json = serializers.serialize('json', found)
+            return JsonResponse({"found": found_json}, content_type='application/json')
 

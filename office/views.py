@@ -22,7 +22,7 @@ def get_emp_found_info(request):
             return JsonResponse({"provider": provider_json, "employee": user_json}, content_type='application/json')
         elif user_obj.user_type == 7:
             certificates = Certificate.objects.filter(volunteer=user_obj)
-            return JsonResponse({"certificates": certificates, "volunteer": user_json}, content_type='application/json')
+            return JsonResponse({"volunteer": user_json}, content_type='application/json')
         else:
             found_obj = models.Foundation.objects.get(employee=user_obj)
             emp_count = found_obj.employee.count()

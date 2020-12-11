@@ -20,12 +20,9 @@
                                 <div class="dropdown-menu notify-box nt-enveloper-box">
                                     <div class="nofity-list">
                                         <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <span class="fa fa-user"></span>
-
-                                            </div>
                                             <div class="notify-text">
-                                                <p class="body-font">{{ request.user.first_name }} {{ request.user.last_name }}</p>
+                                                <a href="{% url 'user-profile-dash' %}" class="body-font">{{ request.user.first_name }} {{ request.user.last_name }}                                                <i class="fa fa-user"></i>
+</a>
                                             </div>
                                         </a>
                                         <a href="{% url 'logout' %}" class="notify-item">
