@@ -77,6 +77,29 @@
                     </div>
                 </div>
             </div>
+        <div class="row">
+            <div class="col-12">
+                 <div class="card center">
+                                        <div class="card-body">
+                                            <form action="#" method="post">
+                                                {% csrf_token %}
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <input id="national_id" name="national_id" type="number" class="form-control" placeholder="إدخل رقم الهويه">
+                                                    </div>
+                                                    <div class="form-group row">
+
+                                                        <div class="col-12">
+                                                           <center>   <input type="submit" id="btn_id" value="متابعه" name="btn_id" class="btn btn-teal text-cursive"> </center>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+            </div>
+        </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="border-top pt-5 center">
@@ -85,18 +108,14 @@
                                 <center><p style="font-size: larger;" class="text-cursive text-green"><i
                                         class="fa fa-envelope-open text-green" aria-hidden="true"></i></p></center>
                             </div>
-                            <div class="card-body" id="cer_body">
-                                <center>
-                                    <div class="card center">
-                                        <div class="card-body">
-                                            <form method="post">
-                                                {% csrf_token %}
-                                            </form>
-                                        </div>
-                                    </div>
-                                </center>
+                          <center>
+                              <div class="card-body" id="info_body">
+
+
+
 
                             </div>
+                          </center>
                         </div>
 
 
@@ -114,84 +133,90 @@
 {% block javascript %}
     <script>
         var id ={{ request.user.pk }}
-        var user ={{ request.user.user_type }}
-        var found;
+        var needy = [] ;
+        var course = [] ;
+        var user_type = {{ request.user.user_type }}
+        var found =[] ;
+        var payment =[];
+        var user ;
         $(() => {
-            console.log(id)
-            if (parseInt(user, 10) === 5) {
-                $.ajax({
-                    method: 'POST',
-                    url: '{% url 'noti' %}',
-                    data: {
-                        'user_id': id,
-                        'national_id': $("#national_id").val(),
-                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
 
-                    },
-                    success: function (data) {
-                        found = JSON.parse(data);
-                        console.log(found);
-                        {#                      volunteer = JSON.parse(data.volunteer);#}
-                        {##}
-                        {##}
-                        {#                      $("#employee_body").empty();#}
-                        {#                      $("#employee_body").append(`#}
-                        {#                         <h2 class="text-cursive h5 text-red  " >الأسم</h2>#}
-                        {#                                     <p class="text-cursive h5 text-black " >${volunteer[0].fields.first_name}</p>#}
-                        {#                                     <hr/>#}
-                        {#<h2 class="text-cursive h5 text-red  " >العنوان</h2>#}
-                        {#                                     <p class="text-cursive h5 text-black " >${volunteer[0].fields.address}</p>#}
-                        {#                                     <hr/>#}
-                        {#<h2 class="text-cursive h5 text-red  " >الهاتف</h2>#}
-                        {#                                     <p class="text-cursive h5 text-black " >${volunteer[0].fields.phone}</p>#}
-                        {#                                     <hr/>#}
-                        {#<h2 class="text-cursive h5 text-red  " >البريد الألكترونى</h2>#}
-                        {#                                     <p class="text-cursive h5 text-black " >${volunteer[0].fields.email}</p>#}
-                        {#                                     <hr/>#}
-                        {#                      `)#}
+            $("#btn_id").on('click' , event => {
+               event.preventDefault();
+                    $.ajax({
+                        method: 'POST',
+                        url: '{% url 'noti' %}',
+                        data: {
+                            'national_id': $('#national_id').val(),
+                            'user_id' : id  ,
+                            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                        },
+                        success: function (data) {
+                            if (user_type === 5) {
+                               needy = JSON.parse(data.needy)
+                                console.log(needy);
+                               $("#info_body").empty();
+                              needy.map((need) => {
+                                  $("#info_body").append(`
+<h2 class="text-cursive h5 text-red  " >مصدر الدخل</h2>
+                                       <p class="text-cursive h5 text-black " >${need.fields.source_income}</p>
+                                       <hr/>
+  <h2 class="text-cursive h5 text-red  " >نوع الدعم</h2>
+                                       <p class="text-cursive h5 text-black " >${need.fields.support}</p>
+                                       <hr/>
+  <h2 class="text-cursive h5 text-red  " >إجمالى التبرعات</h2>
+                                       <p class="text-cursive h5 text-black " >${need.fields.total_donations}</p>
+                                       <hr/>
+                                       <hr/>
+                                  `)
+                              });
+                                if (parseInt(needy[0].fields.enablity) === 1) {
+                                    course = JSON.parse(data.courses)
+                                    console.log(course);
+                                   course.map((value) => {
+                                       $("#info_body").append(`
+       <h2 class="text-cursive h5 text-red  " ><i class="fa fa-laptop" > </i> دورارت التكمين</h2>
+                                       <p class="text-cursive h5 text-black " >بالتعاون مع مؤسسات داخل المملكه</p>
+   <hr/>
+  <h2 class="text-cursive h5 text-red  " ><i class="fa fa-phone" aria-hidden="true"></i> تواصل معنا لمعرفة المزيد</h2>
+                                    <a href="{% url 'contact-page' %}" class="btn btn-teal body-font"> تواصل معنا</a>
+                                    <hr/>
+                                       <h2 class="text-cursive h5 text-red  " >اسم المنحه</h2>
+                                       <p class="text-cursive h5 text-black " >${value.fields.name}</p>
+                                       <hr/>
+  <h2 class="text-cursive h5 text-red  " >الوصف</h2>
+                                       <p class="text-cursive h5 text-black " >${value.fields.description}</p>
+                                       <hr/>
+                                       `);
 
-                    },
-                    error: function (error) {
-                        alert(error.responseText)
-                    }
-                });
+                                   });
+                                }
+                            }else if (parseInt(user_type) === 6 ) {
+                                payment = JSON.parse(data.payment);
+                                console.log(payment)
+                                $("#info_body").empty();
+                              payment.map( pay => {
+                                   $("#info_body").append(`
+                                <h2 class="text-cursive h5 text-red  " >تبرع بمبلغ</h2>
+                                       <p class="text-cursive h5 text-black " >${pay.fields.ammount}</p>
+                                       <hr/>
+                                       <hr/>
+                                `);
+                              });
+                            } else if (parseInt(user_type) === 7) {
+                                user = JSON.parse(data.user);
+                                console.log(found);
+                            }else {
+                                found = JSON.parse(data.found)
+                                console.log(found);
+                            }
+                        },
+                        error: function (error) {
+                            alert(error.responseText)
+                        }
+                    });
 
-            } else {
-                $.ajax({
-                    method: 'POST',
-                    url: '{% url 'noti' %}',
-                    data: {
-                        'user_id': id,
-                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-
-                    },
-                    success: function (data) {
-                        found = JSON.parse(data);
-                        console.log(found);
-
-                        {#                      $("#employee_body").empty();#}
-                        {#                      $("#employee_body").append(`#}
-                        {#                         <h2 class="text-cursive h5 text-red  " >الأسم</h2>#}
-                        {#                                     <p class="text-cursive h5 text-black " >${volunteer[0].fields.first_name}</p>#}
-                        {#                                     <hr/>#}
-                        {#<h2 class="text-cursive h5 text-red  " >العنوان</h2>#}
-                        {#                                     <p class="text-cursive h5 text-black " >${volunteer[0].fields.address}</p>#}
-                        {#                                     <hr/>#}
-                        {#<h2 class="text-cursive h5 text-red  " >الهاتف</h2>#}
-                        {#                                     <p class="text-cursive h5 text-black " >${volunteer[0].fields.phone}</p>#}
-                        {#                                     <hr/>#}
-                        {#<h2 class="text-cursive h5 text-red  " >البريد الألكترونى</h2>#}
-                        {#                                     <p class="text-cursive h5 text-black " >${volunteer[0].fields.email}</p>#}
-                        {#                                     <hr/>#}
-                        {#                      `)#}
-
-                    },
-                    error: function (error) {
-                        alert(error.responseText)
-                    }
-                });
-
-            }
+            });
 
         });
     </script>
