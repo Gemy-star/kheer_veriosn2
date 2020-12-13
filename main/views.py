@@ -14,5 +14,10 @@ def about_page(request):
 def contact(request):
     return render(request, 'main/contact.html')
 
+
 def faq_question(request):
     return render(request, 'main/faq-questions.html')
+
+
+def ksa_2030(request):
+    return render(request, 'main/ksa-2030.html')
