@@ -51,3 +51,14 @@ class Certificate(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class HebaKheer(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True, verbose_name='اسم ')
+    address = models.CharField(max_length=255, null=True, blank=True, verbose_name='العنوان')
+    phone = models.CharField(max_length=255, null=True, blank=True, verbose_name='الهاتف')
+    national_id = models.CharField(max_length=255, null=True, blank=True, verbose_name='الهويه')
+    ammount = models.IntegerField(null=True, blank=True, verbose_name='المبلغ')
+
+    def __str__(self):
+        return self.name

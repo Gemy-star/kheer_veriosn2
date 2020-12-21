@@ -4,9 +4,11 @@ from django.http import JsonResponse
 from office import models
 from accounts.models import User
 from cases.models import Certificate
-from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.decorators import login_required
+from .filters import NeedyFilter
 
 
+@login_required(login_url='login')
 def home_employee(request):
     return render(request, 'office/home-employee.html')
 
@@ -36,7 +38,7 @@ def get_emp_found_info(request):
                  "employee": user_json, "found_count": found_count},
                 content_type='application/json')
 
-
+@login_required(login_url='login')
 def create_needy(request):
     if request.method == 'GET':
         return render(request, 'office/add-needy.html')
@@ -89,7 +91,7 @@ def create_neeedy_ajax(request):
         else:
             return JsonResponse({"data": -1})
 
-
+@login_required(login_url='login')
 def needy_list(request):
     emp = request.user.pk
     emp_obj = User.objects.get(pk=emp)
@@ -105,7 +107,7 @@ def needy_detial(request, pk):
     context = {"needy": needy, "deps": dep}
     return render(request, 'office/needy_detail.html', context)
 
-
+@login_required(login_url='login')
 def delete_needy(request):
     if request.method == 'POST' and request.is_ajax:
         pk = request.POST.get('needy_id')
@@ -115,7 +117,7 @@ def delete_needy(request):
         else:
             return JsonResponse({"data": -1})
 
-
+@login_required(login_url='login')
 def delete_found(request):
     if request.method == 'POST' and request.is_ajax:
         pk = request.POST.get('found_id')
@@ -125,13 +127,13 @@ def delete_found(request):
         else:
             return JsonResponse({"data": -1})
 
-
+@login_required(login_url='login')
 def found_list(request):
     founds = models.Foundation.objects.all()
     context = {"founds": founds}
     return render(request, 'office/found_list.html', context)
 
-
+@login_required(login_url='login')
 def found_detial(request, pk):
     found = models.Foundation.objects.get(pk=pk)
     emps = found.employee.all()
@@ -146,7 +148,7 @@ def enable_list(request):
     context = {"children": children, "enable_needies": enable_needies}
     return render(request, 'office/enable_list.html', context=context)
 
-
+@login_required(login_url='login')
 def add_foundation(request):
     if request.method == 'POST' and request.is_ajax:
         name = request.POST.get('name')
@@ -162,7 +164,7 @@ def add_foundation(request):
     elif request.method == 'GET':
         return render(request, 'office/add-found.html', context={})
 
-
+@login_required(login_url='login')
 def add_provider(request):
     if request.method == 'GET':
         return render(request, 'office/add-provider.html', context={"emps": User.objects.filter(user_type=4)})
@@ -180,11 +182,11 @@ def add_provider(request):
         else:
             return JsonResponse({"data": -1})
 
-
+@login_required(login_url='login')
 def provider_list(request):
     return render(request, 'office/provider-list.html', context={'providers': models.Provider.objects.all()})
 
-
+@login_required(login_url='login')
 def provider_delete(request):
     if request.method == 'POST' and request.is_ajax:
         provider_id = request.POST.get('provider_id')
@@ -194,11 +196,11 @@ def provider_delete(request):
         else:
             return JsonResponse({"data": -1})
 
-
+@login_required(login_url='login')
 def home_emp(request):
     return render(request, 'office/enable-emp.html')
 
-
+@login_required(login_url='login')
 def add_course(request):
     if request.method == 'GET':
         context = {"cases": models.Needy.objects.filter(enablity=1), "provider": models.Provider.objects.all(),
@@ -223,3 +225,11 @@ def add_course(request):
             return JsonResponse({"data": 1})
         else:
             return JsonResponse({"data": -1})
+
+
+def search_needy(request):
+    need = models.Needy.objects.all()
+    need_filter = NeedyFilter(request.GET, queryset=need)
+    need = need_filter.qs
+    context = {"neeedies": need, "myfilter": need_filter}
+    return render(request, 'office/search-needy.html', context)

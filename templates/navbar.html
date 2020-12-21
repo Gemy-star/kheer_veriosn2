@@ -28,30 +28,26 @@
 
                 <ul class="site-menu main-menu js-clone-nav mr-auto ">
                     <li><img src="{% static 'images/white-logo.png' %}" width="100"/></li>
-                    <li class="text-cursive"><a href="{% url 'home-page' %}" class="nav-link "><i class="fa fa-home"
-                                                                                                  aria-hidden="true"></i>الرئيسيه</a>
+                    <li class="text-cursive"><a href="{% url 'home-page' %}" class="nav-link ">الرئيسيه</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-cursive" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-indent" aria-hidden="true"></i>
                             حول المؤسسه
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item text-cursive" href="{% url 'about-page' %}"><i class="fa fa-book"
-                                                                                                   aria-hidden="true"></i>
+                            <a class="dropdown-item text-cursive" href="{% url 'about-page' %}">
                             عن خير السعودية
                             </a>
-                            <a class="dropdown-item text-cursive" href="#"> <i class="fa fa-bookmark"
-                                                                               aria-hidden="true"></i>	رسالتنا ورؤيتنا
+                            <a class="dropdown-item text-cursive" href="#"> 	رسالتنا ورؤيتنا
+                                                            <a class="dropdown-item text-cursive" href="#"> 	تكافل و تمكين
+
                             </a>
 
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-cursive" href="{% url 'ksa2030' %}"><i class="fa fa-registered"
-                                                                              aria-hidden="true"></i>	خير السعودية ضمن 2030</a>
+                            <a class="dropdown-item text-cursive" href="{% url 'ksa2030' %}">	خير السعودية ضمن 2030</a>
 
-                            <a class="dropdown-item text-cursive" href="{% url 'register-volunteer' %}" ا><i
-                                    class="fa fa-check-square" aria-hidden="true"></i>تطوع معنا
+                            <a class="dropdown-item text-cursive" href="{% url 'register-volunteer' %}" >تطوع معنا
                             </a>
 
                         </div>
@@ -59,81 +55,63 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-cursive" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-                            حملاتنا
+                            برامجنا
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item text-cursive" href="#"><i class="fa fa-address-card"
-                                                                              aria-hidden="true"></i>
+                            <a class="dropdown-item text-cursive" href="#">
                                 المنتجات التكافليه الداعمه</a>
-                            <a class="dropdown-item text-cursive" href="#"><i class="fa fa-dot-circle-o"
-                                                                              aria-hidden="true"></i>
+                            <a class="dropdown-item text-cursive" href="#">
                                 الدائره الخضراء</a>
-                            <a class="dropdown-item text-cursive" href="#"><i class="fa fa-comment"
-                                                                              aria-hidden="true"></i>
+                            <a class="dropdown-item text-cursive" href="#">
                                 برنامج التغيير الثقافى و الأثر للجمعيات
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-cursive" href="{% url 'enable-list' %}"><i class="fa fa-users"
-                                                                                                    aria-hidden="true"></i>
+                            <a class="dropdown-item text-cursive" href="{% url 'enable-list' %}">
                                 برامج التأثير </a>
-                            <a class="dropdown-item text-cursive" href="#"><i class="fa fa-handshake-o"
-                                                                              aria-hidden="true"></i>
+                            <a class="dropdown-item text-cursive" href="#">
                                 التمكين و التدريب</a>
-                            <a class="dropdown-item text-cursive" href="#"><i class="fa fa-hand-o-up"
-                                                                              aria-hidden="true"></i>
+                            <a class="dropdown-item text-cursive" href="#">
                                 رمضان الخير </a>
 
                         </div>
                     </li>
                     {% if request.user.user_type == null %}
-                        <li><a href="{% url 'login' %}" class="nav-link text-cursive"><i class="fa fa-address-card"
-                                                                                         aria-hidden="true"></i>
+                        <li><a href="{% url 'login' %}" class="nav-link text-cursive">
                             تسجيل الدخول</a></li>
                     {% endif %}
                     <li class="nav-item dropdown">
 
                         <a class="nav-link dropdown-toggle text-cursive" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-user-plus" aria-hidden="true"></i>
 
                             إنشاء حساب </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item text-cursive" href="{% url 'register' %}"><i
-                                    class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            <a class="dropdown-item text-cursive" href="{% url 'register' %}">
                                 مشرف رئيسيه</a>
-                            <a class="dropdown-item text-cursive" href="{% url 'register-employee' %}"><i
-                                    class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            <a class="dropdown-item text-cursive" href="{% url 'register-employee' %}">
                                 مشرف تنمويه</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-cursive" href="{% url 'register-helper' %}"><i
-                                    class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            <a class="dropdown-item text-cursive" href="{% url 'register-helper' %}">
                                 مشرف مساعد</a>
-                            <a class="dropdown-item text-cursive" href="{% url 'register-needy' %}"><i
-                                    class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            <a class="dropdown-item text-cursive" href="{% url 'register-needy' %}">
                                 محتاج</a>
-                            <a class="dropdown-item text-cursive" href="{% url 'register-donator' %}"><i
-                                    class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            <a class="dropdown-item text-cursive" href="{% url 'register-donator' %}">
                                 متبرع</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-cursive" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-rss" aria-hidden="true"></i>
 
                             الخدمات الالكترونية
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item text-cursive" href="#"><i class="fa fa-laptop"
-                                                                              aria-hidden="true"></i>
+                            <a class="dropdown-item text-cursive" href="#">
                                 دعم فنى </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-cursive" href="{% url 'contact-page' %}"><i
-                                    class="fa fa-question-circle" aria-hidden="true"></i>
+                            <a class="dropdown-item text-cursive" href="{% url 'contact-page' %}">
                                 الأسئله و الأستفسارات</a>
-                            <a class="dropdown-item text-cursive" href="{% url 'faq' %}"><i class="fa fa-quote-right"
-                                                                                            aria-hidden="true"></i>
+                            <a class="dropdown-item text-cursive" href="{% url 'faq' %}">
                                 الأسئله المتكرره</a>
 
                         </div>
@@ -142,30 +120,24 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-cursive" href="#" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-address-book" aria-hidden="true"></i>
                                 الصفحه الشخصيه
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-cursive" href="{% url 'user-profile' %}"> <i
-                                        class="fa fa-user"></i> {{ request.user.first_name }}  </a>
+                                <a class="dropdown-item text-cursive" href="{% url 'user-profile' %}">  {{ request.user.first_name }}  </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-cursive" href="{% url 'logout' %}"><i
-                                        class="fa fa-power-off"></i>تسجيل خروج</a>
+                                <a class="dropdown-item text-cursive" href="{% url 'logout' %}"> خروج</a>
 
                             </div>
                         </li>
                     {% endif %}
-
+          <li><a href="{% url 'login' %}" class="nav-link text-cursive">
+                            متجر خير السعوديه</a></li>
                 </ul>
             </nav>
-            <div class="top-social ml-auto">
-                <img src="{% static 'images/carts.png' %}" width="50" height="50"/>
-            </div>
-            <div class="top-social m1-auto">
-                <span class="block-icon mr-3"><i class="fa fa-plus fa-xs text-white" id="inc_size"></i></span>
-                <span class="block-icon mr-3 "><i class="fa fa-minus fa-xs text-white" id="dec_size"></i></span>
+{#            <div class="top-social ml-auto">#}
+{#                <img src="{% static 'images/carts.png' %}" width="50" height="50"/>#}
+{#            </div>#}
 
-            </div>
         </div>
     </div>
 

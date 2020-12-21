@@ -13,11 +13,11 @@
             </ol>
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active" style="background-image: url('../../../static/images/login.png')">
-                    <div class="carousel-caption d-none d-md-block text-lay-image">
-                        <h2 class="body-font text-green">منصة الخير </h2>
-                        <h5 class="body-font text-black">صممت لتيسير الخير لفاعل الخير ليكون ضمن </h5>
-                        <p class="body-font text-black" style="font-weight: bold;"> دائره تكافليه موثوقه
-                        <p class="body-font text-green" style="font-weight: bold;">,مستمره و ممتده</p>  </p>
+                    <div class="carousel-caption d-none d-md-block text-lay-image" style="margin-top: 10px">
+                        <h2 class="body-font text-green" style="font-size: 50px; font-weight: bold;">منصة الخير </h2>
+                        <h5 class="body-font text-black" style="font-size: 23px; font-weight: bold;">صممت لتيسير الخير لفاعل الخير ليكون ضمن </h5>
+                        <p class="body-font text-black" style="font-size: 23px;  font-weight: bold;"> دائره تكافليه موثوقه
+                        <p class="body-font text-green" style="font-size: 23px; font-weight: bold;">,مستمره و ممتده</p>  </p>
                     </div>
                 </div>
 {#                <div class="carousel-item " style="background-image: url('../../../static/images/login.png')">#}
@@ -53,30 +53,26 @@
         <div class="site-section bg-home">
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <center><h3 class="body-font text-green"> رسالة خير</h3></center>
-                    <p class="body-font text-black">السعى لتمكين و تفعيل التكافل الأجتماعى باستخدام التقنيات الحديثه
+                <div class="col-12 ">
+                 <div class="card">
+                     <div class="card-body">
+                              <center><h3 class="body-font text-green" style="font-size: 32px; font-weight: bold;"> رسالة خير</h3></center>
+                         <hr/>
+                  <center>  <p class="body-font text-black " style="font-size: 20px;">السعى لتمكين و تفعيل التكافل الأجتماعى باستخدام التقنيات الحديثه
                         للربط بين الكيانات المقتدره من المؤسسات و الأفراد و المستفيدات من الجمعيات الخيريه الرسميه فى
-                        المملكه العربيه السعوديه</p>
+                      المملكه العربيه السعوديه</p> </center>
+
+                     </div>
+                 </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
-                    <div class="card" style="width: 18rem;">
+                <div class="col-10">
+                    <div class="card" >
                         <img class="card-img-top" src="{% static 'images/Photos-16.png' %}" alt="Card image cap">
                         <div class="card-body">
-                            <a class="btn btn-primary btn-lg btn-block body-font" style="background-color: #1d5987;" href="{% url 'enable-list' %}">عن تمكين الخير</a>
+                            <a class="btn btn-primary btn-lg btn-block body-font" style="background-color: #1d5987;" href="{% url 'heba-kheer' %}">هبة الخير</a>
                         </div>
-                    </div>
-
-                </div>
-                <div class="col-6">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <a class="btn btn-teal btn-lg btn-block body-font" href="{% url 'enable-list' %}">عن تكافل الخير</a>
-                        </div>
-                        <img class="card-img-top" src="{% static 'images/Photos-17.png' %}" alt="Card image cap">
-
                     </div>
 
                 </div>
@@ -89,7 +85,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="justify-content-center">
-                        <center><a href="#" class="body-font text-green"> الحالات</a></center>
+                        <center><a href="#" class="body-font text-green" style="font-size: 32px; font-weight: bold;"> الحالات</a></center>
                         <hr/>
                     </div>
                 </div>
@@ -104,30 +100,30 @@
                                         <div class="card-body text-center">
                                             {% if case.case_type == 1 %}
                                                 <p><img width="70" height="70"
-                                                        src="{% static 'images/electricty.png' %}" alt="card image"></p>
+                                                        src="{% static 'images/kheer.png' %}" alt="card image"></p>
                                                 <h4 class="card-title body-font">دعم الكهرباء</h4>
                                                 <p class="card-text body-font">لتقديم الدعم للحالات التى تريد دعم فى
                                                     الكهرباء</p>
                                             {% endif %}
                                             {% if case.case_type == 2 %}
-                                                <p><img src="{% static 'images/food.png' %}" alt="card image"></p>
+                                                <p><img src="{% static 'images/kheer.png' %}" alt="card image"></p>
                                                 <h4 class="card-title body-font">دعم الغذاء</h4>
                                                 <p class="card-text body-font">لتقديم الدعم للحالات التى تريد دعم فى
                                                     الطعام</p>
                                             {% endif %}
                                             {% if case.case_type == 3 %}
-                                                <p><img src="{% static 'images/education.png' %}" alt="card image"></p>
+                                                <p><img src="{% static 'images/kheer.png' %}" alt="card image"></p>
                                                 <h4 class="card-title body-font">دعم التعليم</h4>
                                                 <p class="card-text">لتقديم الدعم للحالات التى تريد دعم فى التعليم</p>
                                             {% endif %}
                                             {% if case.case_type == 4 %}
-                                                <p><img src="{% static 'images/education.png' %}" alt="card image"></p>
+                                                <p><img src="{% static 'images/kheer.png' %}" alt="card image"></p>
                                                 <h4 class="card-title body-font">دعم الماء</h4>
                                                 <p class="card-text body-font">لتقديم الدعم للحالات التى تريد دعم فى
                                                     الماء</p>
                                             {% endif %}
                                             {% if case.case_type == 5 %}
-                                                <p><img src="{% static 'images/money.png' %}" alt="card image"></p>
+                                                <p><img src="{% static 'images/kheer.png' %}" alt="card image"></p>
                                                 <h4 class="card-title body-font">دعم الملبس</h4>
                                                 <p class="card-text body-font">لتقديم الدعم للحالات التى تريد دعم فى
                                                     الملبس</p>
@@ -165,7 +161,7 @@
         <div class="container">
             <div class="row justify-content-center text-center mb-5 section-2-title">
                 <div class="col-md-6">
-                    <span class="text-cursive h5 text-red body-font">مساحه للإعلانات</span>
+                    <span class="text-cursive h5 text-red body-font" style="font-size: 25px; font-weight: bold;">مساحه للإعلانات</span>
                     <h3 class="text-white text-center body-font text-black">الأعلانات</h3>
                 </div>
             </div>
@@ -177,22 +173,23 @@
                                 <img src="{% static 'images/hands.png' %}" width="300" height="300"/>
                         </div>
                         <div class="item">
-                                <img src="{% static 'images/hands.png' %}" width="300" height="300"/>
+                                <img src="{% static 'images/white_back.jpg' %}" width="300" height="300"/>
 
                         </div>
 
                         <div class="item">
-                                <img src="{% static 'images/hands.png' %}" width="300" height="300"/>
+                                <img src="{% static 'images/white_back.jpg' %}" width="300" height="300"/>
 
                         </div>
-                        <div class="item">
+                        <div class="item" >
                                 <img src="{% static 'images/hands.png' %}" width="300" height="300"/>
 
                         </div>
 
                     </div>
-                    <button class="btn btn-teal rightLst"><</button>
-                    <button class="btn btn-teal leftLst">></button>
+                   <i class="fa fa-angle-right  fa-lg  rightLst" aria-hidden="true"></i>
+
+<i class="fa fa-angle-left fa-lg leftLst " aria-hidden="true"></i>
                 </div>
 
 
@@ -206,25 +203,25 @@
 
             <div class="row">
                 <div class="col-lg-3 text-center">
-                    <span class="text-teal h2 d-block">3423</span>
+                    <span class="text-green h2 d-block">3423</span>
                     <span class="body-font">متبرع</span>
-                    <img alt="img" width="30" height="30" src="{% static 'images/helper.png' %}"/>
+                    <img alt="img" width="30" height="30" src="{% static 'images/متبرع.png' %}"/>
                 </div>
                 <div class="col-lg-3 text-center">
-                    <span class="text-yellow h2 d-block">4398</span>
+                    <span class="text-green h2 d-block">4398</span>
                     <span class="body-font"> مستفيد</span>
-                    <img alt="img" width="30" height="30" src="{% static 'images/case.png' %}"/>
+                    <img alt="img" width="30" height="30" src="{% static 'images/حالة.png' %}"/>
                 </div>
                 <div class="col-lg-3 text-center">
-                    <span class="text-success h2 d-block">50+</span>
-                    <span class="body-font">موظف</span>
-                    <img alt="img" width="30" height="30" src="{% static 'images/employees.png' %}"/>
+                    <span class="text-green h2 d-block">50+</span>
+                    <span class="body-font">أعضاء</span>
+                    <img alt="img" width="30" height="30" src="{% static 'images/emp.png' %}"/>
 
                 </div>
                 <div class="col-lg-3 text-center">
-                    <span class="text-danger h2 d-block">2000+</span>
+                    <span class="text-green h2 d-block">2000+</span>
                     <span class="body-font">متابع</span>
-                    <img alt="img" width="30" height="30" src="{% static 'images/follower.png' %}"/>
+                    <img alt="img" width="30" height="30" src="{% static 'images/متابع.png' %}"/>
                 </div>
             </div>
 
@@ -239,7 +236,7 @@
         <div class="container">
             <div class="row justify-content-center text-center mb-5 section-2-title">
                 <div class="col-md-6">
-                    <span class="text-cursive h5 text-red body-font">شركاؤنا</span>
+                    <span class="text-cursive h5 text-red body-font" style="font-size: 25px; font-weight: bold;">شركاؤنا</span>
                     <h3 class="text-white text-center body-font text-black">أهدافنا و طموحاتنا ان يصل الخير لمستحقيه</h3>
                 </div>
             </div>
@@ -248,24 +245,25 @@
                 <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
                     <div class="MultiCarousel-inner">
                         <div class="item">
-                                <img src="{% static 'images/share1.png' %}" width="100" height="100"/>
+                                <img src="{% static 'images/share1.png' %}"  width="100" height="60"/>
                         </div>
                         <div class="item">
-                                <img src="{% static 'images/share2.png' %}" width="100" height="100"/>
+                                <img src="{% static 'images/share2.png' %}"  width="100" height="60"/>
 
                         </div>
                         <div class="item">
-                                <img src="{% static 'images/share3.png' %}" width="100" height="100"/>
+                                <img src="{% static 'images/share3.png' %}" width="100" height="60" />
 
                         </div>
                         <div class="item">
-                                <img src="{% static 'images/share4.png' %}" width="100" height="100"/>
+                                <img src="{% static 'images/share4.png' %}"  width="100" height="60"/>
 
                         </div>
 
                     </div>
-                    <button class="btn btn-teal rightLst"><</button>
-                    <button class="btn btn-teal leftLst">></button>
+                                <i class="fa fa-angle-right  fa-lg  rightLst" aria-hidden="true"></i>
+
+<i class="fa fa-angle-left fa-lg leftLst " aria-hidden="true"></i>
                 </div>
 
 

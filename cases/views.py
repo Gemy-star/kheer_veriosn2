@@ -3,8 +3,10 @@ from office.models import Needy
 from . import models
 from django.http import JsonResponse
 from accounts.models import User
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url='login')
 def create_contact(request):
     if request.method == 'POST' and request.is_ajax:
         name = request.POST.get('name')
@@ -19,6 +21,7 @@ def create_contact(request):
             return JsonResponse({"data": -1})
 
 
+@login_required(login_url='login')
 def add_needycase(request):
     if request.method == 'GET':
         return render(request, 'cases/add-needycase.html', context={"cases": Needy.objects.all()})
@@ -35,6 +38,7 @@ def add_needycase(request):
             return JsonResponse({"data": -1})
 
 
+@login_required(login_url='login')
 def payment_page(request, pk):
     case_obj = models.NeedyCase.objects.get(pk=pk)
     if request.method == 'GET':
@@ -59,7 +63,25 @@ def payment_page(request, pk):
             return JsonResponse({"data": -1})
 
 
+@login_required(login_url='login')
 def volunteer_page(request):
     user_obj = User.objects.get(pk=request.user.pk)
     context = {"certificates": models.Certificate.objects.filter(volunteer=user_obj)}
     return render(request, 'cases/home-volunteer.html', context=context)
+
+
+def heba_kheer(request):
+    if request.method == 'GET':
+        return render(request, 'cases/heba-kheer.html')
+    elif request.method == 'POST' and request.is_ajax:
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        national_id = request.POST.get('national_id')
+        ammount = request.POST.get('ammount')
+        heba_obj = models.HebaKheer(address=address, phone=phone, national_id=national_id, name=name, ammount=ammount)
+        heba_obj.save()
+        if heba_obj.pk:
+            return JsonResponse({"data": 1})
+        else:
+            return JsonResponse({"data": -1})

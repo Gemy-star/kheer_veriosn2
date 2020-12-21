@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'office',
     'main',
     'accounts',
-    'cases'
+    'cases',
+    #3rd party package
+    'django_filters'
 ]
 
 MIDDLEWARE = [

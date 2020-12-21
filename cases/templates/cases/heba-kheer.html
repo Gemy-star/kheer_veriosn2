@@ -1,0 +1,155 @@
+{% extends 'main.html' %}
+
+
+{% block title %}  هبة الخير || خير السعوديه {% endblock title %}
+
+
+{% block content %}
+    <div class="ftco-blocks-cover-1">
+        <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/aida1.jpg')">
+            <div class="container">
+                <div class="row align-items-center ">
+
+                    <div class="col-md-5 mt-5 pt-5">
+                        <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+                        <h1 class="mb-3 font-weight-bold body-font">خير السعوديه</h1>
+                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
+                            <strong>خير السعوديه </strong></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="border-top pt-5 center">
+                      <center>  <p class="body-font text-green"> طرق الدفع الألكترونى</p></center>
+                        <center>
+                            <img width="50" height="50" src="{% static 'images/mada.svg' %}" alt="logo"/>
+                            <i class="fa fa-paypal fa-lg text-black" aria-hidden="true"></i>
+                            <i class="fa fa-cc-mastercard fa-lg text-black" aria-hidden="true"></i>
+                            <i class="fa fa-cc-visa fa-lg text-black" aria-hidden="true"></i>
+                        </center>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="#" method="post">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <div class="col-md-6 mb-4 mb-lg-0">
+                                <input type="text" name="name" id="name" class="form-control"
+                                       placeholder="الأسم">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" name="phone" id="phone" class="form-control"
+                                       placeholder="الهاتف">
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <input type="text" name="address" id="address"
+                                       class="form-control"
+                                       placeholder="العنوان">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <input type="number" name="national_id" id="national_id"
+                                       class="form-control"
+                                       placeholder="رقم الهويه">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" name="ammount" id="ammount"
+                                       class="form-control"
+                                       placeholder="قيمة التبرع">
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="form-group row">
+                                <div class="col-md-12" id="btn add">
+                                    <center>
+                                        <button type="submit" id="btn_add"
+                                                class="btn btn-teal btn-custom-1 body-font"> إرسال
+                                        </button>
+                                    </center>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+{% endblock content %}
+
+
+
+{% block javascript %}
+    <script>
+        $(() => {
+
+            $("#btn_add").on('click', event => {
+
+                event.preventDefault();
+                $.ajax({
+                    method: 'POST',
+                    url: '{% url 'heba-kheer' case.pk %}',
+                    data: {
+                        'name': $('#name').val(),
+                        'national_id': $('#national_id').val(),
+                        'address': $('#address').val(),
+                        'phone': $('#phone').val(),
+                        'ammount': $('#ammount').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function (data) {
+                        if (data.data === 1) {
+                            swal({
+                                title: "تم",
+                                text: "تم  بنجاح",
+                                icon: "success",
+                                button: "إغلاق",
+                            });
+                            window.location.href = "{% url 'found-list' %}"
+                        } else {
+                            swal({
+                                title: "خطا",
+                                text: "من فضلك راجع البيانات",
+                                icon: "error",
+                                button: "إغلاق",
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+
+            });
+        });
+    </script>
+{% endblock javascript %}

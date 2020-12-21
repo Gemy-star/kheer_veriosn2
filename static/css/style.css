@@ -1,13 +1,13 @@
 /* Base */
 .text-cursive {
-  font-family: 'Almarai', sans-serif, cursive !important;
+  font-family: 'helveticaneuelt', sans-serif, cursive !important;
   font-size: small;!important;
 }
 
 html {
   overflow-x: hidden; }
 .body-font {
-     font-family: 'Almarai', sans-serif;
+     font-family: 'helveticaneuelt', sans-serif;
   font-size: medium;
   font-weight: lighter;
 }
@@ -332,8 +332,8 @@ h1, h2, h3, h4, h5,
 	}
 .site-footer {
   padding: 4em 0;
-  background: #2D6D93;
-     opacity: 0.75}
+background-image:   url("../images/footer.png");
+opacity: 0.75}
   @media (min-width: 768px) {
     .site-footer {
       padding: 8em 0; } }
@@ -414,6 +414,10 @@ h1, h2, h3, h4, h5,
 .cardimage {
       background-size: cover;
 
+}
+@font-face {
+  font-family: "helveticaneuelt";
+  src: url("../assets/fonts/helveticaneuelt-arabic-55-roman.ttf");
 }
 
 @media (max-width: 991.98px) {
@@ -1984,11 +1988,11 @@ opacity: 0.75;
 
 
 .text-lay-image {
-      top: -60px !important;
-  margin-top: 150px !important;
+         top: -40px !important;
+    margin-top: 110px !important;
     width: 388px !important;
-  text-align : right !important ;
-float: right !important;
+    text-align: right !important;
+    float: right !important;
 }
 
 
