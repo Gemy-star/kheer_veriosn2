@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-
+{% load static %}
 
 {% block title %}  هبة الخير || خير السعوديه {% endblock title %}
 
@@ -117,7 +117,7 @@
                 event.preventDefault();
                 $.ajax({
                     method: 'POST',
-                    url: '{% url 'heba-kheer' case.pk %}',
+                    url: '{% url 'heba-kheer' %}',
                     data: {
                         'name': $('#name').val(),
                         'national_id': $('#national_id').val(),
@@ -134,7 +134,7 @@
                                 icon: "success",
                                 button: "إغلاق",
                             });
-                            window.location.href = "{% url 'found-list' %}"
+                            window.location.href = "{% url 'home-page' %}"
                         } else {
                             swal({
                                 title: "خطا",

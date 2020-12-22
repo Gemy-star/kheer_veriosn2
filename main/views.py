@@ -21,3 +21,23 @@ def faq_question(request):
 
 def ksa_2030(request):
     return render(request, 'main/ksa-2030.html')
+
+
+def roaya_message(request):
+    return render(request, 'main/roaya.html')
+
+
+def tamkeen(request):
+    return render(request, 'main/tamkeen.html')
+
+
+def green_circle(request):
+    return render(request, 'main/green-circle.html')
+
+
+def pernamg(request):
+    return render(request, 'main/pernamg.html')
+
+
+def effect(request):
+    return render(request, 'main/effect.html')

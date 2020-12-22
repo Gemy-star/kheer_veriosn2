@@ -7,4 +7,10 @@ urlpatterns = [
     path('contact', views.contact, name='contact-page'),
     path('faq-questions', views.faq_question, name='faq'),
     path('ksa-2030', views.ksa_2030, name='ksa2030'),
+    path('roaya', views.roaya_message, name='roaya'),
+    path('tamkeen', views.tamkeen, name='tamkeen'),
+    path('green-circle', views.green_circle, name='green-circle'),
+    path('pernamg', views.pernamg, name='pernamg'),
+    path('effect', views.effect, name='effect'),
+
 ]
