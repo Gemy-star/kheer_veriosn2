@@ -16,6 +16,8 @@
                         <ul class="collapse">
                             <li><a class="body-font" href="{% url 'home-page' %}">الرئيسيه</a></li>
                             <li><a href="{% url 'create-needy' %}" class="body-font">إضافة مستفيد</a></li>
+                                                    <li><a href="{% url 'search-needy-dash' %}" class="body-font">البحث </a></li>
+
                             <li class="body-font"><a class="body-font" href="{% url 'enable-list' %}">قائمة التمكين</a>
                             </li>
                             <li class="body-font"><a class="body-font" href="{% url 'needy-list' %}">قائمة الحالات</a>
@@ -30,7 +32,8 @@
                             {% if request.user.user_type == 4 %}
                                 <li><a class="body-font" href="{% url 'add-course' %}">إضافة
                                     منحه</a></li>
-
+<li><a class="body-font" href="{% url 'add-tamkeen' %}">إضافة
+                                    حاله</a></li>
                             {% endif %}
 
                         </ul>

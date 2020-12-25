@@ -4,6 +4,7 @@ from . import models
 from django.http import JsonResponse
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
+from office.models import Needy, Dependency
 
 
 @login_required(login_url='login')
@@ -40,9 +41,10 @@ def add_needycase(request):
 
 @login_required(login_url='login')
 def payment_page(request, pk):
-    case_obj = models.NeedyCase.objects.get(pk=pk)
+    case_obj = Needy.objects.get(pk=pk)
+    needycase_obj = models.NeedyCase.objects.get(case=case_obj)
     if request.method == 'GET':
-        return render(request, 'cases/payment-page.html', context={"case": case_obj})
+        return render(request, 'cases/payment-page.html', context={"case": needycase_obj})
     elif request.method == 'POST' and request.is_ajax:
         user_id = request.user.pk
         user_obj = User.objects.get(pk=user_id)
@@ -85,3 +87,30 @@ def heba_kheer(request):
             return JsonResponse({"data": 1})
         else:
             return JsonResponse({"data": -1})
+
+
+def add_tamkeen(request):
+    context = {"needy": Needy.objects.filter(enablity=1), "depends": Dependency.objects.filter(enablity=1)}
+    if request.method == 'GET':
+        return render(request, 'cases/add-tamkeen.html', context=context)
+    elif request.method == 'POST' and request.is_ajax:
+        tamkeen_type = request.POST.get('tamkeen_type')
+        person_type = request.POST.get('person_type')
+        depend = request.POST.get('depend')
+        need = request.POST.get('need')
+        if int(person_type) == 1:
+            dep = Dependency.objects.get(pk=depend)
+            obj = models.TamkeenSupply(depend=dep, tamkeen_type=int(tamkeen_type))
+            obj.save()
+            if obj.pk:
+                return JsonResponse({"data": 1})
+            else:
+                return JsonResponse({"data": -1})
+        elif int(person_type) == 2:
+            need_obj = Needy.objects.get(pk=need)
+            obj_tamkeen = models.TamkeenSupply(case=need_obj, tamkeen_type=int(tamkeen_type))
+            obj_tamkeen.save()
+            if obj_tamkeen.pk:
+                return JsonResponse({"data": 1})
+            else:
+                return JsonResponse({"data": -1})

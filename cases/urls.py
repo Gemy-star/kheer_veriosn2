@@ -7,5 +7,5 @@ urlpatterns = [
     path('payment/<int:pk>', views.payment_page, name='payment'),
     path('volunteer', views.volunteer_page, name='volunteer-page'),
     path('heba-kheer', views.heba_kheer, name='heba-kheer'),
-
+    path('add-tamkeen', views.add_tamkeen, name='add-tamkeen')
 ]

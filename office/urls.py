@@ -20,5 +20,8 @@ urlpatterns = [
     path('employee/home', views.home_emp, name='home-emp'),
     path('course/add', views.add_course, name='add-course'),
     path('needy/search', views.search_needy, name='search-needy'),
+    path('needy/search/dash', views.search_needy_dash, name='search-needy-dash'),
+    path('cases/list', views.cases_list, name='cases-list'),
+    path('tamkeen/list', views.tamkeen_money, name='tamkeen-list'),
 
 ]

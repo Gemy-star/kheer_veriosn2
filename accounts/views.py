@@ -194,7 +194,7 @@ def get_notification(request):
             needy = Needy.objects.filter(national_id=national_id)
             needy_json = serializers.serialize('json', needy)
             if neddy_obj.enablity == 1:
-                coorse_obi = Courses.objects.filter(cases__national_id__exact=national_id)
+                coorse_obi = Courses.objects.filter(tamkeen__national_id__in=national_id)
                 course_json = serializers.serialize('json', coorse_obi)
                 return JsonResponse({"needy": needy_json, "courses": course_json}, content_type='application/json')
             else:

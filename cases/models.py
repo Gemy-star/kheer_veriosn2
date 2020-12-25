@@ -1,5 +1,5 @@
 from django.db import models
-from office.models import Needy, Foundation
+from office.models import Needy, Foundation, Dependency
 from accounts.models import User
 
 
@@ -36,7 +36,7 @@ class Payment(models.Model):
     national_id = models.CharField(max_length=255, null=True, blank=True, verbose_name='الهويه')
     ammount = models.IntegerField(null=True, blank=True, verbose_name='المبلغ')
     helper = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    case = models.ForeignKey(NeedyCase, on_delete=models.CASCADE, null=True)
+    case = models.ForeignKey(Needy, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
@@ -62,3 +62,19 @@ class HebaKheer(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class TamkeenSupply(models.Model):
+    case = models.OneToOneField(Needy, on_delete=models.CASCADE, null=True, blank=True)
+    depend = models.OneToOneField(Dependency, on_delete=models.CASCADE, null=True, blank=True)
+    TAMKEEN_CHOICES = (
+        (1, 'تمكين منتهى بتدريب'),
+        (2, 'تمكين منتهى بمقابل مادى'),
+        (3, 'تمكين منتهى بفرصة عمل')
+
+    )
+    tamkeen_type = models.SmallIntegerField(null=True, blank=True, choices=TAMKEEN_CHOICES)
+
+    def __str__(self):
+        return str(self.tamkeen_type)
+

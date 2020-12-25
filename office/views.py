@@ -3,9 +3,9 @@ from django.core import serializers
 from django.http import JsonResponse
 from office import models
 from accounts.models import User
-from cases.models import Certificate
+from cases.models import Certificate, NeedyCase, TamkeenSupply
 from django.contrib.auth.decorators import login_required
-from .filters import NeedyFilter
+from .filters import NeedyFilter, NeedyCaseFilter
 
 
 @login_required(login_url='login')
@@ -37,6 +37,7 @@ def get_emp_found_info(request):
                 {"emp_count": emp_count, "cases_count": cases_count, "cases": cases_json, "foundation": found_json,
                  "employee": user_json, "found_count": found_count},
                 content_type='application/json')
+
 
 @login_required(login_url='login')
 def create_needy(request):
@@ -91,6 +92,7 @@ def create_neeedy_ajax(request):
         else:
             return JsonResponse({"data": -1})
 
+
 @login_required(login_url='login')
 def needy_list(request):
     emp = request.user.pk
@@ -107,6 +109,7 @@ def needy_detial(request, pk):
     context = {"needy": needy, "deps": dep}
     return render(request, 'office/needy_detail.html', context)
 
+
 @login_required(login_url='login')
 def delete_needy(request):
     if request.method == 'POST' and request.is_ajax:
@@ -116,6 +119,7 @@ def delete_needy(request):
             return JsonResponse({"data": 1})
         else:
             return JsonResponse({"data": -1})
+
 
 @login_required(login_url='login')
 def delete_found(request):
@@ -127,11 +131,13 @@ def delete_found(request):
         else:
             return JsonResponse({"data": -1})
 
+
 @login_required(login_url='login')
 def found_list(request):
     founds = models.Foundation.objects.all()
     context = {"founds": founds}
     return render(request, 'office/found_list.html', context)
+
 
 @login_required(login_url='login')
 def found_detial(request, pk):
@@ -148,6 +154,7 @@ def enable_list(request):
     context = {"children": children, "enable_needies": enable_needies}
     return render(request, 'office/enable_list.html', context=context)
 
+
 @login_required(login_url='login')
 def add_foundation(request):
     if request.method == 'POST' and request.is_ajax:
@@ -163,6 +170,7 @@ def add_foundation(request):
             return JsonResponse({"data": -1})
     elif request.method == 'GET':
         return render(request, 'office/add-found.html', context={})
+
 
 @login_required(login_url='login')
 def add_provider(request):
@@ -182,9 +190,11 @@ def add_provider(request):
         else:
             return JsonResponse({"data": -1})
 
+
 @login_required(login_url='login')
 def provider_list(request):
     return render(request, 'office/provider-list.html', context={'providers': models.Provider.objects.all()})
+
 
 @login_required(login_url='login')
 def provider_delete(request):
@@ -196,9 +206,11 @@ def provider_delete(request):
         else:
             return JsonResponse({"data": -1})
 
+
 @login_required(login_url='login')
 def home_emp(request):
     return render(request, 'office/enable-emp.html')
+
 
 @login_required(login_url='login')
 def add_course(request):
@@ -219,7 +231,7 @@ def add_course(request):
             depend = models.Dependency.objects.get(pk=child)
             course.depend_child.add(depend)
         for case in cases:
-            case_obj = User.objects.get(pk=case)
+            case_obj = models.Needy.objects.get(pk=case)
             course.cases.add(case_obj)
         if course.pk:
             return JsonResponse({"data": 1})
@@ -227,9 +239,27 @@ def add_course(request):
             return JsonResponse({"data": -1})
 
 
-def search_needy(request):
+def search_needy_dash(request):
     need = models.Needy.objects.all()
     need_filter = NeedyFilter(request.GET, queryset=need)
     need = need_filter.qs
     context = {"neeedies": need, "myfilter": need_filter}
+    return render(request, 'office/search-needy-dash.html', context)
+
+
+def search_needy(request):
+    needcases = NeedyCase.objects.all()
+    need_filter = NeedyCaseFilter(request.GET, queryset=needcases)
+    need = need_filter.qs
+    context = {"neeedies": need, "myfilter": need_filter}
     return render(request, 'office/search-needy.html', context)
+
+
+def cases_list(request):
+    context = {"cases": NeedyCase.objects.all().order_by('case__data_added')}
+    return render(request, 'office/cases-list.html', context=context)
+
+
+def tamkeen_money(request):
+    context = {"cases": TamkeenSupply.objects.all()}
+    return render(request, 'office/tamkeen-money.html', context=context)

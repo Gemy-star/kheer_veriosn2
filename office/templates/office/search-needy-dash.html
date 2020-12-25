@@ -1,37 +1,19 @@
-{% extends 'main.html' %}
+{% extends 'dashmain.html' %}
 {% load static %}
 
-{% block title %}  صفحة البحث || خير السعوديه  {% endblock title %}
+{% block title %}  البحث   {% endblock title %}
 
-{% block content %}
-    <div class="ftco-blocks-cover-1">
-        <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
-        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
-             style="background-image: url('../../../static/images/two_hands.jpg')">
-            <div class="container">
-                <div class="row align-items-center ">
-
-                    <div class="col-md-5 mt-5 pt-5">
-                        <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
-                        <h1 class="mb-3 font-weight-bold body-font">صفحة البحث </h1>
-                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
-                            <strong>صفحة البحث </strong></p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-        <div class="site-section">
-        <div class="container">
-        <div class="row center">
-            <div class="col-12 justify-content-center text-center mb-5 section-2-title">
+{% block body %}
+<div class="main-content-inner">
+<div class="card">
+    <div class="card-body">
+                <div class="container">
+        <div class="row">
+            <div class="row justify-content-center text-center mb-5 section-2-title">
                 <div class="col-md-6">
                     <span class="text-cursive h5 text-red body-font" style="font-size: 25px; font-weight: bold;">المستفيدين</span>
                     <h3 class="text-white text-center body-font text-black">البحث</h3>
                 </div>
-        </div>
         </div>
             <div class="row">
                 <div class="col-md-12">
@@ -91,15 +73,15 @@
                                 <div class="backside">
                                     <div class="card">
                                         <div class="card-body text-center mt-4">
-                                            <h4 class="card-title body-font">{{ need.case.name }}</h4>
+                                            <h4 class="card-title body-font">{{ need.name }}</h4>
                                             <h5 class="body-font text-black"><img src="{% static 'images/coins.png' %}" width="30" height="30">
-                                                {{ need.case.amount }}</h5>
+                                                {{ need.amount }}</h5>
                                             <div class="progress">
-  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ need.case.total_donations  }}"
-  aria-valuemin="0" aria-valuemax="{{need.case.amount }}" style="background-color: #5DBD7E ; width:50%">
+  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ need.total_donations  }}"
+  aria-valuemin="0" aria-valuemax="{{ case.case.amount }}" style="background-color: #5DBD7E ; width:50%">
   </div>
 </div>
-                                            <p class="card-text body-font">{{ need.case.national_id }}</p>
+                                            <p class="card-text body-font">{{ need.national_id }}</p>
 
                                         </div>
                                     </div>
@@ -113,16 +95,36 @@
         </div>
         </div>
         </div>
-        </div>
+
+    </div>
+</div>
 
 
-{% endblock content %}
+</div>
+
+
+{% endblock body %}
 
 
 {% block javascript %}
 <script>
 $(() => {
-    $("#id_case_type").addClass('form-control col-6')
+   $("#id_name").addClass('form-control col-6');
+    $("#id_name").attr("placeholder", "بحث بأسم المستفيد");
+      $("#id_data_added").addClass('form-control col-6');
+    $("#id_data_added").attr("placeholder", "بحث بتاريخ الأضافه");
+        $("#id_status").addClass('form-control col-6');
+    $("#id_status").attr("placeholder", "بحث بالحاله الأجتماعيه");
+     $("#id_status").addClass('form-control col-6');
+    $("#id_status").attr("placeholder", "بحث بالحاله الأجتماعيه");
+      $("#id_enablity").addClass('form-control col-6');
+    $("#id_enablity").attr("placeholder", "مرشح للتمكين");
+      $("#id_amount").addClass('form-control col-6');
+          $("#id_amount").attr("placeholder", "مبلغ التبرع ");
+
+      $("#id_dependencies").addClass('form-control col-6');
+  $("#id_name_part").addClass('form-control col-6');
+          $("#id_name_part").attr("placeholder", "بحث بجزء من الأسم ");
 });
 </script>
 

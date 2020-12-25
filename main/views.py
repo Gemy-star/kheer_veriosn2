@@ -3,8 +3,7 @@ from cases.models import NeedyCase
 
 
 def home_page(request):
-    context = {"cases": NeedyCase.objects.all().order_by('case__data_added')[:3]}
-    return render(request, 'main/home.html', context=context)
+    return render(request, 'main/home.html')
 
 
 def about_page(request):
