@@ -215,9 +215,10 @@ html {
 
 body {
   line-height: 1.7;
-  color: #364d59 !important;
   font-weight: 300;
-  font-size: 1rem; }
+  font-size: 1rem;
+background-color: #f5f4f4 !important;
+}
 
 ::-moz-selection {
   background: #000;
@@ -1800,12 +1801,14 @@ opacity: 0.75;
     background-size: 100%;
 
 }
+
+
 .bg-home {
-  background-color: #FFFFFF;
+background-color: #f5f4f4 ;
   border-top: 2px double black;
 }
 .bg-aida {
-  background-color: #CFD2D2;
+background-color: #f5f4f4
 }
 .bg-ebtsam {
   background-repeat: no-repeat;
@@ -1976,7 +1979,6 @@ opacity: 0.75;
 
 
 .carousel-item {
-    height: 100vh;
     background: no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -1994,7 +1996,8 @@ opacity: 0.75;
 
 
 .text-lay-image {
-         top: -40px !important;
+     right: 100px;
+    top: -40px !important;
     margin-top: 110px !important;
     width: 388px !important;
     text-align: right !important;
