@@ -196,7 +196,7 @@ html:not(.js) .cd-faq__group,
 
   @include breakpoint(md) {
     margin-bottom: var(--space-sm);
-    
+
     h2 {
       font-size: var(--text-xs);
     }
@@ -206,7 +206,7 @@ html:not(.js) .cd-faq__group,
 .cd-faq__item {
   @include breakpoint(md) {
     background: var(--cd-color-4);
-    margin-bottom: var(--space-xxxs); 
+    margin-bottom: var(--space-xxxs);
     box-shadow: 0 1px 2px rgba(#000, .08);
     transition: box-shadow .2s;
 
@@ -271,7 +271,7 @@ html:not(.js) .cd-faq__group,
   .text-component {
     font-size: 0.95em;
   }
-  
+
   p {
     color: var(--cd-color-3);
   }
@@ -280,7 +280,7 @@ html:not(.js) .cd-faq__group,
     display: none;
     padding: 0 var(--space-sm);
     overflow: hidden;
-    
+
     .text-component {
       font-size: 0.75em;
       padding-bottom: var(--space-md);
