@@ -1997,7 +1997,7 @@ background-color: #f5f4f4
 
 .text-lay-image {
      right: 100px;
-    top: -40px !important;
+    top: 40px !important;
     margin-top: 110px !important;
     width: 388px !important;
     text-align: right !important;

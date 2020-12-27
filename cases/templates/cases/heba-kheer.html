@@ -78,13 +78,34 @@
                             </div>
 
                         </div>
+                        <hr/>
+                        <p class="body-font"> الأستاذ الفاضل /
+السلام عليكم ورحمة الله وبركاته ،،
 
+بالبداية يسرنا في وقف خير السعودية التابع لمؤسسة بلد الخير الوقفية ، ان نشكر لك جهودك الدائمة في خدمة ذوي الحاجة ..
+كما نشكر لكم رغبتكم في وقف مبلغ ، والذي سيتم تخصيص ٣٠٪؜ منه لأعمال خير السعودية و ٧٠ ٪؜ لأعمال الخير بناء على مانص عليه صك الوقفيةلخير السعودية ، لذلك نأمل منك مشكور الرد على هذا البريد الالكتروني بالإقرار وذلك من خلال تزويدنا بالبيانات التالية :
+المبلغ :
+الاسم الثلاثي
+رقم الجوال
+السجل المدني
+
+سائلين المولى عز وجل لكم مزيداً من الخير و العطاء وأن يكتب هذا الدعم في ميزان أعمالكم .
+
+تقبلوا تحياتنا ،،
+فريق خير السعودية .</p>
+<hr/>
+    <div class="form-group row">
+        <div class="col-12">
+            <label class="body-font" for="cond">الموافقه على ما سبق</label>
+        <input type="checkbox" id="cond" name="cond" value="True">
+        </div>
+    </div>
                         <div class="card-footer">
                             <div class="form-group row">
                                 <div class="col-md-12" id="btn add">
                                     <center>
-                                        <button type="submit" id="btn_add"
-                                                class="btn btn-teal btn-custom-1 body-font"> إرسال
+                                        <button type="submit" id="btn_heba"
+                                                class="btn btn-teal btn-custom-1 body-font text-white"> إرسال
                                         </button>
                                     </center>
                                 </div>
@@ -112,9 +133,11 @@
     <script>
         $(() => {
 
-            $("#btn_add").on('click', event => {
+            $("#btn_heba").on('click', event => {
 
-                event.preventDefault();
+   if ($("input[type=checkbox]").prop(
+                      ":checked"))  {
+        event.preventDefault();
                 $.ajax({
                     method: 'POST',
                     url: '{% url 'heba-kheer' %}',
@@ -148,6 +171,16 @@
                         alert(error.responseText)
                     }
                 });
+    }else {
+        event.preventDefault();
+         swal({
+                                title: "خطا",
+                                text: "من فضلك اضغط على التأكيد",
+                                icon: "error",
+                                button: "إغلاق",
+                            });
+    }
+
 
             });
         });
