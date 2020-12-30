@@ -12,7 +12,7 @@ class NeedyCase(models.Model):
         (5, 'دعم الملبس'),
     )
     details = models.TextField(blank=True, null=True, verbose_name='عرض الحاله')
-    case = models.ForeignKey(Needy, on_delete=models.CASCADE)
+    case = models.OneToOneField(Needy, on_delete=models.CASCADE)
     case_type = models.SmallIntegerField(blank=True, choices=CASES_CHOICES, null=True, verbose_name='نوع الحاله')
 
     def __str__(self):

@@ -31,12 +31,20 @@ def add_needycase(request):
         case_obj = Needy.objects.get(pk=case_pk)
         case_type = request.POST.get('case_type')
         details = request.POST.get('details')
-        needy_case = models.NeedyCase(details=details, case=case_obj, case_type=int(case_type))
-        needy_case.save()
-        if needy_case.pk:
+        st = models.NeedyCase.objects.filter(case=case_obj).exists()
+        if st:
+            st_obj = models.NeedyCase.objects.get(case=case_obj)
+            st_obj.details = details
+            st_obj.case_type = int(case_type)
+            st_obj.save()
             return JsonResponse({"data": 1})
         else:
-            return JsonResponse({"data": -1})
+            obj = models.NeedyCase(details=details, case=case_obj, case_type=int(case_type))
+            obj.save()
+            if obj.pk:
+                return JsonResponse({"data": 1})
+            else:
+                return JsonResponse({"data": -1})
 
 
 @login_required(login_url='login')
