@@ -45,15 +45,7 @@
                             </a>
 
                             <div class="dropdown-divider"></div>
-                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'ksa2030' %}">	خير السعودية ضمن 2030</a>
-
-                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'register-volunteer' %}" >تطوع معنا
-                            </a>
-
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a style="font-size: 14px;  " class="nav-link dropdown-toggle text-cursive" href="#" id="navbarDropdown" role="button"
+                                    <a style="font-size: 14px;  " class="nav-link dropdown-toggle text-cursive" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             برامجنا
                         </a>
@@ -74,7 +66,36 @@
                                 رمضان الخير </a>
 
                         </div>
+                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'ksa2030' %}">	خير السعودية ضمن 2030</a>
+
+                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'register-volunteer' %}" >تطوع معنا
+                            </a>
+
+                        </div>
                     </li>
+{#                    <li class="nav-item dropdown">#}
+{#                        <a style="font-size: 14px;  " class="nav-link dropdown-toggle text-cursive" href="#" id="navbarDropdown" role="button"#}
+{#                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                            برامجنا#}
+{#                        </a>#}
+{#                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
+{#                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'effect' %}">#}
+{#                                المنتجات التكافليه الداعمه</a>#}
+{#                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'green-circle' %}">#}
+{#                                الدائره الخضراء</a>#}
+{#                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'pernamg' %}">#}
+{#                                برنامج التغيير الثقافى و الأثر للجمعيات#}
+{#                            </a>#}
+{#                            <div class="dropdown-divider"></div>#}
+{#                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'enable-list' %}">#}
+{#                                برامج التأثير </a>#}
+{#                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="#">#}
+{#                                التمكين و التدريب</a>#}
+{#                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="#">#}
+{#                                رمضان الخير </a>#}
+{##}
+{#                        </div>#}
+{#                    </li>#}
                     {% if request.user.user_type == null %}
                         <li><a href="{% url 'login' %}" class="nav-link text-cursive">
                             تسجيل الدخول</a></li>
@@ -94,9 +115,9 @@
                             <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'register-helper' %}">
                                 مشرف مساعد</a>
                             <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'register-needy' %}">
-                                محتاج</a>
+                                مستفيد</a>
                             <a style="font-size: 14px;  "class="dropdown-item text-cursive" href="{% url 'register-donator' %}">
-                                متبرع</a>
+                                فاعل خير</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -106,11 +127,11 @@
                             الخدمات الالكترونية
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="#">
+                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url "admin:index" %}">
                                 دعم فنى </a>
                             <div class="dropdown-divider"></div>
                             <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'contact-page' %}">
-                                الأسئله و الأستفسارات</a>
+                                الشكاوى و الأستفسارات</a>
                             <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'faq' %}">
                                 الأسئله المتكرره</a>
 
