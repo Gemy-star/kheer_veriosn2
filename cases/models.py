@@ -19,6 +19,15 @@ class NeedyCase(models.Model):
         return self.case.name
 
 
+class VolunteerProfile(models.Model):
+    job = models.CharField(max_length=255, null=True, blank=True, verbose_name='المهنه')
+    desc = models.CharField(max_length=255, null=True, blank=True, verbose_name='التخصص')
+    volunteer = models.OneToOneField(User, null=True, verbose_name='المتطوع', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.volunteer.first_name
+
+
 class Contact(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True, verbose_name='الأسم')
     address = models.CharField(max_length=255, null=True, blank=True, verbose_name='العنوان')
@@ -77,4 +86,3 @@ class TamkeenSupply(models.Model):
 
     def __str__(self):
         return str(self.tamkeen_type)
-

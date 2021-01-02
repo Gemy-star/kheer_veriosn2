@@ -1,0 +1,44 @@
+{% extends 'dashmain.html' %}
+
+{% load static %}
+
+{% block title %} خير السعوديه || قائمة المتطوعين {% endblock title %}
+{% block body %}
+    <div class="main-content-inner">
+        <div class="inner-page">
+            <div class="container">
+            <div class="center">
+                <h1 class="body-font text-green"> قائمة المتطوعين</h1>
+            <hr/>
+            </div>
+                <div class="row">
+                    {% for vol in vols %}
+                        <div class="col-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <p class="card-title text-green body-font">{{ vol.volunteer.pk }}</p>
+                                </div>
+                                <div class="card-body">
+                                 <center>                                    <h5 class="body-font text-green">{{ vol.volunteer.first_name }} {{ vol.volunteer.last_name }} </h5></center>
+                                   <hr/>
+                                    <p class="body-font text-black">{{ vol.volunteer.phone }}</p>
+                                  <hr/>
+                                    <p class="body-font text-black">{{ vol.volunteer.email }}</p>
+                                    <hr/>
+                                    <p class="body-font text-black">{{ vol.volunteer.address }}</p>
+                                    <hr/>
+                                    <p class="body-font text-black">{{ vol.job }}</p>
+                                    <hr/>
+                                    <p class="body-font text-black">{{ vol.desc }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock body %}

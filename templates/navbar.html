@@ -18,7 +18,7 @@
     {#    </div>#}
 
     <div class="container">
-        <div class="menu-wrap d-flex align-items-center">
+        <div class="menu-wrap ">
             <span class="d-inline-block d-lg-none"><a href="{% url 'home-page' %}"
                                                       class="text-black site-menu-toggle js-menu-toggle py-5"><span
                     class="icon-menu h3 text-black"></span></a></span>
@@ -127,7 +127,7 @@
                             الخدمات الالكترونية
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url "admin:index" %}">
+                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url "technical-support" %}">
                                 دعم فنى </a>
                             <div class="dropdown-divider"></div>
                             <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'contact-page' %}">
@@ -155,10 +155,6 @@
                             متجر خير السعودية</a></li>
                 </ul>
             </nav>
-{#            <div class="top-social ml-auto">#}
-{#                <img src="{% static 'images/carts.png' %}" width="50" height="50"/>#}
-{#            </div>#}
-
         </div>
     </div>
 

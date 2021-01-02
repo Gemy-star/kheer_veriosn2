@@ -1716,8 +1716,12 @@ background-image:   url("../images/footer.png");
   padding: 20px; }
 
 .menu-wrap {
-  padding: 10px 20px;
-  background: #5DBD7E;}
+  width: fit-content;
+  padding: 4px 8px;
+  background: #5DBD7E;
+    position: fixed;
+    height: fit-content;
+}
   /*border-radius: 100px; }*/
 
 .subtitle {

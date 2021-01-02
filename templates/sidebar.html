@@ -27,7 +27,11 @@
                             <li class="body-font"><a class="body-font" href="{% url 'add-found' %}">إضافة جمعيه</a></li>
                             <li class="body-font"><a class="body-font" href="{% url 'add-provider' %}">إضافة راعى</a>
                             <li class="body-font"><a class="body-font" href="{% url 'add-needycase' %}">تجهيز حاله للعرض</a>
+{% if request.user.user_type == 1 or requset.user.user_type == 2  %}
 
+    <li class="body-font"><a class="body-font" href="{% url 'volunteer-list' %}">قائمة المتطوعين</a>
+
+                            {% endif %}
                             </li>
                             {% if request.user.user_type == 4 %}
                                 <li><a class="body-font" href="{% url 'add-course' %}">إضافة

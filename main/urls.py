@@ -12,5 +12,6 @@ urlpatterns = [
     path('green-circle', views.green_circle, name='green-circle'),
     path('pernamg', views.pernamg, name='pernamg'),
     path('effect', views.effect, name='effect'),
+    path('technical-support', views.technical_page, name='technical-support'),
 
 ]

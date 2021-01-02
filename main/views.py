@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from cases.models import NeedyCase
+from cases.models import Contact
 
 
 def home_page(request):
@@ -40,3 +40,8 @@ def pernamg(request):
 
 def effect(request):
     return render(request, 'main/effect.html')
+
+
+def technical_page(request):
+    context = {"contacts": Contact.objects.all()}
+    return render(request, 'main/technical-support.html', context=context)

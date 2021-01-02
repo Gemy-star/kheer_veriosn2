@@ -5,7 +5,7 @@ from django.contrib import messages
 from .models import User
 from office.models import Needy, Courses, Foundation
 from django.core import serializers
-from cases.models import Payment
+from cases.models import Payment, VolunteerProfile
 
 
 def check_email(request):
@@ -146,6 +146,10 @@ def register_volunteer(request):
         last_name = request.POST.get('last_name')
         user = User.objects.create_volunteer(email=email, first_name=first_name, last_name=last_name,
                                              address=address, password=password, phone=phone)
+        job = request.POST.get('job')
+        desc = request.POST.get('specific')
+        vol_profile = VolunteerProfile(job=job, desc=desc, volunteer=user)
+        vol_profile.save()
         if user is not None:
             login(request, user)
             return redirect('home-page')
@@ -175,7 +179,12 @@ def register_donator(request):
 
 
 def user_profile(request):
-    return render(request, 'accounts/user-profile.html')
+    user_obj = User.objects.get(pk=request.user.pk)
+    if user_obj.user_type == 7:
+        profile = VolunteerProfile.objects.get(volunteer=user_obj)
+        return render(request, 'accounts/user-profile.html', context={"profile": profile})
+    else:
+        return render(request, 'accounts/user-profile.html')
 
 
 def user_profile_dash(request):

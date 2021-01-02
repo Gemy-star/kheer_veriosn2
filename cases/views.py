@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from office.models import Needy
 from . import models
 from django.http import JsonResponse
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from office.models import Needy, Dependency
+from cases.models import VolunteerProfile, NeedyCase
 
 
 @login_required(login_url='login')
@@ -122,3 +122,14 @@ def add_tamkeen(request):
                 return JsonResponse({"data": 1})
             else:
                 return JsonResponse({"data": -1})
+
+
+def volunteer_list(request):
+    volunteer_pro = VolunteerProfile.objects.filter(volunteer__user_type=7)
+    return render(request, 'cases/volunteer_list.html', context={"vols": volunteer_pro})
+
+
+def new_show_case(request):
+    cases = NeedyCase.objects.all()
+    context = {"cases": cases}
+    return render(request, 'cases/new_case_show.html', context=context)

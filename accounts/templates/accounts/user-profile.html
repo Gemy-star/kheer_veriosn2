@@ -9,7 +9,7 @@
     <div class="ftco-blocks-cover-1">
         <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
         <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
-             style="background-image: url('../../../static/images/about2.png')">
+             style="background-image: url('../../../static/images/kheer_inner.png')">
             <div class="container">
                 <div class="row align-items-center ">
 
@@ -43,6 +43,14 @@
                                     <h2 class="text-cursive h5 text-red  ">العنوان</h2>
                                     <p class="text-cursive h5 text-black ">{{ request.user.address }}</p>
                                     <hr/>
+                                    {% if request.user.user_type == 7 %}
+                                        <h2 class="text-cursive h5 text-red  ">المهنه</h2>
+                                        <p class="text-cursive h5 text-black ">{{ profile.job }}</p>
+                                        <hr/>
+                                        <h2 class="text-cursive h5 text-red  ">التخصص</h2>
+                                        <p class="text-cursive h5 text-black ">{{ profile.desc }}</p>
+                                    {% endif %}
+                                    <hr/>
                                     <h2 class="text-cursive h5 text-red  ">البريد الألكترونى </h2>
                                     <p class="text-cursive h5 text-black ">{{ request.user.email }}</p>
                                     <hr/>
@@ -69,7 +77,7 @@
                             </center>
                             <div class="card-footer">
                                 <center>
-                                    <a class="btn btn-teal body-font" href="#"> تغيير كلمة المرور</a>
+                                    <a class="btn btn-teal text-white" href="#"> تغيير كلمة المرور</a>
                                 </center>
                             </div>
                         </div>
@@ -77,29 +85,32 @@
                     </div>
                 </div>
             </div>
-        <div class="row">
-            <div class="col-12">
-                 <div class="card center">
-                                        <div class="card-body">
-                                            <form action="#" method="post">
-                                                {% csrf_token %}
-                                                <div class="form-group row">
-                                                    <div class="col-md-12">
-                                                        <input id="national_id" name="national_id" type="number" class="form-control" placeholder="إدخل رقم الهويه">
-                                                    </div>
-                                                    <div class="form-group row">
-
-                                                        <div class="col-12">
-                                                           <center>   <input type="submit" id="btn_id" value="متابعه" name="btn_id" class="btn btn-teal text-cursive"> </center>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+        {% if request.user.user_type == 5 or request.user.user_type == 6  %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="card center">
+                        <div class="card-body">
+                            <form action="#" method="post">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <input id="national_id" name="national_id" type="number" class="form-control"
+                                               placeholder="إدخل رقم الهويه">
                                     </div>
+                                    <div class="form-group row">
+
+                                        <div class="col-12">
+                                            <center><input type="submit" id="btn_id" value="متابعه" name="btn_id"
+                                                           class="btn btn-teal text-cursive text-white"></center>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="border-top pt-5 center">
@@ -108,14 +119,12 @@
                                 <center><p style="font-size: larger;" class="text-cursive text-green"><i
                                         class="fa fa-envelope-open text-green" aria-hidden="true"></i></p></center>
                             </div>
-                          <center>
-                              <div class="card-body" id="info_body">
+                            <center>
+                                <div class="card-body" id="info_body">
 
 
-
-
-                            </div>
-                          </center>
+                                </div>
+                            </center>
                         </div>
 
 
@@ -123,6 +132,7 @@
                 </div>
 
             </div>
+        {% endif %}
         </div>
     </div>
 
@@ -132,32 +142,34 @@
 
 {% block javascript %}
     <script>
-        var id ={{ request.user.pk }}
-        var needy = [] ;
-        var course = [] ;
-        var user_type = {{ request.user.user_type }}
-        var found =[] ;
-        var payment =[];
-        var user ;
+        var id =
+        {{ request.user.pk }}
+        var needy = [];
+        var course = [];
+        var user_type =
+        {{ request.user.user_type }}
+        var found = [];
+        var payment = [];
+        var user;
         $(() => {
 
-            $("#btn_id").on('click' , event => {
-               event.preventDefault();
-                    $.ajax({
-                        method: 'POST',
-                        url: '{% url 'noti' %}',
-                        data: {
-                            'national_id': $('#national_id').val(),
-                            'user_id' : id  ,
-                            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-                        },
-                        success: function (data) {
-                            if (user_type === 5) {
-                               needy = JSON.parse(data.needy)
-                                console.log(needy);
-                               $("#info_body").empty();
-                              needy.map((need) => {
-                                  $("#info_body").append(`
+            $("#btn_id").on('click', event => {
+                event.preventDefault();
+                $.ajax({
+                    method: 'POST',
+                    url: '{% url 'noti' %}',
+                    data: {
+                        'national_id': $('#national_id').val(),
+                        'user_id': id,
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function (data) {
+                        if (user_type === 5) {
+                            needy = JSON.parse(data.needy)
+                            console.log(needy);
+                            $("#info_body").empty();
+                            needy.map((need) => {
+                                $("#info_body").append(`
 <h2 class="text-cursive h5 text-red  " >مصدر الدخل</h2>
                                        <p class="text-cursive h5 text-black " >${need.fields.source_income}</p>
                                        <hr/>
@@ -169,12 +181,12 @@
                                        <hr/>
                                        <hr/>
                                   `)
-                              });
-                                if (parseInt(needy[0].fields.enablity) === 1) {
-                                    course = JSON.parse(data.courses)
-                                    console.log(course);
-                                   course.map((value) => {
-                                       $("#info_body").append(`
+                            });
+                            if (parseInt(needy[0].fields.enablity) === 1) {
+                                course = JSON.parse(data.courses)
+                                console.log(course);
+                                course.map((value) => {
+                                    $("#info_body").append(`
        <h2 class="text-cursive h5 text-red  " ><i class="fa fa-laptop" > </i> دورارت التكمين</h2>
                                        <p class="text-cursive h5 text-black " >بالتعاون مع مؤسسات داخل المملكه</p>
    <hr/>
@@ -189,32 +201,32 @@
                                        <hr/>
                                        `);
 
-                                   });
-                                }
-                            }else if (parseInt(user_type) === 6 ) {
-                                payment = JSON.parse(data.payment);
-                                console.log(payment)
-                                $("#info_body").empty();
-                              payment.map( pay => {
-                                   $("#info_body").append(`
+                                });
+                            }
+                        } else if (parseInt(user_type) === 6) {
+                            payment = JSON.parse(data.payment);
+                            console.log(payment)
+                            $("#info_body").empty();
+                            payment.map(pay => {
+                                $("#info_body").append(`
                                 <h2 class="text-cursive h5 text-red  " >تبرع بمبلغ</h2>
                                        <p class="text-cursive h5 text-black " >${pay.fields.ammount}</p>
                                        <hr/>
                                        <hr/>
                                 `);
-                              });
-                            } else if (parseInt(user_type) === 7) {
-                                user = JSON.parse(data.user);
-                                console.log(found);
-                            }else {
-                                found = JSON.parse(data.found)
-                                console.log(found);
-                            }
-                        },
-                        error: function (error) {
-                            alert(error.responseText)
+                            });
+                        } else if (parseInt(user_type) === 7) {
+                            user = JSON.parse(data.user);
+                            console.log(found);
+                        } else {
+                            found = JSON.parse(data.found)
+                            console.log(found);
                         }
-                    });
+                    },
+                    error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
 
             });
 
