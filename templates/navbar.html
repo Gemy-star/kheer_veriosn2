@@ -58,11 +58,10 @@
                                 برنامج التغيير الثقافى و الأثر للجمعيات
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'enable-list' %}">
-                                برامج التأثير </a>
-                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="#">
+
+                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'training' %}">
                                 التمكين و التدريب</a>
-                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="#">
+                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'ramdan' %}">
                                 رمضان الخير </a>
 
                         </div>
@@ -107,13 +106,6 @@
 
                             إنشاء حساب </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a style="font-size: 14px;  "class="dropdown-item text-cursive" href="{% url 'register' %}">
-                                مشرف رئيسيه</a>
-                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'register-employee' %}">
-                                مشرف تنمويه</a>
-                            <div class="dropdown-divider"></div>
-                            <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'register-helper' %}">
-                                مشرف مساعد</a>
                             <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'register-needy' %}">
                                 مستفيد</a>
                             <a style="font-size: 14px;  "class="dropdown-item text-cursive" href="{% url 'register-donator' %}">
@@ -127,8 +119,10 @@
                             الخدمات الالكترونية
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% if request.user.first_name %}
                             <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url "technical-support" %}">
                                 دعم فنى </a>
+                            {% endif %}
                             <div class="dropdown-divider"></div>
                             <a style="font-size: 14px;  " class="dropdown-item text-cursive" href="{% url 'contact-page' %}">
                                 الشكاوى و الأستفسارات</a>

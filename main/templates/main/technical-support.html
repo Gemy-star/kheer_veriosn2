@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}  الدعم الفنى {% endblock title %}
 {% block content %}
-<main>
+    <main>
         <div class="ftco-blocks-cover-1">
             <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
             <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
@@ -22,37 +22,100 @@
                 </div>
             </div>
         </div>
-<div class="site-section">
-    <div class="container">
-      <center>
-          <h4 class="body-font text-green head-size"> الدعم الفنى</h4>
-      </center>
-        <hr/>
+        <div class="site-section">
+            <div class="container bg-home">
+                <center>
+                    <h4 class="body-font text-green head-size"> الدعم الفنى</h4>
+                </center>
+                <hr/>
 
-        <div class="row">
-            {% for contact in contacts %}
-<div class="col-4">
-            <div class="card">
-            <div class="card-body">
-                 <h4 class="body-font text-green">الأسم </h4>
-                <p class="body-font text-black ">{{ contact.name }}</p>
-                <hr/>
-                    <h4 class="body-font text-green">الهاتف </h4>
-                <p class="body-font text-black ">{{ contact.phone }}</p>
-                <hr/>
-                    <h4 class="body-font text-green">العنوان </h4>
-                <p class="body-font text-black ">{{ contact.address }}</p>
-                <hr/>
-                    <h4 class="body-font text-green">الرساله </h4>
-                <p class="body-font text-black ">{{ contact.message }}</p>
-                <hr/>
-            </div>
-            </div>
+                <div class="row">
+                    <div class="col-10">
+                        <form action="#" method="post">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <div class="col-md-6 mb-4 mb-lg-0">
+                                    <input type="text" name="name" id="name" class="form-control"
+                                           placeholder="الأسم">
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="body-font form-control" name="user_type" id="user_type">
+                                        <option value="1">مشرف</option>
+                                        <option value="2">فاعل الخير</option>
+                                        <option value="3">مستفيد</option>
+                                    </select>
+                                </div>
+                            </div>
 
-</div>
-            {% endfor %}
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input type="text" name="message" id="message"
+                                           class="form-control"
+                                           placeholder="وصف المشكلة">
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="form-group row">
+                                    <div class="col-md-12" id="btn add">
+                                        <center>
+                                            <button type="submit" id="btn_technical"
+                                                    class="btn btn-teal btn-custom-1 body-font text-white"> إرسال
+                                            </button>
+                                        </center>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-</main>
+    </main>
 {% endblock content %}
+
+
+{% block javascript %}
+<script>
+$(() => {
+            $("#btn_technical").on('click',event => {
+           event.preventDefault();
+                           $.ajax({
+                    method: 'POST',
+                    url: '{% url 'technical-support' %}',
+                    data: {
+                        'name': $('#name').val(),
+                        'message': $('#message').val(),
+                        'user_type': $('#user_type').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function (data) {
+                        if (data.data === 1) {
+                            swal({
+                                title: "تم",
+                                text: "تم  بنجاح",
+                                icon: "success",
+                                button: "إغلاق",
+                            });
+                            window.location.href = "{% url 'home-page' %}"
+                        } else {
+                            swal({
+                                title: "خطا",
+                                text: "من فضلك راجع البيانات",
+                                icon: "error",
+                                button: "إغلاق",
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+
+
+        });
+
+});
+</script>
+{% endblock javascript %}

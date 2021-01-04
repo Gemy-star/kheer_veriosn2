@@ -9,6 +9,8 @@ urlpatterns = [
     path('heba-kheer', views.heba_kheer, name='heba-kheer'),
     path('add-tamkeen', views.add_tamkeen, name='add-tamkeen'),
     path('volunteer-list', views.volunteer_list, name='volunteer-list'),
-    path('all', views.new_show_case, name='show-all-cases')
+    path('all', views.new_show_case, name='show-all-cases'),
+    path('technical-support', views.add_technical, name='technical-support'),
+    path('technical-list', views.technical_list, name='technical-list'),
 
 ]

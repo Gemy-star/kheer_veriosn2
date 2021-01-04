@@ -42,6 +42,9 @@ def effect(request):
     return render(request, 'main/effect.html')
 
 
-def technical_page(request):
-    context = {"contacts": Contact.objects.all()}
-    return render(request, 'main/technical-support.html', context=context)
+def training(request):
+    return render(request, 'main/training.html')
+
+
+def ramadan(request):
+    return render(request, 'main/ramdan.html')

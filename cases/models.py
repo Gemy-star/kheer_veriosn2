@@ -86,3 +86,18 @@ class TamkeenSupply(models.Model):
 
     def __str__(self):
         return str(self.tamkeen_type)
+
+
+class TechnicalSupport(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True, verbose_name='الأسم')
+    CHOICES_USERS = (
+        (1, 'مشرف'),
+        (2, 'فاعل خير'),
+        (3, 'مستفيد'),
+    )
+    user_type = models.SmallIntegerField(choices=CHOICES_USERS, null=True, verbose_name='نوع المستخدم')
+    message = models.TextField(blank=True, null=True, verbose_name='الرساله')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='المستخدم')
+
+    def __str__(self):
+        return self.name

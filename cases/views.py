@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from office.models import Needy, Dependency
-from cases.models import VolunteerProfile, NeedyCase
+from cases.models import VolunteerProfile, NeedyCase, TechnicalSupport
 
 
 @login_required(login_url='login')
@@ -133,3 +133,24 @@ def new_show_case(request):
     cases = NeedyCase.objects.all()
     context = {"cases": cases}
     return render(request, 'cases/new_case_show.html', context=context)
+
+
+def add_technical(request):
+    user = User.objects.get(pk=request.user.pk)
+    if request.method == 'GET':
+        return render(request, 'main/technical-support.html')
+    if request.method == 'POST' and request.is_ajax:
+        name = request.POST.get('name')
+        user_type = request.POST.get('user_type')
+        message = request.POST.get('message')
+        tech_support = TechnicalSupport(name=name, user_type=int(user_type), message=message, user=user)
+        tech_support.save()
+        if tech_support.pk:
+            return JsonResponse({"data": 1})
+        else:
+            return JsonResponse({"data": -1})
+
+
+def technical_list(request):
+    problems = TechnicalSupport.objects.all()
+    return render(request, 'main/technical_list.html', context={"problems": problems})
