@@ -14,5 +14,6 @@ urlpatterns = [
     path('effect', views.effect, name='effect'),
     path('training', views.training, name='training'),
     path('ramadan', views.ramadan, name='ramdan'),
+    path('reports', views.reports, name='reports'),
 
 ]

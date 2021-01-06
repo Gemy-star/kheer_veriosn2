@@ -48,3 +48,7 @@ def training(request):
 
 def ramadan(request):
     return render(request, 'main/ramdan.html')
+
+
+def reports(request):
+    return render(request, 'main/reports.html')

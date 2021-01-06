@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<head>
+
+    <title>{{ title }}</title>
+    <style type="text/css">
+
+
+        .header {
+            font-size: 20px;
+            font-weight: 100;
+            text-align: center;
+            color: #5DBD7E;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 100;
+            /* text-align: right;*/
+            padding: 10px 20px 0px 20px;
+        }
+
+        .title span {
+            color: #5DBD7E;
+        }
+
+        .details {
+            padding: 10px 20px 0px 20px;
+            text-align: right !important;
+            /*margin-left: 40%;*/
+        }
+
+        .hrItem {
+            border: none;
+            height: 1px;
+            /* Set the hr color */
+            color: #333;
+            /* old IE */
+            background-color: #fff;
+            /* Modern Browsers */
+        }
+
+        @font-face {
+            font-family: RTLFont;
+            src: url('../static/assets/fonts/helveticaneuelt-arabic-55-roman.ttf')
+        }
+
+        body {
+            font-weight: 200;
+            font-size: 14px;
+            font-family: RTLFont;
+        }
+
+        table {
+            border: 1px solid #666666;
+            border-collapse: collapse;
+            border-color: #ccc;
+        }
+
+        td, th {
+            border: 1px solid #666666;
+            font-size: 11px;
+            line-height: 13px;
+            border-bottom: 1px solid #666666;
+            vertical-align: top;
+            padding: 5px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class='wrapper'>
+    <div class='header'>
+        <pdf:language name="arabic"/>
+        <h3> {{ company }}</h3>
+    </div>
+    <div>
+        <div class='details'>
+            <pdf:language name="arabic"/>
+            المملكه العربيه السعوديه
+            <br>
+            مؤسسه خير السعوديه
+            <br>
+            التاريخ : {{ today }}
+            <br>
+
+            <hr class='hrItem'/>
+            <h3 class="header"> {{ topic }}</h3>
+            <br>
+            <div class="body">
+                <table style="width:100%">
+                    <tr>
+                        <th>رقم الحاله</th>
+                        <th>العمر</th>
+                        <th>الحاله الصحيه</th>
+                        <th>الحاله الأجتماعيه</th>
+                        <th>عدد الأبناء</th>
+                        <th>المهنه</th>
+                        <th>المبلغ المستحق</th>
+                        <th>التبرعات</th>
+                    </tr>
+
+                    {% for need in needs %}
+                        <tr>
+                            <td>{{ need.case_number }}</td>
+                            <td>{{ need.age }}</td>
+                            <td>{{ need.health_status }}</td>
+                            <td>{{ need.status }}</td>
+                            <td>{{ need.dependencies.count }}</td>
+                            <td>{{ need.job }}</td>
+                            <td>{{ need.amount }}</td>
+                            <td>{{ need.total_donations }}</td>
+                        </tr>
+
+                    {% endfor %}
+
+                </table>
+            </div>
+            <hr class='hrItem'/>
+
+            <div class="card">
+                <div class="card-body">
+                    انشاء بواسطة:
+                    {{ user.first_name }} {{ user.last_name }}
+                    <br>
+                    {% if user.user_type == 1 %}
+                        الوظيفه : مدير المؤسسه
+                    {% endif %}
+                    {% if user.user_type == 2 %}
+                        الوظيفه : مشرف جمعيه رئيسيه
+                    {% endif %}
+                    {% if user.user_type == 3 %}
+                        الوظيفه : مشرف جمعيه تنمويه
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

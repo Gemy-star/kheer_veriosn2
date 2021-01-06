@@ -16,7 +16,7 @@
                         <ul class="collapse">
                             <li><a class="body-font" href="{% url 'home-page' %}">الرئيسيه</a></li>
                             <li><a href="{% url 'create-needy' %}" class="body-font">إضافة مستفيد</a></li>
-                                                    <li><a href="{% url 'search-needy-dash' %}" class="body-font">البحث </a></li>
+                            <li><a href="{% url 'search-needy-dash' %}" class="body-font">البحث </a></li>
 
                             <li class="body-font"><a class="body-font" href="{% url 'enable-list' %}">قائمة التمكين</a>
                             </li>
@@ -25,21 +25,25 @@
                             <li class="body-font"><a class="body-font" href="{% url 'found-list' %}">قائمة الجمعيات</a>
                             </li>
 
-                            <li class="body-font"><a class="body-font" href="{% url 'technical-list' %}">قائمة الشكاوى</a>
+                            <li class="body-font"><a class="body-font" href="{% url 'technical-list' %}">قائمة
+                                الشكاوى</a>
                             </li>
+                               {% if request.user.user_type == 1 or requset.user.user_type == 2 or requset.user.user_type == 3 %}
+
+                                    <li class="body-font"><a class="body-font" href="{% url 'volunteer-list' %}">قائمة
+                                        المتطوعين</a></li>
+                                    <li class="body-font"><a class="body-font" href="{% url 'reports' %}">التقارير </a>
+                                    </li>
+
+                                {% endif %}
                             <li class="body-font"><a class="body-font" href="{% url 'add-found' %}">إضافة جمعيه</a></li>
                             <li class="body-font"><a class="body-font" href="{% url 'add-provider' %}">إضافة راعى</a>
-                            <li class="body-font"><a class="body-font" href="{% url 'add-needycase' %}">تجهيز حاله للعرض</a>
-{% if request.user.user_type == 1 or requset.user.user_type == 2  %}
-
-    <li class="body-font"><a class="body-font" href="{% url 'volunteer-list' %}">قائمة المتطوعين</a>
-
-                            {% endif %}
-                            </li>
+                            <li class="body-font"><a class="body-font" href="{% url 'add-needycase' %}">تجهيز حاله
+                                للعرض</a>
                             {% if request.user.user_type == 4 %}
                                 <li><a class="body-font" href="{% url 'add-course' %}">إضافة
                                     منحه</a></li>
-<li><a class="body-font" href="{% url 'add-tamkeen' %}">إضافة
+                                <li><a class="body-font" href="{% url 'add-tamkeen' %}">إضافة
                                     حاله</a></li>
                             {% endif %}
 

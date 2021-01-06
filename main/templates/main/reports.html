@@ -1,0 +1,43 @@
+{% extends 'dashmain.html' %}
+
+
+{% block title %}  التقارير || خير السعوديه {% endblock title %}
+
+{% block body %}
+<div class="main-content-inner">
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            <h3 class="body-font text-green">التقارير</h3>
+            <hr/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <a class="btn btn-success body-font text-white" href="{% url 'case-show-pdf' %}">الحالات المجهزه للعرض </a>
+             <br/>
+                    <hr/>
+                            <a class="btn btn-success body-font text-white" href="{% url 'found-all-pdf' %}"> الجمعيات  </a>
+             <br/>
+                                        <hr/>
+
+                    <a class="btn btn-success body-font text-white" href="{% url 'needy-all-pdf' %}"> الحالات  </a>
+             <br/>
+                                        <hr/>
+                    <a class="btn btn-success body-font text-white" href="{% url 'volunteer-all-pdf' %}"> المتطوعيين  </a>
+             <br/>
+                                        <hr/>
+                    <a class="btn btn-success body-font text-white" href="{% url 'enable-all-pdf' %}"> الحالات المرشحه للتمكين  </a>
+             <br/>
+                                        <hr/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock body %}

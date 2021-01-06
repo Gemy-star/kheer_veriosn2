@@ -1,10 +1,15 @@
 from django.shortcuts import render
+from django.template.loader import get_template
+from datetime import datetime
 from . import models
 from django.http import JsonResponse
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
-from office.models import Needy, Dependency
+from office.models import Needy, Dependency, Foundation
 from cases.models import VolunteerProfile, NeedyCase, TechnicalSupport
+from django.http import HttpResponse
+from django.views.generic import View
+from kheer_new.utils import render_to_pdf
 
 
 @login_required(login_url='login')
@@ -154,3 +159,133 @@ def add_technical(request):
 def technical_list(request):
     problems = TechnicalSupport.objects.all()
     return render(request, 'main/technical_list.html', context={"problems": problems})
+
+
+class CaseInShow(View):
+    def get(self, request, *args, **kwargs):
+        template = get_template('case-in-show.html')
+        needyinshow = NeedyCase.objects.all()
+        user_obj = User.objects.get(pk=request.user.pk)
+        context = {
+            "company": "خير السعوديه",
+            "user": user_obj,
+            "needs": needyinshow,
+            "topic": "الحالات المجهزة للعرض",
+            "today": datetime.today().strftime('%Y-%m-%d'),
+        }
+        html = template.render(context)
+        pdf = render_to_pdf('case-in-show.html', context)
+        if pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            filename = "Invoice_%s.pdf" % ("12341231")
+            content = "inline; filename='%s'" % (filename)
+            download = request.GET.get("download")
+            if download:
+                content = "attachment; filename='%s'" % (filename)
+            response['Content-Disposition'] = content
+            return response
+        return HttpResponse("Not found")
+
+
+class NeedyAllReport(View):
+    def get(self, request, *args, **kwargs):
+        template = get_template('needy-all-pdf.html')
+        needyinshow = Needy.objects.all()
+        user_obj = User.objects.get(pk=request.user.pk)
+        context = {
+            "company": "خير السعوديه",
+            "user": user_obj,
+            "needs": needyinshow,
+            "topic": "تفاصيل الحالات ",
+            "today": datetime.today().strftime('%Y-%m-%d'),
+        }
+        html = template.render(context)
+        pdf = render_to_pdf('needy-all-pdf.html', context)
+        if pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            filename = "Invoice_%s.pdf" % ("12341231")
+            content = "inline; filename='%s'" % (filename)
+            download = request.GET.get("download")
+            if download:
+                content = "attachment; filename='%s'" % (filename)
+            response['Content-Disposition'] = content
+            return response
+        return HttpResponse("Not found")
+
+
+class EnableAllReport(View):
+    def get(self, request, *args, **kwargs):
+        template = get_template('enable-all-pdf.html')
+        needyinshow = Needy.objects.filter(enablity=1)
+        user_obj = User.objects.get(pk=request.user.pk)
+        context = {
+            "company": "خير السعوديه",
+            "user": user_obj,
+            "needs": needyinshow,
+            "topic": "تفاصيل الحالات المرشحه للتمكين ",
+            "today": datetime.today().strftime('%Y-%m-%d'),
+        }
+        html = template.render(context)
+        pdf = render_to_pdf('enable-all-pdf.html', context)
+        if pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            filename = "Invoice_%s.pdf" % ("12341231")
+            content = "inline; filename='%s'" % (filename)
+            download = request.GET.get("download")
+            if download:
+                content = "attachment; filename='%s'" % (filename)
+            response['Content-Disposition'] = content
+            return response
+        return HttpResponse("Not found")
+
+
+class FoundationAllReport(View):
+    def get(self, request, *args, **kwargs):
+        template = get_template('found-all-pdf.html')
+        needyinshow = Foundation.objects.all()
+        user_obj = User.objects.get(pk=request.user.pk)
+        context = {
+            "company": "خير السعوديه",
+            "user": user_obj,
+            "needs": needyinshow,
+            "topic": "تفاصيل الجمعيات",
+            "today": datetime.today().strftime('%Y-%m-%d'),
+        }
+        html = template.render(context)
+        pdf = render_to_pdf('found-all-pdf.html', context)
+        if pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            filename = "Invoice_%s.pdf" % ("12341231")
+            content = "inline; filename='%s'" % (filename)
+            download = request.GET.get("download")
+            if download:
+                content = "attachment; filename='%s'" % (filename)
+            response['Content-Disposition'] = content
+            return response
+        return HttpResponse("Not found")
+
+
+class VolunteerAllReport(View):
+    def get(self, request, *args, **kwargs):
+        template = get_template('volunteer-all-pdf.html')
+        needyinshow = VolunteerProfile.objects.all()
+        user_obj = User.objects.get(pk=request.user.pk)
+        context = {
+            "company": "خير السعوديه",
+            "user": user_obj,
+            "needs": needyinshow,
+            "topic": "تفاصيل المتطوعيين",
+            "today": datetime.today().strftime('%Y-%m-%d'),
+        }
+        html = template.render(context)
+        pdf = render_to_pdf('volunteer-all-pdf.html', context)
+        if pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            filename = "Invoice_%s.pdf" % ("12341231")
+            content = "inline; filename='%s'" % (filename)
+            download = request.GET.get("download")
+            if download:
+                content = "attachment; filename='%s'" % (filename)
+            response['Content-Disposition'] = content
+            return response
+        return HttpResponse("Not found")
