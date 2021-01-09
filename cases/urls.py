@@ -18,5 +18,6 @@ urlpatterns = [
     path('volunteer/all/report', views.VolunteerAllReport.as_view(), name='volunteer-all-pdf'),
     path('enable/all/report', views.EnableAllReport.as_view(), name='enable-all-pdf'),
     path('volunteer/add/cer', views.add_vol_cer, name='add-vol-cer'),
+    path('all/new', views.cases_all_new, name='cases-all-new'),
 
 ]

@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from office.models import Needy, Dependency, Foundation
-from cases.models import VolunteerProfile, NeedyCase, TechnicalSupport
+from cases.models import VolunteerProfile, NeedyCase, TechnicalSupport, TamkeenSupply
 from django.http import HttpResponse
 from django.views.generic import View
 from kheer_new.utils import render_to_pdf
@@ -290,6 +290,12 @@ class VolunteerAllReport(View):
             response['Content-Disposition'] = content
             return response
         return HttpResponse("Not found")
+
+
+def cases_all_new(request):
+    context = {"tamkeen_cases": TamkeenSupply.objects.filter(tamkeen_type=2),
+               "needy_cases": NeedyCase.objects.all()}
+    return render(request, 'cases/cases-final-new.html', context=context)
 
 
 def add_vol_cer(request):
