@@ -85,54 +85,59 @@
                     </div>
                 </div>
             </div>
-        {% if request.user.user_type == 5 or request.user.user_type == 6  %}
-            <div class="row">
-                <div class="col-12">
-                    <div class="card center">
-                        <div class="card-body">
-                            <form action="#" method="post">
-                                {% csrf_token %}
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <input id="national_id" name="national_id" type="number" class="form-control"
-                                               placeholder="إدخل رقم الهويه">
-                                    </div>
+            {% if request.user.user_type == 5 or request.user.user_type == 6 %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card center">
+                            <div class="card-body">
+                                <form action="#" method="post">
+                                    {% csrf_token %}
                                     <div class="form-group row">
-
-                                        <div class="col-12">
-                                            <center><input type="submit" id="btn_id" value="متابعه" name="btn_id"
-                                                           class="btn btn-teal text-cursive text-white"></center>
+                                        <div class="col-md-12">
+                                            <input id="national_id" name="national_id" type="number"
+                                                   class="form-control"
+                                                   placeholder="إدخل رقم الهويه">
                                         </div>
+                                        <div class="form-group row">
+
+                                            <div class="col-12">
+                                                <center><input type="submit" id="btn_id" value="متابعه" name="btn_id"
+                                                               class="btn btn-teal text-cursive text-white"></center>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="border-top pt-5 center">
+                            <div class="card">
+                                <div class="card-title">
+                                    <center><p style="font-size: larger;" class="text-cursive text-green"><i
+                                            class="fa fa-envelope-open text-green" aria-hidden="true"></i></p></center>
+                                </div>
+                                <center>
+                                    <div class="card-body" id="info_body">
+
 
                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="border-top pt-5 center">
-                        <div class="card">
-                            <div class="card-title">
-                                <center><p style="font-size: larger;" class="text-cursive text-green"><i
-                                        class="fa fa-envelope-open text-green" aria-hidden="true"></i></p></center>
+                                    <hr/>
+                                    <div class="card-body" id="bags_body">
+
+                                    </div>
+                                </center>
                             </div>
-                            <center>
-                                <div class="card-body" id="info_body">
 
 
-                                </div>
-                            </center>
                         </div>
-
-
                     </div>
-                </div>
 
-            </div>
-        {% endif %}
+                </div>
+            {% endif %}
         </div>
     </div>
 
@@ -151,6 +156,7 @@
         var found = [];
         var payment = [];
         var user;
+        var bags = [];
         $(() => {
 
             $("#btn_id").on('click', event => {
@@ -181,9 +187,38 @@
                                        <hr/>
                                        <hr/>
                                   `)
+                                bags = bags = JSON.parse(data.bags)
+                                $("#bags_body").empty();
+                                bags.map((value) => {
+                                    $("#bags_body").append(`
+                                                 <h2 class="text-cursive h5 text-red  " >اسم المنحه</h2>
+                                       <p class="text-cursive h5 text-black " >${value.fields.name}</p>
+                                       <hr/>
+  <h2 class="text-cursive h5 text-red  " >الوصف</h2>
+                                       <p class="text-cursive h5 text-black " >${value.fields.description}</p>
+                                       <hr/>
+            <h2 class="text-cursive h5 text-red  " >المسار</h2>
+                                       <p class="text-cursive h5 text-black " >${value.fields.link}</p>
+                                    `);
+                                })
+
                             });
                             if (parseInt(needy[0].fields.enablity) === 1) {
                                 course = JSON.parse(data.courses)
+                                bags = JSON.parse(data.bags)
+                                $("#bags_body").empty();
+                                bags.map((value) => {
+                                    $("#bags_body").append(`
+                                                 <h2 class="text-cursive h5 text-red  " >اسم المنحه</h2>
+                                       <p class="text-cursive h5 text-black " >${value.fields.name}</p>
+                                       <hr/>
+  <h2 class="text-cursive h5 text-red  " >الوصف</h2>
+                                       <p class="text-cursive h5 text-black " >${value.fields.description}</p>
+                                       <hr/>
+            <h2 class="text-cursive h5 text-red  " >المسار</h2>
+                                       <p class="text-cursive h5 text-black " >${value.fields.link}</p>
+                                    `);
+                                });
                                 console.log(course);
                                 course.map((value) => {
                                     $("#info_body").append(`

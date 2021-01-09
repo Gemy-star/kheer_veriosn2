@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template.loader import get_template
 from datetime import datetime
 from . import models
@@ -10,6 +10,7 @@ from cases.models import VolunteerProfile, NeedyCase, TechnicalSupport
 from django.http import HttpResponse
 from django.views.generic import View
 from kheer_new.utils import render_to_pdf
+from django.core.files.storage import FileSystemStorage
 
 
 @login_required(login_url='login')
@@ -289,3 +290,21 @@ class VolunteerAllReport(View):
             response['Content-Disposition'] = content
             return response
         return HttpResponse("Not found")
+
+
+def add_vol_cer(request):
+    volunteers = User.objects.filter(user_type=7)
+    context = {"volunteers": volunteers}
+    if request.method == 'POST' and request.FILES['cer']:
+        vol = request.POST.get('volunteer')
+        vol_obj = User.objects.get(pk=vol)
+        cer = request.FILES['cer']
+        fs = FileSystemStorage()
+        filename = fs.save(cer.name, cer)
+        cer_obj = models.Certificate(volunteer=vol_obj, paper=cer)
+        cer_obj.save()
+        if cer_obj is not None:
+            return redirect('home-employee')
+        else:
+            return redirect('home-employee')
+    return render(request, 'cases/add-volunteer-certificate.html', context=context)

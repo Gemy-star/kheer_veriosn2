@@ -17,5 +17,6 @@ urlpatterns = [
     path('found/all/report', views.FoundationAllReport.as_view(), name='found-all-pdf'),
     path('volunteer/all/report', views.VolunteerAllReport.as_view(), name='volunteer-all-pdf'),
     path('enable/all/report', views.EnableAllReport.as_view(), name='enable-all-pdf'),
+    path('volunteer/add/cer', views.add_vol_cer, name='add-vol-cer'),
 
 ]

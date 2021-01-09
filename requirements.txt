@@ -1,0 +1,10 @@
+appdirs==1.4.4
+asgiref==3.2.10
+certifi==2020.4.5.1
+distlib==0.3.0
+django-appconf==1.0.4
+Pillow==7.1.2
+PyPDF2==1.26.0
+pytz==2020.1
+reportlab==3.5.42
+xhtml2pdf==0.2.4

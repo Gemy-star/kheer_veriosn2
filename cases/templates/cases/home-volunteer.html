@@ -52,17 +52,11 @@
         </div>
         <div class="card-body" id="cer_body">
            {% for cer in certificates %}
-                <p class="text-cursive h5 text-black " >{{ cer.name }}</p>
-                                       <hr/>
-  <h2 class="text-cursive h5 text-red  " >الجمعيه</h2>
-                                       <p class="text-cursive h5 text-black " >{{ cer.found.name }}</p>
-                                       <hr/>
+
   <h2 class="text-cursive h5 text-red  " >الشهاده</h2>
                                       <a class="btn btn-success body-font text-white" href="{{ cer.paper.url }}">تحميل</a>
                                        <hr/>
-  <h2 class="text-cursive h5 text-red  " >وصف العمل</h2>
-                                       <p class="text-cursive h5 text-black " >{{ cer.description }}</p>
-                                       <hr/>
+
             {% endfor %}
         </div>
     </div>

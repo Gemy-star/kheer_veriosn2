@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.core.files.storage import FileSystemStorage
+from django.shortcuts import render, redirect
 from django.core import serializers
 from django.http import JsonResponse
 from office import models
@@ -11,6 +12,80 @@ from .filters import NeedyFilter, NeedyCaseFilter
 @login_required(login_url='login')
 def home_employee(request):
     return render(request, 'office/home-employee.html')
+
+
+def add_course_bag(request):
+    if request.method == 'POST' and request.is_ajax:
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        link = request.POST.get('link')
+        bag = models.CourseBag(name=name, description=description, link=link)
+        bag.save()
+        if bag.pk:
+            return JsonResponse({"data": 1})
+        else:
+            return JsonResponse({"data": -1})
+    return render(request, 'office/add-course_bag.html')
+
+
+def bag_list(request):
+    context = {"bags": models.CourseBag.objects.all()}
+    return render(request, 'office/bag-list.html', context=context)
+
+
+def bag_payment(request, pk):
+    needs = models.Needy.objects.all()
+    bag_obj = models.CourseBag.objects.get(pk=pk)
+    user_obj = User.objects.get(pk=request.user.pk)
+    if request.method == 'POST' and request.is_ajax:
+        needy = request.POST.get('needy')
+        needy_obj = models.Needy.objects.get(pk=needy)
+        pay = models.PaymentCourseBag(user=user_obj, course=bag_obj, needy=needy_obj)
+        pay.save()
+        if pay.pk:
+            return JsonResponse({"data": 1})
+        else:
+            return JsonResponse({"data": -1})
+    return render(request, 'office/payment-course_bag.html', context={"bag": bag_obj, "needs": needs})
+
+
+def add_pay_ticket(request):
+    needy = models.Needy.objects.all()
+    context = {"needs": needy}
+    if request.method == 'POST' and request.FILES['ticket']:
+        vol = request.POST.get('needy')
+        vol_obj = models.Needy.objects.get(pk=vol)
+        ticket = request.FILES['ticket']
+        fs = FileSystemStorage()
+        filename = fs.save(ticket.name, ticket)
+        ticket_obj = models.PayTicket(needy=vol_obj, ticket=ticket)
+        ticket_obj.save()
+        if ticket_obj is not None:
+            return redirect('home-employee')
+        else:
+            return redirect('home-employee')
+    return render(request, 'office/add-pay-ticket.html', context=context)
+
+
+def add_bag_cer(request):
+    needy = models.Needy.objects.all()
+    bags = models.CourseBag.objects.all()
+    context = {"needs": needy, "bags": bags}
+    if request.method == 'POST' and request.FILES['cer']:
+        vol = request.POST.get('needy')
+        vol_obj = models.Needy.objects.get(pk=vol)
+        bag = request.POST.get('bag')
+        bag_obj = models.CourseBag.objects.get(pk=bag)
+        cer = request.FILES['cer']
+        fs = FileSystemStorage()
+        filename = fs.save(cer.name, cer)
+        ticket_obj = models.BagCertificate(needy=vol_obj, bag=bag_obj, certificate=cer)
+        ticket_obj.save()
+        if ticket_obj is not None:
+            return redirect('home-employee')
+        else:
+            return redirect('home-employee')
+    return render(request, 'office/add-bag-cer.html', context=context)
 
 
 def get_emp_found_info(request):

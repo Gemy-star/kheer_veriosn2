@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import User
-from office.models import Needy, Courses, Foundation
+from office.models import Needy, Courses, Foundation, CourseBag
 from django.core import serializers
 from cases.models import Payment, VolunteerProfile
 
@@ -203,11 +203,14 @@ def get_notification(request):
             needy = Needy.objects.filter(national_id=national_id)
             needy_json = serializers.serialize('json', needy)
             if neddy_obj.enablity == 1:
+                bags = CourseBag.objects.filter(paymentcoursebag__needy__national_id__in=national_id)
                 coorse_obi = Courses.objects.filter(tamkeen__national_id__in=national_id)
                 course_json = serializers.serialize('json', coorse_obi)
-                return JsonResponse({"needy": needy_json, "courses": course_json}, content_type='application/json')
+                return JsonResponse({"needy": needy_json, "courses": course_json, "bags": bags},
+                                    content_type='application/json')
             else:
-                return JsonResponse({"needy": neddy_obj}, content_type='application/json')
+                bags = CourseBag.objects.filter(paymentcoursebag__needy__national_id__in=national_id)
+                return JsonResponse({"needy": neddy_obj, "bags": bags}, content_type='application/json')
         elif user_obj.user_type == 6:
             payment = Payment.objects.filter(helper=user_obj)
             payment_json = serializers.serialize('json', payment)

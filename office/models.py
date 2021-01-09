@@ -108,3 +108,45 @@ class Courses(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CourseBag(models.Model):
+    name = models.CharField(max_length=255, null=True, verbose_name='اسم الدوره')
+    description = models.CharField(max_length=255, null=True, verbose_name='عن الدوره')
+    link = models.URLField(
+        verbose_name='المسار',
+        max_length=128,
+        db_index=True,
+        unique=True,
+        blank=True,
+        null=True
+    )
+
+    def __str__(self):
+        return self.name
+
+
+class PaymentCourseBag(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='المستخدم')
+    course = models.ForeignKey(CourseBag, on_delete=models.CASCADE, verbose_name='الحقيبه')
+    needy = models.ForeignKey(Needy, on_delete=models.CASCADE, verbose_name='المستفيد')
+
+    def __str__(self):
+        return self.user.first_name
+
+
+class PayTicket(models.Model):
+    needy = models.OneToOneField(Needy, on_delete=models.CASCADE, verbose_name='المستفيد')
+    ticket = models.FileField(verbose_name='سند الصرف', null=True, blank=True)
+
+    def __str__(self):
+        return self.needy.name
+
+
+class BagCertificate(models.Model):
+    bag = models.ForeignKey(Courses, on_delete=models.CASCADE, null=True, verbose_name='الحقيبه')
+    needy = models.ForeignKey(Needy, on_delete=models.CASCADE, null=True, verbose_name='المستفيد')
+    certificate = models.FileField(null=True, blank=True, verbose_name='الشهاده')
+
+    def __str__(self):
+        return self.needy.name

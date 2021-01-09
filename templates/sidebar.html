@@ -10,46 +10,114 @@
         <div class="menu-inner">
             <nav>
                 <ul class="metismenu" id="menu">
-                    <li class="active">
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span
-                                class="body-font">خير السعوديه</span></a>
-                        <ul class="collapse">
-                            <li><a class="body-font" href="{% url 'home-page' %}">الرئيسيه</a></li>
-                            <li><a href="{% url 'create-needy' %}" class="body-font">إضافة مستفيد</a></li>
-                            <li><a href="{% url 'search-needy-dash' %}" class="body-font">البحث </a></li>
+                    {% if request.user.user_type == 1 or request.user.user_type == 2 or request.user.user_type == 3 %}
+                        <li class="active">
+                            <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span
+                                    class="body-font">خير السعوديه</span></a>
+                            <ul class="collapse">
+                                <li><a class="body-font" href="{% url 'home-page' %}">الرئيسيه</a></li>
+                                <li class="body-font"><a class="body-font" href="{% url 'enable-list' %}">قائمة
+                                    التمكين</a>
+                                </li>
+                                <li class="body-font"><a class="body-font" href="{% url 'needy-list' %}">قائمة
+                                    الحالات</a>
+                                </li>
+                                <li class="body-font"><a class="body-font" href="{% url 'found-list' %}">قائمة
+                                    الجمعيات</a>
+                                </li>
 
-                            <li class="body-font"><a class="body-font" href="{% url 'enable-list' %}">قائمة التمكين</a>
-                            </li>
-                            <li class="body-font"><a class="body-font" href="{% url 'needy-list' %}">قائمة الحالات</a>
-                            </li>
-                            <li class="body-font"><a class="body-font" href="{% url 'found-list' %}">قائمة الجمعيات</a>
-                            </li>
+                                <li class="body-font"><a class="body-font" href="{% url 'technical-list' %}">قائمة
+                                    الشكاوى</a>
+                                </li>
+                                <li class="body-font"><a class="body-font" href="{% url 'volunteer-list' %}">قائمة
+                                    المتطوعين</a></li>
 
-                            <li class="body-font"><a class="body-font" href="{% url 'technical-list' %}">قائمة
-                                الشكاوى</a>
-                            </li>
-                               {% if request.user.user_type == 1 or requset.user.user_type == 2 or requset.user.user_type == 3 %}
+                                <li class="body-font"><a class="body-font" href="{% url 'add-needycase' %}">تجهيز حاله
+                                    للعرض</a>
 
-                                    <li class="body-font"><a class="body-font" href="{% url 'volunteer-list' %}">قائمة
-                                        المتطوعين</a></li>
-                                    <li class="body-font"><a class="body-font" href="{% url 'reports' %}">التقارير </a>
-                                    </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" aria-expanded="true"><i
+                                    class="ti-layout-sidebar-left"></i><span class="body-font ">
+                                    أدوات التحكم
+                                    </span></a>
+                            <ul class="collapse">
+                                <li><a href="{% url 'create-needy' %}" class="body-font">إضافة مستفيد</a></li>
+                                <li class="body-font"><a class="body-font" href="{% url 'add-found' %}">إضافة جمعيه</a>
+                                </li>
+                                <li class="body-font"><a class="body-font" href="{% url 'add-provider' %}">إضافة
+                                    راعى</a> </li>
+                                <li><a href="{% url 'add-bag' %}" class="body-font">إضافة حقيبة دراسيه </a></li>
+                                <li><a href="{% url 'add-vol-cer' %}" class="body-font">إضافة شهادة متطوع </a></li>
+                                <li><a href="{% url 'pay-ticket' %}" class="body-font">إضافة سند صرف </a></li>
+                                <li><a href="{% url 'add-bag-cer' %}" class="body-font">إضافة شهادة للحقيبة </a></li>
 
-                                {% endif %}
-                            <li class="body-font"><a class="body-font" href="{% url 'add-found' %}">إضافة جمعيه</a></li>
-                            <li class="body-font"><a class="body-font" href="{% url 'add-provider' %}">إضافة راعى</a>
-                            <li class="body-font"><a class="body-font" href="{% url 'add-needycase' %}">تجهيز حاله
-                                للعرض</a>
-                            {% if request.user.user_type == 4 %}
+                                <li><a href="{% url 'search-needy-dash' %}" class="body-font">البحث </a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span
+                                    class="body-font">المستخدمين</span></a>
+                            <ul class="collapse">
+                                <li class="body-font"><a class="body-font" href="{% url 'register' %}">انشاء مشرف جمعيه
+                                    رئيسيه </a>
+                                </li>
+                                <li class="body-font"><a class="body-font" href="{% url 'register-employee' %}">انشاء
+                                    مشرف جمعيه تنمويه </a>
+                                </li>
+                                <li class="body-font"><a class="body-font" href="{% url 'register-helper' %}">انشاء
+                                   مشرف متعاون </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span
+                                    class="body-font">التقارير</span></a>
+                            <ul class="collapse">
+                                <li class="body-font"><a class="body-font" href="{% url 'reports' %}">التقارير </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                    {% if request.user.user_type == 4 %}
+                        <li class="active">
+                            <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span
+                                    class="body-font">خير السعوديه</span></a>
+                            <ul class="collapse">
+                                <li><a class="body-font" href="{% url 'home-page' %}">الرئيسيه</a></li>
+                                <li class="body-font"><a class="body-font" href="{% url 'enable-list' %}">قائمة
+                                    التمكين</a>
+                                </li>
+                                <li class="body-font"><a class="body-font" href="{% url 'needy-list' %}">قائمة
+                                    الحالات</a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" aria-expanded="true"><i
+                                    class="ti-layout-sidebar-left"></i><span class="body-font ">
+                                    أدوات التحكم
+                                    </span></a>
+                            <ul class="collapse">
                                 <li><a class="body-font" href="{% url 'add-course' %}">إضافة
                                     منحه</a></li>
                                 <li><a class="body-font" href="{% url 'add-tamkeen' %}">إضافة
                                     حاله</a></li>
-                            {% endif %}
-
-                        </ul>
-                    </li>
-
+                            </ul>
+                        </li>
+                        {#                        <li>#}
+                        {#                            <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span#}
+                        {#                                    class="body-font">التقارير</span></a>#}
+                        {#                            <ul class="collapse">#}
+                        {#                                <li class="body-font"><a class="body-font" href="{% url 'reports' %}">التقارير </a>#}
+                        {#                                </li>#}
+                        {#                            </ul>#}
+                        {#                        </li>#}
+                    {% endif %}
                 </ul>
             </nav>
         </div>

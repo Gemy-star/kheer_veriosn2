@@ -1,0 +1,50 @@
+{% extends 'dashmain.html' %}
+
+
+{% block title %}  إضافة شهادة المتطوع {% endblock title %}
+
+
+{% block body %}
+    <div class="main-content-inner">
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <center>
+                        <h5 class="body-font text-green">إضافة شهادة المتطوع</h5>
+                    </center>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row form-group">
+                            <div class="col-10">
+                                <label class="body-font text-green">اختر المتطوع </label>
+                                <select class="body-font form-control" name="volunteer">
+                                    {% for vol in volunteers %}
+                                    <option class="body-font" value="{{ vol.pk }}">{{ vol.first_name }} {{ vol.last_name }}</option>
+                                   {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                     <div class="row form-group">
+                            <div class="col-10">
+                                <label class="body-font text-green">الشهاده</label>
+                              <input name="cer" type="file" class="form-control" id="cer">
+                            </div>
+                        </div>
+                    <center>
+                        <input type="submit" id="sub" name="sub" class="btn btn-success body-font text-white" value="إضافه">
+                    </center>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock body %}

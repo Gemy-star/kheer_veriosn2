@@ -23,5 +23,10 @@ urlpatterns = [
     path('needy/search/dash', views.search_needy_dash, name='search-needy-dash'),
     path('cases/list', views.cases_list, name='cases-list'),
     path('tamkeen/list', views.tamkeen_money, name='tamkeen-list'),
+    path('add/bag', views.add_course_bag, name='add-bag'),
+    path('pay/bag/<int:pk>', views.bag_payment, name='pay-bag'),
+    path('bag/list', views.bag_list, name='bag-list'),
+    path('add/pay/ticket', views.add_pay_ticket, name='pay-ticket'),
+    path('add/bag/cer', views.add_bag_cer, name='add-bag-cer'),
 
 ]

@@ -42,8 +42,10 @@ INSTALLED_APPS = [
     'accounts',
     'cases',
     #3rd party package
-    'django_filters'
+    'django_filters',
+    'xhtml2pdf'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

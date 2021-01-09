@@ -1,0 +1,52 @@
+{% extends 'dashmain.html' %}
+
+
+{% block title %}  إضافة سند صرف{% endblock title %}
+
+
+{% block body %}
+
+<div class="main-content-inner">
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <center>
+                        <h5 class="body-font text-green">  إضافة سند صرف</h5>
+                    </center>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row form-group">
+                            <div class="col-10">
+                                <label class="body-font text-green">اختر المستفيد </label>
+                                <select class="body-font form-control" name="needy">
+                                    {% for need in needs %}
+                                    <option class="body-font" value="{{ need.pk }}">{{ need.name }} {{ need.case_number }}</option>
+                                   {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                     <div class="row form-group">
+                            <div class="col-10">
+                                <label class="body-font text-green">سند الصرف</label>
+                              <input name="ticket" type="file" class="form-control" id="ticket">
+                            </div>
+                        </div>
+                    <center>
+                        <input type="submit" id="sub" name="sub" class="btn btn-success body-font text-white" value="إضافه">
+                    </center>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+{% endblock body %}

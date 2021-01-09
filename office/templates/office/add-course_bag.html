@@ -1,21 +1,22 @@
 {% extends 'dashmain.html' %}
-{% load static %}
 
-{% block  title %} إضافة جمعيه || خير السعوديه {% endblock title %}
+{% block title %}  إضافة حقيبه دراسيه {% endblock title %}
 
 
 {% block body %}
-    <div class="card center">
-        <div class="card-title">
-            <center><p class="body-font text-green">إضافة جمعيه</p></center>
-            <hr/>
-        </div>
-        <div class="card-body">
+
+    <div class="main-content-inner">
+        <div class="container">
             <div class="row">
-                <div class="site-section py-12 bg-white">
-                    <div class="row ">
-                        <div class="col-md-12 mr-5 ">
-                            <form action="#" method="post">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                               <center>
+                        <h5 class="body-font text-green">إضافة حقيبه دراسيه</h5>
+                    </center>
+                        </div>
+                        <div class="card-body">
+                            <form method="post">
                                 {% csrf_token %}
                                 <div class="form-group row">
                                     <div class="col-md-6 mb-4 mb-lg-0">
@@ -23,37 +24,28 @@
                                                placeholder="الأسم">
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" name="phone" id="phone" class="form-control"
-                                               placeholder="الهاتف">
+                                        <input type="text" name="link" id="link" class="form-control"
+                                               placeholder="المسار الألكترونى">
 
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <input type="text" name="address" id="address"
-                                               class="form-control"
-                                               placeholder="العنوان">
-                                    </div>
-                                </div>
-
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         <input type="text" name="description" id="description"
                                                class="form-control"
-                                               placeholder="الوصف">
+                                               placeholder=" التفاصيل">
                                     </div>
                                 </div>
                                 <div class="card-footer">
                                     <div class="form-group row">
                                         <div class="col-md-12" id="depend_div">
-                                            <button type="submit" id="btn_add"
-                                                    class="btnn btn-teal btn-custom-1 body-font"> إضافة
+                                            <button type="submit" id="add_bag"
+                                                    class="btn btn-success body-font"> إضافة
                                             </button>
                                         </div>
                                     </div>
 
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -63,20 +55,21 @@
     </div>
 
 
+
 {% endblock body %}
 
 {% block javascript %}
     <script>
         $(() => {
-            $("#btn_add").on('click', event => {
+            $("#add_bag").on('click', event => {
+                event.preventDefault();
                 $.ajax({
                     method: 'POST',
-                    url: '{% url 'add-found' %}',
+                    url: '{% url 'add-bag' %}',
                     data: {
                         'name': $('#name').val(),
                         'description': $('#description').val(),
-                        'address': $('#address').val(),
-                        'phone': $('#phone').val(),
+                        'link': $('#link').val(),
                         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
                     },
                     success: function (data) {
@@ -87,7 +80,7 @@
                                 icon: "success",
                                 button: "إغلاق",
                             });
-                            window.location.href = "{% url 'found-list' %}"
+                            window.location.href = "{% url 'home-employee' %}"
                         } else {
                             swal({
                                 title: "خطا",
