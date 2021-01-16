@@ -19,7 +19,10 @@ def add_course_bag(request):
         name = request.POST.get('name')
         description = request.POST.get('description')
         link = request.POST.get('link')
-        bag = models.CourseBag(name=name, description=description, link=link)
+        start = request.POST.get('start')
+        end = request.POST.get('end')
+        bag = models.CourseBag(
+            name=name, description=description, link=link, start_date=start, end_date=end)
         bag.save()
         if bag.pk:
             return JsonResponse({"data": 1})
@@ -40,7 +43,8 @@ def bag_payment(request, pk):
     if request.method == 'POST' and request.is_ajax:
         needy = request.POST.get('needy')
         needy_obj = models.Needy.objects.get(pk=needy)
-        pay = models.PaymentCourseBag(user=user_obj, course=bag_obj, needy=needy_obj)
+        pay = models.PaymentCourseBag(
+            user=user_obj, course=bag_obj, needy=needy_obj)
         pay.save()
         if pay.pk:
             return JsonResponse({"data": 1})
@@ -79,7 +83,8 @@ def add_bag_cer(request):
         cer = request.FILES['cer']
         fs = FileSystemStorage()
         filename = fs.save(cer.name, cer)
-        ticket_obj = models.BagCertificate(needy=vol_obj, bag=bag_obj, certificate=cer)
+        ticket_obj = models.BagCertificate(
+            needy=vol_obj, bag=bag_obj, certificate=cer)
         ticket_obj.save()
         if ticket_obj is not None:
             return redirect('home-employee')
@@ -107,7 +112,8 @@ def get_emp_found_info(request):
             cases_all = found_obj.cases.all()
             found_count = models.Foundation.objects.all().count()
             cases_json = serializers.serialize('json', cases_all)
-            found_json = serializers.serialize('json', models.Foundation.objects.filter(employee=user_obj))
+            found_json = serializers.serialize(
+                'json', models.Foundation.objects.filter(employee=user_obj))
             return JsonResponse(
                 {"emp_count": emp_count, "cases_count": cases_count, "cases": cases_json, "foundation": found_json,
                  "employee": user_json, "found_count": found_count},
@@ -237,7 +243,8 @@ def add_foundation(request):
         address = request.POST.get('address')
         phone = request.POST.get('phone')
         description = request.POST.get('description')
-        found = models.Foundation(name=name, address=address, phone=phone, description=description)
+        found = models.Foundation(
+            name=name, address=address, phone=phone, description=description)
         found.save()
         if found.pk:
             return JsonResponse({"data": 1})
@@ -258,7 +265,8 @@ def add_provider(request):
         desc = request.POST.get('desc')
         emp = request.POST.get('emps')
         emp_obj = User.objects.get(pk=emp)
-        provider = models.Provider(name=name, address=address, phone=phone, description=desc, employee=emp_obj)
+        provider = models.Provider(
+            name=name, address=address, phone=phone, description=desc, employee=emp_obj)
         provider.save()
         if provider.pk:
             return JsonResponse({"data": 1})
@@ -290,21 +298,20 @@ def home_emp(request):
 @login_required(login_url='login')
 def add_course(request):
     if request.method == 'GET':
-        context = {"cases": models.Needy.objects.filter(enablity=1), "provider": models.Provider.objects.all(),
-                   "children": models.Dependency.objects.filter(enablity=1)}
+        context = {"cases": models.Needy.objects.filter(
+            enablity=1), "provider": models.Provider.objects.all()}
         return render(request, 'office/add-course.html', context=context)
     elif request.method == 'POST' and request.is_ajax:
         course_name = request.POST.get('course_name')
         provider = request.POST.get('provider')
         provider_obj = models.Provider.objects.get(pk=provider)
+        start = request.POST.get('start')
+        end = request.POST.get('end')
         course_desc = request.POST.get('course_desc')
-        children = request.POST.getlist('children[]')
         cases = request.POST.getlist('cases[]')
-        course = models.Courses(provider=provider_obj, description=course_desc, name=course_name)
+        course = models.Courses(provider=provider_obj, description=course_desc,
+                                name=course_name, start_date=start, end_date=end)
         course.save()
-        for child in children:
-            depend = models.Dependency.objects.get(pk=child)
-            course.depend_child.add(depend)
         for case in cases:
             case_obj = models.Needy.objects.get(pk=case)
             course.cases.add(case_obj)

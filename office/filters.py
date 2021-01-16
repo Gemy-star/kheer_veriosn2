@@ -9,7 +9,7 @@ class NeedyFilter(django_filters.FilterSet):
 
     class Meta:
         model = Needy
-        fields = ['name', 'data_added', 'status', 'enablity', 'dependencies', 'amount']
+        fields = ['name', 'data_added', 'status', 'dependencies', 'amount']
         exclude = ['case_number', 'national_id']
 
 

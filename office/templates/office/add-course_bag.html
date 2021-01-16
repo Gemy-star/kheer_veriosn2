@@ -36,6 +36,26 @@
                                                placeholder=" التفاصيل">
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <label for="start" class="body-font">تاريخ البدايه</label>
+                                <br/>
+                                        <input class="form-control" type="date" id="start" name="trip-start"
+                                               value="2021-01-01"
+                                               min="2021-01-01" max="2021-01-01">
+                                        
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-12">
+                                            <label for="end" class="body-font">تاريخ النهايه</label>
+                                            <br/>
+
+                                            <input class="form-control" type="date" id="end" name="trip-start"
+                                                   value="2021-01-01"
+                                                   min="2021-01-01" max="2021-01-01">
+                                            
+                                        </div>
+                                              </div>
                                 <div class="card-footer">
                                     <div class="form-group row">
                                         <div class="col-md-12" id="depend_div">
@@ -70,6 +90,8 @@
                         'name': $('#name').val(),
                         'description': $('#description').val(),
                         'link': $('#link').val(),
+                        'start': $('#start').val(),
+                        'end': $('#end').val(),
                         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
                     },
                     success: function (data) {

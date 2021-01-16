@@ -6,65 +6,47 @@
 
 {% block body %}
 
- <div class="main-content-inner">
-        <div class="card center">
-            <div class="card-header">
-              <center>  <h5 class="body-font text-green"> ضف حالات التمكين</h5></center>
-            </div>
-            <div class="card-body">
-                <form method="post" autocomplete="off">
-                    {% csrf_token %}
+<div class="main-content-inner">
+    <div class="card center">
+        <div class="card-header">
+            <center>
+                <h5 class="body-font text-green"> ضف حالات التمكين</h5>
+            </center>
+        </div>
+        <div class="card-body">
+            <form method="post" autocomplete="off">
+                {% csrf_token %}
+
                 <div class="form-group row">
                     <div class="col-10">
-                        <label class="body-font" for="person_type" >
-                            اختر نوع المستفيد
-                        </label>
-                        <select id="person_type" name="person_type" class="body-font form-control">
-                            <option value="1" class="body-font">ابن</option>
-                            <option value="2" class="body-font">مستفيد</option>
+                        <label class="body-font" for="tamkeen_type"> اختر نوع التمكين</label>
+
+                        <select id="tamkeen_type" class="form-control body-font" name="tamkeen_type">
+                            <option value="1" class="body-font"> تمكين منتهى بتدريب</option>
+                            <option value="2" class="body-font">تمكين منتهى بمقابل مادى</option>
+                            <option value="3" class="body-font">تمكين منتهى بفرصة عمل</option>
+                            <option value="4" class="body-font">غير مرشح</option>
+
                         </select>
                     </div>
                 </div>
-                 <div class="form-group row">
-                     <div class="col-10">
-                         <label class="body-font" for="tamkeen_type"> اختر نوع التمكين</label>
+                <div class="form-group row" id="need_div">
+                    <div class="col-10">
+                        <label class="body-font" for="need"> اختر المستفيد</label>
+                        <select id="need" class="form-control body-font" name="need">
+                            {% for need in needy %}
 
-                         <select id="tamkeen_type" class="form-control body-font" name="tamkeen_type">
-                             <option value="1" class="body-font"> تمكين منتهى بتدريب</option>
-                                                     <option value="2" class="body-font">تمكين منتهى بمقابل مادى</option>
-                             <option value="3" class="body-font">تمكين منتهى بفرصة عمل</option>
+                            <option value="{{ need.pk }}" class="body-font">{{ need.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
 
-                         </select>
-                     </div>
-                 </div>
-                                         <div class="form-group row" id="need_div">
-                         <div class="col-10">
-                         <label class="body-font" for="need"> اختر المستفيد</label>
-                             <select id="need" class="form-control body-font" name="need">
-                                                              {% for need in needy %}
-
-                                                     <option value="{{ need.pk }}" class="body-font">{{ need.name }}</option>
-                             {% endfor %}
-                             </select>
-                         </div>
-                     </div>
-<div class="form-group row" id="depend_div">
-    <div class="col-10">
-        <label class="body-font" for="depend">اختر ابن</label>
-        <select id="depend" name="depend" class="form-control body-font">
-            {% for depend in depends %}
-            <option value="{{ depend.pk }}">{{ depend.name }}</option>
-            {% endfor %}
-        </select>
-
-    </div>
-
-</div>
-                <center><input type="submit" id="add_btn" class="btn btn-teal body-font" value="ضف"></center>
-                </form>
-            </div>
+                <center><input type="submit" id="add_btn" class="btn btn-success body-font" value="ضف"></center>
+            </form>
         </div>
- </div>
+    </div>
+</div>
 
 
 
@@ -73,54 +55,44 @@
 
 {% block javascript %}
 <script>
-$(() => {
-   var person_type =parseInt( $("#person_type").val());
-   console.log(person_type);
-   $("#person_type").on('change' , event => {
-      event.preventDefault();
-          if ( person_type === 1) {
-        $("#depend_div").empty();
-    }else if (person_type === 2) {
-        $("#need_div").empty();
-    }
-          $("#add_btn").on('click' , event => {
-             event.preventDefault();
-                                  $.ajax({
-                    method: 'POST',
-                    url: '{% url 'add-tamkeen' %}',
-                    data: {
-                        'tamkeen_type': $('#tamkeen_type').val(),
-                        'need': $('#need').val(),
-                        'depend': $('#depend').val(),
-                        'person_type': $('#person_type').val(),
-                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-                    },
-                    success: function (data) {
-                        if (data.data === 1) {
-                            swal({
-                                title: "تم",
-                                text: "تم  بنجاح",
-                                icon: "success",
-                                button: "إغلاق",
-                            });
-                            window.location.href = "{% url 'home-employee' %}"
-                        } else {
-                            swal({
-                                title: "خطا",
-                                text: "من فضلك راجع البيانات",
-                                icon: "error",
-                                button: "إغلاق",
-                            });
-                        }
-                    },
-                    error: function (error) {
-                        alert(error.responseText)
+    $(() => {
+
+        $("#add_btn").on('click', event => {
+            event.preventDefault();
+            $.ajax({
+                method: 'POST',
+                url: '{% url 'add- tamkeen' %}',
+                data: {
+                'tamkeen_type': $('#tamkeen_type').val(),
+                'need': $('#need').val(),
+                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+            },
+                success: function (data) {
+                    if (data.data === 1) {
+                        swal({
+                            title: "تم",
+                            text: "تم  بنجاح",
+                            icon: "success",
+                            button: "إغلاق",
+                        });
+                        window.location.href = "{% url 'home-employee' %}"
+                    } else {
+                        swal({
+                            title: "خطا",
+                            text: "من فضلك راجع البيانات",
+                            icon: "error",
+                            button: "إغلاق",
+                        });
                     }
+                },
+                error: function (error) {
+                    alert(error.responseText)
+                }
                 });
 
 
-          });
-   });
+    });
+    });
 
 
 })

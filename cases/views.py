@@ -20,7 +20,8 @@ def create_contact(request):
         address = request.POST.get('address')
         phone = request.POST.get('phone')
         message = request.POST.get('message')
-        contact = models.Contact(name=name, address=address, phone=phone, message=message)
+        contact = models.Contact(
+            name=name, address=address, phone=phone, message=message)
         contact.save()
         if contact.pk:
             return JsonResponse({"data": 1})
@@ -45,7 +46,8 @@ def add_needycase(request):
             st_obj.save()
             return JsonResponse({"data": 1})
         else:
-            obj = models.NeedyCase(details=details, case=case_obj, case_type=int(case_type))
+            obj = models.NeedyCase(
+                details=details, case=case_obj, case_type=int(case_type))
             obj.save()
             if obj.pk:
                 return JsonResponse({"data": 1})
@@ -82,7 +84,8 @@ def payment_page(request, pk):
 @login_required(login_url='login')
 def volunteer_page(request):
     user_obj = User.objects.get(pk=request.user.pk)
-    context = {"certificates": models.Certificate.objects.filter(volunteer=user_obj)}
+    context = {"certificates": models.Certificate.objects.filter(
+        volunteer=user_obj)}
     return render(request, 'cases/home-volunteer.html', context=context)
 
 
@@ -95,7 +98,8 @@ def heba_kheer(request):
         address = request.POST.get('address')
         national_id = request.POST.get('national_id')
         ammount = request.POST.get('ammount')
-        heba_obj = models.HebaKheer(address=address, phone=phone, national_id=national_id, name=name, ammount=ammount)
+        heba_obj = models.HebaKheer(
+            address=address, phone=phone, national_id=national_id, name=name, ammount=ammount)
         heba_obj.save()
         if heba_obj.pk:
             return JsonResponse({"data": 1})
@@ -104,30 +108,19 @@ def heba_kheer(request):
 
 
 def add_tamkeen(request):
-    context = {"needy": Needy.objects.filter(enablity=1), "depends": Dependency.objects.filter(enablity=1)}
-    if request.method == 'GET':
-        return render(request, 'cases/add-tamkeen.html', context=context)
-    elif request.method == 'POST' and request.is_ajax:
+    if request.method == 'POST' and request.is_ajax:
         tamkeen_type = request.POST.get('tamkeen_type')
-        person_type = request.POST.get('person_type')
-        depend = request.POST.get('depend')
         need = request.POST.get('need')
-        if int(person_type) == 1:
-            dep = Dependency.objects.get(pk=depend)
-            obj = models.TamkeenSupply(depend=dep, tamkeen_type=int(tamkeen_type))
-            obj.save()
-            if obj.pk:
-                return JsonResponse({"data": 1})
-            else:
-                return JsonResponse({"data": -1})
-        elif int(person_type) == 2:
-            need_obj = Needy.objects.get(pk=need)
-            obj_tamkeen = models.TamkeenSupply(case=need_obj, tamkeen_type=int(tamkeen_type))
-            obj_tamkeen.save()
-            if obj_tamkeen.pk:
-                return JsonResponse({"data": 1})
-            else:
-                return JsonResponse({"data": -1})
+        need_obj = Needy.objects.get(pk=need)
+        obj_tamkeen = models.TamkeenSupply(
+            case=need_obj, tamkeen_type=int(tamkeen_type))
+        obj_tamkeen.save()
+        if obj_tamkeen.pk:
+            return JsonResponse({"data": 1})
+        else:
+            return JsonResponse({"data": -1})
+    context = {"needy": Needy.objects.all()}
+    return render(request, 'cases/add-tamkeen.html', context=context)
 
 
 def volunteer_list(request):
@@ -149,7 +142,8 @@ def add_technical(request):
         name = request.POST.get('name')
         user_type = request.POST.get('user_type')
         message = request.POST.get('message')
-        tech_support = TechnicalSupport(name=name, user_type=int(user_type), message=message, user=user)
+        tech_support = TechnicalSupport(name=name, user_type=int(
+            user_type), message=message, user=user)
         tech_support.save()
         if tech_support.pk:
             return JsonResponse({"data": 1})

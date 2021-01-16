@@ -72,12 +72,11 @@ class HebaKheer(models.Model):
 
 class TamkeenSupply(models.Model):
     case = models.OneToOneField(Needy, on_delete=models.CASCADE, null=True, blank=True)
-    depend = models.OneToOneField(Dependency, on_delete=models.CASCADE, null=True, blank=True)
     TAMKEEN_CHOICES = (
         (1, 'تمكين منتهى بتدريب'),
         (2, 'تمكين منتهى بمقابل مادى'),
-        (3, 'تمكين منتهى بفرصة عمل')
-
+        (3, 'تمكين منتهى بفرصة عمل'),
+        (4, 'غير مرشح'),
     )
     tamkeen_type = models.SmallIntegerField(null=True, blank=True, choices=TAMKEEN_CHOICES)
 

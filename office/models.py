@@ -3,11 +3,6 @@ from accounts.models import User
 
 
 class Dependency(models.Model):
-    ENABILTY_CHOICES = (
-        (1, 'مرشح للتمكين'),
-        (2, 'غير مرشح للتمكين'),
-
-    )
     GENDER_CHOICES = (
         ('M', 'ذكر'),
         ('F', 'أنثى'),
@@ -22,7 +17,6 @@ class Dependency(models.Model):
     )
     stage = models.CharField(max_length=255, choices=STAGE_CHOICES, verbose_name='المرحله')
     age = models.SmallIntegerField(null=True, verbose_name='العمر')
-    enablity = models.SmallIntegerField(null=True, choices=ENABILTY_CHOICES)
     name = models.CharField(null=True, max_length=255, verbose_name='الأسم')
 
     def __str__(self):
@@ -37,16 +31,10 @@ class Needy(models.Model):
         ('أخرى', 'أخرى'),
 
     )
-    ENABILTY_CHOICES = (
-        (1, 'مرشح للتمكين'),
-        (2, 'غير مرشح للتمكين'),
-
-    )
     home = models.CharField(null=True, max_length=255, choices=HOME_CHOICES, verbose_name='السكن')
     national_id = models.CharField(unique=True, max_length=255, null=True, verbose_name='رقم الهويه')
     phone = models.CharField(max_length=255, null=True, verbose_name='الجوال')
     parent = models.CharField(max_length=255, null=True, verbose_name='العائل')
-    enablity = models.SmallIntegerField(null=True, choices=ENABILTY_CHOICES)
     job = models.CharField(max_length=255, null=True, verbose_name='المهنه')
 
     SOURCE_CHOICES = (
@@ -104,7 +92,9 @@ class Courses(models.Model):
     description = models.CharField(max_length=255, null=True, verbose_name='عن الدوره')
     provider = models.ForeignKey(Provider, null=True, on_delete=models.CASCADE, verbose_name='الراعى')
     cases = models.ManyToManyField(Needy, null=True, verbose_name='الحاله المستحقه')
-    depend_child = models.ManyToManyField(Dependency, null=True, verbose_name='الأطفال')
+    start_date = models.DateField(verbose_name="تاريخ البدايه",null=True, auto_now=False, auto_now_add=False)
+    end_date = models.DateField(verbose_name="تاريخ النهايه", null=True,auto_now=False, auto_now_add=False ,)
+
 
     def __str__(self):
         return self.name
@@ -121,6 +111,8 @@ class CourseBag(models.Model):
         blank=True,
         null=True
     )
+    start_date = models.DateField(verbose_name="تاريخ البدايه",null=True, auto_now=False, auto_now_add=False)
+    end_date = models.DateField(verbose_name="تاريخ النهايه", null=True,auto_now=False, auto_now_add=False ,)
 
     def __str__(self):
         return self.name

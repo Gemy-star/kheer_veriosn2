@@ -37,17 +37,26 @@
                         </select>
                    </div>
                     </div>
+              <div class="form-group row">
+    <div class="col-12">
+        <label for="start" class="body-font">تاريخ البدايه</label>
+        <br/>
 
-                                    <div class="form-group row">
-                   <div class="col-12">
-                        <label class="body-font text-green"> إختر الحالات</label>
-                        <select class="form-control" multiple="multiple" name="children" id="children" size="5">
-                            {% for child in children %}
-                                <option class="form-control" value="{{ child.pk }}">{{ child.name }}</option>
-                            {% endfor %}
-                        </select>
-                   </div>
-                    </div>
+        <input class="form-control" type="date" id="start" name="trip-start"
+               value="2021-01-01"
+               min="2021-01-01" max="2021-01-01">
+        
+    </div>
+    <div class="form-group row">
+        <div class="col-12">
+            <label for="end" class="body-font">تاريخ النهايه</label>
+            <br/>
+            <input class="form-control" type="date" id="end" name="trip-start"
+                   value="2021-01-01"
+                   min="2021-01-01" max="2021-01-01">
+            
+        </div>
+              </div>
                                     <div class="form-group row">
                                     <div class="col-md-12" id="depend_div">
                                         <button type="submit" id="btn_add"
@@ -77,7 +86,8 @@
                         'provider': $('#provider').val(),
                         'course_desc': $('#course_desc').val(),
                         'cases': $('#cases').val(),
-                        'children': $('#children').val(),
+                        'start': $('#start').val(),
+                        'end': $('#end').val(),
                         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
                     },
                     success: function (data) {
