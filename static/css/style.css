@@ -887,7 +887,6 @@ background-image:   url("../images/footer.png");
 .block-heading-1 span {
   text-transform: uppercase;
   font-size: 12px;
-  letter-spacing: .1em;
   font-weight: bold; }
 
 .block-heading-1 h2 {
@@ -1004,7 +1003,7 @@ background-image:   url("../images/footer.png");
       background: rgba(52, 58, 64, 0.3); }
   .block-counter-1 .caption {
     font-size: 14px;
-    letter-spacing: .05em; }
+     }
 
 .block-team-member-1 {
   padding: 30px;
@@ -1234,7 +1233,7 @@ background-image:   url("../images/footer.png");
       .comment-list li .comment-body .meta {
         text-transform: uppercase;
         font-size: 13px;
-        letter-spacing: .1em;
+      
         color: #ccc; }
       .comment-list li .comment-body .reply {
         padding: 5px 10px;
@@ -1264,7 +1263,7 @@ background-image:   url("../images/footer.png");
 .post-meta {
   font-size: 13px;
   text-transform: uppercase;
-  letter-spacing: .2em; }
+  }
   .post-meta a {
     color: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
@@ -1854,7 +1853,7 @@ background-image:   url("../images/footer.png");
       font-size: 13px;
       color: #5DBD7E;
       font-weight: 900;
-      letter-spacing: .2rem; }
+      }
   .news-1 .arrow-wrap span {
     font-size: 1.5rem; }
   .news-1:hover .text {

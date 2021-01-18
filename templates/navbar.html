@@ -118,14 +118,12 @@
                             <a style="font-size: 14px;  " class="dropdown-item text-cursive"
                                 href="{% url 'technical-support' %}">
                                 دعم فنى </a>
-                            {% endif %}
-
-                            {% if request.user.user_type == 1 or request.user.user_type == 2 or request.user.user_type
-                            == 3 %}
                             <a style="font-size: 14px;  " class="dropdown-item text-cursive"
                                 href="{% url 'home-employee' %}">
                                 لوحة التحكم</a>
                             {% endif %}
+
+
                             <div class="dropdown-divider"></div>
                             <a style="font-size: 14px;  " class="dropdown-item text-cursive"
                                 href="{% url 'contact-page' %}">

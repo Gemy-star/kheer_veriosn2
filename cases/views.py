@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.template.loader import get_template
 from datetime import datetime
-from . import models
 from django.http import JsonResponse
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
@@ -112,13 +111,22 @@ def add_tamkeen(request):
         tamkeen_type = request.POST.get('tamkeen_type')
         need = request.POST.get('need')
         need_obj = Needy.objects.get(pk=need)
-        obj_tamkeen = models.TamkeenSupply(
-            case=need_obj, tamkeen_type=int(tamkeen_type))
-        obj_tamkeen.save()
-        if obj_tamkeen.pk:
-            return JsonResponse({"data": 1})
-        else:
-            return JsonResponse({"data": -1})
+        tam_exist = TamkeenSupply.objects.filter(case=need_obj).exists()
+        if tam_exist : 
+            tam_obj = TamkeenSupply.objects.get(case=need_obj)
+            tam_obj.tamkeen_type = int(tamkeen_type)
+            if tam_obj :
+               return JsonResponse({"data": 1})
+            else:
+               return JsonResponse({"data": -1})
+        else :
+             obj_tamkeen = models.TamkeenSupply(
+             case=need_obj, tamkeen_type=int(tamkeen_type))
+             obj_tamkeen.save()
+             if obj_tamkeen:
+               return JsonResponse({"data": 1})
+             else:
+               return JsonResponse({"data": -1})
     context = {"needy": Needy.objects.all()}
     return render(request, 'cases/add-tamkeen.html', context=context)
 
@@ -308,3 +316,7 @@ def add_vol_cer(request):
         else:
             return redirect('home-employee')
     return render(request, 'cases/add-volunteer-certificate.html', context=context)
+
+def cases_type(request):
+   return render(request , 'cases/cases_types.html')
+
