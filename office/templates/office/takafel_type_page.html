@@ -1,0 +1,198 @@
+{% extends 'main.html' %}
+{% block title %}
+المستفيدين
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<main>
+
+    <div class="ftco-blocks-cover-1">
+        <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+        {% if case_type == 1 %}
+        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/kharba_banner.png')">
+        {% endif %}
+           {% if case_type == 2 %}
+        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/food_banner.png')">
+        {% endif %}
+           {% if case_type == 5 %}
+        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/se7a_banner.png')">
+        {% endif %}
+             {% if case_type == 4 %}
+        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/water_banner.png')">
+        {% endif %}
+             {% if case_type == 3 %}
+        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/ta3leem_banner.png')">
+        {% endif %}
+             {% if case_type == 6 %}
+        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/egar_banner.png')">
+        {% endif %}
+            <div class="container">
+                <div class="row align-items-center ">
+
+                    <div class="col-md-5 mt-5 pt-5">
+                        <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+                            <h1 class="mb-3 font-weight-bold body-font">المستفيدين || الرئيسيه</h1>
+                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
+                            <strong>خير السعوديه </strong></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border-top pt-5 center">
+              <center>  <p class="body-font text-green"> طرق الدفع الألكترونى</p></center>
+                <center>
+                    <img width="50" height="50" src="{% static 'images/mada.svg' %}" alt="logo"/>
+                    <i class="fa fa-paypal fa-lg text-black" aria-hidden="true"></i>
+                    <i class="fa fa-cc-mastercard fa-lg text-black" aria-hidden="true"></i>
+                    <i class="fa fa-cc-visa fa-lg text-black" aria-hidden="true"></i>
+                </center>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+  <div class="row">
+                        {% for case in cases %}
+                            <div class="col-4">
+                                <div class="card" style="text-align: right;">
+                                    <div class="card-header">
+                                        <center>
+                                            <i class="fa fa-bars text-green" style="display: inline-block;"
+                                               aria-hidden="true"></i>
+                                            <h3 class="card-title body-font" style="display: inline-block;"> رقم
+                                                الحاله </h3>
+
+                                            <p class="card-title body-font text-green"
+                                               style="display: inline-block; "> {{ case.case.case_number }}</p>
+                                        </center>
+                                    </div>
+                                    <div class="card-body ">
+                                        <i class="fa fa-user text-green" aria-hidden="true"
+                                           style="display: inline-block;"></i>
+                                        <h3 class="card-title body-font" style="display: inline-block;"> الحاله
+                                            الصحيه:</h3>
+
+                                        <p class="card-title body-font text-green"
+                                           style="display: inline-block; text-align: left !important;"> {{ case.case.health_status }} </p>
+
+                                        <hr/>
+                                        <div class="align-justify" style="display: inline-block;">
+                                            <i class="fa fa-location-arrow" style="display: inline-block;"
+                                               aria-hidden="true"></i>
+                                            <h3 class="card-title body-font text-green" style="display: inline-block;">
+                                                المنطقه</h3>
+
+                                            <p class="card-title body-font text-green"
+                                               style="display: inline-block;"> {{ case.case.department }} </p>
+
+                                        </div>
+                                        <hr/>
+                                        <i class="fa fa-bed" aria-hidden="true" style="display: inline-block;"></i>
+                                        <h3 class="card-title body-font text-green" style="display: inline-block;">
+                                            العمر</h3>
+
+                                        <p class="card-title body-font text-green"
+                                           style="display: inline-block;"> {{ case.case.age }} </p>
+
+                                        <hr/>
+                                        {% if case.case.dependencies.count %}
+                                            <i class="fa fa-bed" aria-hidden="true" style="display: inline-block;"></i>
+                                            <h3 class="card-title body-font text-green" style="display: inline-block;">
+                                                عدد الأبناء</h3>
+
+                                            <p class="card-title body-font text-green"
+                                               style="display: inline-block;"> {{ case.case.dependencies.count }} </p>
+
+                                            <hr/>
+                                        {% endif %}
+
+                                        <img width="40" height="40" src="{% static 'images/coins.png' %}"
+                                             class="img-fluid"/>
+                                        <h3 class="card-title body-font text-green" style="display: inline-block;">
+                                            المبلغ </h3>
+
+                                        <p class="card-title body-font text-green"
+                                           style="display: inline-block;"> {{ case.case.amount }} </p>
+
+                                        <hr/>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-success" role="progressbar"
+                                                 aria-valuenow="{{ case.case.total_donations }}"
+                                                 aria-valuemin="0" aria-valuemax="{{ case.case.amount }}"
+                                                 style="background-color: #5DBD7E ; width:50%; display: inline-block;">
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        {% if case.case_type == 1 %}
+                                            <p><img width="70" height="70"
+                                                    src="{% static 'images/electricty.png' %}" class="img-fluid"
+                                                    alt="card image"></p>
+                                            <h4 class="card-title body-font" style="display: inline-block;">دعم
+                                                الكهرباء</h4>
+                                        {% endif %}
+                                        {% if case.case_type == 2 %}
+                                            <img width="70" height="70" src="{% static 'images/takfel.png' %}"
+                                                 class="img-fluid" alt=" image" style="display: inline-block;" >
+                                            <h4 class="card-title body-font" style="display: inline-block;">دعم
+                                                الغذاء</h4>
+                                            
+                                        {% endif %}
+                                        {% if case.case_type == 3 %}
+                                            <p><img width="70" height="70" src="{% static 'images/education.png' %}"
+                                                    class="img-fluid" alt="card image"></p>
+                                            <h4 class="card-title body-font  text-green" style="display: inline-block;">
+                                                دعم التعليم</h4>
+                                            
+                                        {% endif %}
+                                        {% if case.case_type == 4 %}
+                                            <p><img width="70" height="70" class="img-fluid"
+                                                    src="{% static 'images/water.png' %}" alt="card image"></p>
+                                            <h4 class="card-title body-font text-green" style="display: inline-block;">
+                                                دعم الماء</h4>
+                                         
+                                        {% endif %}
+                                        {% if case.case_type == 5 %}
+                                            <p><img width="70" height="70" class="img-fluid"
+                                                    src="{% static 'images/login_new.png' %}" alt="card image"></p>
+                                            <h4 class="card-title body-font text-green" style="display: inline-block;">
+                                                دعم الملبس</h4>
+
+                                        {% endif %}
+                                        <hr/>
+                                        <center>
+                                            <a href="{% url "payment" case.pk %}"
+                                               class="btn btn-teal text-white btn-sm body-font">
+                                                تقديم الدعم</a>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                </div>
+
+
+
+</div>
+    </div>
+
+</main>
+
+{% endblock content %}

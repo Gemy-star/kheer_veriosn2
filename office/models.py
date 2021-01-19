@@ -113,7 +113,8 @@ class CourseBag(models.Model):
     )
     start_date = models.DateField(verbose_name="تاريخ البدايه",null=True, auto_now=False, auto_now_add=False)
     end_date = models.DateField(verbose_name="تاريخ النهايه", null=True,auto_now=False, auto_now_add=False ,)
-
+    total_hours = models.IntegerField(null=True , blank=True , verbose_name='عدد الساعات')
+    trainer = models.ForeignKey(User , on_delete=models.CASCADE , verbose_name='المدرب')
     def __str__(self):
         return self.name
 

@@ -15,9 +15,9 @@
 
                     <div class="col-md-5 mt-5 pt-5">
                         <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
-                        <h1 class="mb-3 font-weight-bold body-font">  الحقائب الدراسيه </h1>
+                        <h1 class="mb-3 font-weight-bold body-font">   منتجات الدائره الخضراء </h1>
                         <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
-                            <strong>  الحقائب الدراسيه </strong></p>
+                            <strong>   منتجات الدائره الخضراء </strong></p>
                     </div>
 
                 </div>
@@ -27,11 +27,12 @@
 
   <div class="site-section">
         <div class="container">
-            <div class="row center">
-                <center>
-                    <h3 class="body-font text-green head-size">  الحقائب الدراسيه</h3>
-                </center>
-            </div>
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                <h2 class="h2 text-red d-block"> منتجات الدائره الخضراء </h2>
+                <span class="text-green h5 d-block text-red">شارك فى الخير</span>
+                </div>
+                </div>
             <div class="row">
                 {% for bag in bags %}
                 <div class="col-4">
@@ -41,8 +42,26 @@
                         <i class="fa fa-archive" aria-hidden="true" style="display: inline-block;"></i>
                         <h5 class="body-font text-green" style="display: inline-block;"> {{ bag.name }}</h5>
                           </center>
-                        <hr/>
                         <p class="card-body body-font text-black">{{ bag.description }}</p>
+                      <h5 class="body-font card-body text-green">تاريخ البدايه</h5>
+                        <p class="card-body body-font text-black">{{ bag.start_date }}</p>
+                        <h5 class="body-font card-body text-green">تاريخ النهايه</h5>
+
+                        <p class="card-body body-font text-black">{{ bag.end_date }}</p>
+                        <h5 class="body-font card-body text-green">عدد الساعات </h5>
+
+                        <p class="card-body body-font text-black">{{ bag.total_hours }}</p>
+                        <h5 class="body-font card-body text-green">المدرب  </h5>
+
+                        <p class="card-body body-font text-black">
+                            {{ bag.trainer.first_name }} {{ bag.trainer.last_name }}
+
+                        </p>
+                        <hr/>
+                        <div id="myProgress">
+                            <div id="myBar"></div>
+                          </div>
+
                     </div>
                     <div class="card-footer">
                         <center>
@@ -61,3 +80,32 @@
 
 
 {% endblock content %}
+
+
+{% block javascript %}
+<script>
+$(()=> {
+
+    var i = 0;
+function move() {
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("myBar");
+    var width = 1;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+      }
+    }
+  }
+    
+});
+
+</script>  
+
+{% endblock javascript %}

@@ -28,5 +28,7 @@ urlpatterns = [
     path('bag/list', views.bag_list, name='bag-list'),
     path('add/pay/ticket', views.add_pay_ticket, name='pay-ticket'),
     path('add/bag/cer', views.add_bag_cer, name='add-bag-cer'),
+    path('takafel/type', views.takafel_type, name='new-takafel-case-page'),
+    path('takafel/type/<int:pk>', views.takafel_type_page, name='takafel-type-page'),
 
 ]

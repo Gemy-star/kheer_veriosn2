@@ -47,6 +47,45 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
+def register_trainer(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        user = User.objects.create_trainer(email=email, first_name=first_name, last_name=last_name,
+                                                        address=address, password=password, phone=phone)
+        if user is not None:
+            login(request, user)
+            return redirect('home-page')
+
+
+        else:
+            messages.add_message(request, messages.error, 'Please Review Your Data Failed To Register')
+    context = {}
+    return render(request, 'accounts/register-trainer.html', context)
+
+def register_trainee(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        user = User.objects.create_trainee(email=email, first_name=first_name, last_name=last_name,
+                                                        address=address, password=password, phone=phone)
+        if user is not None:
+            login(request, user)
+            return redirect('home-page')
+
+
+        else:
+            messages.add_message(request, messages.error, 'Please Review Your Data Failed To Register')
+    context = {}
+    return render(request, 'accounts/register-trainee.html', context)
 
 def register_permier_emp(request):
     if request.method == 'POST':

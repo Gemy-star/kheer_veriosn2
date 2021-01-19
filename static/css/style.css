@@ -288,7 +288,6 @@ h1, h2, h3, h4, h5,
   border-radius: 30px;
   font-size: .8rem;
   text-transform: uppercase;
-  letter-spacing: .2rem;
   padding: 10px 20px;
   text-decoration: none; }
   .btn:active, .btn:focus {
@@ -314,6 +313,8 @@ h1, h2, h3, h4, h5,
       border-color: #fff;
       color: #000; }
 
+
+      
 .btn-custom-1 {
   border-radius: 30px;
   border-top-right-radius: 0;
@@ -612,7 +613,6 @@ background-image:   url("../images/footer.png");
             margin-left: -10px; }
         .site-navbar .site-navigation .site-menu .has-children .dropdown a {
           text-transform: none;
-          letter-spacing: normal;
           -webkit-transition: 0s all;
           -o-transition: 0s all;
           transition: 0s all;
@@ -1870,10 +1870,20 @@ opacity: 0.75;
 
 }
 
+#myProgress {
+  width: 100%;
+  background-color: grey;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: #5DBD7E;
+}
+
 
 .bg-home {
 background-color: #f5f4f4 ;
-  border-top: 2px double black;
 }
 .bg-aida {
 background-color: #f5f4f4
@@ -1881,7 +1891,6 @@ background-color: #f5f4f4
 .bg-ebtsam {
   background-repeat: no-repeat;
     background-size: 100%;
-    border-top:  2px double black;
 
 
 }
