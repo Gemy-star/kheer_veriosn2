@@ -29,6 +29,25 @@
 
                                     </div>
                                 </div>
+                                        <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label for="trainer" class="body-font">اختار مدرب</label>
+
+<select class="form-control body-font" name="trainer" id="trainer">
+{% for trainer in trainers  %}
+  <option class="body-font" value="{{trainer.pk}}">{{trainer.first_name}} {{trainer.last_name}}</option>
+
+{% endfor %}
+</select> 
+                                    </div>
+                                </div>
+                                     <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <input type="number" name="total_hours" id="total_hours"
+                                               class="form-control"
+                                               placeholder=" عدد الساعات">
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         <input type="text" name="description" id="description"
@@ -49,10 +68,13 @@
                                         <div class="col-12">
                                             <label for="end" class="body-font">تاريخ النهايه</label>
                                             <br/>
+                                        </div>
+             <div>
 
-                                            <input class="form-control" type="date" id="end" name="trip-start"
+                                            <input class="form-control body-font" type="date" id="end" name="trip-start"
                                                    value="2021-01-01"
                                                    min="2021-01-01" max="2021-01-01">
+             </div>
                                             
                                         </div>
                                               </div>

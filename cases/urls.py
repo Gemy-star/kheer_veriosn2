@@ -22,5 +22,6 @@ urlpatterns = [
     path('volunteer/add/cer', views.add_vol_cer, name='add-vol-cer'),
     path('all/new', views.cases_all_new, name='cases-all-new'),
     path('types', views.cases_type, name='cases-types'),
+    path('types/<int:pk>', views.tamkeen_case_page, name='cases-tamkeen'),
 
 ]

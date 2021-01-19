@@ -10,6 +10,13 @@ from django.http import HttpResponse
 from django.views.generic import View
 from kheer_new.utils import render_to_pdf
 from django.core.files.storage import FileSystemStorage
+from cases import models
+
+def tamkeen_case_page(request,pk):
+    tam_obj = TamkeenSupply.objects.filter(tamkeen_type=pk)
+    contexts = {"cases":tam_obj}
+    return render(request,'cases/new_tamkeen_case.html',context=contexts)
+
 
 
 @login_required(login_url='login')
@@ -37,7 +44,7 @@ def add_needycase(request):
         case_obj = Needy.objects.get(pk=case_pk)
         case_type = request.POST.get('case_type')
         details = request.POST.get('details')
-        st = models.NeedyCase.objects.filter(case=case_obj).exists()
+        st = NeedyCase.objects.filter(case=case_obj).exists()
         if st:
             st_obj = models.NeedyCase.objects.get(case=case_obj)
             st_obj.details = details

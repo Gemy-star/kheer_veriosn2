@@ -288,7 +288,6 @@ h1, h2, h3, h4, h5,
   border-radius: 30px;
   font-size: .8rem;
   text-transform: uppercase;
-  letter-spacing: .2rem;
   padding: 10px 20px;
   text-decoration: none; }
   .btn:active, .btn:focus {
@@ -612,7 +611,6 @@ background-image:   url("../images/footer.png");
             margin-left: -10px; }
         .site-navbar .site-navigation .site-menu .has-children .dropdown a {
           text-transform: none;
-          letter-spacing: normal;
           -webkit-transition: 0s all;
           -o-transition: 0s all;
           transition: 0s all;

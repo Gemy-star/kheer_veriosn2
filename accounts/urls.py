@@ -14,5 +14,7 @@ urlpatterns = [
     path('user-profile', views.user_profile, name='user-profile'),
     path('user-profile-dash', views.user_profile_dash, name='user-profile-dash'),
     path('user-noti', views.get_notification, name='noti'),
+    path('register-trainee', views.register_trainee, name='register-trainee'),
+    path('register-trainer', views.register_trainer, name='register-trainer'),
 
 ]

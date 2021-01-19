@@ -9,7 +9,9 @@ class NeedyCase(models.Model):
         (2, 'دعم الغذاء'),
         (3, 'دعم التعليم'),
         (4, 'دعم الماء'),
-        (5, 'دعم الملبس'),
+        (5, 'دعم الصحة'),
+        (6, 'دعم اﻷيجار'),
+
     )
     details = models.TextField(blank=True, null=True, verbose_name='عرض الحاله')
     case = models.OneToOneField(Needy, on_delete=models.CASCADE)

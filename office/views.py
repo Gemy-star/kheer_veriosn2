@@ -11,7 +11,18 @@ from .filters import NeedyFilter, NeedyCaseFilter
 
 @login_required(login_url='login')
 def home_employee(request):
-    return render(request, 'office/home-employee.html')
+    user_obj = User.objects.get(pk=request.user.pk)
+    request.session['user_id'] = user_obj.user_type
+    return render(request, 'office/home-employee.html',{"user":user_obj})
+
+def takafel_type(request):
+    return render(request,'office/takafel_type.html')
+
+def takafel_type_page(request,pk):
+    needy = NeedyCase.objects.filter(case_type=pk)
+    contexts = {"cases":needy , "case_type":pk}
+    return render(request,'office/takafel_type_page.html',context=contexts)
+    
 
 
 def add_course_bag(request):
@@ -21,15 +32,17 @@ def add_course_bag(request):
         link = request.POST.get('link')
         start = request.POST.get('start')
         end = request.POST.get('end')
+        user = request.POST.get('user')
+        user_obj = User.objects.get(pk=user)
+        total = request.POST.get('total_hour')
         bag = models.CourseBag(
-            name=name, description=description, link=link, start_date=start, end_date=end)
+            name=name, description=description, link=link, start_date=start, end_date=end ,trainer=user_obj , total_hours=total)
         bag.save()
         if bag.pk:
             return JsonResponse({"data": 1})
         else:
             return JsonResponse({"data": -1})
-    return render(request, 'office/add-course_bag.html')
-
+    return render(request, 'office/add-course_bag.html',context={"trainers":User.objects.filter(user_type=9)})
 
 def bag_list(request):
     context = {"bags": models.CourseBag.objects.all()}

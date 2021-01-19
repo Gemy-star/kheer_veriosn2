@@ -77,7 +77,7 @@
 
     {% block  javascript %}
         <script>
-            var id =sessionStorage.getItem('user_id');
+            var id = '{{user.user_type}}'
             var empolyees;
             var fondations;
             var cases;
