@@ -1337,11 +1337,14 @@ table.dbkit-table tr td {
     font-size: 13px;
     border-radius: 2px;
 }
-
+@font-face {
+    font-family: "helveticaneuelt";
+    src: url("../assets/fonts/helveticaneuelt-arabic-55-roman.ttf");
+  }
 .body-font {
-font-family: 'Cairo', sans-serif;
-    font-size: medium;
-    font-weight: bold;
+    font-family: 'helveticaneuelt', sans-serif;
+ font-size: medium;
+ font-weight: lighter;
 }
 
 .team-search input::-webkit-input-placeholder {

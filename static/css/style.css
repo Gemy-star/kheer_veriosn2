@@ -313,6 +313,8 @@ h1, h2, h3, h4, h5,
       border-color: #fff;
       color: #000; }
 
+
+      
 .btn-custom-1 {
   border-radius: 30px;
   border-top-right-radius: 0;
@@ -1871,7 +1873,6 @@ opacity: 0.75;
 
 .bg-home {
 background-color: #f5f4f4 ;
-  border-top: 2px double black;
 }
 .bg-aida {
 background-color: #f5f4f4
@@ -1879,7 +1880,6 @@ background-color: #f5f4f4
 .bg-ebtsam {
   background-repeat: no-repeat;
     background-size: 100%;
-    border-top:  2px double black;
 
 
 }
