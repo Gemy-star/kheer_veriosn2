@@ -11,6 +11,7 @@ from django.views.generic import View
 from kheer_new.utils import render_to_pdf
 from django.core.files.storage import FileSystemStorage
 from cases import models
+from office.models import CourseBag
 
 def tamkeen_case_page(request,pk):
     tam_obj = TamkeenSupply.objects.filter(tamkeen_type=pk)
@@ -274,6 +275,31 @@ class FoundationAllReport(View):
             return response
         return HttpResponse("Not found")
 
+        
+class GreenCircleAllReport(View):
+    def get(self, request, *args, **kwargs):
+        template = get_template('circle-all-pdf.html')
+        needyinshow = CourseBag.objects.all()
+        user_obj = User.objects.get(pk=request.user.pk)
+        context = {
+            "company": "خير السعوديه",
+            "user": user_obj,
+            "needs": needyinshow,
+            "topic": "تفاصيل الدوائر الخضراء",
+            "today": datetime.today().strftime('%Y-%m-%d'),
+        }
+        html = template.render(context)
+        pdf = render_to_pdf('circle-all-pdf.html', context)
+        if pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            filename = "Invoice_%s.pdf" % ("12341231")
+            content = "inline; filename='%s'" % (filename)
+            download = request.GET.get("download")
+            if download:
+                content = "attachment; filename='%s'" % (filename)
+            response['Content-Disposition'] = content
+            return response
+        return HttpResponse("Not found")
 
 class VolunteerAllReport(View):
     def get(self, request, *args, **kwargs):

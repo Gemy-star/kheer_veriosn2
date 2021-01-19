@@ -1870,6 +1870,17 @@ opacity: 0.75;
 
 }
 
+#myProgress {
+  width: 100%;
+  background-color: grey;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: #5DBD7E;
+}
+
 
 .bg-home {
 background-color: #f5f4f4 ;
