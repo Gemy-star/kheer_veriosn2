@@ -30,5 +30,6 @@ urlpatterns = [
     path('add/bag/cer', views.add_bag_cer, name='add-bag-cer'),
     path('takafel/type', views.takafel_type, name='new-takafel-case-page'),
     path('takafel/type/<int:pk>', views.takafel_type_page, name='takafel-type-page'),
+    path('add/greenparticipant', views.add_green_participant, name='add-green-participant'),
 
 ]

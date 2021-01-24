@@ -119,6 +119,15 @@ class CourseBag(models.Model):
         return self.name
 
 
+class GreenParticipant(models.Model):
+    participant = models.OneToOneField(User ,on_delete=models.CASCADE , verbose_name='المشارك')
+    foundation = models.ForeignKey(Foundation , on_delete=models.CASCADE , verbose_name='المؤسسه')
+    provider = models.ForeignKey(Provider , blank=True , null=True,on_delete=models.CASCADE , verbose_name='الداعم')
+    date_added = models.DateTimeField(auto_now_add=True , verbose_name='تاريخ اﻷضافه')
+    def __str__(self):
+        return self.foundation.name
+        
+
 class PaymentCourseBag(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='المستخدم')
     course = models.ForeignKey(CourseBag, on_delete=models.CASCADE, verbose_name='الحقيبه')

@@ -23,7 +23,31 @@ def takafel_type_page(request,pk):
     contexts = {"cases":needy , "case_type":pk}
     return render(request,'office/takafel_type_page.html',context=contexts)
     
-
+def add_green_participant(request):
+    if request.method == 'GET':
+        founds = models.Foundation.objects.all()
+        proivders = models.Provider.objects.all()
+        users = User.objects.filter(user_type__range=(1, 4))
+        return render(request , 'office/add-green-participant.html' , context={"emps": users , "providers":proivders , "founds":founds})
+    elif request.method == 'POST' and request.is_ajax:
+        emp = request.POST.get('emp')
+        provider = request.POST.get('provider') 
+        found = request.POST.get('found')
+        emp_obj = User.objects.get(pk=emp)
+        provid = models.Provider.objects.get(pk=provider)
+        found_obj = models.Foundation.objects.get(pk=found)
+        if models.GreenParticipant.objects.filter(participant=emp_obj).exists():
+            green_obj = models.GreenParticipant.objects.get(participant=emp_obj)
+            green_obj.provider = provid
+            green_obj.foundation = found_obj
+            return JsonResponse({"data":1})
+        else:
+            green = models.GreenParticipant(participant=emp_obj , provider=provid , foundation=found_obj)
+            green.save()
+            if green.pk:
+                return JsonResponse({"data":1})
+            else:
+                return JsonResponse({"data":-1})
 
 def add_course_bag(request):
     if request.method == 'POST' and request.is_ajax:
