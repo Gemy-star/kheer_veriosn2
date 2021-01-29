@@ -7,18 +7,18 @@
     <div class="ftco-blocks-cover-1" style="margin-top: -113px;">
         <div id="carouselExampleIndicators" class="carousel slide my-carousel my-carousel" data-ride="carousel">
             <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="circle black-dot active" style="background-color: #0b0b0b"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1" class="circle blue-dot" style="background-color: #2D6D93"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2" class="circle green-dot" style="background-color: #5DBD7E"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active" style="background-color: #0b0b0b"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1" class="" style="background-color: #2D6D93"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2" class="" style="background-color: #5DBD7E"></li>
             </ol>
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active" style="background-image: url('../../../static/images/login.png')">
                     <div class="carousel-caption d-none d-md-block text-lay-image" style="height: 380px; width: 100%;">
                         <h2 class="body-font text-green"
                             style="color: #2D6D93 !important; font-size: 50px; font-weight: bold;">منصة الخير </h2>
-                        <h5 class="body-font text-black" style="font-size: 23px; font-weight: bold;">صممت لتيسير الخير
-                            لفاعل الخير ليكون ضمن دائره تكافلية موثوقة </h5>
-                        <p class="body-font text-green" style="font-size: 23px; font-weight: bold;">مستمرة و ممتدة</p>
+                        <h5 class="body-font text-black" style="font-size: 23px; font-weight: bold; white-space: nowrap;">صممت لتيسير الخير
+                            لفاعل الخير ليكون ضمن دائره تكافلية موثوقة مستمرة و ممتدة </h5>
+                        <p class="body-font text-green" style="font-size: 23px; font-weight: bold;">نسهل الخير لأهل الخير</p>
                     </div>
                 </div>
             </div>
@@ -28,12 +28,14 @@
         <div class="container bg-home">
             <div class="row">
                 <div class="col-12">
-                    <center><h3 class="body-font text-green" style="font-size: 32px; font-weight: bold;"> رسالة خير</h3>
+                    <center><h3 class="body-font text-green" style="font-size: 38px; font-weight: bold;"> رسالة خير</h3>
                     </center>
-                    <center><p class="body-font text-black " style="font-size: 20px;">السعى  لتمكين و تفعيل التكافل
+                    <center><p class="body-font text-black " style="font-size: 22px; padding: 10px 10px 10px 10px;
+        margin: 6%;
+    margin-bottom: 9%; font-weight:600">السعى  لتمكين و تفعيل التكافل
                         الأجتماعى باستخدام التقنيات الحديثه
                         للربط بين الكيانات المقتدره من المؤسسات و الأفراد و المستفيدات من الجمعيات الخيريه الرسميه فى
-                        المملكه العربيه السعوديه</p></center>
+                        المملكة العربية السعودية</p></center>
 
                 </div>
             </div>
@@ -65,10 +67,10 @@
                     <div class="block-2" style="background-color: white; height: 255px;">
                          {% if request.user.first_name %}
                           <a class="btn btn-primary btn-lg btn-block body-font text-white" style="background-color: #1d5987;"
-                           href="{% url 'bag-list' %}">دائرة الخضراء</a>
+                           href="{% url 'found-bags' %}">دائرة الخضراء</a>
                            {% else %}
                             <a class="btn btn-primary btn-lg btn-block body-font text-white disabled" style="background-color: #1d5987;"
-                           href="{% url 'bag-list' %}">دائرة الخضراء</a>
+                           href="{% url 'found-bags' %}">دائرة الخضراء</a>
                          {% endif %}
                   <img src="{% static 'images/green_icon.png' %}" class="img-fluid">
 

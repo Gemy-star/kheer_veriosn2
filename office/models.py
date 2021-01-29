@@ -126,6 +126,7 @@ class CourseBag(models.Model):
     total_hours = models.IntegerField(null=True , blank=True , verbose_name='عدد الساعات')
     trainer = models.ForeignKey(User , on_delete=models.CASCADE , verbose_name='المدرب')
     green = models.ManyToManyField(GreenParticipant , verbose_name='المشاركين' ,null=True , blank=True)
+    foundation = models.ForeignKey(Foundation ,null=True, blank=True, on_delete=models.CASCADE , verbose_name='المؤسسه')
     def __str__(self):
         return self.name
 class PaymentCourseBag(models.Model):
