@@ -56,26 +56,33 @@ def add_course_bag(request):
         link = request.POST.get('link')
         start = request.POST.get('start')
         end = request.POST.get('end')
+        found = request.POST.get('found')
+        found_obj = models.Foundation.objects.get(pk=found)
         user = request.POST.get('trainer')
         user_obj = User.objects.get(pk=user)
         total = request.POST.get('total_hour')
         bag = models.CourseBag(
-            name=name, description=description, link=link, start_date=start, end_date=end ,trainer=user_obj , total_hours=total)
+            name=name, description=description,foundation=found_obj, link=link, start_date=start, end_date=end ,trainer=user_obj , total_hours=total)
         bag.save()
         if bag.pk:
             return JsonResponse({"data": 1})
         else:
             return JsonResponse({"data": -1})
-    return render(request, 'office/add-course_bag.html',context={"trainers":User.objects.filter(user_type=9)})
+    return render(request, 'office/add-course_bag.html',context={"trainers":User.objects.filter(user_type=9),"founds":models.Foundation.objects.all()})
 
-def bag_list(request):
+def found_bags(request):
+    context= {"founds":models.Foundation.objects.all()}
+    return render(request , 'office/found_bags.html',context=context)
+
+
+def bag_list(request,pk):
     user_obj = User.objects.get(pk=request.user.pk)
     if models.GreenParticipant.objects.filter(participant= user_obj).exists():
         green = models.GreenParticipant.objects.get(participant= user_obj)
-        context = {"bags": models.CourseBag.objects.all() , "green":green}
+        context = {"bags": models.CourseBag.objects.filter(foundation=pk) , "green":green}
         return render(request, 'office/bag-list.html', context=context)
     else:
-        context = {"bags": models.CourseBag.objects.all()}
+        context = {"bags": models.CourseBag.objects.filter(foundation=pk)}
         return render(request, 'office/bag-list.html', context=context)
 
 def bag_payment(request, pk):

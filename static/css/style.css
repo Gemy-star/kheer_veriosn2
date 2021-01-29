@@ -314,7 +314,7 @@ h1, h2, h3, h4, h5,
       color: #000; }
 
 
-      
+
 .btn-custom-1 {
   border-radius: 30px;
   border-top-right-radius: 0;
@@ -1233,7 +1233,7 @@ background-image:   url("../images/footer.png");
       .comment-list li .comment-body .meta {
         text-transform: uppercase;
         font-size: 13px;
-      
+
         color: #ccc; }
       .comment-list li .comment-body .reply {
         padding: 5px 10px;
@@ -2073,9 +2073,9 @@ background-color: #f5f4f4
 
 
 .text-lay-image {
-     right: 100px;
+    right: -3%;
     top: 40px !important;
-    margin-top: 110px !important;
+    margin-top: 12%!important;
     width: 388px !important;
     text-align: right !important;
     float: right !important;

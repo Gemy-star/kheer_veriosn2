@@ -25,11 +25,12 @@ urlpatterns = [
     path('tamkeen/list', views.tamkeen_money, name='tamkeen-list'),
     path('add/bag', views.add_course_bag, name='add-bag'),
     path('pay/bag/<int:pk>', views.bag_payment, name='pay-bag'),
-    path('bag/list', views.bag_list, name='bag-list'),
+    path('bag/list/<int:pk>', views.bag_list, name='bag-list'),
     path('add/pay/ticket', views.add_pay_ticket, name='pay-ticket'),
     path('add/bag/cer', views.add_bag_cer, name='add-bag-cer'),
     path('takafel/type', views.takafel_type, name='new-takafel-case-page'),
     path('takafel/type/<int:pk>', views.takafel_type_page, name='takafel-type-page'),
     path('add/greenparticipant', views.add_green_participant, name='add-green-participant'),
+    path('found/bags', views.found_bags, name='found-bags'),
 
 ]
