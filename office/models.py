@@ -1,6 +1,6 @@
 from django.db import models
 from accounts.models import User
-
+from datetime import date
 class Dependency(models.Model):
     GENDER_CHOICES = (
         ('M', 'ذكر'),
@@ -90,10 +90,11 @@ class Courses(models.Model):
     name = models.CharField(max_length=255, null=True, verbose_name='اسم الدوره')
     description = models.CharField(max_length=255, null=True, verbose_name='عن الدوره')
     provider = models.ForeignKey(Provider, null=True, on_delete=models.CASCADE, verbose_name='الراعى')
-    cases = models.ManyToManyField(Needy, null=True, verbose_name='الحاله المستحقه')
     start_date = models.DateField(verbose_name="تاريخ البدايه",null=True, auto_now=False, auto_now_add=False)
     end_date = models.DateField(verbose_name="تاريخ النهايه", null=True,auto_now=False, auto_now_add=False ,)
-
+    @property
+    def is_past_due(self):
+            return date.today() > self.end_date
 
     def __str__(self):
         return self.name
@@ -127,6 +128,9 @@ class CourseBag(models.Model):
     trainer = models.ForeignKey(User , on_delete=models.CASCADE , verbose_name='المدرب')
     green = models.ManyToManyField(GreenParticipant , verbose_name='المشاركين' ,null=True , blank=True)
     foundation = models.ForeignKey(Foundation ,null=True, blank=True, on_delete=models.CASCADE , verbose_name='المؤسسه')
+    @property
+    def is_past_due(self):
+            return date.today() > self.end_date
     def __str__(self):
         return self.name
 class PaymentCourseBag(models.Model):

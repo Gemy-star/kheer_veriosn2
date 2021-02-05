@@ -341,8 +341,7 @@ def home_emp(request):
 @login_required(login_url='login')
 def add_course(request):
     if request.method == 'GET':
-        context = {"cases": models.Needy.objects.filter(
-            enablity=1), "provider": models.Provider.objects.all()}
+        context = {"provider": models.Provider.objects.all()}
         return render(request, 'office/add-course.html', context=context)
     elif request.method == 'POST' and request.is_ajax:
         course_name = request.POST.get('course_name')
@@ -351,13 +350,9 @@ def add_course(request):
         start = request.POST.get('start')
         end = request.POST.get('end')
         course_desc = request.POST.get('course_desc')
-        cases = request.POST.getlist('cases[]')
         course = models.Courses(provider=provider_obj, description=course_desc,
                                 name=course_name, start_date=start, end_date=end)
         course.save()
-        for case in cases:
-            case_obj = models.Needy.objects.get(pk=case)
-            course.cases.add(case_obj)
         if course.pk:
             return JsonResponse({"data": 1})
         else:

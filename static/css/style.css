@@ -2329,4 +2329,14 @@ section .section-title {
 }
 
 
+.end_course{
+  background-image: url('../images/end_course.png') !important;
+  object-fit: contain !important;
+  opacity: 0.25 !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important; 
+  background-size: cover !important; 
+}
+
 

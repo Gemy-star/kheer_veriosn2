@@ -1,5 +1,5 @@
 from django.db import models
-from office.models import Needy, Foundation, Dependency
+from office.models import Courses, Needy, Foundation, Dependency
 from accounts.models import User
 
 
@@ -72,18 +72,30 @@ class HebaKheer(models.Model):
         return self.name
 
 
+
 class TamkeenSupply(models.Model):
     case = models.OneToOneField(Needy, on_delete=models.CASCADE, null=True, blank=True)
     TAMKEEN_CHOICES = (
-        (1, 'تمكين منتهى بتدريب'),
-        (2, 'تمكين منتهى بمقابل مادى'),
-        (3, 'تمكين منتهى بفرصة عمل'),
-        (4, 'غير مرشح'),
+        (1, 'تمكين منتهى بمقابل مادى'),
+        (2, 'تمكين منتهى بفرصة عمل'),
+        (3, 'غير مرشح'),
     )
     tamkeen_type = models.SmallIntegerField(null=True, blank=True, choices=TAMKEEN_CHOICES)
 
     def __str__(self):
         return str(self.tamkeen_type)
+
+
+class TamkeenCourses(models.Model):
+    TAMKEEN = (
+        (1, 'تمكين منتهى بمقابل مادى'),
+        (2, 'تمكين منتهى بفرصة عمل'),
+    )
+    tamkeen = models.SmallIntegerField(null=True, blank=True, choices=TAMKEEN)
+    courses = models.ForeignKey(Courses , null=True , on_delete=models.CASCADE)
+    def __str__(self):
+        return str(self.tamkeen)
+        
 
 
 class TechnicalSupport(models.Model):
@@ -100,3 +112,10 @@ class TechnicalSupport(models.Model):
     def __str__(self):
         return self.name
 
+class TamkeenPayment(models.Model):
+    course =  models.ForeignKey(TamkeenCourses ,on_delete=models.CASCADE , null=True )
+    course =  models.ForeignKey(TamkeenSupply ,on_delete=models.CASCADE , null=True )
+    user =  models.ForeignKey(User ,on_delete=models.CASCADE , null=True )
+    date = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.name

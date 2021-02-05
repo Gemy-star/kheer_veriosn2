@@ -5,17 +5,21 @@ from django.http import JsonResponse
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from office.models import Needy, Dependency, Foundation
-from cases.models import VolunteerProfile, NeedyCase, TechnicalSupport, TamkeenSupply
+from cases.models import TamkeenCourses, VolunteerProfile, NeedyCase, TechnicalSupport, TamkeenSupply
 from django.http import HttpResponse
 from django.views.generic import View
 from kheer_new.utils import render_to_pdf
 from django.core.files.storage import FileSystemStorage
 from cases import models
 from office.models import CourseBag
+from datetime import datetime
+
+
 
 def tamkeen_case_page(request,pk):
-    tam_obj = TamkeenSupply.objects.filter(tamkeen_type=pk)
-    contexts = {"cases":tam_obj}
+    courses = TamkeenCourses.objects.filter(tamkeen=pk)
+    date = datetime.today().date
+    contexts = {"courses":courses ,"today":date}
     return render(request,'cases/new_tamkeen_case.html',context=contexts)
 
 
