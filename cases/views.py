@@ -1,26 +1,28 @@
 from django.shortcuts import render, redirect
 from django.template.loader import get_template
-from datetime import datetime
 from django.http import JsonResponse
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from office.models import Needy, Dependency, Foundation
-from cases.models import TamkeenCourses, VolunteerProfile, NeedyCase, TechnicalSupport, TamkeenSupply
+from cases.models import  VolunteerProfile, NeedyCase, TechnicalSupport, TamkeenSupply
 from django.http import HttpResponse
 from django.views.generic import View
 from kheer_new.utils import render_to_pdf
 from django.core.files.storage import FileSystemStorage
 from cases import models
-from office.models import CourseBag
+from office.models import CourseBag , Courses
 from datetime import datetime
 
-
-
-def tamkeen_case_page(request,pk):
-    courses = TamkeenCourses.objects.filter(tamkeen=pk)
-    date = datetime.today().date
-    contexts = {"courses":courses ,"today":date}
-    return render(request,'cases/new_tamkeen_case.html',context=contexts)
+def pay_course_final(request , pk):
+    course = Courses.objects.get(pk=pk)
+    user_ob = User.objects.get(pk=request.user.pk)
+    context = {"tamkeens": models.TamkeenSupply.objects.all(), "course": course}
+    if request.method == 'GET':
+        return render(request, 'cases/pay-tamkeen.html', context=context)
+    elif request.method == 'POST' and request.is_ajax:
+        tamkeens = request.POST.get('tamkeens')
+        pay_obj = models.TamkeenPayment()
+    return render(request, 'cases/pay-tamkeen.html', context=context)
 
 
 
@@ -124,21 +126,21 @@ def add_tamkeen(request):
         need = request.POST.get('need')
         need_obj = Needy.objects.get(pk=need)
         tam_exist = TamkeenSupply.objects.filter(case=need_obj).exists()
-        if tam_exist : 
+        if tam_exist:
             tam_obj = TamkeenSupply.objects.get(case=need_obj)
             tam_obj.tamkeen_type = int(tamkeen_type)
-            if tam_obj :
-               return JsonResponse({"data": 1})
+            if tam_obj:
+                return JsonResponse({"data": 1})
             else:
-               return JsonResponse({"data": -1})
-        else :
-             obj_tamkeen = models.TamkeenSupply(
-             case=need_obj, tamkeen_type=int(tamkeen_type))
-             obj_tamkeen.save()
-             if obj_tamkeen:
-               return JsonResponse({"data": 1})
-             else:
-               return JsonResponse({"data": -1})
+                return JsonResponse({"data": -1})
+        else:
+            obj_tamkeen = models.TamkeenSupply(
+                case=need_obj, tamkeen_type=int(tamkeen_type))
+            obj_tamkeen.save()
+            if obj_tamkeen:
+                return JsonResponse({"data": 1})
+            else:
+                return JsonResponse({"data": -1})
     context = {"needy": Needy.objects.all()}
     return render(request, 'cases/add-tamkeen.html', context=context)
 
@@ -279,7 +281,7 @@ class FoundationAllReport(View):
             return response
         return HttpResponse("Not found")
 
-        
+
 class GreenCircleAllReport(View):
     def get(self, request, *args, **kwargs):
         template = get_template('circle-all-pdf.html')
@@ -304,6 +306,7 @@ class GreenCircleAllReport(View):
             response['Content-Disposition'] = content
             return response
         return HttpResponse("Not found")
+
 
 class VolunteerAllReport(View):
     def get(self, request, *args, **kwargs):
@@ -354,6 +357,6 @@ def add_vol_cer(request):
             return redirect('home-employee')
     return render(request, 'cases/add-volunteer-certificate.html', context=context)
 
-def cases_type(request):
-   return render(request , 'cases/cases_types.html')
 
+def cases_type(request):
+    return render(request, 'cases/cases_types.html')

@@ -19,11 +19,10 @@ urlpatterns = [
     path('volunteer/all/report', views.VolunteerAllReport.as_view(),
          name='volunteer-all-pdf'),
     path('circles/all/report', views.GreenCircleAllReport.as_view(),
-         name='circle-all-pdf'),     
+         name='circle-all-pdf'),
     path('enable/all/report', views.EnableAllReport.as_view(), name='enable-all-pdf'),
     path('volunteer/add/cer', views.add_vol_cer, name='add-vol-cer'),
     path('all/new', views.cases_all_new, name='cases-all-new'),
     path('types', views.cases_type, name='cases-types'),
-    path('types/<int:pk>', views.tamkeen_case_page, name='cases-tamkeen'),
-
+    path('course/<int:pk>', views.pay_course_final, name='tamkeen-course-pay')
 ]

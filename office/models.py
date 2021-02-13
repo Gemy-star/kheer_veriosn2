@@ -1,6 +1,8 @@
 from django.db import models
 from accounts.models import User
 from datetime import date
+
+
 class Dependency(models.Model):
     GENDER_CHOICES = (
         ('M', 'ذكر'),
@@ -90,26 +92,32 @@ class Courses(models.Model):
     name = models.CharField(max_length=255, null=True, verbose_name='اسم الدوره')
     description = models.CharField(max_length=255, null=True, verbose_name='عن الدوره')
     provider = models.ForeignKey(Provider, null=True, on_delete=models.CASCADE, verbose_name='الراعى')
-    start_date = models.DateField(verbose_name="تاريخ البدايه",null=True, auto_now=False, auto_now_add=False)
-    end_date = models.DateField(verbose_name="تاريخ النهايه", null=True,auto_now=False, auto_now_add=False ,)
+    start_date = models.DateField(verbose_name="تاريخ البدايه", null=True, auto_now=False, auto_now_add=False)
+    end_date = models.DateField(verbose_name="تاريخ النهايه", null=True, auto_now=False, auto_now_add=False, )
+    price = models.IntegerField(null=True, blank=True, verbose_name='السعر')
+    TAMKEEN = (
+        (1, 'تمكين منتهى بمقابل مادى'),
+        (2, 'تمكين منتهى بتوظيف')
+    )
+    tamkeen = models.SmallIntegerField(null=True, blank=True, choices=TAMKEEN)
+
     @property
     def is_past_due(self):
-            return date.today() > self.end_date
+        return date.today() > self.end_date
 
     def __str__(self):
         return self.name
 
 
-
-
 class GreenParticipant(models.Model):
-    participant = models.OneToOneField(User ,on_delete=models.CASCADE , verbose_name='المشارك')
-    foundation = models.ForeignKey(Foundation , on_delete=models.CASCADE , verbose_name='المؤسسه')
-    provider = models.ForeignKey(Provider , blank=True , null=True,on_delete=models.CASCADE , verbose_name='الداعم')
-    date_added = models.DateTimeField(auto_now_add=True , verbose_name='تاريخ اﻷضافه')
+    participant = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='المشارك')
+    foundation = models.ForeignKey(Foundation, on_delete=models.CASCADE, verbose_name='المؤسسه')
+    provider = models.ForeignKey(Provider, blank=True, null=True, on_delete=models.CASCADE, verbose_name='الداعم')
+    date_added = models.DateTimeField(auto_now_add=True, verbose_name='تاريخ اﻷضافه')
+
     def __str__(self):
         return self.foundation.name
-        
+
 
 class CourseBag(models.Model):
     name = models.CharField(max_length=255, null=True, verbose_name='اسم الدوره')
@@ -122,17 +130,21 @@ class CourseBag(models.Model):
         blank=True,
         null=True
     )
-    start_date = models.DateField(verbose_name="تاريخ البدايه",null=True, auto_now=False, auto_now_add=False)
-    end_date = models.DateField(verbose_name="تاريخ النهايه", null=True,auto_now=False, auto_now_add=False ,)
-    total_hours = models.IntegerField(null=True , blank=True , verbose_name='عدد الساعات')
-    trainer = models.ForeignKey(User , on_delete=models.CASCADE , verbose_name='المدرب')
-    green = models.ManyToManyField(GreenParticipant , verbose_name='المشاركين' ,null=True , blank=True)
-    foundation = models.ForeignKey(Foundation ,null=True, blank=True, on_delete=models.CASCADE , verbose_name='المؤسسه')
+    start_date = models.DateField(verbose_name="تاريخ البدايه", null=True, auto_now=False, auto_now_add=False)
+    end_date = models.DateField(verbose_name="تاريخ النهايه", null=True, auto_now=False, auto_now_add=False, )
+    total_hours = models.IntegerField(null=True, blank=True, verbose_name='عدد الساعات')
+    trainer = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='المدرب')
+    green = models.ManyToManyField(GreenParticipant, verbose_name='المشاركين', null=True, blank=True)
+    foundation = models.ForeignKey(Foundation, null=True, blank=True, on_delete=models.CASCADE, verbose_name='المؤسسه')
+
     @property
     def is_past_due(self):
-            return date.today() > self.end_date
+        return date.today() > self.end_date
+
     def __str__(self):
         return self.name
+
+
 class PaymentCourseBag(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='المستخدم')
     course = models.ForeignKey(CourseBag, on_delete=models.CASCADE, verbose_name='الحقيبه')

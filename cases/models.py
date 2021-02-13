@@ -72,7 +72,6 @@ class HebaKheer(models.Model):
         return self.name
 
 
-
 class TamkeenSupply(models.Model):
     case = models.OneToOneField(Needy, on_delete=models.CASCADE, null=True, blank=True)
     TAMKEEN_CHOICES = (
@@ -84,18 +83,6 @@ class TamkeenSupply(models.Model):
 
     def __str__(self):
         return str(self.tamkeen_type)
-
-
-class TamkeenCourses(models.Model):
-    TAMKEEN = (
-        (1, 'تمكين منتهى بمقابل مادى'),
-        (2, 'تمكين منتهى بفرصة عمل'),
-    )
-    tamkeen = models.SmallIntegerField(null=True, blank=True, choices=TAMKEEN)
-    courses = models.ForeignKey(Courses , null=True , on_delete=models.CASCADE)
-    def __str__(self):
-        return str(self.tamkeen)
-        
 
 
 class TechnicalSupport(models.Model):
@@ -112,10 +99,12 @@ class TechnicalSupport(models.Model):
     def __str__(self):
         return self.name
 
+
 class TamkeenPayment(models.Model):
-    course =  models.ForeignKey(TamkeenCourses ,on_delete=models.CASCADE , null=True )
-    course =  models.ForeignKey(TamkeenSupply ,on_delete=models.CASCADE , null=True )
-    user =  models.ForeignKey(User ,on_delete=models.CASCADE , null=True )
+    course = models.ForeignKey(Courses, on_delete=models.CASCADE, null=True)
+    cases = models.ManyToManyField(TamkeenSupply, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
-        return self.name
+        return self.user.first_name

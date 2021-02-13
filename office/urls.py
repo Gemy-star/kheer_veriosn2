@@ -32,5 +32,6 @@ urlpatterns = [
     path('takafel/type/<int:pk>', views.takafel_type_page, name='takafel-type-page'),
     path('add/greenparticipant', views.add_green_participant, name='add-green-participant'),
     path('found/bags', views.found_bags, name='found-bags'),
+    path('courses/search/<int:pk>', views.search_tamkeen_course, name='course-search'),
 
 ]

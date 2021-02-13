@@ -6,32 +6,36 @@ from office import models
 from accounts.models import User
 from cases.models import Certificate, NeedyCase, TamkeenSupply
 from django.contrib.auth.decorators import login_required
-from .filters import NeedyFilter, NeedyCaseFilter
+from .filters import NeedyFilter, NeedyCaseFilter, CourseFilter
 
 
 @login_required(login_url='login')
 def home_employee(request):
     user_obj = User.objects.get(pk=request.user.pk)
     request.session['user_id'] = user_obj.user_type
-    return render(request, 'office/home-employee.html',{"user":user_obj})
+    return render(request, 'office/home-employee.html', {"user": user_obj})
+
 
 def takafel_type(request):
-    return render(request,'office/takafel_type.html')
+    return render(request, 'office/takafel_type.html')
 
-def takafel_type_page(request,pk):
+
+def takafel_type_page(request, pk):
     needy = NeedyCase.objects.filter(case_type=pk)
-    contexts = {"cases":needy , "case_type":pk}
-    return render(request,'office/takafel_type_page.html',context=contexts)
-    
+    contexts = {"cases": needy, "case_type": pk}
+    return render(request, 'office/takafel_type_page.html', context=contexts)
+
+
 def add_green_participant(request):
     if request.method == 'GET':
         founds = models.Foundation.objects.all()
         proivders = models.Provider.objects.all()
         users = User.objects.filter(user_type__range=(1, 4))
-        return render(request , 'office/add-green-participant.html' , context={"emps": users , "providers":proivders , "founds":founds})
+        return render(request, 'office/add-green-participant.html',
+                      context={"emps": users, "providers": proivders, "founds": founds})
     elif request.method == 'POST' and request.is_ajax:
         emp = request.POST.get('emp')
-        provider = request.POST.get('provider') 
+        provider = request.POST.get('provider')
         found = request.POST.get('found')
         emp_obj = User.objects.get(pk=emp)
         provid = models.Provider.objects.get(pk=provider)
@@ -40,14 +44,15 @@ def add_green_participant(request):
             green_obj = models.GreenParticipant.objects.get(participant=emp_obj)
             green_obj.provider = provid
             green_obj.foundation = found_obj
-            return JsonResponse({"data":1})
+            return JsonResponse({"data": 1})
         else:
-            green = models.GreenParticipant(participant=emp_obj , provider=provid , foundation=found_obj)
+            green = models.GreenParticipant(participant=emp_obj, provider=provid, foundation=found_obj)
             green.save()
             if green.pk:
-                return JsonResponse({"data":1})
+                return JsonResponse({"data": 1})
             else:
-                return JsonResponse({"data":-1})
+                return JsonResponse({"data": -1})
+
 
 def add_course_bag(request):
     if request.method == 'POST' and request.is_ajax:
@@ -62,36 +67,40 @@ def add_course_bag(request):
         user_obj = User.objects.get(pk=user)
         total = request.POST.get('total_hour')
         bag = models.CourseBag(
-            name=name, description=description,foundation=found_obj, link=link, start_date=start, end_date=end ,trainer=user_obj , total_hours=total)
+            name=name, description=description, foundation=found_obj, link=link, start_date=start, end_date=end,
+            trainer=user_obj, total_hours=total)
         bag.save()
         if bag.pk:
             return JsonResponse({"data": 1})
         else:
             return JsonResponse({"data": -1})
-    return render(request, 'office/add-course_bag.html',context={"trainers":User.objects.filter(user_type=9),"founds":models.Foundation.objects.all()})
+    return render(request, 'office/add-course_bag.html',
+                  context={"trainers": User.objects.filter(user_type=9), "founds": models.Foundation.objects.all()})
+
 
 def found_bags(request):
-    context= {"founds":models.Foundation.objects.all()}
-    return render(request , 'office/found_bags.html',context=context)
+    context = {"founds": models.Foundation.objects.all()}
+    return render(request, 'office/found_bags.html', context=context)
 
 
-def bag_list(request,pk):
+def bag_list(request, pk):
     user_obj = User.objects.get(pk=request.user.pk)
-    if models.GreenParticipant.objects.filter(participant= user_obj).exists():
-        green = models.GreenParticipant.objects.get(participant= user_obj)
-        context = {"bags": models.CourseBag.objects.filter(foundation=pk) , "green":green}
+    if models.GreenParticipant.objects.filter(participant=user_obj).exists():
+        green = models.GreenParticipant.objects.get(participant=user_obj)
+        context = {"bags": models.CourseBag.objects.filter(foundation=pk), "green": green}
         return render(request, 'office/bag-list.html', context=context)
     else:
         context = {"bags": models.CourseBag.objects.filter(foundation=pk)}
         return render(request, 'office/bag-list.html', context=context)
 
+
 def bag_payment(request, pk):
     bag_obj = models.CourseBag.objects.get(pk=pk)
     user_obj = User.objects.get(pk=request.user.pk)
-    green_obj = models.GreenParticipant.objects.get(participant = user_obj)
+    green_obj = models.GreenParticipant.objects.get(participant=user_obj)
     if request.method == 'POST' and request.is_ajax:
-       bag_obj.green.add(green_obj)
-       return JsonResponse({"data": 1})
+        bag_obj.green.add(green_obj)
+        return JsonResponse({"data": 1})
     else:
         return render(request, 'office/payment-course_bag.html', context={"bag": bag_obj})
 
@@ -346,11 +355,12 @@ def add_course(request):
     elif request.method == 'POST' and request.is_ajax:
         course_name = request.POST.get('course_name')
         provider = request.POST.get('provider')
+        tamkeen = request.POST.get('tamkeen')
         provider_obj = models.Provider.objects.get(pk=provider)
         start = request.POST.get('start')
         end = request.POST.get('end')
         course_desc = request.POST.get('course_desc')
-        course = models.Courses(provider=provider_obj, description=course_desc,
+        course = models.Courses(tamkeen=int(tamkeen), provider=provider_obj, description=course_desc,
                                 name=course_name, start_date=start, end_date=end)
         course.save()
         if course.pk:
@@ -383,3 +393,11 @@ def cases_list(request):
 def tamkeen_money(request):
     context = {"cases": TamkeenSupply.objects.all()}
     return render(request, 'office/tamkeen-money.html', context=context)
+
+
+def search_tamkeen_course(request, pk):
+    tam_cou = models.Courses.objects.filter(tamkeen=pk)
+    courses_filter = CourseFilter(request.GET, queryset=tam_cou)
+    courses = courses_filter.qs
+    context = {"courses": courses, "myfilter": courses_filter}
+    return render(request, 'office/search-courses.html', context)
