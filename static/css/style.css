@@ -2044,13 +2044,13 @@ background-color: #f5f4f4
 .pricing.green .price {
   background: #5DBD7E; }
 .pricing.teal .price {
-  background: #16c3b0; }
+  background:  #5DBD7E; }
 
 .pricing.danger .price {
   background: #5DBD7E; }
 
 .bg-teal {
-  background: #2D6D93; }
+  background:  #5DBD7E; }
 
 
 
@@ -2328,15 +2328,5 @@ section .section-title {
   transform: rotateY(180deg);
 }
 
-
-.end_course{
-  background-image: url('../images/end_course.png') !important;
-  object-fit: contain !important;
-  opacity: 0.25 !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important; 
-  background-size: cover !important; 
-}
 
 

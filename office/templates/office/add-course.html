@@ -6,54 +6,67 @@
     <div class="main-content-inner">
         <div class="card center">
             <div class="card-header">
-              <center>  <h5 class="body-font text-green"> إضافة منحه</h5></center>
+                <center><h5 class="body-font text-green"> إضافة منحه</h5></center>
             </div>
             <div class="card-body">
                 <form method="post" autocomplete="off">
                     {% csrf_token %}
-                <div class="form-group row">
-                     <input class="form-control body-font" placeholder="اسم المنحه" name="course_name" id="course_name" type="text">
-                </div>
-                 <div class="form-group row">
-                     <input class="form-control body-font" placeholder="وصف المنحه" name="course_desc" id="course_desc" type="text">
-                </div>
-                                    <div class="form-group row">
-                   <div class="col-12">
-                        <label for="provider" class="body-font text-green"> إختر الراعى</label>
-                        <select class="form-control" name="provider" id="provider">
-                            {% for pro in provider %}
-                                <option class="form-control" value="{{ pro.pk }}">{{ pro.name }}</option>
-                            {% endfor %}
-                        </select>
-                   </div>
+                    <div class="form-group row">
+                        <input class="form-control body-font" placeholder="اسم المنحه" name="course_name"
+                               id="course_name" type="text">
                     </div>
-              <div class="form-group row">
-    <div class="col-12">
-        <label for="start" class="body-font">تاريخ البدايه</label>
-        <br/>
+                    <div class="form-group row">
+                        <input class="form-control body-font" placeholder="وصف المنحه" name="course_desc"
+                               id="course_desc" type="text">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label for="provider" class="body-font text-green"> إختر الراعى</label>
+                            <select class="form-control" name="provider" id="provider">
+                                {% for pro in provider %}
+                                    <option class="form-control" value="{{ pro.pk }}">{{ pro.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label for="tamkeen" class="body-font text-green"> نوع التمكين</label>
+                            <select class="form-control" name="tamkeen" id="tamkeen">
+                                <option class="form-control" value="2">منتهى بتوظيف</option>
+                                <option class="form-control" value="1">منتهى بمقابل مادى</option>
 
-        <input class="form-control" type="date" id="start" name="trip-start"
-               value="2021-01-01"
-               min="2021-01-01" max="2021-01-01">
-        
-    </div>
-    <div class="form-group row">
-        <div class="col-12">
-            <label for="end" class="body-font">تاريخ النهايه</label>
-            <br/>
-            <input class="form-control" type="date" id="end" name="trip-start"
-                   value="2021-01-01"
-                   min="2021-01-01" max="2021-01-01">
-            
-        </div>
-              </div>
-                                    <div class="form-group row">
-                                    <div class="col-md-12" id="depend_div">
-                                        <button type="submit" id="btn_add"
-                                                class="btnn btn-teal btn-custom-1 body-font"> إضافة
-                                        </button>
-                                    </div>
-                                </div>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label for="start" class="body-font">تاريخ البدايه</label>
+                            <br/>
+
+                            <input class="form-control" type="date" id="start" name="trip-start"
+                                   value="2021-01-01"
+                                   min="2021-01-01" max="2021-01-01">
+
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <label for="end" class="body-font">تاريخ النهايه</label>
+                                <br/>
+                                <input class="form-control" type="date" id="end" name="trip-start"
+                                       value="2021-01-01"
+                                       min="2021-01-01" max="2021-01-01">
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12" id="depend_div">
+                                <button type="submit" id="btn_add"
+                                        class="btnn btn-teal btn-custom-1 body-font"> إضافة
+                                </button>
+                            </div>
+                        </div>
 
                 </form>
             </div>
@@ -64,17 +77,18 @@
 
 
 {% block javascript %}
- <script>
- $(() => {
-    $("#btn_add").on('click',(event) => {
-        event.preventDefault();
-                     $.ajax({
+    <script>
+        $(() => {
+            $("#btn_add").on('click', (event) => {
+                event.preventDefault();
+                $.ajax({
                     method: 'POST',
                     url: '{% url 'add-course' %}',
                     data: {
                         'course_name': $('#course_name').val(),
                         'provider': $('#provider').val(),
                         'course_desc': $('#course_desc').val(),
+                        'tamkeen': $('#tamkeen').val(),
                         'start': $('#start').val(),
                         'end': $('#end').val(),
                         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
@@ -102,7 +116,7 @@
                     }
                 });
 
-    });
- });
- </script>
+            });
+        });
+    </script>
 {% endblock javascript %}

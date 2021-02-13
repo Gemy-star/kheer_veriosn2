@@ -1,0 +1,130 @@
+{% extends 'main.html' %}
+
+
+{% block title %} التمكين {% endblock title %}
+
+{% block content %}
+
+  <div class="ftco-blocks-cover-1">
+        <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/paramg.jpg')">
+            <div class="container">
+                <div class="row align-items-center ">
+
+                    <div class="col-md-5 mt-5 pt-5">
+                        <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+                        <h1 class="mb-3 font-weight-bold body-font"> التمكين</h1>
+                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
+                            <strong> التمكين </strong></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+   <div class="site-section">
+
+<div class="container">
+    <div class="row mb-5">
+    <div class="col-12 text-center">
+    <span class="text-cursive h5 text-red d-block"> التمكين</span>
+    <h2 class="text-green">شارك فى الخير</h2>
+    </div>
+    </div>
+<div class="row">
+    <div class="col-10">
+        <div class="card">
+            <div class="card-body">
+            <center>
+                <h4 class="body-font text-green"> سيتم مراسلتك مره أخرى بعد تأكيد عملية المساهمه
+                </h4>
+            </center>
+                <hr/>
+                <p class="body-font text-white">{{ course.name }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="card">
+        <div class="card-header">
+            <center>
+                <h5 class="text-green body-font">خير السعوديه</h5>
+            </center>
+        </div>
+        <div class="card-body">
+            <form enctype="multipart/form-data" method="post" >
+                {% csrf_token %}
+                <div class="row form-group">
+                    <div class="col-10">
+                        <label class="text-green body-font" for="cases">
+                            إختار مستفيد
+                        </label>
+                        <select id="cases" name="cases" class="form-control body-font" multiple>
+
+                           {% for tamkeen in tamkeens %}
+                            <option class="body-font" value="{{ tamkeen.pk }}">{{ tamkeen.case.name }} {{ tamkeen.case.case_number }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="alert alert-success">
+                            <p class="body-font text-white"> يمكنك أكثر من مستفيد</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    <div class="card-footer">
+        <center>
+            <button class="btn btn-teal body-font text-white" type="button" id="btn_pay" >
+                تأكيد
+            </button>
+        </center>
+    </div>
+    </div>
+</div>
+   </div>
+{% endblock content %}
+
+
+{% block javascript %}
+
+<script>
+
+$(() =>  {
+   $("#btn_pay").on('click' , (e) =>  {
+       e.preventDefault();
+                $.ajax({
+                    method: 'POST',
+                    url: '{% url 'pay-courses' %}',
+                    data: {
+                        'tamkeens': $('#cases').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function (data) {
+                        if (data.data === 1) {
+                            swal({
+                                title: "تم",
+                                text: "تم  بنجاح",
+                                icon: "success",
+                                button: "إغلاق",
+                            });
+                            window.location.href = "{% url 'home-page' %}"
+                        } else {
+                            swal({
+                                title: "خطا",
+                                text: "من فضلك راجع البيانات",
+                                icon: "error",
+                                button: "إغلاق",
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+
+   })
+});
+</script>
+
+{% endblock javascript %}

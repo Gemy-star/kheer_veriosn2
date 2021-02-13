@@ -4,6 +4,14 @@ from django_filters import CharFilter
 from cases.models import NeedyCase
 
 
+class CourseFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(field_name='name',lookup_expr='iexact')
+
+    class Meta:
+        model = Courses
+        fields = ['start_date', 'end_date', 'name']
+
+
 class NeedyFilter(django_filters.FilterSet):
     name_part = CharFilter(field_name='name', lookup_expr='icontains')
 
