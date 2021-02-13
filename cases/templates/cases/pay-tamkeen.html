@@ -34,7 +34,7 @@
     </div>
 <div class="row">
     <div class="col-10">
-        <div class="card">
+        <div class="card" style="text-align: center">
             <div class="card-body">
             <center>
                 <h4 class="body-font text-green"> سيتم مراسلتك مره أخرى بعد تأكيد عملية المساهمه
@@ -46,6 +46,8 @@
         </div>
     </div>
 </div>
+<hr/>
+<br/>
     <div class="card">
         <div class="card-header">
             <center>
@@ -66,9 +68,10 @@
                             <option class="body-font" value="{{ tamkeen.pk }}">{{ tamkeen.case.name }} {{ tamkeen.case.case_number }}</option>
                             {% endfor %}
                         </select>
-                        <div class="alert alert-success">
-                            <p class="body-font text-white"> يمكنك أكثر من مستفيد</p>
-                        </div>
+
+                    <div id="alert" class="alert alert-success body-font text-white" role="alert">
+يمكنك أكثر من مستفيد</div>
+
                     </div>
                 </div>
             </form>
@@ -91,11 +94,15 @@
 <script>
 
 $(() =>  {
+    $("#alert").hide();
+    $("#tamkeen").on('change', (e)=> {
+       $("#alert").show();
+    });
    $("#btn_pay").on('click' , (e) =>  {
        e.preventDefault();
                 $.ajax({
                     method: 'POST',
-                    url: '{% url 'pay-courses' %}',
+                    url: '{% url 'tamkeen-course-pay' course.pk %}',
                     data: {
                         'tamkeens': $('#cases').val(),
                         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
