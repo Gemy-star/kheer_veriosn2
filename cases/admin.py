@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import TamkeenPayment,NeedyCase, Contact, Payment, Certificate, TamkeenSupply, VolunteerProfile, TechnicalSupport
+from .models import TamkeenPayment, Contact, Payment, Certificate, TamkeenSupply, VolunteerProfile, TechnicalSupport
 
-admin.site.register(NeedyCase)
 admin.site.register(Contact)
 admin.site.register(Payment)
 admin.site.register(Certificate)

@@ -4,16 +4,17 @@ from django.http import JsonResponse
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from office.models import Needy, Dependency, Foundation
-from cases.models import  VolunteerProfile, NeedyCase, TechnicalSupport, TamkeenSupply
+from cases.models import VolunteerProfile, TechnicalSupport, TamkeenSupply
 from django.http import HttpResponse
 from django.views.generic import View
 from kheer_new.utils import render_to_pdf
 from django.core.files.storage import FileSystemStorage
 from cases import models
-from office.models import CourseBag , Courses
+from office.models import CourseBag, Courses
 from datetime import datetime
 
-def pay_course_final(request , pk):
+
+def pay_course_final(request, pk):
     course = Courses.objects.get(pk=pk)
     user_ob = User.objects.get(pk=request.user.pk)
     context = {"tamkeens": models.TamkeenSupply.objects.all(), "course": course}
@@ -23,7 +24,6 @@ def pay_course_final(request , pk):
         tamkeens = request.POST.get('tamkeens')
         pay_obj = models.TamkeenPayment()
     return render(request, 'cases/pay-tamkeen.html', context=context)
-
 
 
 @login_required(login_url='login')
@@ -51,29 +51,19 @@ def add_needycase(request):
         case_obj = Needy.objects.get(pk=case_pk)
         case_type = request.POST.get('case_type')
         details = request.POST.get('details')
-        st = NeedyCase.objects.filter(case=case_obj).exists()
-        if st:
-            st_obj = models.NeedyCase.objects.get(case=case_obj)
-            st_obj.details = details
-            st_obj.case_type = int(case_type)
-            st_obj.save()
+        case_obj.support = int(case_type)
+        case_obj.details = details
+        if case_obj.pk:
             return JsonResponse({"data": 1})
         else:
-            obj = models.NeedyCase(
-                details=details, case=case_obj, case_type=int(case_type))
-            obj.save()
-            if obj.pk:
-                return JsonResponse({"data": 1})
-            else:
-                return JsonResponse({"data": -1})
+            return JsonResponse({"data": -1})
 
 
 @login_required(login_url='login')
 def payment_page(request, pk):
     case_obj = Needy.objects.get(pk=pk)
-    needycase_obj = models.NeedyCase.objects.get(case=case_obj)
     if request.method == 'GET':
-        return render(request, 'cases/payment-page.html', context={"case": needycase_obj})
+        return render(request, 'cases/payment-page.html', context={"case": case_obj})
     elif request.method == 'POST' and request.is_ajax:
         user_id = request.user.pk
         user_obj = User.objects.get(pk=user_id)
@@ -151,7 +141,7 @@ def volunteer_list(request):
 
 
 def new_show_case(request):
-    cases = NeedyCase.objects.all()
+    cases = Needy.objects.all()
     context = {"cases": cases}
     return render(request, 'cases/new_case_show.html', context=context)
 
@@ -178,30 +168,6 @@ def technical_list(request):
     return render(request, 'main/technical_list.html', context={"problems": problems})
 
 
-class CaseInShow(View):
-    def get(self, request, *args, **kwargs):
-        template = get_template('case-in-show.html')
-        needyinshow = NeedyCase.objects.all()
-        user_obj = User.objects.get(pk=request.user.pk)
-        context = {
-            "company": "خير السعوديه",
-            "user": user_obj,
-            "needs": needyinshow,
-            "topic": "الحالات المجهزة للعرض",
-            "today": datetime.today().strftime('%Y-%m-%d'),
-        }
-        html = template.render(context)
-        pdf = render_to_pdf('case-in-show.html', context)
-        if pdf:
-            response = HttpResponse(pdf, content_type='application/pdf')
-            filename = "Invoice_%s.pdf" % ("12341231")
-            content = "inline; filename='%s'" % (filename)
-            download = request.GET.get("download")
-            if download:
-                content = "attachment; filename='%s'" % (filename)
-            response['Content-Disposition'] = content
-            return response
-        return HttpResponse("Not found")
 
 
 class NeedyAllReport(View):

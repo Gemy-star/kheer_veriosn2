@@ -32,6 +32,16 @@ class Needy(models.Model):
         ('أخرى', 'أخرى'),
 
     )
+    CASES_CHOICES = (
+        (1, 'دعم الكهرباء'),
+        (2, 'دعم الغذاء'),
+        (3, 'دعم التعليم'),
+        (4, 'دعم الماء'),
+        (5, 'دعم الصحة'),
+        (6, 'دعم اﻷيجار'),
+
+    )
+    details = models.TextField(blank=True, null=True, verbose_name='عرض الحاله')
     home = models.CharField(null=True, max_length=255, choices=HOME_CHOICES, verbose_name='السكن')
     national_id = models.CharField(unique=True, max_length=255, null=True, verbose_name='رقم الهويه')
     phone = models.CharField(max_length=255, null=True, verbose_name='الجوال')
@@ -56,7 +66,7 @@ class Needy(models.Model):
     data_added = models.DateField(auto_now_add=True, null=True)
     case_number = models.SmallIntegerField(null=True, blank=True)
     emp_name = models.CharField(null=True, max_length=255, verbose_name='اسم المشرف')
-    support = models.CharField(null=True, max_length=255, verbose_name='الدعم المقدم')
+    support = models.SmallIntegerField(null=True, max_length=255, verbose_name='الدعم المقدم', choices=CASES_CHOICES)
     department = models.CharField(null=True, max_length=255, verbose_name='المنطقة')
     amount = models.IntegerField(null=True, max_length=255, verbose_name='قيمة الدعم')
     total_donations = models.IntegerField(null=True, default=0, verbose_name='إجمالى التبرعات')

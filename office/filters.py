@@ -1,11 +1,10 @@
 import django_filters
 from .models import *
 from django_filters import CharFilter
-from cases.models import NeedyCase
 
 
 class CourseFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(field_name='name',lookup_expr='iexact')
+    name = django_filters.CharFilter(field_name='name', lookup_expr='iexact')
 
     class Meta:
         model = Courses
@@ -17,11 +16,5 @@ class NeedyFilter(django_filters.FilterSet):
 
     class Meta:
         model = Needy
-        fields = ['name', 'data_added', 'status', 'dependencies', 'amount']
+        fields = ['source_income','home','health_status']
         exclude = ['case_number', 'national_id']
-
-
-class NeedyCaseFilter(django_filters.FilterSet):
-    class Meta:
-        model = NeedyCase
-        fields = ['case_type']

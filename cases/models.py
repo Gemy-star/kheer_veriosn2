@@ -3,24 +3,6 @@ from office.models import Courses, Needy, Foundation, Dependency
 from accounts.models import User
 
 
-class NeedyCase(models.Model):
-    CASES_CHOICES = (
-        (1, 'دعم الكهرباء'),
-        (2, 'دعم الغذاء'),
-        (3, 'دعم التعليم'),
-        (4, 'دعم الماء'),
-        (5, 'دعم الصحة'),
-        (6, 'دعم اﻷيجار'),
-
-    )
-    details = models.TextField(blank=True, null=True, verbose_name='عرض الحاله')
-    case = models.OneToOneField(Needy, on_delete=models.CASCADE)
-    case_type = models.SmallIntegerField(blank=True, choices=CASES_CHOICES, null=True, verbose_name='نوع الحاله')
-
-    def __str__(self):
-        return self.case.name
-
-
 class VolunteerProfile(models.Model):
     job = models.CharField(max_length=255, null=True, blank=True, verbose_name='المهنه')
     desc = models.CharField(max_length=255, null=True, blank=True, verbose_name='التخصص')

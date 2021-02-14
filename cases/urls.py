@@ -12,7 +12,6 @@ urlpatterns = [
     path('all', views.new_show_case, name='show-all-cases'),
     path('technical-support', views.add_technical, name='technical-support'),
     path('technical-list', views.technical_list, name='technical-list'),
-    path('show/report', views.CaseInShow.as_view(), name='case-show-pdf'),
     path('needy/all/report', views.NeedyAllReport.as_view(), name='needy-all-pdf'),
     path('found/all/report', views.FoundationAllReport.as_view(),
          name='found-all-pdf'),

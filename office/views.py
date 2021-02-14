@@ -4,9 +4,9 @@ from django.core import serializers
 from django.http import JsonResponse
 from office import models
 from accounts.models import User
-from cases.models import Certificate, NeedyCase, TamkeenSupply
+from cases.models import Certificate, TamkeenSupply
 from django.contrib.auth.decorators import login_required
-from .filters import NeedyFilter, NeedyCaseFilter, CourseFilter
+from .filters import NeedyFilter, CourseFilter
 
 
 @login_required(login_url='login')
@@ -21,7 +21,7 @@ def takafel_type(request):
 
 
 def takafel_type_page(request, pk):
-    needy = NeedyCase.objects.filter(case_type=pk)
+    needy = models.Needy.objects.filter(support=pk)
     contexts = {"cases": needy, "case_type": pk}
     return render(request, 'office/takafel_type_page.html', context=contexts)
 
@@ -377,17 +377,17 @@ def search_needy_dash(request):
     return render(request, 'office/search-needy-dash.html', context)
 
 
-def search_needy(request):
-    needcases = NeedyCase.objects.all()
-    need_filter = NeedyCaseFilter(request.GET, queryset=needcases)
+def search_needy(request, pk):
+    needcases = models.Needy.objects.filter(support=pk)
+    need_filter = NeedyFilter(request.GET, queryset=needcases)
     need = need_filter.qs
     context = {"neeedies": need, "myfilter": need_filter}
-    return render(request, 'office/search-needy.html', context)
+    return render(request, 'office/search-needy.html',context=context)
 
 
 def cases_list(request):
-    context = {"cases": NeedyCase.objects.all().order_by('case__data_added')}
-    return render(request, 'office/cases-list.html', context=context)
+    # context = {"cases": nee.objects.all().order_by('case__data_added')}
+    return render(request, 'office/cases-list.html')
 
 
 def tamkeen_money(request):
