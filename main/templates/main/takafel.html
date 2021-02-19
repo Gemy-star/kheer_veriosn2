@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+{%  load static %}
+{% block title %} التكافل  {% endblock title %}
+
+
+{% block content %}
+   <div class="ftco-blocks-cover-1">
+       <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+      <div class="site-section-cover overlay" data-stellar-background-ratio="0.5" style="background-image: url('../../../static/images/takafel.png')">
+        <div class="container">
+          <div class="row align-items-center ">
+
+            <div class="col-md-5 mt-5 pt-5">
+              <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+              <h1 class="mb-3 font-weight-bold body-font"> التكافل </h1>
+              <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span> <strong> التكافل </strong></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <img src="{% static 'images/takafel.png' %}" alt="Image" class="img-fluid">
+          </div>
+          <div class="col-md-6 ml-auto pl-md-6">
+<span class="text-cursive h5 text-green head-size">  التكافل / تم تفعيل التكافل الاجتماعي (تفريج الكرب) باستخدام التقنيات الحديثة </span>
+              <hr/>
+            <p class="body-font text-black " style="font-size: 20px;"><span>
+                للربط بين الكيانات المقتدرة من المؤسسات والأفراد من فاعلي الخير والمستفيدات
+                من الجمعيات الخيرية الرسمية في المملكة العربية السعودية منذ عام 2010 – 2020 تم تغطية 000 حالة  بإجمالي 00000ريال قيمة الدعم لعدد من أنوع الدعم تشمل الايجار السكني – فواتير المياه – فواتير الكهرباء- المؤونة الغذائية -الضائقات المالية – دعم الصحة والتعليم ،ولاعتماد الاستدامة كقيمة أساسية في ادائنا لتخفيف الفقر توجهنا الى تمكين المستفيدات من خلال تطويرهن واعدادهن لسوق العمل عن طريق توفير عدة برامج ودورات تدريبية .
+
+            </span></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+{% endblock content %}

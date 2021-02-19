@@ -49,7 +49,12 @@
  <div class="row">
      {% for needy in neeedies %}
                <div class="col-md-4">
-              <div class="card" style="text-align: center; ">
+                {% if needy.is_past_due %}
+                                 <div class="cc back" style="background-image: url('../../../static/images/end_pay.png');text-align: center;">
+                       {% else %}
+                       <div class="cc back" style=";text-align: center;">
+
+                                     {% endif %}
                   <div class="card-body">
                       <div class="pricing green">
 <h3>{{ needy.name }}</h3>
@@ -57,7 +62,8 @@
 <ul class="ul-check list-unstyled teal">
 <li>{{ needy.details }}</li>
 <li>{{ needy.job }}</li>
-<li>{{ course.status }}</li>
+<li>{{ needy.status }}</li>
+    <li>{{ needy.health_status }}</li>
 </ul>
                      <center>
                           <span class="price">

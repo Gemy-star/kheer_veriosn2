@@ -7,7 +7,7 @@ from accounts.models import User
 from cases.models import Certificate, TamkeenSupply
 from django.contrib.auth.decorators import login_required
 from .filters import NeedyFilter, CourseFilter
-
+from datetime import datetime
 
 @login_required(login_url='login')
 def home_employee(request):
@@ -382,7 +382,7 @@ def search_needy(request, pk):
     need_filter = NeedyFilter(request.GET, queryset=needcases)
     need = need_filter.qs
     context = {"neeedies": need, "myfilter": need_filter}
-    return render(request, 'office/search-needy.html',context=context)
+    return render(request, 'office/search-needy.html', context=context)
 
 
 def cases_list(request):
@@ -396,8 +396,9 @@ def tamkeen_money(request):
 
 
 def search_tamkeen_course(request, pk):
+    today = datetime.today().strftime('%Y-%m-%d')
     tam_cou = models.Courses.objects.filter(tamkeen=pk)
     courses_filter = CourseFilter(request.GET, queryset=tam_cou)
     courses = courses_filter.qs
-    context = {"courses": courses, "myfilter": courses_filter}
+    context = {"courses": courses, "myfilter": courses_filter, "pk": pk , "today":today }
     return render(request, 'office/search-courses.html', context)

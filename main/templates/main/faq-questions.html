@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 {% load static %}
 
-{% block title %}  الأسئله المتكرره{% endblock title %}
+{% block title %}  الأسئله الشائعة{% endblock title %}
 
 
 
@@ -16,8 +16,8 @@
 
             <div class="col-md-5 mt-5 pt-5">
               <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
-              <h1 class="mb-3 font-weight-bold body-font">  الأسئله المتكرره</h1>
-              <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span> <strong>  الأسئله المتكرره</strong></p>
+              <h1 class="mb-3 font-weight-bold body-font">  الأسئله الشائعة</h1>
+              <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span> <strong>  الأسئله الشائعة</strong></p>
             </div>
 
           </div>
@@ -31,52 +31,28 @@
 <div>
 		<ul id="" class="bg-home">
 <center>
-<li class="body-font"><h2 class="body-font text-blue head-size">الأسئله المتكرره</h2></li>
+<li class="body-font"><h2 class="body-font text-blue head-size">الأسئله الشائعة</h2></li>
 </center>
             <hr/>
-			<li class="body-font">
-				<a class="body-font" style="color: #5DBD7E" href=""><span>ما رؤية ورسالة خير السعودية ؟</span></a>
+	{% for faq in faqs %}
+
+            		<li class="body-font">
+				<a class="body-font" style="color: #5DBD7E" href=""><span>{{ faq.title }}</span></a>
 				<div class="">
           <div class="">
               <p class="body-font">
-رؤية خير السعودية:
-أن تكون خير السعودية رائدة في أنسنة العمل الخيري والتكافل الاجتماعي المتناغم ونشر ثقافة الخير والعطاء بوعي في المملكة العربية السعودية.
-              </p>
+{{ faq.content }}             </p>
           </div>
 				</div> <!-- cd-faq__content -->
 			</li>
 
-			<li class="body-font">
-				<a class="body-font" style="color: #5DBD7E" href=""><span> رسالة خير السعودية:</span></a>
-				<div class="">
-          <div class="">
-<p class="body-font">
-السعي لتمكين وتفعيل التكافل الاجتماعي باستخدام التقنيات الحديثة للربط بين الكيانات المقتدرة من المؤسسات والافراد والمستفيدات من الجمعيات الخيرية الرسمية في المملكة العربية السعودية. </p>
-          </div>
-				</div> <!-- cd-faq__content -->
-			</li>
+            {% endfor %}
 
-			<li class="">
-				<a class="body-font" style="color: #5DBD7E" href="#0"><span>كيف يمكن للجمعيات الخيرية المساهمة والالتحاق في خير السعودية ؟</span></a>
-				<div class="">
-          <div class="text-component">
-              <p class="body-font">
-كيف يمكن الالتحاق والتطوع في خير السعودية؟ يمكنكم التطوع من خلال  إرسال السيرة الذاتية على الايميل التالي info@khieer.com
-              </p>
-          </div>
-				</div> <!-- cd-faq__content -->
-			</li>
 
-			<li class="">
-				<a class=" body-font" style="color: #5DBD7E" href="#0"><span>من هم مستفيدي خير السعودية ؟</span></a>
-				<div class="">
-          <div class="text-component">
-              <p class="body-font">
-الأرامل والمطلقات وأبنائهن لدى شركاء خير السعودية من الجمعيات
-              </p>
-          </div>
-				</div> <!-- cd-faq__content -->
-			</li>
+
+
+
+
 		</ul>
 </div>
         </div>

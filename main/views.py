@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from . import  models
 from cases.models import Contact
 
 
@@ -14,8 +15,13 @@ def contact(request):
     return render(request, 'main/contact.html')
 
 
+def ksa_shop(request):
+    return render(request, 'main/shop-ksa.html')
+
+
 def faq_question(request):
-    return render(request, 'main/faq-questions.html')
+    context = {"faqs": models.FAQ.objects.all()}
+    return render(request, 'main/faq-questions.html' , context=context)
 
 
 def ksa_2030(request):
@@ -28,6 +34,10 @@ def roaya_message(request):
 
 def tamkeen(request):
     return render(request, 'main/tamkeen.html')
+
+
+def takafel(request):
+    return render(request, 'main/takafel.html')
 
 
 def green_circle(request):

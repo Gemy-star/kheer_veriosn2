@@ -69,7 +69,18 @@ class Needy(models.Model):
     support = models.SmallIntegerField(null=True, max_length=255, verbose_name='الدعم المقدم', choices=CASES_CHOICES)
     department = models.CharField(null=True, max_length=255, verbose_name='المنطقة')
     amount = models.IntegerField(null=True, max_length=255, verbose_name='قيمة الدعم')
-    total_donations = models.IntegerField(null=True, default=0, verbose_name='إجمالى التبرعات')
+    completed = models.BooleanField(default=False, null=True, blank=True)
+
+    @property
+    def is_past_due(self):
+        return self.completed
+
+    @property
+    def add_amount(self, donate):
+        if self.amount == 0:
+            self.completed = True
+        else:
+            self.amount = self.amount - donate
 
     def __str__(self):
         return self.name

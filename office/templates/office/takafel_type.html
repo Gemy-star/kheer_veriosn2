@@ -33,8 +33,32 @@
     <h2 class="text-green">شارك فى الخير</h2>
     </div>
     </div>
-    <div class="row">
+    <div class="row mb-2">
+            <div class="col-lg-4 mb-4 mb-lg-0">
+    <div class="package text-center bg-white">
+    <span class="card-img"><img src="{% static 'images/se7a_icon.png'%}" alt="Image" class="img-fluid"></span>
+    <h3 class="text-green">الصحة</h3>
+    <p><a href="{% url 'search-needy' 5 %}" class="btn btn-teal text-white  mt-4">الحالات</a></p>
+    </div>
+    </div>
     <div class="col-lg-4 mb-4 mb-lg-0">
+    <div class="package text-center bg-white">
+    <span class="card-img"><img src="{% static 'images/egar_icon.png'%}" alt="Image" class="img-fluid"></span>
+        <h3 class="text-green">اﻷيجار</h3>
+    <p><a href="{% url 'search-needy' 6 %}" class="btn btn-teal text-white  mt-4">الحالات</a></p>
+    </div>
+    </div>
+    <div class="col-lg-4 mb-4 mb-lg-0">
+    <div class="package text-center bg-white">
+    <span class="card-img"><img src="{% static 'images/ta3leem_icon.png'%}" alt="Image" class="img-fluid"></span>
+         <h3 class="text-green">التعليم</h3>
+    <p><a href="{% url 'search-needy' 3 %}" class="btn btn-teal text-white  mt-4">الحالات</a></p>
+    </div>
+    </div>
+
+    </div>
+    <div class="row mb-3">
+         <div class="col-lg-4 mb-4 mb-lg-0">
     <div class="package text-center bg-white">
     <span class="card-img"><img src="{% static 'images/kahraba_icon.png'%}" alt="Image" class="img-fluid"></span>
     <h3 class="text-green">الكهرباء</h3>
@@ -56,34 +80,15 @@
     </div>
     </div>
     </div>
-    <div class="row">
-    <div class="col-lg-4 mb-4 mb-lg-0">
-    <div class="package text-center bg-white">
-    <span class="card-img"><img src="{% static 'images/se7a_icon.png'%}" alt="Image" class="img-fluid"></span>
-    <h3 class="text-green">الصحة</h3>
-    <p><a href="{% url 'search-needy' 5 %}" class="btn btn-teal text-white  mt-4">الحالات</a></p>
+<div>
+</div>
+</div>
+
+
     </div>
-    </div>
-    <div class="col-lg-4 mb-4 mb-lg-0">
-    <div class="package text-center bg-white">
-    <span class="card-img"><img src="{% static 'images/egar_icon.png'%}" alt="Image" class="img-fluid"></span>
-        <h3 class="text-green">اﻷيجار</h3>
-    <p><a href="{% url 'search-needy' 6 %}" class="btn btn-teal text-white  mt-4">الحالات</a></p>
-    </div>
-    </div>
-    <div class="col-lg-4 mb-4 mb-lg-0">
-    <div class="package text-center bg-white">
-    <span class="card-img"><img src="{% static 'images/ta3leem_icon.png'%}" alt="Image" class="img-fluid"></span>
-         <h3 class="text-green">التعليم</h3>
-    <p><a href="{% url 'search-needy' 3 %}" class="btn btn-teal text-white  mt-4">الحالات</a></p>
-    </div>
-    </div>
-    </div>
+
        
 
 
 {% endblock content %}
-
-
-
 
