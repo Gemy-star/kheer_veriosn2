@@ -842,7 +842,7 @@ background-image:   url("../images/footer.png");
   .site-section-cover,
   .site-section-cover .container > .row {
     height: calc(100vh - 196px);
-    min-height: 777px; }
+    min-height: 544px; }
     @media (max-width: 991.98px) {
       .site-section-cover,
       .site-section-cover .container > .row {

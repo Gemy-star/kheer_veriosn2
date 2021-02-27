@@ -52,7 +52,7 @@
                 {% if needy.is_past_due %}
                                  <div class="cc back" style="background-image: url('../../../static/images/end_pay.png');text-align: center;">
                        {% else %}
-                       <div class="cc back" style=";text-align: center;">
+                       <div class="cc" style=";text-align: center;">
 
                                      {% endif %}
                   <div class="card-body">
@@ -74,7 +74,11 @@
 </div>
                   </div>
 
-
+<div class="card-footer">
+<center>
+    <a href="{% url 'payNeedy' needy.pk %}" class="body-font text-white btn btn-success"> مساهمة  </a>
+</center>
+</div>
               </div>
 </div>
 

@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-  <div class="row mb-5">
+  <div class="row mb-5" style="margin-bottom: 16rem!important;">
     <div class="col-12 text-center">
     <h2 class="text-cursive head-size h5 text-red d-block">الدائرة الخضراء</h2>
     <span class="text-green">الدائرة الخضراء نتطلع أن تكون الدائرة الخضراء طريقة نعبر بها عن حب العطاء ومنها نكبر لأجل مجتمعنا </span>
@@ -38,7 +38,12 @@
     <div class="package text-center bg-white">
     <span class="card-img"><img src="{% static 'images/share3.png'%}" alt="Image" class="img-fluid"></span>
     <h3 class="text-green">{{found.name}}</h3>
+        {% if request.user.first_name %}
     <p><a href="{% url 'bag-list' found.pk %}" class="btn btn-teal text-white  mt-4">الحقائب</a></p>
+            {% else %}
+                <p><a href="{% url 'bag-list' found.pk %}" class="btn btn-teal text-white disabled  mt-4">الحقائب</a></p>
+
+        {% endif %}
     </div>
     </div>
   

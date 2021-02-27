@@ -175,6 +175,15 @@ class PaymentCourseBag(models.Model):
         return self.user.first_name
 
 
+class PayDonation(models.Model):
+    amount = models.IntegerField(blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name='المساهم')
+    needy = models.ForeignKey(Needy, on_delete=models.CASCADE, null=True, blank=True, verbose_name='المساهم')
+
+    def __str__(self):
+        return self.needy.name
+
+
 class PayTicket(models.Model):
     needy = models.OneToOneField(Needy, on_delete=models.CASCADE, verbose_name='المستفيد')
     ticket = models.FileField(verbose_name='سند الصرف', null=True, blank=True)

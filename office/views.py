@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from .filters import NeedyFilter, CourseFilter
 from datetime import datetime
 
+
 @login_required(login_url='login')
 def home_employee(request):
     user_obj = User.objects.get(pk=request.user.pk)
@@ -395,10 +396,26 @@ def tamkeen_money(request):
     return render(request, 'office/tamkeen-money.html', context=context)
 
 
+def needy_pay(request, id):
+    needy = models.Needy.objects.get(pk=id)
+    context = {"needy": needy}
+    if request.method == 'POST' and request.is_ajax:
+        amount = request.POST.get('amount')
+        user = User.objects.get(pk=request.user.pk)
+        needy.add_amount(int(amount))
+        pay = models.PayDonation(amount=int(amount), needy=needy, user=user)
+        pay.save()
+        if pay.pk:
+            return JsonResponse({"data": 1})
+        else:
+            return JsonResponse({"data": -1})
+    return render(request, 'office/pay_need.html', context=context)
+
+
 def search_tamkeen_course(request, pk):
     today = datetime.today().strftime('%Y-%m-%d')
     tam_cou = models.Courses.objects.filter(tamkeen=pk)
     courses_filter = CourseFilter(request.GET, queryset=tam_cou)
     courses = courses_filter.qs
-    context = {"courses": courses, "myfilter": courses_filter, "pk": pk , "today":today }
+    context = {"courses": courses, "myfilter": courses_filter, "pk": pk, "today": today}
     return render(request, 'office/search-courses.html', context)

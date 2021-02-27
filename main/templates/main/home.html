@@ -65,13 +65,9 @@
 
                 <div class="col-lg-3">
                     <div class="block-2" style="background-color: white; height: 255px;">
-                         {% if request.user.first_name %}
                           <a class="btn btn-primary btn-lg btn-block body-font text-white" style="background-color: #1d5987;"
                            href="{% url 'found-bags' %}">دائرة الخضراء</a>
-                           {% else %}
-                            <a class="btn btn-primary btn-lg btn-block body-font text-white disabled" style="background-color: #1d5987;"
-                           href="{% url 'found-bags' %}">دائرة الخضراء</a>
-                         {% endif %}
+
                   <img src="{% static 'images/green_icon.png' %}" class="img-fluid">
 
                     </div>
