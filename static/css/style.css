@@ -841,7 +841,6 @@ background-image:   url("../images/footer.png");
     z-index: 2; }
   .site-section-cover,
   .site-section-cover .container > .row {
-    height: calc(100vh - 196px);
     min-height: 544px; }
     @media (max-width: 991.98px) {
       .site-section-cover,
@@ -857,7 +856,7 @@ background-image:   url("../images/footer.png");
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.2);
       z-index: 1; }
   .site-section-cover.inner-page,
   .site-section-cover.inner-page .container > .row {
