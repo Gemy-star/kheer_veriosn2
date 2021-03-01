@@ -2446,3 +2446,25 @@ section .section-title {
 
 
 
+
+
+
+.wrapper{
+  width:100%;
+  padding-top: 20px;
+  text-align:center;
+}
+h2{
+  color:#5DBD7E;
+}
+.carousel{
+  width:90%;
+  margin:0px auto;
+}
+.slick-slide{
+  margin:10px;
+}
+.slick-slide img{
+  width:100%;
+  border: 2px solid #fff;
+}
