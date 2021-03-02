@@ -42,12 +42,12 @@
    
    {% for found in founds   %}
 
-  <div class="card" style="margin-inline: 10rem; margin-bottom: 5rem;">
+  <div class="card" style="margin-inline: 10rem; ">
 									<div class="card-header">
 										<h5 class="card-title m-0 p-0 font-weight-bolder text-secondary">{{found.name}}</h5>
 									</div>
 									<div class="card-body text-left">
-                                    <img src={% static 'images/tatw3.png' %}/>
+                                    <img src={% static 'images/tatw3.png' %} class="img-fluid" style="width:200px; height:200px;"/>
   						   {% if request.user.first_name %}
 									<div class="card-footer"><a href="{% url 'bag-list' found.pk %}" class="btn btn-success text-white">الحقائب</a></div>
                                     {% else %}
