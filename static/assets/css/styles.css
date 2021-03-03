@@ -810,7 +810,7 @@ ul.breadcrumbs {
 }
 
 .text-red {
-    color: #fd4d40;
+    color: #2D6D93;
 }
 
 .text-green {
@@ -2482,7 +2482,7 @@ table.dataTable thead td {
 }
 
 .form-gp.has-error, .form-gp.has-error label, .form-gp.has-error input, .form-gp.has-error input::placeholder, .form-gp.has-error i {
-    color: var(--red);
+    color: #2D6D93;
 }
 
 .rmber-area {
