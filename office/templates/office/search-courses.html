@@ -72,38 +72,61 @@
                <div class="col-md-4">
                <div >
                    {% if course.is_past_due %}
-                                 <div class="cc back" style="background-image: url('../../../static/images/end_course.png');text-align: center;">
+                                 <div class="content cc back" style="background-image: url('../../../static/images/end_course.png');text-align: center;">
                        {% else %}
-                       <div class="cc back" style=";text-align: center;">
+                                                <div class="content cc">
 
-                                     {% endif %}
-                  <div class="card-body">
-                      <div class="pricing green">
-<h3>{{ course.name }}</h3>
-                          <hr/>
-<ul class="ul-check list-unstyled teal">
-<li><i class="fa fa-pen body-font" aria-hidden="true">{{ course.description }}</i></li>
-<li><i class="fa fa-calendar" aria-hidden="true">{{ course.start_date }}</i></li>
-<li><i class="fa fa-calendar" aria-hidden="true">{{ course.end_date }}</i></li>
-</ul>
-                     <center>
-                          <span class="price">
-<span>ريال{{ course.price }}</span>
-</span>
-                     </center>
 
-</div>
-                  </div>
-                      <div class="card-footer">
-                          {% if request.user.first_name %}
-                          <p><a href="{% url 'tamkeen-course-pay' course.pk %}" class="btn btn-success body-font text-white">شراء</a></p>
-                     {% else %}
-                                                    <p><a href="{% url 'tamkeen-course-pay' course.pk %}" class="btn btn-success disabled body-font text-white">شراء</a></p>
+                        {% endif %}
+                                           <div class="card_needy">
+                                <div class="itemright">
+                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa fa-book"></i>
+                                </div>
+                                <div class="itemleft">
+                                    <h4 class="body-font text-green">{{ course.name }}</h4>
+                                </div>
+                            </div>
 
-                          {% endif %}
-                      </div>
+                            <div class="card_needy">
+                                <div class="itemright">
+                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa fa-calendar"></i>
+                                </div>
+                                <div class="itemleft">
+                                    <h4 class="body-font text-green">{{ course.start_date }}</h4>
+                                </div>
+                            </div>
+                            <div class="card_needy">
+                                <div class="itemright">
+                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa  fa-calendar"></i>
+                                </div>
+                                <div class="itemleft">
+                                    <h4 class="body-font text-green">{{ course.end_date }}</h4>
+                                </div>
+                            </div>
+                            <div class="card_needy">
+                                <div class="itemright">
+                                    <img src="{% static 'images/coins.png' %}" style="width:30px; height:30px;" />
+                                </div>
+                                <div class="itemleft">
+                                    <h4 class="body-font text-green">{{ course.price }}</h4>
+                                </div>
+                            </div>
+                            <div class="card_needy">
+                                <div class="itemright">
+                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa  fa-newspaper-o "></i>
+                                </div>
+                                <div class="itemleft">
+                                    <h4 class="body-font text-green">{{ course.description }}</h4>
+                                </div>
+                            </div>
 
-              </div>
+                            <div style="display:flex; align-items:center; justify-content:center; align-self: center; border-radius: 50px;">
+                                <a class="btn-sm btn-success body-font" style="color:#ffffff; text-align: center; margin-top: 2rem;"
+                                  href="{% url 'tamkeen-course-pay' course.pk %}">مشاركه</a>
+                            </div>
+
+
+                        </div>
 
                </div>
 </div>
@@ -114,6 +137,7 @@
  </div>
  </div>
 </div>
+
 
 {% endblock content %}
 
