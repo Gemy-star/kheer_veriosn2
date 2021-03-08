@@ -17,5 +17,6 @@ urlpatterns = [
     path('reports', views.reports, name='reports'),
     path('shop-ksa', views.ksa_shop, name='shop-ksa'),
     path('takafel', views.takafel, name='takafel'),
+    path('who', views.who_page, name='who'),
 
 ]

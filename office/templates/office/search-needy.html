@@ -46,49 +46,77 @@
      </div>
  <hr/>
  <br/>
- <div class="row">
-     {% for needy in neeedies %}
-               <div class="col-md-4">
-                {% if needy.is_past_due %}
-                                 <div class="cc back" style="background-image: url('../../../static/images/end_pay.png');text-align: center;">
-                       {% else %}
-                       <div class="cc" style=";text-align: center;">
-
-                                     {% endif %}
-                  <div class="card-body">
-                      <div class="pricing green">
-<h3>{{ needy.name }}</h3>
-                          <hr/>
-<ul class="ul-check list-unstyled teal">
-<li>{{ needy.details }}</li>
-<li>{{ needy.job }}</li>
-<li>{{ needy.status }}</li>
-    <li>{{ needy.health_status }}</li>
-</ul>
-                     <center>
-                          <span class="price">
-<span>ريال{{ needy.ammount }}</span>
-</span>
-                     </center>
-
+   <div class="row">
+           {% for need in neeedies %}
+                                <div class="col-lg-4">
+                        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                            <div class="mainflip">
+                                <div class="frontside">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            {% if need.support == 1 %}
+                                                <p><img width="70" height="70"
+                                                        src="{% static 'images/electricty.png' %}" alt="card image"></p>
+                                                <h4 class="card-title body-font">دعم الكهرباء</h4>
+                                                <p class="card-text body-font">لتقديم الدعم للحالات التى تريد دعم فى
+                                                    الكهرباء</p>
+                                            {% endif %}
+                                            {% if need.support == 2 %}
+                                                <p><img src="{% static 'images/food.png' %}" alt="card image"></p>
+                                                <h4 class="card-title body-font">دعم الغذاء</h4>
+                                                <p class="card-text body-font">لتقديم الدعم للحالات التى تريد دعم فى
+                                                    الطعام</p>
+                                            {% endif %}
+                                            {% if need.support == 3 %}
+                                                <p><img src="{% static 'images/education.png' %}" alt="card image"></p>
+                                                <h4 class="card-title body-font">دعم التعليم</h4>
+                                                <p class="card-text">لتقديم الدعم للحالات التى تريد دعم فى التعليم</p>
+                                            {% endif %}
+                                            {% if need.support == 4 %}
+                                                <p><img src="{% static 'images/education.png' %}" alt="card image"></p>
+                                                <h4 class="card-title body-font">دعم الماء</h4>
+                                                <p class="card-text body-font">لتقديم الدعم للحالات التى تريد دعم فى
+                                                    الماء</p>
+                                            {% endif %}
+                                            {% if need.support == 5 %}
+                                                <p><img src="{% static 'images/money.png' %}" alt="card image"></p>
+                                                <h4 class="card-title body-font">دعم الملبس</h4>
+                                                <p class="card-text body-font">لتقديم الدعم للحالات التى تريد دعم فى
+                                                    الملبس</p>
+                                            {% endif %}
+                                     <a class="body-font  btn btn-success text-white" href="{% url 'needy-payment' need.pk %}"> تقديم الدعم </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="backside">
+                                    <div class="card">
+                                        <div class="card-body text-center mt-4">
+                                            <h4 class="body-font">الحالة الصحية </h4>
+                                            <p class="card-title body-font">{{ need.health_status }}</p>
+                                            <hr/>
+                                            <h5 class="body-font text-black"><img src="{% static 'images/coins.png' %}" width="30" height="30">
+                                                {{ need.amount }}</h5>
+                                            <div class="progress">
+  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ need.total_donations  }}"
+  aria-valuemin="0" aria-valuemax="{{need.amount }}" style="background-color: #5DBD7E ; width:50%">
+  </div>
 </div>
-                  </div>
+                                            <h4 class="body-font">رقم الحالة</h4>
+                                            <p class="card-text body-font">{{ need.case_number }}</p>
+                                     <a style="color:white;" class="btn btn-success btn-sm body-font" href="{% url 'needy-payment' need.pk %}"> تقديم الدعم </a>
 
-<div class="card-footer">
-<center>
-    <a href="{% url 'payNeedy' needy.pk %}" class="body-font text-white btn btn-success"> مساهمة  </a>
-</center>
-</div>
-              </div>
-</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
-     {% endfor %}
-
+            {% endfor %}
+   </div>
  </div>
- </div>
 </div>
-
 {% endblock content %}
 
 

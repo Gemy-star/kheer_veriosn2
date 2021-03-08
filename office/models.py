@@ -75,12 +75,7 @@ class Needy(models.Model):
     def is_past_due(self):
         return self.completed
 
-    @property
-    def add_amount(self, donate):
-        if self.amount == 0:
-            self.completed = True
-        else:
-            self.amount = self.amount - donate
+
 
     def __str__(self):
         return self.name

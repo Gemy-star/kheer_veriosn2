@@ -17,8 +17,8 @@
                     <div class="col-md-5 mt-5 pt-5">
                         <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
                         <h1 class="mb-3 font-weight-bold body-font">انواع التمكين</h1>
-                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
-                            <strong>انواع التمكين </strong></p>
+                        <p ><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
+                            <strong >انواع التمكين </strong></p>
                     </div>
 
                 </div>
@@ -36,23 +36,25 @@
 
     <div class="row mb-5">
     <div class="col-12 text-center">
-    <span class="text-cursive h5 text-red d-block">أنواع التمكين</span>
+    <span class="text-cursive h5 text-red d-block" style="    font-weight: 800;
+    font-size: 24px;
+">أنواع التمكين</span>
     <h2 class="text-green">شارك فى الخير</h2>
     </div>
     </div>
 
       <div class="row">
     <div class="col-lg-6 mb-3 mb-lg-0">
-    <div class="package text-center bg-white">
+    <div class="package text-center bg-white" style="    height: 67vh !important;">
     <span class="card-img"><img src="{% static 'images/card_money_tamkeen.png'%}" alt="Image" class="img-fluid"></span>
     <h3 class="text-teal"></h3>
-    <p><a href="{% url 'course-search' 1 %}" class="btn btn-teal text-white  mt-4">الدورات</a></p>
+    <p><a style="position: absolute;top: 76%;" href="{% url 'course-search' 1 %}" class="btn btn-teal text-white  mt-4">المزيد</a></p>
     </div>
     </div>
     <div class="col-lg-6 mb-3 mb-lg-0">
     <div class="package text-center bg-white">
     <span class="card-img"><img src="{% static 'images/banner_employer_tamkeen.png'%}" alt="Image" class="img-fluid"></span>
-    <p><a href="{% url 'course-search' 2 %}" class="btn btn-teal text-white  mt-4">الدورات</a></p>
+    <p><a  href="{% url 'course-search' 2 %}" class="btn btn-teal text-white  mt-4">المزيد</a></p>
     </div>
     </div>
     </div>

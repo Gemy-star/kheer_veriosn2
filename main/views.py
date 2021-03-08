@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from . import  models
+from . import models
 from cases.models import Contact
 
 
@@ -9,6 +9,10 @@ def home_page(request):
 
 def about_page(request):
     return render(request, 'main/about.html')
+
+
+def who_page(request):
+    return render(request, 'main/who-us.html')
 
 
 def contact(request):
@@ -21,7 +25,7 @@ def ksa_shop(request):
 
 def faq_question(request):
     context = {"faqs": models.FAQ.objects.all()}
-    return render(request, 'main/faq-questions.html' , context=context)
+    return render(request, 'main/faq-questions.html', context=context)
 
 
 def ksa_2030(request):

@@ -396,20 +396,24 @@ def tamkeen_money(request):
     return render(request, 'office/tamkeen-money.html', context=context)
 
 
-def needy_pay(request, id):
-    needy = models.Needy.objects.get(pk=id)
+def needy_pay(request, pk):
+    needy = models.Needy.objects.get(pk=pk)
     context = {"needy": needy}
     if request.method == 'POST' and request.is_ajax:
         amount = request.POST.get('amount')
         user = User.objects.get(pk=request.user.pk)
-        needy.add_amount(int(amount))
+        if needy.amount == 0:
+            needy.completed = True
+        else:
+            needy.amount = needy.amount - int(amount)
         pay = models.PayDonation(amount=int(amount), needy=needy, user=user)
         pay.save()
         if pay.pk:
             return JsonResponse({"data": 1})
         else:
             return JsonResponse({"data": -1})
-    return render(request, 'office/pay_need.html', context=context)
+    else:
+        return render(request, 'office/pay_need.html', context=context)
 
 
 def search_tamkeen_course(request, pk):

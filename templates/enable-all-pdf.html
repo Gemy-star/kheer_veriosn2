@@ -42,11 +42,11 @@
             background-color: #fff;
             /* Modern Browsers */
         }
+  body {
+      direction: rtl;
+  }
+            @font-face {font-family: RTLFont; src: url('../static/assets/fonts/Amiri-Italic.ttf')}
 
-        @font-face {
-            font-family: RTLFont;
-            src: url('../static/assets/fonts/helveticaneuelt-arabic-55-roman.ttf')
-        }
 
         body {
             font-weight: 200;
@@ -92,6 +92,7 @@
             <h3 class="header"> {{ topic }}</h3>
             <br>
             <div class="body">
+            <pdf:language name="arabic"/>
                 <table style="width:100%">
                     <tr>
                         <th>رقم الحاله</th>

@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'cases',
     #3rd party package
     'django_filters',
-    'xhtml2pdf'
+    'xhtml2pdf',
+    'easy_pdf'
 ]
 
 

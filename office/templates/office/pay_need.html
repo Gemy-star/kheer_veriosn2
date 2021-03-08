@@ -39,7 +39,7 @@
                         {% csrf_token %}
                         <div class="form-group row">
                             <div class="col-md-6">
-                                <input type="number" name="ammount" id="ammount"
+                                <input type="number" name="amount" id="amount"
                                        class="form-control"
                                        placeholder="قيمة المساهمه">
                             </div>
@@ -47,12 +47,6 @@
                         </div>
                         <hr/>
                         <hr/>
-    <div class="form-group row">
-        <div class="col-12">
-            <label class="body-font" for="cond">الموافقه على ما سبق</label>
-        <input type="checkbox" id="cond" name="cond" value="True">
-        </div>
-    </div>
                         <div class="card-footer">
                             <div class="form-group row">
                                 <div class="col-md-12" id="btn add">
@@ -105,9 +99,9 @@ $("#btn_pay").on('click' , event =>   {
     event.preventDefault();
                     $.ajax({
                     method: 'POST',
-                    url: '{% url 'pay_need' needy.pk %}',
+                    url: '{% url 'needy-payment' needy.pk %}',
                     data: {
-                        'ammount': $('#ammount').val(),
+                        'amount': $('#amount').val(),
                         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
                     },
                     success: function (data) {

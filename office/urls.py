@@ -33,6 +33,6 @@ urlpatterns = [
     path('add/greenparticipant', views.add_green_participant, name='add-green-participant'),
     path('found/bags', views.found_bags, name='found-bags'),
     path('courses/search/<int:pk>', views.search_tamkeen_course, name='course-search'),
-    path('pay/needy/<int:id>', views.needy_pay, name='payNeedy'),
+    path('<int:pk>', views.needy_pay, name='needy-payment'),
 
 ]

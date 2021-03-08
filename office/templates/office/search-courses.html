@@ -95,7 +95,12 @@
 </div>
                   </div>
                       <div class="card-footer">
+                          {% if request.user.first_name %}
                           <p><a href="{% url 'tamkeen-course-pay' course.pk %}" class="btn btn-success body-font text-white">شراء</a></p>
+                     {% else %}
+                                                    <p><a href="{% url 'tamkeen-course-pay' course.pk %}" class="btn btn-success disabled body-font text-white">شراء</a></p>
+
+                          {% endif %}
                       </div>
 
               </div>
