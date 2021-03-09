@@ -12,7 +12,6 @@ from django.core.files.storage import FileSystemStorage
 from cases import models
 from office.models import CourseBag, Courses
 from datetime import datetime
-import pandas as pd
 
 
 def pay_course_final(request, pk):

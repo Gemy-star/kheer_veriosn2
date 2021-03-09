@@ -1,117 +1,135 @@
 {% extends 'main.html' %}
+{% load static %}
 
-
-{% block title %}  الحقائب الدراسيه{% endblock title %}
-
-
+{% block title %}   الدوائر الخضراء {% endblock title %}
 
 {% block content %}
     <div class="ftco-blocks-cover-1">
         <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+                                {% if pk ==   1 %}
         <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
-             style="background-image: url('../../../static/images/green_banner.png')">
+             style="background-image: url('../../../static/images/banner_money_tamkeen.png')">
             <div class="container">
                 <div class="row align-items-center ">
 
                     <div class="col-md-5 mt-5 pt-5">
                         <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
-                        <h1 class="mb-3 font-weight-bold body-font">   منتجات الدائره الخضراء </h1>
+                        <h1 class="mb-3 font-weight-bold body-font"> تمكين منتهى بدعم مالى</h1>
+
                         <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
-                            <strong>   منتجات الدائره الخضراء </strong></p>
+                            <strong>تمكين منتهى بدعم مالى </strong></p>
                     </div>
 
                 </div>
             </div>
         </div>
+        {% else %}
+                <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/banner_employer_tamkeen.png')">
+            <div class="container">
+                <div class="row align-items-center ">
+
+                    <div class="col-md-5 mt-5 pt-5">
+                        <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+                        <h1 class="mb-3 font-weight-bold body-font"> تمكين منتهى بتوظيف</h1>
+
+                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
+                            <strong>تمكين منتهى بدعم يتوظيف </strong></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+     {% endif %}
     </div>
 
-  <div class="site-section">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-12 text-center">
-                <h2 class="h2 text-red d-block"> منتجات الدائره الخضراء </h2>
-                <span class="text-green h5 d-block text-red">شارك فى الخير</span>
-                </div>
-                </div>
-            <div class="row">
-                {% for bag in bags %}
-                <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                      <center>
-                        <i class="fa fa-archive" aria-hidden="true" style="display: inline-block;"></i>
-                        <h5 class="body-font text-green" style="display: inline-block;"> {{ bag.name }}</h5>
-                          </center>
-                        <p class="card-body body-font text-black">{{ bag.description }}</p>
-                      <h5 class="body-font card-body text-green">تاريخ البدايه</h5>
-                        <p class="card-body body-font text-black">{{ bag.start_date }}</p>
-                        <h5 class="body-font card-body text-green">تاريخ النهايه</h5>
+<div class="site-section">
+ <div class="container">
+     <div class="section-title">
+         <h3 class="body-font text-green" style="font-size:large; font-weight:800; text-align:center;"> الدوائر الخضراء</h3>
+     </div>
+ <hr/>
+ <br/>
+ <div class="row">
+     {% for bag in bags %}
+               <div class="col-md-4 col-lg-4" style="margin: 0 auto; padding: 2%;">
 
-                        <p class="card-body body-font text-black">{{ bag.end_date }}</p>
-                        <h5 class="body-font card-body text-green">عدد الساعات </h5>
+                   {% if course.is_past_due %}
+                                 <div class="card content_bag cc back" style="background-image: url('../../../static/images/end_course.png');text-align: center;">
+                       {% else %}
+                                                <div class="card content_bag cc">
 
-                        <p class="card-body body-font text-black">{{ bag.total_hours }}</p>
-                        <h5 class="body-font card-body text-green">المدرب  </h5>
 
-                        <p class="card-body body-font text-black">
-                            {{ bag.trainer.first_name }} {{ bag.trainer.last_name }}
+                        {% endif %}
+               <div class="card_needy">
+                       <img src="{{ bag.logo.url }}" class="card_needy_img" />
+               </div>
+                                           <div class="card_needy">
+                                <div class="itemright">
+                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa fa-book"></i>
+                                </div>
+                                <div class="itemleft">
+                                    <h4 class="body-font text-green">{{ bag.name }}</h4>
+                                </div>
+                            </div>
 
-                        </p>
-                        <hr/>
-                        <div id="myProgress">
-                            <div id="myBar"></div>
-                          </div>
+                            <div class="card_needy">
+                                <div class="itemright">
+                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa fa-calendar"></i>
+                                </div>
+                                <div class="itemleft">
+                                    <h4 class="body-font text-green">{{ bag.start_date }}</h4>
+                                </div>
+                            </div>
+                            <div class="card_needy">
+                                <div class="itemright">
+                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa  fa-calendar"></i>
+                                </div>
+                                <div class="itemleft">
+                                    <h4 class="body-font text-green">{{ bag.end_date }}</h4>
+                                </div>
+                            </div>
+                            <div class="card_needy">
+                                <div class="itemright">
+                                  <i class="fa fa-clock-o" aria-hidden="true" style="color:#5DBD7E; font-size:medium;" ></i>
 
-                    </div>
-                    <div class="card-footer">
-                        <center>
-                          {% if green.pk %}
-                            <a class="btn btn-teal text-white body-font" href="{% url 'pay-bag' bag.pk %}">
-                                اشترك بالحقيبة
-                            </a>
-                            {% else %}
-                              <a class="btn btn-teal text-white body-font disabled" href="{% url 'pay-bag' bag.pk %}">
-  اشترك بالحقيبة                            
-  </a>
-                          {% endif %}
-                        </center>
-                    </div>
-                </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-  </div>
+                                </div>
+                                <div class="itemleft">
+                                    <h4 class="body-font text-green">{{ bag.duration }}</h4>
+                                </div>
+                            </div>
+                            <div class="card_needy">
+                                <div class="itemright">
+                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa  fa-user "></i>
+                                </div>
+                                <div class="itemleft">
+                                    <h4 class="body-font text-green">{{ bag.trainer.first_name }}  {{ bag.trainer.last_name }}</h4>
+                                </div>
+                            </div>
 
+                            <div style="display:flex; align-items:center; justify-content:center; align-self: center; border-radius: 50px;">
+                                <a class="btn-sm btn-success body-font" style="color:#ffffff; text-align: center; margin-top: 2rem;"
+                                  href="{% url 'pay-bag' bag.pk %}">إبدأ</a>
+                            </div>
+
+
+                        </div>
+
+               </div>
+                     {% endfor %}
+
+</div>
+
+
+
+
+
+ </div>
+</div>
+</div>
 
 
 {% endblock content %}
 
 
-{% block javascript %}
-<script>
-$(()=> {
-
-    var i = 0;
-function move() {
-  if (i == 0) {
-    i = 1;
-    var elem = document.getElementById("myBar");
-    var width = 1;
-    var id = setInterval(frame, 10);
-    function frame() {
-      if (width >= 100) {
-        clearInterval(id);
-        i = 0;
-      } else {
-        width++;
-        elem.style.width = width + "%";
-      }
-    }
-  }
-    
-});
-
-</script>  
-
-{% endblock javascript %}

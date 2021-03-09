@@ -36,25 +36,47 @@
                 <div class="row">
 
             {% for found in founds %}
+                    <div class="card cc content">
+                        <div class="card_needy" style="height: 6vh;">
+                            <div class="itemright">
+                                <i class="fa fa-building text-green" style="font-size: xx-large;"></i>
+                            </div>
+                               <div class="itemleft">
+                                    <h4 class="body-font text-green" style="text-align:center; align-self: center; font-size:large;">{{ found.name }}</h4>
+                            </div>
+                        </div>
+                                  <div class="card_needy" style="height: 6vh;">
+                            <div class="itemright">
+                                <i class="fa fa-newspaper-o text-green" style="font-size: xx-large;"></i>
+                            </div>
+                               <div class="itemleft">
+                                    <h4 class="body-font text-green" style="text-align:center;  align-self: center; font-size:0.85rem;">{{ found.description }}</h4>
+                            </div>
+                        </div>
+                        <div class="card_needy" style="height: 6vh;">
+                            <div class="itemright">
+                                <i class="fa fa-phone text-green" style="font-size: xx-large;"></i>
+                            </div>
+                               <div class="itemleft">
+                                    <h4 class="body-font text-green" style="text-align:center; align-self: center; font-size:large;">{{ found.phone }}</h4>
+                            </div>
+                        </div>
+                        <div class="card_needy" style="height: 6vh;">
+                            <div class="itemright">
+                                <i class="fa fa-map-marker text-green" style="font-size: xx-large;"></i>
+                            </div>
+                               <div class="itemleft">
+                                    <h4 class="body-font text-green" style="text-align:center; align-self: center; font-size:large;">{{ found.address }}</h4>
+                            </div>
+                        </div>
+                                                <div style="display:flex; align-items:center; justify-content:center; align-self: center; border-radius: 50px;margin-top: 1.5rem; ">
+                                <a class="btn btn-success body-font" style="color:#ffffff; text-align: center;"
+                                   href="{% url 'bag-list' found.pk %}">المزيد</a>
+                            </div>
 
-                <div class="card" style="margin-inline: 10rem; ">
-                <div class="card-header">
-                    <h5 class="card-title m-0 p-0 font-weight-bolder text-secondary">{{ found.name }}</h5>
-                </div>
-                <div class="card-body text-left">
-                    <img src={% static 'images/tatw3.png' %} class="img-fluid" style="width:200px; height:200px;"/>
-                    {% if request.user.first_name %}
-                        <div class="card-footer"><a href="{% url 'bag-list' found.pk %}"
-                                                    class="btn btn-success text-white">الحقائب</a></div>
-                    {% else %}
-                        <div class="card-footer"><a href="{% url 'bag-list' found.pk %}"
-                                                    class="btn btn-success disabled text-white">الحقائب</a></div>
-                    {% endif %}
-                </div>
+
+                    </div>
             {% endfor %}
-            </div>
-
-
         </div>
 
     </div>

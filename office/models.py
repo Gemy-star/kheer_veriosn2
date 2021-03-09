@@ -75,8 +75,6 @@ class Needy(models.Model):
     def is_past_due(self):
         return self.completed
 
-
-
     def __str__(self):
         return self.name
 
@@ -138,6 +136,9 @@ class GreenParticipant(models.Model):
 class CourseBag(models.Model):
     name = models.CharField(max_length=255, null=True, verbose_name='اسم الدوره')
     description = models.CharField(max_length=255, null=True, verbose_name='عن الدوره')
+    logo = models.ImageField(verbose_name='لوجو الدوره', null=True)
+    duration = models.SmallIntegerField(null=True, blank=True)
+
     link = models.URLField(
         verbose_name='المسار',
         max_length=128,

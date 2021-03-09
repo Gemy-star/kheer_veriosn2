@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     #3rd party package
     'django_filters',
     'xhtml2pdf',
-    'easy_pdf'
 ]
 
 
