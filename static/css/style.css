@@ -2679,7 +2679,7 @@ h6 {
   height: 42.44vh;
 }
 .card_needy{
-  border:1px solid #5DBD7E;
+  border-bottom:1px solid #5DBD7E;
   border-radius: 5px;
   width: 80%;
   height:auto;
