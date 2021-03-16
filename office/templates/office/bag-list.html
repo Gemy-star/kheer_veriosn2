@@ -47,7 +47,7 @@
 <div class="site-section">
  <div class="container">
      <div class="section-title">
-         <h3 class="body-font text-green" style="font-size:large; font-weight:800; text-align:center;"> الدوائر الخضراء</h3>
+         <h3 class="body-font text-blue" style="font-size:large; font-weight:800; text-align:center;"> الدوائر الخضراء</h3>
      </div>
  <hr/>
  <br/>
@@ -67,49 +67,49 @@
                </div>
                                            <div class="card_needy">
                                 <div class="itemright">
-                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa fa-book"></i>
+                                    <i aria-hidden="true" style="color:#2D6D93;" class="fa fa-book"></i>
                                 </div>
                                 <div class="itemleft">
-                                    <h4 class="body-font text-green">{{ bag.name }}</h4>
+                                    <h4 class="body-font text-blue">{{ bag.name }}</h4>
                                 </div>
                             </div>
 
                             <div class="card_needy">
                                 <div class="itemright">
-                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa fa-calendar"></i>
+                                    <i aria-hidden="true" style="color:#2D6D93;" class="fa fa-calendar"></i>
                                 </div>
                                 <div class="itemleft">
-                                    <h4 class="body-font text-green">{{ bag.start_date }}</h4>
+                                    <h4 class="body-font text-blue">{{ bag.start_date }}</h4>
                                 </div>
                             </div>
                             <div class="card_needy">
                                 <div class="itemright">
-                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa  fa-calendar"></i>
+                                    <i aria-hidden="true" style="color:#2D6D93;" class="fa  fa-calendar"></i>
                                 </div>
                                 <div class="itemleft">
-                                    <h4 class="body-font text-green">{{ bag.end_date }}</h4>
+                                    <h4 class="body-font text-blue">{{ bag.end_date }}</h4>
                                 </div>
                             </div>
                             <div class="card_needy">
                                 <div class="itemright">
-                                  <i class="fa fa-clock-o" aria-hidden="true" style="color:#5DBD7E; font-size:medium;" ></i>
+                                  <i class="fa fa-clock-o" aria-hidden="true" style="color:#2D6D93; font-size:medium;" ></i>
 
                                 </div>
                                 <div class="itemleft">
-                                    <h4 class="body-font text-green">{{ bag.duration }}</h4>
+                                    <h4 class="body-font text-blue">{{ bag.duration }}</h4>
                                 </div>
                             </div>
                             <div class="card_needy">
                                 <div class="itemright">
-                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa  fa-user "></i>
+                                    <i aria-hidden="true" style="color:#2D6D93;" class="fa  fa-user "></i>
                                 </div>
                                 <div class="itemleft">
-                                    <h4 class="body-font text-green">{{ bag.trainer.first_name }}  {{ bag.trainer.last_name }}</h4>
+                                    <h4 class="body-font text-blue">{{ bag.trainer.first_name }}  {{ bag.trainer.last_name }}</h4>
                                 </div>
                             </div>
 
                             <div style="display:flex; align-items:center; justify-content:center; align-self: center; border-radius: 50px;">
-                                <a class="btn-sm btn-success body-font" style="color:#ffffff; text-align: center; margin-top: 2rem;"
+                                <a class="btn-sm btn-success body-font" style="color:#ffffff; text-align: center; background-color:#2D6D93; margin-top: 2rem;"
                                   href="{% url 'pay-bag' bag.pk %}">إبدأ</a>
                             </div>
 

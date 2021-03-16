@@ -2076,14 +2076,13 @@ faq-heading {
 
 
 .back{
-display: block;
-margin: 0 auto;
-  opacity: 0.75;
-  background-repeat: no-repeat;
- background-size: inherit;
- max-width: 100%;
-  height: auto;
-
+    width: auto;
+    z-index: 1;
+    background-repeat: no-repeat !important;
+    background-size: contain!important;
+    max-width: 100%;
+    height: auto;
+    background-position: bottom !important;
 }
 .cc{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);

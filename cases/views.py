@@ -221,6 +221,8 @@ class NeedyAllReport(View):
         return HttpResponse("Not found")
 
 
+
+
 class EnableAllReport(View):
     def get(self, request, *args, **kwargs):
         template = get_template('enable-all-pdf.html')
