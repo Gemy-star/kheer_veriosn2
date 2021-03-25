@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 {% load static %}
 
-{% block title %}  صفحة البحث || خير السعوديه  {% endblock title %}
+{% block title %} خير السعوديه  {% endblock title %}
 
 {% block content %}
     <div class="ftco-blocks-cover-1">
@@ -13,7 +13,7 @@
                 <div class="row align-items-center ">
 
                     <div class="col-md-5 mt-5 pt-5">
-                        <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+                        <span class="text-cursive h5 " style="color: #000000"> خير السعوديه</span>
                         <h1 class="mb-3 font-weight-bold body-font"> تمكين منتهى بدعم مالى</h1>
 
                         <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
@@ -30,7 +30,7 @@
                 <div class="row align-items-center ">
 
                     <div class="col-md-5 mt-5 pt-5">
-                        <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+                        <span class="text-cursive h5 " style="color: #000000"> خير السعوديه</span>
                         <h1 class="mb-3 font-weight-bold body-font"> تمكين منتهى بتوظيف</h1>
 
                         <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
@@ -80,27 +80,27 @@
                         {% endif %}
                                            <div class="card_needy">
                                 <div class="itemright">
-                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa fa-book"></i>
+                                    <i aria-hidden="true" style="color:#000000;" class="fa fa-book"></i>
                                 </div>
                                 <div class="itemleft">
-                                    <h4 class="body-font text-green">{{ course.name }}</h4>
+                                    <h4 class="body-font text-black">{{ course.name }}</h4>
                                 </div>
                             </div>
 
                             <div class="card_needy">
                                 <div class="itemright">
-                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa fa-calendar"></i>
+                                    <i aria-hidden="true" style="color:#000000;" class="fa fa-calendar"></i>
                                 </div>
                                 <div class="itemleft">
-                                    <h4 class="body-font text-green">{{ course.start_date }}</h4>
+                                    <h4 class="body-font text-black">{{ course.start_date }}</h4>
                                 </div>
                             </div>
                             <div class="card_needy">
                                 <div class="itemright">
-                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa  fa-calendar"></i>
+                                    <i aria-hidden="true" style="color:#000000;" class="fa  fa-calendar"></i>
                                 </div>
                                 <div class="itemleft">
-                                    <h4 class="body-font text-green">{{ course.end_date }}</h4>
+                                    <h4 class="body-font text-black">{{ course.end_date }}</h4>
                                 </div>
                             </div>
                             <div class="card_needy">
@@ -108,21 +108,21 @@
                                     <img src="{% static 'images/coins.png' %}" style="width:30px; height:30px;" />
                                 </div>
                                 <div class="itemleft">
-                                    <h4 class="body-font text-green">{{ course.price }}</h4>
+                                    <h4 class="body-font text-black">{{ course.price }}</h4>
                                 </div>
                             </div>
                             <div class="card_needy">
                                 <div class="itemright">
-                                    <i aria-hidden="true" style="color:#5DBD7E;" class="fa  fa-newspaper-o "></i>
+                                    <i aria-hidden="true" style="color:#000000;" class="fa  fa-newspaper-o "></i>
                                 </div>
                                 <div class="itemleft">
-                                    <h4 class="body-font text-green">{{ course.description }}</h4>
+                                    <h4 class="body-font text-black">{{ course.description }}</h4>
                                 </div>
                             </div>
 
-                            <div style="display:flex; align-items:center; justify-content:center; align-self: center; border-radius: 50px;">
-                                <a class="btn-sm btn-success body-font" style="color:#ffffff; text-align: center; margin-top: 2rem;"
-                                  href="{% url 'tamkeen-course-pay' course.pk %}">مشاركه</a>
+                            <div style="display:flex;  margin-top: 1.7rem">
+                                <a class=" btn-black body-font" style="color:#ffffff; text-align: center; margin-top: 2rem; "
+                                  href="{% url 'tamkeen-course-pay' course.pk %}"><p style="  text-align: center !important; margin-top: 0.3rem">مشاركة</p></a>
                             </div>
 
 

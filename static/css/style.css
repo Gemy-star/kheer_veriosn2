@@ -2076,22 +2076,36 @@ faq-heading {
 
 
 .back{
+  position: relative;
     width: auto;
     z-index: 1;
     background-repeat: no-repeat !important;
-    background-size: contain!important;
+    background-size: cover!important;
     max-width: 100%;
     height: auto;
-    background-position: bottom !important;
+    background-position: center !important;
 }
 .cc{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       width: 18rem !important;
-    height: 45vh !important;
+    height: 56vh !important;
     margin: 0 auto !important;
   border-radius: 35px !important;
 
 }
+.btn-success {
+  background-color: #5DBD7E !important;
+}
+.btn-black{
+  width:55px !important;
+  height: 55px !important;
+   display:block;
+  background-color: #0b0b0b !important;
+  border-radius: 50% !important;
+  border: 1px solid ;
+}
+
+
 .end_pay{
   background-repeat: no-repeat;
   background-position: center;
@@ -2704,6 +2718,7 @@ h6 {
     background-size: cover;
 }
 .card_needy{
+  margin-block: 0.4rem!important;
   border-bottom:1px solid #5DBD7E;
   border-radius: 5px;
   width: 80%;
