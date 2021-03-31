@@ -356,6 +356,7 @@ background-image:   url("../images/footer.png");
 }
   @media (min-width: 768px) {
     .site-footer {
+        height: auto;
       padding: 8em 0; } }
   .site-footer .border-top {
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important; }
@@ -878,6 +879,8 @@ background-image:   url("../images/footer.png");
     color: #fff; }
 
 .site-section {
+  width:auto;
+  height:auto;
   padding: 7rem 0; }
   @media (max-width: 991.98px) {
     .site-section {
@@ -1916,13 +1919,16 @@ background-color: #f5f4f4
   .white-dots:before {
     position: absolute;
     content: "";
-    background-image: url("../images/white-dots.png");
     z-index: -1;
     background-repeat: repeat;
     top: -50px;
     left: -50px;
     width: 100%;
     height: 100%; }
+  .advirst{
+    height: auto !important;
+    width: auto !important;
+  }
 
 .block-2 {
   padding: 40px;
@@ -1933,7 +1939,7 @@ background-color: #f5f4f4
     width: 80px;
     margin-left: auto;
     margin-right: auto;
-    height: 80px;
+    height: auto !important;
     display: block;
     border-radius: 50%;
     margin-top: -70px;
@@ -2064,48 +2070,65 @@ faq-heading {
   display: none;
 }
 
+.back_container {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-evenly;
+}
+.img_header{
+  order: 2;
+  width:auto;
+  height: 56vh;;
+}
+.txt_div {
+  order: 1;
+  display: flex;
+  flex-direction: column;
+      height: 56vh;
+
+}
+.text_header{
+    margin-block: auto;
+  font-family: helveticaneuelt sans-serif;
+  font-weight:700;
+  line-height:1px;
+
+}
 
 
+body{
+  font-family: helveticaneuelt sans-serif !important;
+}
+h1 , h2 , h3 , h4 , h5 , span , p{
+    font-family: helveticaneuelt sans-serif !important;
+}
 
+.btn_ebtsam {
+ background-color: #2D6D93 !important;
+  display:block !important;
+  height: 60px!important;
+  width: 60px !important;
+  border-radius: 50% !important;
 
-
-
-
-
-
-
+}
 
 .back{
-  position: relative;
     width: auto;
-    z-index: 1;
     background-repeat: no-repeat !important;
     background-size: cover!important;
     max-width: 100%;
     height: auto;
     background-position: center !important;
+  z-index: 1 !important;
 }
 .cc{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      width: 18rem !important;
-    height: 56vh !important;
+      width: auto !important;
+    height: auto !important;
     margin: 0 auto !important;
   border-radius: 35px !important;
 
 }
-.btn-success {
-  background-color: #5DBD7E !important;
-}
-.btn-black{
-  width:55px !important;
-  height: 55px !important;
-   display:block;
-  background-color: #0b0b0b !important;
-  border-radius: 50% !important;
-  border: 1px solid ;
-}
-
-
 .end_pay{
   background-repeat: no-repeat;
   background-position: center;
@@ -2128,6 +2151,9 @@ faq-heading {
     width: 80px; }
     .package .img-wrap img {
       width: 80px; }
+.btn-success{
+  background-color:#5DBD7E!important
+}
 
 .testimonial-3-wrap {
   background: #5DBD7E;
@@ -2718,7 +2744,7 @@ h6 {
     background-size: cover;
 }
 .card_needy{
-  margin-block: 0.4rem!important;
+  margin-block: 1.1rem;
   border-bottom:1px solid #5DBD7E;
   border-radius: 5px;
   width: 80%;
