@@ -95,17 +95,17 @@
             <div class="row advirst" >
                 <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
                     <div class="carousel-inner w-100" role="listbox">
-                        <div class="carousel-item active">
+                        <div class="carousel-item active height">
                             <div class="col-md-4">
                                 <img class="img-fluid" src="{% static 'images/bg_home.png' %}">
                             </div>
                         </div>
-                        <div class="carousel-item">
+                        <div class="carousel-item height">
                             <div class="col-md-4">
                                 <img class="img-fluid" src="{% static 'images/bg_home.png' %}">
                             </div>
                         </div>
-                        <div class="carousel-item">
+                        <div class="carousel-item  height">
                             <div class="col-md-4">
                                 <img class="img-fluid" src="{% static 'images/bg_home.png' %}">
                             </div>
@@ -160,32 +160,32 @@
             <div class="row advirst" >
                 <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
                     <div class="carousel-inner w-100" role="listbox">
-                        <div class="carousel-item active">
+                        <div class="carousel-item active height">
                             <div class="col-md-4">
                                 <img class="img-fluid" src="{% static 'images/bg_home.png' %}">
                             </div>
                         </div>
-                        <div class="carousel-item">
+                        <div class="carousel-item height">
                             <div class="col-md-4">
                                 <img class="img-fluid" src="{% static 'images/bg_home.png' %}">
                             </div>
                         </div>
-                        <div class="carousel-item">
+                        <div class="carousel-item height">
                             <div class="col-md-4">
                                 <img class="img-fluid" src="{% static 'images/bg_home.png' %}">
                             </div>
                         </div>
-                        <div class="carousel-item">
+                        <div class="carousel-item height">
                             <div class="col-md-4">
                                 <img class="img-fluid" src="{% static 'images/bg_home.png' %}">
                             </div>
                         </div>
-                        <div class="carousel-item">
+                        <div class="carousel-item height">
                             <div class="col-md-4">
                                 <img class="img-fluid" src="{% static 'images/bg_home.png' %}">
                             </div>
                         </div>
-                        <div class="carousel-item">
+                        <div class="carousel-item height">
                             <div class="col-md-4">
                                 <img class="img-fluid" src="{% static 'images/bg_home.png' %}">
                             </div>
@@ -264,22 +264,22 @@
             <div class="row mx-auto my-auto">
                 <div id="e3lan" class="carousel slide w-100" data-ride="carousel">
                     <div class="carousel-inner w-100" role="listbox">
-                        <div class="carousel-item active">
+                        <div class="carousel-item active height">
                             <div class="col-md-4">
                                 <img class="img-fluid" src="{% static 'images/share1.png' %}" width="300" height="250">
                             </div>
                         </div>
-                        <div class="carousel-item">
+                        <div class="carousel-item height">
                             <div class="col-md-4">
                                 <img class="img-fluid" src="{% static 'images/share2.png' %}" width="300" height="250">
                             </div>
                         </div>
-                        <div class="carousel-item">
+                        <div class="carousel-item height">
                             <div class="col-md-4">
                                 <img class="img-fluid" src="{% static 'images/share4.png' %}" width="300" height="250">
                             </div>
                         </div>
-                        <div class="carousel-item">
+                        <div class="carousel-item height">
                             <div class="col-md-4">
                                 <img class="img-fluid" src="{% static 'images/share3.png' %}" width="150" height="100">
                             </div>
@@ -311,12 +311,6 @@
         $(document).ready(function () {
             var user = sessionStorage.getItem('user_id');
             console.log(user);
-            $('#recipeCarousel').carousel({
-                interval: 1000000
-            })
-            $('#e3lan').carousel({
-                interval: 1000000
-            })
 
             $('.carousel .carousel-item').each(function () {
                 var minPerSlide = 3;

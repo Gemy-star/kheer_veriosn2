@@ -349,14 +349,22 @@ h1, h2, h3, h4, h5,
 		margin: 0 auto;
 		border-radius: 50%;
 	}
+.cases {
+  height: auto!important;
+}
 
 .site-footer {
   padding: 4em 0;
+          height: auto;
 background-image:   url("../images/footer.png");
 }
   @media (min-width: 768px) {
+       .cases{
+         height: 67vh !important;
+
+     }
     .site-footer {
-        height: auto;
+          height: 77vh;
       padding: 8em 0; } }
   .site-footer .border-top {
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important; }
@@ -390,7 +398,10 @@ background-image:   url("../images/footer.png");
   overflow: hidden;
   position: relative; }
   @media (max-width: 991.98px) {
-    .hover-bg-enlarge {
+       .cases{
+         height: auto!important;
+       }
+        .hover-bg-enlarge {
       height: auto !important; } }
   .hover-bg-enlarge > div {
     -webkit-transform: scale(1);
@@ -2136,7 +2147,9 @@ h1 , h2 , h3 , h4 , h5 , span , p{
   position: relative;
 }
 
-
+.height{
+  height:auto !important;
+}
 
 .package {
   color: #777;
