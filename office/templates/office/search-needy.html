@@ -4,18 +4,95 @@
 {% block title %}   خير السعوديه  {% endblock title %}
 
 {% block content %}
-    <div class="ftco-blocks-cover-1">
+   {% if pk == 1 %}
+        <div class="ftco-blocks-cover-1">
         <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
         <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
-             style="background-image: url('../../../static/images/takafly.jpg')">
+             style="background-image: url('../../../static/images/search.png')">
             <div class="container">
                 <div class="row align-items-center ">
 
                     <div class="col-md-5 mt-5 pt-5">
                         <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
-                        <h1 class="mb-3 font-weight-bold body-font">صفحة البحث </h1>
+                        <h1 class="mb-3 font-weight-bold body-font">دعم الكهرباء </h1>
                         <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
-                            <strong>صفحة البحث </strong></p>
+                            <strong>دعم الكهرباء</strong></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+       {% elif pk == 2 %}
+        <div class="ftco-blocks-cover-1">
+        <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/search.png')">
+            <div class="container">
+                <div class="row align-items-center ">
+
+                    <div class="col-md-5 mt-5 pt-5">
+                        <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+                        <h1 class="mb-3 font-weight-bold body-font">دعم الغذاء </h1>
+                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
+                            <strong>دعم الغذاء</strong></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% elif pk == 3 %}
+               <div class="ftco-blocks-cover-1">
+        <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/search.png')">
+            <div class="container">
+                <div class="row align-items-center ">
+
+                    <div class="col-md-5 mt-5 pt-5">
+                        <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+                        <h1 class="mb-3 font-weight-bold body-font">دعم التعليم </h1>
+                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
+                            <strong>دعم التعليم</strong></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% elif pk == 4  %}
+               <div class="ftco-blocks-cover-1">
+        <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/search.png')">
+            <div class="container">
+                <div class="row align-items-center ">
+
+                    <div class="col-md-5 mt-5 pt-5">
+                        <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+                        <h1 class="mb-3 font-weight-bold body-font">دعم الماء </h1>
+                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
+                            <strong>دعم الماء</strong></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% elif pk == 5 %}
+               <div class="ftco-blocks-cover-1">
+        <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/search.png')">
+            <div class="container">
+                <div class="row align-items-center ">
+
+                    <div class="col-md-5 mt-5 pt-5">
+                        <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+                        <h1 class="mb-3 font-weight-bold body-font">دعم الصحة </h1>
+                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
+                            <strong>دعم الصحة</strong></p>
                     </div>
 
                 </div>
@@ -23,6 +100,27 @@
         </div>
     </div>
 
+       {% else%}
+        <div class="ftco-blocks-cover-1">
+        <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url('../../../static/images/search.png')">
+            <div class="container">
+                <div class="row align-items-center ">
+
+                    <div class="col-md-5 mt-5 pt-5">
+                        <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+                        <h1 class="mb-3 font-weight-bold body-font">دعم اﻷيجار </h1>
+                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
+                            <strong>دعم اﻷيجار</strong></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
     <div class="site-section">
         <div class="container">
             <div class="row">

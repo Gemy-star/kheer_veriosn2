@@ -382,7 +382,7 @@ def search_needy(request, pk):
     needcases = models.Needy.objects.filter(support=pk)
     need_filter = NeedyFilter(request.GET, queryset=needcases)
     need = need_filter.qs
-    context = {"neeedies": need, "myfilter": need_filter}
+    context = {"neeedies": need, "myfilter": need_filter , "pk":pk}
     return render(request, 'office/search-needy.html', context=context)
 
 

@@ -27,7 +27,6 @@
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 <div class="site-wrap" id="home-section">
-
     <div class="site-mobile-menu site-navbar-target">
         <div class="site-mobile-menu-header">
             <div class="site-mobile-menu-close mt-3">
@@ -36,10 +35,12 @@
         </div>
         <div class="site-mobile-menu-body"></div>
     </div>
+
     {% include 'navbar.html' %}
      {% block content %}
 
     {% endblock content %}
+<button id="myBtn" title="Go to top"><i style="font-size:25px; margin: 0.3rem;"  aria-hidden="true" onclick="topFunction()" class="fa fa-arrow-up"></i> <i onclick="Whatsapp()" class="fa fa-whatsapp" aria-hidden="true" style="font-size:25px;"></i></button>
 
     {% include 'footer.html' %}
 
@@ -59,7 +60,6 @@
     <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
     <script src="{% static 'js/aos.js' %}"></script>
     <script src="{% static 'js/sweetalert.js' %}"></script>
-
     <script src="{% static 'js/main.js' %}"></script>
 <script>
     var size = 20
@@ -71,6 +71,8 @@
           $("body").css("font-size", size.toString()+"px");
 
        });
+
+
         $("#dec_size").on('click' , (event) => {
            event.preventDefault();
            size = size - 5
@@ -119,7 +121,29 @@
 
     });
 </script>
+<script>
+    mybutton = document.getElementById("myBtn");
 
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+function Whatsapp() {
+  window.location.href = "https://api.whatsapp.com/send?phone=01111343463"
+}
+</script>
 {% block javascript %}
 
 {% endblock javascript %}
