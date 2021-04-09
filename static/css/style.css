@@ -345,10 +345,12 @@ h1, h2, h3, h4, h5,
   .site-section.site-section-sm {
     padding:1em 0; }
 .profile-pic{
-		max-width: 100px;
-		max-height:100px;
+		max-width: 150px;
+		max-height:150px;
 		margin: 0 auto;
-		border-radius: 50%;
+  background-size: cover !important;
+  border: 5px dotted #2e6e9e !important;
+		border-radius: 50% !important;
 	}
 .cases {
   height: auto!important;
@@ -843,11 +845,11 @@ background-image:   url("../images/footer.png");
 
 /* Blocks */
 .site-section-cover {
-  position: relative;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center !important;
-  overflow: hidden; }
+     position: relative;
+    background-size: contain !important;
+    background-repeat: no-repeat;
+    background-position: left !important;
+    overflow: hidden; }
   .site-section-cover,
   .site-section-cover .container {
     position: relative;
