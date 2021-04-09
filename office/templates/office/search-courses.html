@@ -6,168 +6,179 @@
 {% block content %}
     <div class="ftco-blocks-cover-1">
         <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
-                                {% if pk ==   1 %}
-        <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
-             style="background-image: url('../../../static/images/banner_money_tamkeen.png')">
-            <div class="container">
-                <div class="row align-items-center ">
+        {% if pk ==   1 %}
+            <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+                 style="background-image: url('../../../static/images/banner_money_tamkeen.png')">
+                <div class="container">
+                    <div class="row align-items-center ">
 
-                    <div class="col-md-5 mt-5 pt-5">
-                        <span class="text-cursive h5 " style="color: #000000"> خير السعوديه</span>
-                        <h1 class="mb-3 font-weight-bold body-font"> تمكين منتهى بدعم مالى</h1>
+                        <div class="col-md-5 mt-5 pt-5">
+                            <span class="text-cursive h5 " style="color: #2D6D93"> خير السعوديه</span>
+                            <h1 class="mb-3 font-weight-bold body-font"> تمكين منتهى بدعم مالى</h1>
 
-                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
-                            <strong>تمكين منتهى بدعم مالى </strong></p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        {% else %}
-                <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
-             style="background-image: url('../../../static/images/banner_employer_tamkeen.png')">
-            <div class="container">
-                <div class="row align-items-center ">
-
-                    <div class="col-md-5 mt-5 pt-5">
-                        <span class="text-cursive h5 " style="color: #000000"> خير السعوديه</span>
-                        <h1 class="mb-3 font-weight-bold body-font"> تمكين منتهى بتوظيف</h1>
-
-                        <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span class="mx-3">/</span>
-                            <strong>تمكين منتهى بدعم يتوظيف </strong></p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-     {% endif %}
-    </div>
-
-<div class="site-section">
- <div class="container">
-     <div class="row">
-         <center>
-             <button class="btn btn-success body-font text-white" id="btn_Search" ><i class="fa fa-search-plus" aria-hidden="true"></i>
- </button>
-         </center>
-         <div id="search">
-                                <form>
-            {% csrf_token %}
-
-         {% for filed in myfilter.form%}
-
-
-                       {{ filed }}
-                       {% endfor %}
-                                <button id="btn_sub_search" type="submit" class="btn btn-success body-font text-white" >البحث</button>
-                   </form>
-
-         </div>
-     </div>
- <hr/>
- <br/>
- <div class="row">
-     {% for course in courses %}
-               <div class="col-md-4">
-               <div >
-                   {% if course.is_past_due %}
-                                 <div class="card content cc back" style="background-image: url('../../../static/images/end_course.png');text-align: center;">
-                       {% else %}
-                                                <div class="card content cc">
-
-
-                        {% endif %}
-                                           <div class="card_needy">
-                                <div class="itemright">
-                                    <i aria-hidden="true" style="color:#000000;" class="fa fa-book"></i>
-                                </div>
-                                <div class="itemleft">
-                                    <h4 class="body-font text-black">{{ course.name }}</h4>
-                                </div>
-                            </div>
-
-                            <div class="card_needy">
-                                <div class="itemright">
-                                    <i aria-hidden="true" style="color:#000000;" class="fa fa-calendar"></i>
-                                </div>
-                                <div class="itemleft">
-                                    <h4 class="body-font text-black">{{ course.start_date }}</h4>
-                                </div>
-                            </div>
-                            <div class="card_needy">
-                                <div class="itemright">
-                                    <i aria-hidden="true" style="color:#000000;" class="fa  fa-calendar"></i>
-                                </div>
-                                <div class="itemleft">
-                                    <h4 class="body-font text-black">{{ course.end_date }}</h4>
-                                </div>
-                            </div>
-                            <div class="card_needy">
-                                <div class="itemright">
-                                    <img src="{% static 'images/coins.png' %}" style="width:30px; height:30px;" />
-                                </div>
-                                <div class="itemleft">
-                                    <h4 class="body-font text-black">{{ course.price }}</h4>
-                                </div>
-                            </div>
-                            <div class="card_needy">
-                                <div class="itemright">
-                                    <i aria-hidden="true" style="color:#000000;" class="fa  fa-newspaper-o "></i>
-                                </div>
-                                <div class="itemleft">
-                                    <h4 class="body-font text-black">{{ course.description }}</h4>
-                                </div>
-                            </div>
-
-                            <div style="display:flex;  margin-top: 1.7rem">
-                                <a class="btn btn-dark body-font" style="color:#ffffff; text-align: center; margin-top: 2rem; "
-                                  href="{% url 'tamkeen-course-pay' course.pk %}">مشاركة</a>
-                            </div>
-
-
+                            <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span
+                                    class="mx-3">/</span>
+                                <strong>تمكين منتهى بدعم مالى </strong></p>
                         </div>
 
-               </div>
-</div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+                 style="background-image: url('../../../static/images/banner_employer_tamkeen.png')">
+                <div class="container">
+                    <div class="row align-items-center ">
+
+                        <div class="col-md-5 mt-5 pt-5">
+                            <span class="text-cursive h5 " style="color: #2D6D93"> خير السعوديه</span>
+                            <h1 class="mb-3 font-weight-bold body-font"> تمكين منتهى بتوظيف</h1>
+
+                            <p><a href="{% url 'home-page' %}" class="text-white">الرئيسيه</a> <span
+                                    class="mx-3">/</span>
+                                <strong>تمكين منتهى بدعم يتوظيف </strong></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+    </div>
+
+    <div class="site-section">
+    <div class="container">
+        <div class="row">
+            <center>
+                <button class="btn btn-success body-font text-white" id="btn_Search"><i class="fa fa-search-plus"
+                                                                                        aria-hidden="true"></i>
+                </button>
+            </center>
+            <div id="search">
+                <form>
+                    {% csrf_token %}
+
+                    {% for filed in myfilter.form %}
 
 
-     {% endfor %}
+                        {{ filed }}
+                    {% endfor %}
+                    <button id="btn_sub_search" type="submit" class="btn btn-success body-font text-white">البحث
+                    </button>
+                </form>
 
- </div>
- </div>
-</div>
+            </div>
+        </div>
+        <hr/>
+        <br/>
+        <div class="row">
+            {% for course in courses %}
+                <div class="col-md-4">
+                <div>
+                    {% if course.is_past_due %}
+                        <div class=" content cc back course_card"
+                             style="background-image: url('../../../static/images/end_course.png');text-align: center;">
+                    {% else %}
+                        <div class=" content cc course_card">
+
+
+                    {% endif %}
+                    <div class="card_needy">
+                        <img src="{% static 'images/logo.png' %}" class="img-fluid"/>
+                    </div>
+                    <div class="card_needy">
+                        <div class="itemright">
+                            <i aria-hidden="true" style="color:#2D6D93;" class="fa fa-book"></i>
+                        </div>
+                        <div class="itemleft">
+                            <h4 class="body-font text-blue">{{ course.name }}</h4>
+                        </div>
+                    </div>
+
+
+                    <div class="card_needy">
+                        <div class="itemright">
+                            <i aria-hidden="true" style="color:#2D6D93;" class="fa fa-calendar"></i>
+                        </div>
+                        <div class="itemleft">
+                            <h4 class="body-font text-blue">{{ course.start_date }}</h4>
+                        </div>
+                    </div>
+                    <div class="card_needy">
+                        <div class="itemright">
+                            <i aria-hidden="true" style="color:#2D6D93;" class="fa  fa-calendar"></i>
+                        </div>
+                        <div class="itemleft">
+                            <h4 class="body-font text-blue">{{ course.end_date }}</h4>
+                        </div>
+                    </div>
+                    <div class="card_needy">
+                        <div class="itemright">
+                            <img src="{% static 'images/motabr3.png' %}" style="width:30px; height:30px;"/>
+                        </div>
+                        <div class="itemleft">
+                            <h4 class="body-font text-blue">{{ course.price }}</h4>
+                        </div>
+                    </div>
+                    <div class="card_needy">
+                        <div class="itemright">
+                            <i aria-hidden="true" style="color:#2D6D93;" class="fa  fa-newspaper-o "></i>
+                        </div>
+                        <div class="itemleft">
+                            <h4 class="body-font text-blue">{{ course.description }}</h4>
+                        </div>
+                    </div>
+
+                    <div style="display:flex;  margin-top: 1.7rem">
+                        <a class="btn btn-blue body-font" style="color:#ffffff; text-align: center; margin-top: 2rem; "
+                           href="{% url 'tamkeen-course-pay' course.pk %}">مشاركة<i class="fa fa-share-alt" style="margin-inline: 0.4rem;
+    font-size: large; margin-block: 0.2rem;" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+
+                    </div>
+
+                    </div>
+                </div>
+
+
+            {% endfor %}
+
+            </div>
+        </div>
+    </div>
 
 
 {% endblock content %}
 
 
 {% block javascript %}
-<script>
-var search = false;
-$(() => {
-        $("#search").hide();
-    $("#id_start_date").addClass('form-control')
-        $("#id_name").addClass('form-control body-font')
-        $("#id_name").attr('placeholder',"بحث بأسم الدوره")
-      $("#id_start_date").attr("type","date");
-          $("#id_start_date").attr("placeholder","بحث بتاريخ البدايه");
-          $("#id_end_date").attr("placeholder","بحث بتاريخ النهايه");
-      $("#id_end_date").attr("type","date");
-          $("#id_end_date").addClass('form-control ')
-$("#btn_Search").on("click", (e) => {
-    e.preventDefault();
-    if(search) {
+    <script>
+        var search = false;
+        $(() => {
             $("#search").hide();
- search = false
-    }else {
-            $("#search").show();
- search = true
+            $("#id_start_date").addClass('form-control')
+            $("#id_name").addClass('form-control body-font')
+            $("#id_name").attr('placeholder', "بحث بأسم الدوره")
+            $("#id_start_date").attr("type", "date");
+            $("#id_start_date").attr("placeholder", "بحث بتاريخ البدايه");
+            $("#id_end_date").attr("placeholder", "بحث بتاريخ النهايه");
+            $("#id_end_date").attr("type", "date");
+            $("#id_end_date").addClass('form-control ')
+            $("#btn_Search").on("click", (e) => {
+                e.preventDefault();
+                if (search) {
+                    $("#search").hide();
+                    search = false
+                } else {
+                    $("#search").show();
+                    search = true
 
-    }
-});
+                }
+            });
 
-});
-</script>
+        });
+    </script>
 
 {% endblock javascript %}

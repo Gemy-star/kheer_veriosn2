@@ -23,9 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '13*28owzjy%-%#-y2=9dt&5sl*_pen6qz1zu1xk9#3x)s5_bke'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['khieer.com',
+'www.khieer.com',
+'https://www.khieer.com/',
+'http://www.khieer.com/']
 
 
 # Application definition

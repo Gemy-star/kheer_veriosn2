@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 {% load static %}
 {% block title %} إنشاء حساب {% endblock title %}
-
+{% load static %}
 {% block content %}
    <div class="ftco-blocks-cover-1">
        <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
@@ -27,9 +27,7 @@
                <center>
                         <h2 class="body-font text-blue"  style="font-size: 35px; font-weight: bold;">شارك فى الخير</h2>
                  <hr/>
-                    <p class="body-font text-green" style="font-size: 25px">طاقات و أرواح
-                        شبابية خلاقة
-                    </p>
+                  <img src="{% static 'images/solgan.png' %}" class="img-fluid"/>
                    </center>
                   </div>
             </div>
