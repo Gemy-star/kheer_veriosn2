@@ -385,6 +385,12 @@ background-image:   url("../images/footer.png");
     font-size: 18px;
     color: #5DBD7E; }
 
+  .advirst_img {
+    width: 15.25rem;
+    height: 19vh;
+    overflow: hidden;
+  }
+
 .bg-text-line {
   display: inline;
   background: #000;
